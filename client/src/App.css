@@ -51,6 +51,12 @@
   color: white;
 }
 
+.Login {
+  background-color: #2c3e50;
+  min-height: 100vh;
+  color: white;
+}
+
 .ShowFlightDetails {
   background-color: #2c3e50;
   min-height: 100vh;
@@ -58,6 +64,18 @@
 }
 
 .UpdateFlightInfo {
+  background-color: #2c3e50;
+  min-height: 100vh;
+  color: white;
+}
+
+.AdvancedSearch {
+  background-color: #2c3e50;
+  min-height: 100vh;
+  color: white;
+}
+
+.AdvancedSearchResults {
   background-color: #2c3e50;
   min-height: 100vh;
   color: white;
@@ -91,7 +109,7 @@
 }
 
 .desc {
-  height: 220px;
+  height: 225px;
   padding: 10px;
 }
 
@@ -107,7 +125,7 @@
 }
 
 .desc h3 {
-  color: #6c757d;
+  color: #ffffff;
   font-size: 1em;
   padding: 10px 0 10px 0;
   text-align: center;
