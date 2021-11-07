@@ -41,6 +41,10 @@ class showFlightDetails extends Component {
   render() {
 
     const flight = this.state.flight;
+	var a = "";
+	if((flight.date) !== undefined){
+		a = (flight.date).substring(0,10);
+	}
     let FlightItem = <div>
       <table className="table table-hover table-dark">
         {/* <thead>
@@ -80,7 +84,7 @@ class showFlightDetails extends Component {
           <tr>
             <th scope="row">6</th>
             <td>Date</td>
-            <td>{ flight.date }</td>
+            <td>{ a }</td>
           </tr>
 		  <tr>
             <th scope="row">7</th>
@@ -106,16 +110,16 @@ class showFlightDetails extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-10 m-auto">
-              <br /> <br />
-              <Link to="/" className="btn btn-outline-warning float-left">
-                  Show Flight List
+              <br />
+              <Link to="/show-flight-list" className="btn btn-outline-warning float-left">
+                  Flight List
               </Link>
             </div>
             <br />
             <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Flight's Record</h1>
+              <h1 className="display-4 text-center">Flight Details</h1>
               <p className="lead text-center">
-                  View Flight's Info
+                  
               </p>
               <hr /> <br />
             </div>
@@ -126,13 +130,9 @@ class showFlightDetails extends Component {
 
           <div className="row">
             <div className="col-md-6">
-              <button type="button" className="btn btn-outline-danger btn-lg btn-block" onClick={this.onDeleteClick.bind(this,flight._id)}>Delete Flight</button><br />
             </div>
 
             <div className="col-md-6">
-              <Link to={`/edit-flight/${flight._id}`} className="btn btn-outline-info btn-lg btn-block">
-                    Edit Flight
-              </Link>
               <br />
             </div>
 
