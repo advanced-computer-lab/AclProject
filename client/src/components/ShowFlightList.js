@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../App.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import FlightCard from './FlightCard';
+import FlightSummary from './FlightSummary';
 
 class ShowFlightList extends Component {
   constructor(props) {
@@ -35,7 +35,7 @@ class ShowFlightList extends Component {
       flightList = "there is no flight record!";
     } else {
       flightList = flights.map((flight, k) =>
-        <FlightCard flight={flight} key={k} />
+        <FlightSummary flight={flight} key={k} />
       );
     }
 
@@ -44,14 +44,10 @@ class ShowFlightList extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <br />
               <h2 className="display-4 text-center">Flight List</h2>
             </div>
 
             <div className="col-md-11">
-              <Link to="/create-flight" className="btn btn-outline-warning float-right">
-                + Add New Flight
-              </Link>
               <br />
               <br />
               <hr />
