@@ -1,0 +1,4 @@
+{
+    "mongoURI":
+      "mongodb+srv://admin:12345@aclprojectcluster.lql2h.mongodb.net/AclProject?retryWrites=true&w=majority"
+  }
