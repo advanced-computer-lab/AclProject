@@ -1,3 +1,6 @@
 Name           Tasks
-Youssef Magdy  Models(schemes), Flight Summary(component), Admin Flight Summary(component)
-Ahmed Hussein  ShowFlightDetails(component), ShowFlightList(component), AdminShowFlightDetails(component), AdminShowFlightList(component)
+Youssef Magdy: Models(schemes), Flight Summary(component), Admin Flight Summary(component)
+Ahmed Hussein: ShowFlightDetails(component), ShowFlightList(component), AdminShowFlightDetails(component), AdminShowFlightList(component)
+Noureldin Hesham: App.js frontend/backend, App.css frontend, MongoDB configration/connection, routes/axios, AdvancedSearchResults(component), UpdateFlight(component)
+Mohamed Mahmoud: AdvancedSearch(component), CreateFlight(component), Login(component)
+Omar Alhadi: Registration(component), ShowFlightList(component)
