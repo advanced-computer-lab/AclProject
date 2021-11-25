@@ -45,11 +45,12 @@ class ShowFlightList extends Component {
           <div className="row">
             <div className="col-md-12">
               <h2 className="display-4 text-center">Flight List</h2>
+              <Link to="/profile" className="btn btn-outline-warning float-left">
+                Profile
+              </Link>
             </div>
 
             <div className="col-md-11">
-              <br />
-              <br />
               <hr />
             </div>
 

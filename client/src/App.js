@@ -10,6 +10,7 @@ import AdminShowFlightDetails from './components/AdminShowFlightDetails';
 import UpdateFlightInfo from './components/UpdateFlightInfo';
 import Registration from './components/Registration';
 import Login from './components/Login';
+import Profile from './components/Profile';
 import AdvancedSearch from './components/AdvancedSearch';
 import AdvancedSearchResults from './components/AdvancedSearchResults';
 
@@ -20,14 +21,15 @@ class App extends Component {
         <div>
           <Route exact path='/' component={Login} />
           <Route path='/create-flight' component={CreateFlight} />
-		  <Route path='/advanced-search' component={AdvancedSearch} />
-		  <Route path='/advanced-search-results' component={AdvancedSearchResults} />
-		  <Route path='/registration' component={Registration} />
-		  <Route path='/show-flight-list' component={ShowFlightList} />
+          <Route path='/profile' component={Profile} />
+		      <Route path='/advanced-search' component={AdvancedSearch} />
+		      <Route path='/advanced-search-results' component={AdvancedSearchResults} />
+		      <Route path='/registration' component={Registration} />
+		      <Route path='/show-flight-list' component={ShowFlightList} />
           <Route path='/edit-flight/:id' component={UpdateFlightInfo} />
           <Route path='/show-flight/:id' component={ShowFlightDetails} />
-		  <Route exact path='/admin-show-flight-list' component={AdminShowFlightList} />
-		  <Route path='/admin-show-flight/:id' component={AdminShowFlightDetails} />
+		      <Route exact path='/admin-show-flight-list' component={AdminShowFlightList} />
+		      <Route path='/admin-show-flight/:id' component={AdminShowFlightDetails} />
         </div>
       </Router>
     );
