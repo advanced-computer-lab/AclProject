@@ -12,6 +12,7 @@ class Registration extends Component {
       firstname: '',
       lastname: '',
       email: '',
+      passport: '',
       password: ''
     };
   }
@@ -28,6 +29,7 @@ class Registration extends Component {
       firstname: this.state.firstname,
       lastname: this.state.lastname,
       email: this.state.email,
+      passport: this.state.passport,
       password: this.state.password,
     };
 
@@ -39,7 +41,8 @@ class Registration extends Component {
           firstname: '',
           lastname: '',
 	      email: '',
-          password: ''
+          password: '',
+          passport: ''
         })
         this.props.history.push('/');
       })
@@ -104,6 +107,17 @@ class Registration extends Component {
                     name='email'
                     className='form-control'
                     value={this.state.email}
+                    onChange={this.onChange}
+                  />
+                </div>
+
+                <div className='form-group'>
+                  <input
+                    type='text'
+                    placeholder='Passport Number'
+                    name='passport'
+                    className='form-control'
+                    value={this.state.passport}
                     onChange={this.onChange}
                   />
                 </div>

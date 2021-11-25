@@ -45,61 +45,41 @@ class Profile extends Component {
 	if((flight.date) !== undefined){
 		a = (flight.date).substring(0,10);
 	}
-    let FlightItem = <div>
+    let UserItem = <div>
       <table className="table table-hover table-dark">
         
         <tbody>
           <tr>
-            <th scope="row">1</th>
-            <td>Flight Number</td>
-            <td>{ flight.flight_number }</td>
+            <th scope="row"></th>
+            <td>First Name</td>
+            <td>{/* data here */}</td>
           </tr>
           <tr>
-            <th scope="row">2</th>
-            <td>Departure Airport</td>
-            <td>{ flight.departure_airport }</td>
+            <th scope="row"></th>
+            <td>Last Name</td>
+            <td>{/* data here */}</td>
           </tr>
           <tr>
-            <th scope="row">3</th>
-            <td>Arrival Airport</td>
-            <td>{ flight.arrival_airport }</td>
+            <th scope="row"></th>
+            <td>Username</td>
+            <td>{/* data here */}</td>
           </tr>
           <tr>
-            <th scope="row">4</th>
-            <td>Departure Time</td>
-            <td>{ flight.departure_time }</td>
+            <th scope="row"></th>
+            <td>Email</td>
+            <td>{/* data here */}</td>
           </tr>
           <tr>
-            <th scope="row">5</th>
-            <td>Arrival Time</td>
-            <td>{ flight.arrival_time }</td>
-          </tr>
-          <tr>
-            <th scope="row">6</th>
-            <td>Date</td>
-            <td>{ a }</td>
-          </tr>
-		  <tr>
-            <th scope="row">7</th>
-            <td>Economy Seats Number</td>
-            <td>{ flight.economy_seats_number }</td>
-          </tr>
-		  <tr>
-            <th scope="row">8</th>
-            <td>Business Seats Number</td>
-            <td>{ flight.business_seats_number }</td>
-          </tr>
-		  <tr>
-            <th scope="row">9</th>
-            <td>First Seats Number</td>
-            <td>{ flight.first_seats_number }</td>
+            <th scope="row"></th>
+            <td>Passport Number</td>
+            <td>{/* data here */}</td>
           </tr>
         </tbody>
       </table>
     </div>
 
     return (
-      <div className="ShowFlightDetails">
+      <div className="Profile">
         <div className="container">
           <div className="row">
             <div className="col-md-10 m-auto">
@@ -107,10 +87,13 @@ class Profile extends Component {
               <Link to="/show-flight-list" className="btn btn-outline-warning float-left">
                   Flight List
               </Link>
+              <Link to="/edit-profile" className="btn btn-outline-warning float-right">
+                Edit Profile
+              </Link>
             </div>
             <br />
             <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Flight Details</h1>
+              <h1 className="display-4 text-center">Profile Information</h1>
               <p className="lead text-center">
                   
               </p>
@@ -118,7 +101,7 @@ class Profile extends Component {
             </div>
           </div>
           <div>
-            { FlightItem }
+            { UserItem }
           </div>
 
           <div className="row">
@@ -130,10 +113,6 @@ class Profile extends Component {
             </div>
 
           </div>
-            {/* <br />
-            <button type="button" class="btn btn-outline-info btn-lg btn-block">Edit Flight</button>
-            <button type="button" class="btn btn-outline-danger btn-lg btn-block">Delete Flight</button> */}
-
         </div>
       </div>
     );

@@ -11,6 +11,7 @@ import UpdateFlightInfo from './components/UpdateFlightInfo';
 import Registration from './components/Registration';
 import Login from './components/Login';
 import Profile from './components/Profile';
+import EditProfile from './components/EditProfile';
 import AdvancedSearch from './components/AdvancedSearch';
 import AdvancedSearchResults from './components/AdvancedSearchResults';
 
@@ -25,6 +26,7 @@ class App extends Component {
 		      <Route path='/advanced-search' component={AdvancedSearch} />
 		      <Route path='/advanced-search-results' component={AdvancedSearchResults} />
 		      <Route path='/registration' component={Registration} />
+          <Route path='/edit-profile' component={EditProfile} />
 		      <Route path='/show-flight-list' component={ShowFlightList} />
           <Route path='/edit-flight/:id' component={UpdateFlightInfo} />
           <Route path='/show-flight/:id' component={ShowFlightDetails} />
