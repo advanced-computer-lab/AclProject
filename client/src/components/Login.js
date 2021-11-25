@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
+import jwt from 'jsonwebtoken'
 
 
 class Login extends Component {
@@ -27,9 +28,16 @@ class Login extends Component {
 	
 
     axios
-      .get('http://localhost:8082/api/users/', data)
+      .post('http://localhost:8082/api/users/login', data)
       .then(res => {
-		   this.props.history.push('/show-flight-list');
+        localStorage.setItem('token', res.data)
+        const user = jwt.decode(localStorage.getItem('token'))
+        if(user.username === 'Administrator'){
+          this.props.history.push('/admin-show-flight-list/');
+        }
+        else {
+          this.props.history.push('/show-flight-list/');
+        }
 		})
       .catch(err => {
         console.log("Error in Login!");
@@ -49,10 +57,6 @@ class Login extends Component {
             <div className="col-md-8 m-auto">
               <h1 className="display-4 text-center">Login</h1>
               <p className="lead text-center">
-                  Press submit to login as a user (Authentication is not implemented yet since it's not required in Sprtint 1) &nbsp; 
-				  <Link to={"admin-show-flight-list"}>
-                         Click here to login as admin
-                    </Link>
               </p>
 
               <form noValidate onSubmit={this.onSubmit}>
@@ -78,10 +82,8 @@ class Login extends Component {
                   />
                 </div>
 
-                <input
-                    type="submit"
-                    className="btn btn-outline-warning btn-block mt-4"
-                />
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
+                <button onClick={event =>  window.location.href='/show-flight-list-guest'} type="button" class="btn btn-secondary btn-lg btn-block">Continue As A Guest</button>
               </form>
           </div>
           </div>

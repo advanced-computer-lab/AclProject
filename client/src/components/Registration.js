@@ -29,20 +29,20 @@ class Registration extends Component {
       firstname: this.state.firstname,
       lastname: this.state.lastname,
       email: this.state.email,
-      passport: this.state.passport,
       password: this.state.password,
+      passport: this.state.passport,
     };
 
     axios
-      .post('http://localhost:8082/api/users', data)
+      .post('http://localhost:8082/api/users/registration', data)
       .then(res => {
         this.setState({
           username: '',
           firstname: '',
           lastname: '',
-	      email: '',
+	        email: '',
           password: '',
-          passport: ''
+          passport: '',
         })
         this.props.history.push('/');
       })
@@ -132,11 +132,7 @@ class Registration extends Component {
                     onChange={this.onChange}
                   />
                 </div>
-
-                <input
-                    type="submit"
-                    className="btn btn-outline-warning btn-block mt-4"
-                />
+                <button type="submit" class="btn btn-outline-warning btn-block mt-4">Register</button>
               </form>
           </div>
           </div>
