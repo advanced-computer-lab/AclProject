@@ -9,6 +9,8 @@ class Registration extends Component {
     super();
     this.state = {
       username: '',
+      firstname: '',
+      lastname: '',
       email: '',
       password: ''
     };
@@ -23,6 +25,8 @@ class Registration extends Component {
 
     const data = {
       username: this.state.username,
+      firstname: this.state.firstname,
+      lastname: this.state.lastname,
       email: this.state.email,
       password: this.state.password,
     };
@@ -32,6 +36,8 @@ class Registration extends Component {
       .then(res => {
         this.setState({
           username: '',
+          firstname: '',
+          lastname: '',
 	      email: '',
           password: ''
         })
@@ -65,6 +71,28 @@ class Registration extends Component {
                     name='username'
                     className='form-control'
                     value={this.state.username}
+                    onChange={this.onChange}
+                  />
+                </div>
+
+                <div className='form-group'>
+                  <input
+                    type='text'
+                    placeholder='First Name'
+                    name='firstname'
+                    className='form-control'
+                    value={this.state.firstname}
+                    onChange={this.onChange}
+                  />
+                </div>
+
+                <div className='form-group'>
+                  <input
+                    type='text'
+                    placeholder='Last Name'
+                    name='lastname'
+                    className='form-control'
+                    value={this.state.lastname}
                     onChange={this.onChange}
                   />
                 </div>
