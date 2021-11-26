@@ -64,4 +64,12 @@ router.post('/login', async (req, res) => {
 	}
 })
 
+router.put('/', (req, res) => {
+	User.findByIdAndUpdate(req.body.id, req.body)
+	  .then(user => res.json({ msg: 'Updated successfully' }))
+	  .catch(err =>
+		res.status(400).json({ error: 'Unable to update the Database' })
+	  );
+  });
+
 module.exports = router;

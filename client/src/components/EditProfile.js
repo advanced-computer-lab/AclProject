@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../App.css';
+import jwt from 'jsonwebtoken';
+
+const token = localStorage.getItem('token');
+const user = jwt.decode(token);
+
 
 class EditProfile extends Component {
   constructor(props) {
@@ -15,20 +20,28 @@ class EditProfile extends Component {
   }
 
   componentDidMount() {
-    // console.log("Print id: " + this.props.match.params.id);
+  
     axios
-      .get('http://localhost:8082/api/flights/'+this.props.match.params.id)
+      .get('http://localhost:8082/api/users')
       .then(res => {
-        // this.setState({...this.state, flight: res.data})
+        var data = {};
+        for (var i = 0; i < res.data.length; i++) {
+          if(res.data[i].username == user.username){
+            data = res.data[i];
+            break;
+        }
+      }
+        
         this.setState({
-          firstname: res.data.firstname,
-          lastname: res.data.lastname,
-          email: res.data.email,
-          passport: res.data.passport
+          id: data.id,
+          firstname: data.firstname,
+          lastname: data.lastname,
+          email: data.email,
+          passport: data.passport
         })
       })
       .catch(err => {
-        console.log("Error from UpdateFlightInfo");
+        console.log("Error from Edit Profile");
       })
   };
 
@@ -40,6 +53,7 @@ class EditProfile extends Component {
     e.preventDefault();
 
     const data = {
+      id: this.state.id,
       firstname: this.state.firstname,
       lastname: this.state.lastname,
       email: this.state.email,
@@ -48,12 +62,12 @@ class EditProfile extends Component {
     };
 
     axios
-      .put('http://localhost:8082/api/flights/'+this.props.match.params.id, data)
+      .put('http://localhost:8082/api/users', data)
       .then(res => {
-        this.props.history.push('/admin-show-flight/'+this.props.match.params.id);
+        this.props.history.push('/profile');
       })
       .catch(err => {
-        console.log("Error in UpdateFlightInfo!");
+        console.log("Error in Edit Profile!");
       })
   };
 
