@@ -55,8 +55,10 @@ class Login extends Component {
               
             </div>
             <div className="col-md-8 m-auto">
+            
               <h1 className="display-4 text-center">Login</h1>
               <p className="lead text-center">
+              
               </p>
 
               <form noValidate onSubmit={this.onSubmit}>
@@ -83,7 +85,11 @@ class Login extends Component {
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
+                
                 <button onClick={event =>  window.location.href='/show-flight-list-guest'} type="button" class="btn btn-secondary btn-lg btn-block">Continue As A Guest</button>
+                <br />
+                <br />
+                <button onClick={event =>  window.location.href='/registration'} type="button" class="btn btn-secondary btn-lg btn-block">Register</button>
               </form>
           </div>
           </div>

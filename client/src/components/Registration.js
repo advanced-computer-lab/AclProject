@@ -61,6 +61,7 @@ class Registration extends Component {
               
             </div>
             <div className="col-md-8 m-auto">
+              
               <h1 className="display-4 text-center">Registration</h1>
               <p className="lead text-center">
                   Enter your information

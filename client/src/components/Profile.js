@@ -2,49 +2,47 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
+import jwt from 'jsonwebtoken';
+
+const token = localStorage.getItem('token');
+const user = jwt.decode(token);
 
 class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      flight: {}
+      userinfo: {}
     };
   }
 
   componentDidMount() {
-    // console.log("Print id: " + this.props.match.params.id);
+    
     axios
-      .get('http://localhost:8082/api/flights/'+this.props.match.params.id)
+      .get('http://localhost:8082/api/users')
       .then(res => {
-        // console.log("Print-showFlightDetails-API-response: " + res.data);
-        this.setState({
-          flight: res.data
-        })
+        var data = {};
+        for (var i = 0; i < res.data.length; i++) {
+          if(res.data[i].username == user.username){
+            data = res.data[i];
+            break;
+        }
+      }
+
+      this.setState({
+        userinfo: data
+      })
+
       })
       .catch(err => {
         console.log("Error from ShowFlightDetails");
       })
+      
   };
-
-  onDeleteClick (id) {
-    axios
-      .delete('http://localhost:8082/api/flights/'+id)
-      .then(res => {
-        this.props.history.push("/");
-      })
-      .catch(err => {
-        console.log("Error form ShowFlightDetails_deleteClick");
-      })
-  };
-
 
   render() {
 
-    const flight = this.state.flight;
-	var a = "";
-	if((flight.date) !== undefined){
-		a = (flight.date).substring(0,10);
-	}
+    const userinfo = this.state.userinfo;
+
     let UserItem = <div>
       <table className="table table-hover table-dark">
         
@@ -52,27 +50,27 @@ class Profile extends Component {
           <tr>
             <th scope="row"></th>
             <td>First Name</td>
-            <td>{/* data here */}</td>
+            <td>{userinfo.firstname}</td>
           </tr>
           <tr>
             <th scope="row"></th>
             <td>Last Name</td>
-            <td>{/* data here */}</td>
+            <td>{userinfo.lastname}</td>
           </tr>
           <tr>
             <th scope="row"></th>
             <td>Username</td>
-            <td>{/* data here */}</td>
+            <td>{userinfo.username}</td>
           </tr>
           <tr>
             <th scope="row"></th>
             <td>Email</td>
-            <td>{/* data here */}</td>
+            <td>{userinfo.email}</td>
           </tr>
           <tr>
             <th scope="row"></th>
             <td>Passport Number</td>
-            <td>{/* data here */}</td>
+            <td>{userinfo.passport}</td>
           </tr>
         </tbody>
       </table>

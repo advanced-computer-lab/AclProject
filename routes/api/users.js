@@ -2,9 +2,15 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
-
 const User = require('../../models/User');
 
+
+router.get('/', (req, res) => {
+	User.find()
+	  .then(user => res.json(user))
+	  .catch(err => res.status(404).json({ nouserfound: 'No User found' }));
+	  
+  });
 
 router.post('/registration', async (req, res) => {
 	console.log(req.body)
