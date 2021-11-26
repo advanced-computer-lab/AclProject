@@ -45,6 +45,7 @@ class ShowFlightList extends Component {
           <div className="row">
             <div className="col-md-12">
               <h2 className="display-4 text-center">Flight List</h2>
+              <button onClick={event =>  window.location.href='/'} type="button" class="btn btn-outline-warning float-right">Logout</button>
             </div>
 
             <div className="col-md-11">

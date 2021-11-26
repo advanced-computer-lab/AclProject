@@ -48,12 +48,18 @@ class ShowFlightList extends Component {
             </div>
 
             <div className="col-md-11">
-              <Link to="/create-flight" className="btn btn-outline-warning float-right">
-                + Add New Flight
-              </Link>
+            
+             
 			  <Link to="/advanced-search" className="btn btn-outline-warning float-left">
                 Advanced Search
               </Link>
+              <br />
+              <br />
+              <Link to="/create-flight" className="btn btn-outline-warning float-left">
+                + Add New Flight
+              </Link>
+              <button onClick={event =>  window.location.href='/'} type="button" class="btn btn-outline-warning float-right">Logout</button>
+
               <br />
               <br />
               <hr />

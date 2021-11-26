@@ -48,6 +48,7 @@ class ShowFlightList extends Component {
               <Link to="/profile" className="btn btn-outline-warning float-left">
                 Profile
               </Link>
+              <button onClick={event =>  window.location.href='/'} type="button" class="btn btn-outline-warning float-right">Logout</button>
             </div>
 
             <div className="col-md-11">

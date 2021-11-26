@@ -111,9 +111,7 @@ class showFlightDetails extends Component {
           <div className="row">
             <div className="col-md-10 m-auto">
               <br />
-              <Link to="/show-flight-list" className="btn btn-outline-warning float-left">
-                  Flight List
-              </Link>
+              
             </div>
             <br />
             <div className="col-md-8 m-auto">
