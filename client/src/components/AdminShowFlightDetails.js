@@ -4,6 +4,10 @@ import '../App.css';
 import axios from 'axios';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import jwt from 'jsonwebtoken'
+
+var token = localStorage.getItem('token')
+var user;
 
 class showFlightDetails extends Component {
   constructor(props) {
@@ -11,6 +15,27 @@ class showFlightDetails extends Component {
     this.state = {
       flight: {}
     };
+
+    var token2 = localStorage.getItem('token')
+    user = jwt.decode(token2)
+    if (token !== token2){ //token updated
+      if (token2 == null){
+        window.location.href = "http://localhost:3000/not-authorized";
+      }
+      else if (token2 !== null && user.username !== "Administrator"){
+        window.location.href = "http://localhost:3000/not-authorized";
+      }
+    }
+
+    else if (token2 === null && token2 === token){
+      window.location.href = "http://localhost:3000/not-authorized";
+    }
+
+    else {
+      if (user.username !== "Administrator"){
+        window.location.href = "http://localhost:3000/not-authorized";
+      }
+    }
   }
 
   componentDidMount() {

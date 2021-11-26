@@ -3,6 +3,10 @@ import '../App.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import FlightSummary from './AdminFlightSummary';
+import jwt from 'jsonwebtoken'
+
+var token = localStorage.getItem('token')
+var user;
 
 class ShowFlightList extends Component {
   constructor(props) {
@@ -10,6 +14,27 @@ class ShowFlightList extends Component {
     this.state = {
       flights: []
     };
+
+    var token2 = localStorage.getItem('token')
+    user = jwt.decode(token2)
+    if (token !== token2){ //token updated
+      if (token2 == null){
+        window.location.href = "http://localhost:3000/not-authorized";
+      }
+      else if (token2 !== null && user.username !== "Administrator"){
+        window.location.href = "http://localhost:3000/not-authorized";
+      }
+    }
+
+    else if (token2 === null && token2 === token){
+      window.location.href = "http://localhost:3000/not-authorized";
+    }
+
+    else {
+      if (user.username !== "Administrator"){
+        window.location.href = "http://localhost:3000/not-authorized";
+      }
+    }
   }
 
   componentDidMount() {

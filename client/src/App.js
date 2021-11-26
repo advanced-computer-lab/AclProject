@@ -15,6 +15,7 @@ import EditProfile from './components/EditProfile';
 import AdvancedSearch from './components/AdvancedSearch';
 import AdvancedSearchResults from './components/AdvancedSearchResults';
 import ShowFlightListGuest from './components/ShowFlightListGuest';
+import NotAuthorized from './components/NotAuthorized';
 
 class App extends Component {
   render() {
@@ -27,6 +28,7 @@ class App extends Component {
 		      <Route path='/advanced-search' component={AdvancedSearch} />
 		      <Route path='/advanced-search-results' component={AdvancedSearchResults} />
 			  <Route path='/show-flight-list-guest' component={ShowFlightListGuest} />
+			  <Route path='/not-authorized' component={NotAuthorized} />
 		      <Route path='/registration' component={Registration} />
           <Route path='/edit-profile' component={EditProfile} />
 		      <Route path='/show-flight-list' component={ShowFlightList} />

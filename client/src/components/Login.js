@@ -4,6 +4,7 @@ import '../App.css';
 import axios from 'axios';
 import jwt from 'jsonwebtoken'
 
+localStorage.removeItem('token');
 
 class Login extends Component {
   constructor() {
