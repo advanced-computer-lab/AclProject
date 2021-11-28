@@ -9,7 +9,8 @@ class ReservedShowFlightDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      flight: {}
+      flight: {},
+      userflight: {}
     };
 }
 
@@ -18,7 +19,19 @@ class ReservedShowFlightDetails extends Component {
     axios
       .get('http://localhost:8082/api/flights/'+this.props.match.params.id)
       .then(res => {
-        // console.log("Print-showFlightDetails-API-response: " + res.data);
+          axios.get('http://localhost:8082/api/userflights')
+          .then(res=>{for(var i=0;i<res.data.length;i++){
+              if(res.data[i].flight_id==this.props.match.params.id){
+                this.setState({
+                    userflight: res.data[i]
+                  })
+                  break;
+              }
+          }})
+          .catch(err => {
+            console.log("Error from ReservedShowFlightDetails12");
+          })
+          
         this.setState({
           flight: res.data
         })
@@ -40,7 +53,7 @@ class ReservedShowFlightDetails extends Component {
 		  
 		  
 		  axios
-      .delete('http://localhost:8082/api/userflights/'+id)
+      .delete('http://localhost:8082/api/userflights/'+this.state.userflight._id)
       .then(res => {
         this.props.history.push("/reservedflights");
       })
@@ -150,7 +163,7 @@ class ReservedShowFlightDetails extends Component {
 
           <div className="row">
             <div className="col-md-6">
-               <button type="button" className="btn btn-outline-danger btn-lg btn-block" onClick={this.submit.bind(this,flight._id)}>Cancel Flight</button><br />
+               <button type="button" className="btn btn-outline-danger btn-lg btn-block" onClick={this.submit.bind(this,this.state.userflight._id)}>Cancel Flight</button><br />
             </div>
 
             <div className="col-md-6">
