@@ -29,12 +29,7 @@ class ReservedFlights extends Component {
         }
       }
 
-      })
-      .catch(err =>{
-        console.log('Error from ReservedFlights');
-      })
-    axios
-    .get('http://localhost:8082/api/flights').then(
+      axios.get('http://localhost:8082/api/flights').then(
       res =>{
         var data = [];
         
@@ -45,7 +40,7 @@ class ReservedFlights extends Component {
             console.log(data);
           }
         }
-      }
+      } 
       this.setState({
         flights: data
       })
@@ -55,6 +50,12 @@ class ReservedFlights extends Component {
     ).catch(err =>{
       console.log('Error from ReservedFlights2');
     })
+
+      })
+      .catch(err =>{
+        console.log('Error from ReservedFlights');
+      })
+    
 
   };
 

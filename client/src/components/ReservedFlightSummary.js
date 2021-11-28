@@ -1,6 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
+import axios from 'axios';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import jwt from 'jsonwebtoken'
+
+var token = localStorage.getItem('token')
+var user;
 
 const ReservedFlightSummary = (props) => {
     const  flight  = props.flight;
@@ -14,7 +21,7 @@ const ReservedFlightSummary = (props) => {
 				<h3>Departure: {flight.departure_time}  &nbsp; Arrival: {flight.arrival_time}</h3>
                 <p>Date: {flight.date.substring(0, 10)}</p>
 				<h2>
-                <br />
+                <button type="button" className="btn btn-outline-danger btn-lg btn-block" /*onClick={this.submit.bind(this,flight._id)}*/>Delete Flight</button><br />
                 </h2>
             </div>
         </div>
