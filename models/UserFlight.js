@@ -11,4 +11,4 @@ const UserFlightSchema = new mongoose.Schema({
   }
 });
 
-module.exports = User = mongoose.model('userflight', UserFlightSchema);
+module.exports = UserFlight = mongoose.model('userflight', UserFlightSchema);

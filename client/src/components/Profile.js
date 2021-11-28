@@ -101,6 +101,8 @@ class Profile extends Component {
           <div>
             { UserItem }
           </div>
+          <button onClick={event =>  window.location.href='/reservedflights'} type="button" class="btn btn-primary btn-lg btn-block">View Reserved Flights</button>
+
 
           <div className="row">
             <div className="col-md-6">

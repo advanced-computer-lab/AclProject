@@ -5,6 +5,8 @@ var cors = require('cors');
 // routes
 const flights = require('./routes/api/flights');
 const users = require('./routes/api/users');
+const userflights = require('./routes/api/userflights');
+
 
 const app = express();
 
@@ -22,6 +24,7 @@ app.get('/', (req, res) => res.send('Hello world!'));
 // use Routes
 app.use('/api/flights', flights);
 app.use('/api/users', users);
+app.use('/api/userflights', userflights);
 
 const port = process.env.PORT || 8082;
 

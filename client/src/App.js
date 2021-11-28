@@ -16,6 +16,8 @@ import AdvancedSearch from './components/AdvancedSearch';
 import AdvancedSearchResults from './components/AdvancedSearchResults';
 import ShowFlightListGuest from './components/ShowFlightListGuest';
 import NotAuthorized from './components/NotAuthorized';
+import ReservedFlights from './components/ReservedFlights';
+import ReservedFlightSummary from './components/ReservedFlightSummary';
 
 class App extends Component {
   render() {
@@ -36,6 +38,8 @@ class App extends Component {
           <Route path='/show-flight/:id' component={ShowFlightDetails} />
 		      <Route exact path='/admin-show-flight-list' component={AdminShowFlightList} />
 		      <Route path='/admin-show-flight/:id' component={AdminShowFlightDetails} />
+          <Route path='/reservedflights/' component={ReservedFlights} />
+          <Route path='/ReservedFlightSummary/' component={ReservedFlightSummary} />
         </div>
       </Router>
     );
