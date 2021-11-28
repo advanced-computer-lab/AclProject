@@ -21,7 +21,10 @@ const ReservedFlightSummary = (props) => {
 				<h3>Departure: {flight.departure_time}  &nbsp; Arrival: {flight.arrival_time}</h3>
                 <p>Date: {flight.date.substring(0, 10)}</p>
 				<h2>
-                <button type="button" className="btn btn-outline-danger btn-lg btn-block" /*onClick={this.submit.bind(this,flight._id)}*/>Delete Flight</button><br />
+                <Link to={`/reserved-show-flight/${flight._id}`}>
+                         Show Flight
+                    </Link>
+                <br />
                 </h2>
             </div>
         </div>

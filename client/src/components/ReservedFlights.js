@@ -25,7 +25,7 @@ class ReservedFlights extends Component {
         for (var i = 0; i < res.data.length; i++) {
           if(res.data[i].username == user.username){
             nums.push(res.data[i].flight_number);
-            console.log(nums);
+            
         }
       }
 
@@ -37,7 +37,7 @@ class ReservedFlights extends Component {
           for(var j=0 ; j<nums.length;j++){
           if(res.data[i].flight_number == nums[j]){
             data.push(res.data[i]);
-            console.log(data);
+            
           }
         }
       } 
@@ -71,6 +71,7 @@ class ReservedFlights extends Component {
       flightList = flights.map((flight, k) =>
         <ReservedFlightSummary flight={flight} key={k} />
       );
+      nums=[];
     }
 
     return (
