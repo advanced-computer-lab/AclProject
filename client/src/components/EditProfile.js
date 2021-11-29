@@ -33,7 +33,7 @@ class EditProfile extends Component {
       }
         
         this.setState({
-          id: data.id,
+          id: data._id,
           firstname: data.firstname,
           lastname: data.lastname,
           email: data.email,
@@ -53,7 +53,6 @@ class EditProfile extends Component {
     e.preventDefault();
 
     const data = {
-      id: this.state.id,
       firstname: this.state.firstname,
       lastname: this.state.lastname,
       email: this.state.email,
@@ -62,7 +61,7 @@ class EditProfile extends Component {
     };
 
     axios
-      .put('http://localhost:8082/api/users', data)
+      .put('http://localhost:8082/api/users/'+this.state.id, data)
       .then(res => {
         this.props.history.push('/profile');
       })
