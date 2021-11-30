@@ -5,14 +5,13 @@ import { Link } from 'react-router-dom';
 import ReservedFlightSummary from './ReservedFlightSummary';
 import jwt from 'jsonwebtoken';
 
-const token = localStorage.getItem('token');
-const user = jwt.decode(token);
 var nums=[]; 
 class ReservedFlights extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      flights: []
+      flights: [],
+      LoggedInUser: jwt.decode(localStorage.getItem('token'))
     };
   }
 
@@ -23,7 +22,7 @@ class ReservedFlights extends Component {
 
         
         for (var i = 0; i < res.data.length; i++) {
-          if(res.data[i].username == user.username){
+          if(res.data[i].username === this.state.LoggedInUser.username){
             nums.push(res.data[i].flight_number);
             
         }
@@ -35,7 +34,7 @@ class ReservedFlights extends Component {
         
         for (var i = 0; i < res.data.length; i++) {
           for(var j=0 ; j<nums.length;j++){
-          if(res.data[i].flight_number == nums[j]){
+          if(res.data[i].flight_number === nums[j]){
             data.push(res.data[i]);
             
           }

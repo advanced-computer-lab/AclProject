@@ -4,14 +4,12 @@ import '../App.css';
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
 
-const token = localStorage.getItem('token');
-const user = jwt.decode(token);
-
 class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userinfo: {}
+      userinfo: {},
+      LoggedInUser: jwt.decode(localStorage.getItem('token'))
     };
   }
 
@@ -22,7 +20,7 @@ class Profile extends Component {
       .then(res => {
         var data = {};
         for (var i = 0; i < res.data.length; i++) {
-          if(res.data[i].username == user.username){
+          if(res.data[i].username === this.state.LoggedInUser.username){
             data = res.data[i];
             break;
         }

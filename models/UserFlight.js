@@ -9,10 +9,14 @@ const UserFlightSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  flight_id:{
-    type:String,
-    required:true
-  }
+  flight_id: {
+    type: String,
+    required: true
+  },
+  seats_booked: {
+    type: Array,
+    required: true
+  },
 });
 
 module.exports = UserFlight = mongoose.model('userflight', UserFlightSchema);

@@ -21,7 +21,7 @@ class ReservedShowFlightDetails extends Component {
       .then(res => {
           axios.get('http://localhost:8082/api/userflights')
           .then(res=>{for(var i=0;i<res.data.length;i++){
-              if(res.data[i].flight_id==this.props.match.params.id){
+              if(res.data[i].flight_id === this.props.match.params.id){
                 this.setState({
                     userflight: res.data[i]
                   })

@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import '../App.css';
-import jwt from 'jsonwebtoken'
-import axios from 'axios';
-const token = localStorage.getItem('token')
+import Button from '@mui/material/Button';
 
 class NotAuthorized extends Component {
   constructor() {
@@ -13,7 +10,7 @@ class NotAuthorized extends Component {
       password: ''
     };
   }
-	
+
 
   render() {
     return (
@@ -22,19 +19,29 @@ class NotAuthorized extends Component {
           <div className="row">
             <div className="col-md-8 m-auto">
               <br />
-              
+              <br />
             </div>
             <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">You are not authorized to access this page. Please Log in</h1>
-              <Link to={`/`}>
-                         Click here to login
-                    </Link>
-              <p className="lead text-center">
-              </p>
+              <div className="backgroundLabel3">
+                <div className="Label1">
+                  <b style={{
+                    position: "absolute",
+                    fontSize: "40px",
+                    marginTop: "-15px",
+                    marginLeft: "-141px"
+                  }}>Not Authorized</b>
+                </div>
+              </div>
+              <div className="backgroundBox3">
+                <h1 style={{ color: 'red', fontWeight: 'bold'}} className="display-4 text-center">You are not authorized to access this page. Please Log in</h1>
+                <Button href="/login" variant="contained">Click here to login</Button>
+                <p className="lead text-center">
+                </p>
+              </div>
+            </div>
           </div>
-          </div>
+          <br />
         </div>
-		<br />
       </div>
     );
   }

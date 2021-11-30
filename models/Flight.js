@@ -7,11 +7,11 @@ const FlightSchema = new mongoose.Schema({
   },
   departure_airport: {
     type: String,
-	required: true
+    required: true
   },
   arrival_airport: {
     type: String,
-	required: true
+    required: true
   },
   departure_time: {
     type: String,
@@ -23,19 +23,27 @@ const FlightSchema = new mongoose.Schema({
   },
   date: {
     type: Date,
-	required: true
+    required: true
   },
   economy_seats_number: {
     type: String,
-	required: true
+    required: true
   },
   business_seats_number: {
     type: String,
-	required: true
+    required: true
   },
   first_seats_number: {
     type: String,
-	required: true
+    required: true
+  },
+  baggage_allowance: {
+    type: String,
+    required: true
+  },
+  price: {
+    type: String,
+    required: true
   }
 });
 

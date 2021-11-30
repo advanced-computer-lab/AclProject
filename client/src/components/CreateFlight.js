@@ -4,9 +4,6 @@ import '../App.css';
 import axios from 'axios';
 import jwt from 'jsonwebtoken'
 
-var token = localStorage.getItem('token')
-var user;
-
 class CreateFlight extends Component {
   constructor() {
     super();
@@ -17,32 +14,18 @@ class CreateFlight extends Component {
       departure_time: '',
       arrival_time: '',
       date: '',
-	  economy_seats_number: '',
-	  business_seats_number: '',
-	  first_seats_number: ''
+      economy_seats_number: '',
+      business_seats_number: '',
+      first_seats_number: '',
+      LoggedInUser: jwt.decode(localStorage.getItem('token'))
     };
 
-    var token2 = localStorage.getItem('token')
-    user = jwt.decode(token2)
-    if (token !== token2){ //token updated
-      if (token2 == null){
-        window.location.href = "http://localhost:3000/not-authorized";
-      }
-      else if (token2 !== null && user.username !== "Administrator"){
-        window.location.href = "http://localhost:3000/not-authorized";
-      }
-    }
-
-    else if (token2 === null && token2 === token){
+    if (jwt.decode(localStorage.getItem('token')) === null){
       window.location.href = "http://localhost:3000/not-authorized";
     }
-
-    else {
-      if (user.username !== "Administrator"){
-        window.location.href = "http://localhost:3000/not-authorized";
-      }
+    else if (this.state.LoggedInUser.username !== "Administrator") {
+      window.location.href = "http://localhost:3000/not-authorized";
     }
-    
   }
 
   onChange = e => {
@@ -60,8 +43,8 @@ class CreateFlight extends Component {
       arrival_time: this.state.arrival_time,
       date: this.state.date,
       economy_seats_number: this.state.economy_seats_number,
-	  business_seats_number: this.state.business_seats_number,
-	  first_seats_number: this.state.first_seats_number
+      business_seats_number: this.state.business_seats_number,
+      first_seats_number: this.state.first_seats_number
     };
 
     axios
@@ -69,13 +52,13 @@ class CreateFlight extends Component {
       .then(res => {
         this.setState({
           flight_number: '',
-	      departure_airport: '',
+          departure_airport: '',
           arrival_airport: '',
           departure_time: '',
           arrival_time: '',
           date: '',
-	      economy_seats_number: '',
-	      business_seats_number: ''
+          economy_seats_number: '',
+          business_seats_number: ''
         })
         this.props.history.push('/admin-show-flight-list');
       })
@@ -92,13 +75,13 @@ class CreateFlight extends Component {
             <div className="col-md-8 m-auto">
               <br />
               <Link to="/admin-show-flight-list" className="btn btn-outline-warning float-left">
-                  Flight List
+                Flight List
               </Link>
             </div>
             <div className="col-md-8 m-auto">
               <h1 className="display-4 text-center">Add Flight</h1>
               <p className="lead text-center">
-                  Create new flight
+                Create new flight
               </p>
 
               <form noValidate onSubmit={this.onSubmit}>
@@ -145,8 +128,8 @@ class CreateFlight extends Component {
                     onChange={this.onChange}
                   />
                 </div>
-				
-				<div className='form-group'>
+
+                <div className='form-group'>
                   <input
                     type='text'
                     placeholder='Arrival Time'
@@ -177,8 +160,8 @@ class CreateFlight extends Component {
                     onChange={this.onChange}
                   />
                 </div>
-				
-				<div className='form-group'>
+
+                <div className='form-group'>
                   <input
                     type='text'
                     placeholder='Business Seats Number'
@@ -188,8 +171,8 @@ class CreateFlight extends Component {
                     onChange={this.onChange}
                   />
                 </div>
-				
-				<div className='form-group'>
+
+                <div className='form-group'>
                   <input
                     type='text'
                     placeholder='First Seats Number'
@@ -201,14 +184,14 @@ class CreateFlight extends Component {
                 </div>
 
                 <input
-                    type="submit"
-                    className="btn btn-outline-warning btn-block mt-4"
+                  type="submit"
+                  className="btn btn-outline-warning btn-block mt-4"
                 />
               </form>
-          </div>
+            </div>
           </div>
         </div>
-		<br />
+        <br />
       </div>
     );
   }

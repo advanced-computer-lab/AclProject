@@ -1,13 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
-import axios from 'axios';
-import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import jwt from 'jsonwebtoken'
-
-var token = localStorage.getItem('token')
-var user;
 
 const ReservedFlightSummary = (props) => {
     const  flight  = props.flight;

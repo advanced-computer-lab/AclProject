@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import loginPic from '../login.png';
 
 
 class Registration extends Component {
@@ -19,6 +21,36 @@ class Registration extends Component {
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
+  };
+
+  onChangeFirstName = e => {
+    this.setState({ [e.target.name]: e.target.value });
+    this.state.firstname = e.target.value
+  };
+
+  onChangeLastName = e => {
+    this.setState({ [e.target.name]: e.target.value });
+    this.state.lastname = e.target.value
+  };
+
+  onChangeUsername = e => {
+    this.setState({ [e.target.name]: e.target.value });
+    this.state.username = e.target.value
+  };
+
+  onChangePassword = e => {
+    this.setState({ [e.target.name]: e.target.value });
+    this.state.password = e.target.value
+  };
+
+  onChangePassportNumber = e => {
+    this.setState({ [e.target.name]: e.target.value });
+    this.state.passport = e.target.value
+  };
+
+  onChangeEmail = e => {
+    this.setState({ [e.target.name]: e.target.value });
+    this.state.email = e.target.value
   };
 
   onSubmit = e => {
@@ -40,7 +72,7 @@ class Registration extends Component {
           username: '',
           firstname: '',
           lastname: '',
-	        email: '',
+          email: '',
           password: '',
           passport: '',
         })
@@ -53,92 +85,86 @@ class Registration extends Component {
 
   render() {
     return (
-      <div className="Registration">
+      <div className="Login">
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
               <br />
-              
+              <br />
             </div>
             <div className="col-md-8 m-auto">
-              
-              <h1 className="display-4 text-center">Registration</h1>
-              <p className="lead text-center">
-                  Enter your information
-              </p>
-
-              <form noValidate onSubmit={this.onSubmit}>
-                <div className='form-group'>
-                  <input
-                    type='text'
-                    placeholder='Username'
-                    name='username'
-                    className='form-control'
-                    value={this.state.username}
-                    onChange={this.onChange}
-                  />
+              <div className="backgroundLabel2">
+                <div className="Label1">
+                  <b style={{
+                    position: "absolute",
+                    fontSize: "40px",
+                    marginTop: "-22px",
+                    marginLeft: "-110px"
+                  }}>Registration</b>
                 </div>
+              </div>
+              <div className="backgroundBox2">
+                <p className="lead text-center">
 
-                <div className='form-group'>
-                  <input
-                    type='text'
-                    placeholder='First Name'
-                    name='firstname'
-                    className='form-control'
-                    value={this.state.firstname}
-                    onChange={this.onChange}
+                </p>
+                <img src={loginPic} width="160px" height="160px" alt="fireSpot" />
+                <br />
+                <br />
+                <form noValidate onSubmit={this.onSubmit}>
+                  <TextField 
+                  onChange={this.onChangeFirstName} style={{
+                    width: "200px",
+                  }} label="First Name" id="outlined-size-normal" defaultValue="" />
+                  <TextField onChange={this.onChangeLastName} style={{
+                    width: "200px"
+                  }} label="Last Name" id="outlined-size-normal" defaultValue="" />
+                  <br />
+                  <br />
+                  <TextField
+                  onChange={this.onChangeUsername}
+                    style={{
+                      width: "400px",
+                    }}
+                    id="filled-helperText"
+                    label="Username"
+                    defaultValue=""
+                    helperText="You will use the username and password to login"
+                    variant="filled"
                   />
-                </div>
-
-                <div className='form-group'>
-                  <input
-                    type='text'
-                    placeholder='Last Name'
-                    name='lastname'
-                    className='form-control'
-                    value={this.state.lastname}
-                    onChange={this.onChange}
+                  <br />
+                  <TextField
+                  onChange={this.onChangePassword}
+                    style={{
+                      width: "400px",
+                    }}
+                    id="filled-password-input"
+                    label="Password"
+                    type="password"
+                    autoComplete="current-password"
+                    variant="filled"
                   />
-                </div>
-
-                <div className='form-group'>
-                  <input
-                    type='text'
-                    placeholder='Email'
-                    name='email'
-                    className='form-control'
-                    value={this.state.email}
-                    onChange={this.onChange}
-                  />
-                </div>
-
-                <div className='form-group'>
-                  <input
-                    type='text'
-                    placeholder='Passport Number'
-                    name='passport'
-                    className='form-control'
-                    value={this.state.passport}
-                    onChange={this.onChange}
-                  />
-                </div>
-
-                <div className='form-group'>
-                  <input
-                    type='text'
-                    placeholder='Password'
-                    name='password'
-                    className='form-control'
-                    value={this.state.password}
-                    onChange={this.onChange}
-                  />
-                </div>
-                <button type="submit" class="btn btn-outline-warning btn-block mt-4">Register</button>
-              </form>
-          </div>
+                  <br />
+                  <br />
+                  <TextField onChange={this.onChangeEmail} style={{
+                    width: "400px",
+                  }} label="Email" id="outlined-size-normal" defaultValue="" />
+                  <br />
+                  <br />
+                  <TextField onChange={this.onChangePassportNumber} style={{
+                    width: "400px",
+                  }} label="Passport Number" id="outlined-size-normal" defaultValue="" />
+                  <br />
+                  <br />
+                  <Button type="submit" style={{
+                    width: "180px",
+                    height: "50px",
+                  }} variant="contained">Register</Button>
+                </form>
+              </div>
+            </div>
           </div>
         </div>
-		<br />
+        <br />
       </div>
     );
   }

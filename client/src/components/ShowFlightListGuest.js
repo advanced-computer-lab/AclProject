@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import FlightSummary from './FlightSummary';
 
 class ShowFlightList extends Component {

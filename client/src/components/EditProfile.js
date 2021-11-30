@@ -4,9 +4,6 @@ import axios from 'axios';
 import '../App.css';
 import jwt from 'jsonwebtoken';
 
-const token = localStorage.getItem('token');
-const user = jwt.decode(token);
-
 
 class EditProfile extends Component {
   constructor(props) {
@@ -15,7 +12,8 @@ class EditProfile extends Component {
       firstname: '',
       lastname: '',
       email: '',
-      passport: ''
+      passport: '',
+      LoggedInUser: jwt.decode(localStorage.getItem('token'))
     };
   }
 
@@ -26,7 +24,7 @@ class EditProfile extends Component {
       .then(res => {
         var data = {};
         for (var i = 0; i < res.data.length; i++) {
-          if(res.data[i].username == user.username){
+          if(res.data[i].username === this.state.LoggedInUser.username){
             data = res.data[i];
             break;
         }

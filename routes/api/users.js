@@ -36,8 +36,7 @@ router.post('/login', async (req, res) => {
 	})
 
 	if (!user) {
-    console.log('User not found')
-		return { status: 'error', error: 'Invalid login' }
+		return res.json("User not found")
 	}
 
 	const isPasswordValid = await bcrypt.compare(
@@ -46,7 +45,7 @@ router.post('/login', async (req, res) => {
 	)
 
 	if (isPasswordValid) {
-    console.log('User logged in')
+		console.log('User logged in')
 		const token = jwt.sign(
 			{
 				id: user._id,
@@ -55,12 +54,11 @@ router.post('/login', async (req, res) => {
 			},
 			'secret123'
 		)
-      //console.log('token '+ token)
+		//console.log('token '+ token)
 
 		return res.json(token)
 	} else {
-    console.log('Wrong password')
-		//return res.json({ status: 'error', user: false })
+		return res.json("Wrong password")
 	}
 })
 

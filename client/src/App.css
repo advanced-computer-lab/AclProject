@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+body {
+  background: #f5f5f5;
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
@@ -39,68 +43,177 @@
   width: 50%;
 }
 
+.homepageItems {
+  display: block;
+  margin-left: 5px;
+  margin-right: auto;
+  width: 100%;
+}
+
 .CreateFlight {
-  background-color: #2c3e50;
+  background-color: #f7f5f5;
   min-height: 100vh;
   color: white;
 }
 
 .Registration {
-  background-color: #2c3e50;
+  background-color: #f7f5f5;
   min-height: 100vh;
   color: white;
 }
 
+.Homepage {
+
+  /* background: repeating-linear-gradient(#74ABDD, #74ABDD 49.9%, #498DCB 50.1%, #498DCB 100%); */
+  background:#f7f5f5;
+  min-height: 100vh;
+  color: #f7f5f5;
+}
+
 .Login {
-  background-color: #2c3e50;
+  background-color: #f7f5f5;
   min-height: 100vh;
   color: white;
 }
 
 .ShowFlightDetails {
-  background-color: #2c3e50;
+  background-color: #f7f5f5;
   min-height: 100vh;
   color: white;
 }
 
 .Profile {
-  background-color: #2c3e50;
+  background-color: #f7f5f5;
   min-height: 100vh;
   color: white;
 }
 
 .EditProfile {
-  background-color: #2c3e50;
+  background-color: #f7f5f5;
   min-height: 100vh;
   color: white;
 }
 
 .UpdateFlightInfo {
-  background-color: #2c3e50;
+  background-color: #f7f5f5;
   min-height: 100vh;
   color: white;
 }
 
 .AdvancedSearch {
-  background-color: #2c3e50;
+  background-color: #f7f5f5;
   min-height: 100vh;
   color: white;
 }
 
 .AdvancedSearchResults {
-  background-color: #2c3e50;
+  background-color: #f7f5f5;
   min-height: 100vh;
   color: white;
 }
 
+.SelectFlights {
+  background-color: #f7f5e1;
+  min-height: 100vh;
+  color: #f7f5e1;
+}
+
+/* Login */
+.backgroundBox1 {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -10px;
+  border-color: rgb(0, 0, 0);
+  border-style: solid;
+  border-radius: 0px 0px 25px 25px;
+  background-color: #ffffff;
+  height: 450px;
+  width: 550px;
+  color: #f7f5e1;
+  text-align: center;
+}
+
+.backgroundLabel1 {
+  width: 550px;
+  height: 85px;
+  padding-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  border-radius: 25px 25px 0px 0px;
+  background-color: #0B0909;
+}
+/*  */
+
+/* Registeration */
+.backgroundBox2 {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -10px;
+  border-color: rgb(0, 0, 0);
+  border-style: solid;
+  border-radius: 0px 0px 25px 25px;
+  background-color: #ffffff;
+  height: 690px;
+  width: 550px;
+  color: #f7f5e1;
+  text-align: center;
+}
+
+.backgroundLabel2 {
+  width: 550px;
+  height: 85px;
+  padding-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  border-radius: 25px 25px 0px 0px;
+  background-color: #0B0909;
+}
+/*  */
+
+/* Not Authorized */
+.backgroundBox3 {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -100px;
+  border-color: rgb(0, 0, 0);
+  border-style: solid;
+  border-radius: 0px 0px 25px 25px;
+  background-color: #ffffff;
+  height: 330px;
+  width: 550px;
+  color: #f7f5e1;
+  text-align: center;
+}
+
+.backgroundLabel3 {
+  width: 550px;
+  height: 185px;
+  padding-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  border-radius: 25px 25px 0px 0px;
+  background-color: #0B0909;
+}
+/*  */
+
+.container2 {
+  height: 345px;
+  width: 100%;
+  background-color: rgb(0, 0, 0);
+  text-align: center;
+}
+
 .ShowFlightList {
-  background-color: #2c3e50;
+  background-color: #f7f5f5;
   height: 100%;
   width: 100%;
   min-height: 100vh;
   min-width: 100px;
   overflow-y: auto;
-  color: white;
+  color: #f7f5e1;
 }
 
 
@@ -119,6 +232,84 @@
   margin: 0 auto;
   border-radius: 5px;
   overflow: hidden;
+}
+
+.Footer {
+  height: 550px;
+  position: relative;
+ }
+
+.container-fluid {
+  height: 345px;
+  width: 100%;
+  background-color: rgb(0, 0, 0);
+  text-align: center;
+}
+
+.A1 {
+  margin-left: 150px;
+  text-align: center;
+ }
+
+ .A2 {
+  margin-left: 430px;
+  text-align: center;
+ }
+
+ .A3 {
+  margin-left: 330px;
+  text-align: center;
+ }
+
+ .A4 {
+  margin-left: 1012px;
+  position: absolute;
+  width: 22%;
+  height: 50px;
+  text-align: center;
+  color:rgb(0, 0, 0);
+  background-color: #f5f5f5;
+  border-radius: 15px;
+  padding: 5px;
+ }
+
+ .A5 {
+  margin-left: 10.85px;
+  text-align: center;
+ }
+
+ .A6 {
+  margin-left: 1107px;
+  text-align: center;
+ }
+
+ .A7 {
+  margin-left: 1225px;
+  text-align: center;
+ }
+
+ .selectFlights {
+  margin-left: 287px;
+ }
+
+ .buttonUp {
+  margin-top: 0px;
+}
+
+ 
+ header {
+  margin: auto;
+  width: 47.8%;
+  /* border-radius: 25px; */
+  background: #73AD21;
+  /* border: 3px solid green; */
+  padding: 10px;
+  text-align: center;
+  background-color: rgb(255, 255, 255);
+}
+
+header h1 {
+  margin: 0;
 }
 
 .desc {
@@ -143,3 +334,74 @@
   padding: 10px 0 10px 0;
   text-align: center;
 }
+
+/* Seats */
+.section {
+  margin-left: auto;
+  margin-right: auto;
+    margin-top: 10px;
+    width: 150px;
+    text-align: center;
+    align-items: center;
+    display: grid ;
+    align-self: center;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.section > div {
+    border: 1px solid black;
+}
+.section > div:hover {
+    cursor: pointer;
+}
+
+.disabled {
+    background-color: grey;
+}
+.booked {
+    background-color: #19a0d9;
+}
+
+.section .disabled:hover {
+    cursor: not-allowed;
+}
+
+.vl {
+  position: absolute;
+  margin-top: 100px;
+  margin-left: 450px;
+  border-left: 4px solid rgb(0, 0, 0);
+  height: 800px;
+}
+
+.v2 {
+  position: absolute;
+  margin-top: 100px;
+  margin-left: 655px;
+  border-left: 4px solid rgb(0, 0, 0);
+  height: 800px;
+}
+
+button {
+  margin-top: 10px;
+}
+.center2 {
+  display: block;
+  
+  margin-left: 600px;
+  margin-right: auto;
+  width: 50%;
+}
+
+.center3 {
+  margin-top: 10px;
+  margin-left: 410px;
+}
+
+.steep2 {
+  margin-left: auto;
+  margin-right: auto;
+  margin-left: -405px;
+  width: 1000px;
+}
+/*  */

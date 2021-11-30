@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 
+import Navbar from './components/Navbar';
+import Homepage from './components/Homepage';
 import CreateFlight from './components/CreateFlight';
 import ShowFlightList from './components/ShowFlightList';
 import ShowFlightDetails from './components/ShowFlightDetails';
@@ -19,13 +21,19 @@ import NotAuthorized from './components/NotAuthorized';
 import ReservedFlights from './components/ReservedFlights';
 import ReservedFlightSummary from './components/ReservedFlightSummary';
 import ReservedShowFlightDetails from './components/ReservedShowFlightDetails';
+import SelectFlights from './components/SelectFlights';
+import SeatsSelection from './components/SeatsSelection';
 
 class App extends Component {
   render() {
     return (
       <Router>
+	  <Navbar />
         <div>
-          <Route exact path='/' component={Login} />
+          <Route exact path='/' component={Homepage} />
+		  <Route exact path='/login' component={Login} />
+		  <Route path='/select-flights' component={SelectFlights} />
+		  <Route path='/seats-selection' component={SeatsSelection} />
           <Route path='/create-flight' component={CreateFlight} />
           <Route path='/profile' component={Profile} />
 		      <Route path='/advanced-search' component={AdvancedSearch} />

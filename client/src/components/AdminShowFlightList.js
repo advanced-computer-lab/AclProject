@@ -5,35 +5,19 @@ import { Link } from 'react-router-dom';
 import FlightSummary from './AdminFlightSummary';
 import jwt from 'jsonwebtoken'
 
-var token = localStorage.getItem('token')
-var user;
-
 class ShowFlightList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      flights: []
+      flights: [],
+      LoggedInUser: jwt.decode(localStorage.getItem('token'))
     };
 
-    var token2 = localStorage.getItem('token')
-    user = jwt.decode(token2)
-    if (token !== token2){ //token updated
-      if (token2 == null){
-        window.location.href = "http://localhost:3000/not-authorized";
-      }
-      else if (token2 !== null && user.username !== "Administrator"){
-        window.location.href = "http://localhost:3000/not-authorized";
-      }
-    }
-
-    else if (token2 === null && token2 === token){
+    if (jwt.decode(localStorage.getItem('token')) === null){
       window.location.href = "http://localhost:3000/not-authorized";
     }
-
-    else {
-      if (user.username !== "Administrator"){
-        window.location.href = "http://localhost:3000/not-authorized";
-      }
+    else if (this.state.LoggedInUser.username !== "Administrator") {
+      window.location.href = "http://localhost:3000/not-authorized";
     }
   }
 
