@@ -43,13 +43,6 @@ body {
   width: 50%;
 }
 
-.homepageItems {
-  display: block;
-  margin-left: 5px;
-  margin-right: auto;
-  width: 100%;
-}
-
 .CreateFlight {
   background-color: #f7f5f5;
   min-height: 100vh;
@@ -57,20 +50,8 @@ body {
 }
 
 .Registration {
-  background-color: #f7f5f5;
-  min-height: 100vh;
-  color: white;
-}
-
-.Homepage {
-
-  /* background: repeating-linear-gradient(#74ABDD, #74ABDD 49.9%, #498DCB 50.1%, #498DCB 100%); */
-  background:#f7f5f5;
-  min-height: 100vh;
-  color: #f7f5f5;
-}
-
-.Login {
+  margin-left: auto;
+  margin-right: auto;
   background-color: #f7f5f5;
   min-height: 100vh;
   color: white;
@@ -112,63 +93,190 @@ body {
   color: white;
 }
 
+/* Select Flights */
 .SelectFlights {
-  background-color: #f7f5e1;
+  align-items: center;
+  text-align: center;
+  margin: auto;
+  background-color: #f7f5f5;
   min-height: 100vh;
-  color: #f7f5e1;
+  color: #000000;
 }
 
-/* Login */
-.backgroundBox1 {
+.HeaderSelectFlight {
+  margin: auto;
+  width: 535px;
+  padding: 10px;
+  text-align: center;
+  background-color: rgb(255, 255, 255);
+}
+/*  */
+
+/* Select Seats */
+.SeatsSelection {
+  align-items: center;
+  text-align: center;
+  margin: auto;
+  background-color: #f7f5f5;
+  min-height: 100vh;
+  color: #000000;
+}
+
+.section {
   margin-left: auto;
   margin-right: auto;
-  margin-top: -10px;
+    margin-top: 10px;
+    width: 150px;
+    text-align: center;
+    align-items: center;
+    display: grid ;
+    align-self: center;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.section > div {
+    border: 1px solid black;
+}
+.section > div:hover {
+    cursor: pointer;
+}
+
+.disabled {
+    background-color: grey;
+}
+.booked {
+    background-color: #19a0d9;
+}
+
+.section .disabled:hover {
+    cursor: not-allowed;
+}
+
+.vl {
+  position: absolute;
+  margin-bottom: auto;
+  margin-top: 50px;
+  margin-left: 450px;
+  border-left: 4px solid rgb(0, 0, 0);
+  height: 800px;
+}
+
+.v2 {
+  position: absolute;
+  margin-bottom: auto;
+  margin-top: 50px;
+  margin-left: 655px;
+  border-left: 4px solid rgb(0, 0, 0);
+  height: 800px;
+}
+/*  */
+
+/* Homepage */
+.Homepage {
+  margin: auto;
+  min-height: 100vh;
+  background:#f7f5f5;
+  color: #f7f5f5;
+}
+
+.container-fluid {
+  margin: auto;
+  height: 345px;
+  width: 100%;
+  background-color: rgb(0, 0, 0);
+  text-align: center;
+}
+
+.HomepageRow {
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  width: 1200px;
+}
+
+.HomepageRadioButtons1 {
+  margin-left: 1012px;
+  position: absolute;
+  width: 22%;
+  height: 50px;
+  text-align: center;
+  color:rgb(0, 0, 0);
+  background-color: #f5f5f5;
+  border-radius: 15px;
+  padding: 5px;
+ }
+
+ .HomepageRadioButtons2 {
+  margin-left: 10.85px;
+  text-align: center;
+ }
+ /*  */
+
+/* Login */
+.Login {
+  margin: auto;
+  min-height: 100vh;
+  background-color: #f7f5f5;
+  color: white;
+}
+
+.backgroundLabelLogin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
+  width: 550px;
+  height: 85px;
+  font-size: 45px;
+  border-radius: 25px 25px 0px 0px;
+  background-color: #0B0909;
+}
+
+.backgroundBoxLogin {
+  margin: auto;
+  height: 450px;
+  width: 550px;
   border-color: rgb(0, 0, 0);
   border-style: solid;
   border-radius: 0px 0px 25px 25px;
   background-color: #ffffff;
-  height: 450px;
-  width: 550px;
   color: #f7f5e1;
   text-align: center;
-}
-
-.backgroundLabel1 {
-  width: 550px;
-  height: 85px;
-  padding-top: 30px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-  border-radius: 25px 25px 0px 0px;
-  background-color: #0B0909;
 }
 /*  */
 
 /* Registeration */
-.backgroundBox2 {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: -10px;
+.Registration {
+  margin: auto;
+  min-height: 100vh;
+  background-color: #f7f5f5;
+  color: white;
+}
+
+.backgroundLabelRegistration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
+  width: 550px;
+  height: 85px;
+  font-size: 45px;
+  border-radius: 25px 25px 0px 0px;
+  background-color: #0B0909;
+}
+
+.backgroundBoxRegistration {
+  margin: auto;
+  height: 690px;
+  width: 550px;
   border-color: rgb(0, 0, 0);
   border-style: solid;
   border-radius: 0px 0px 25px 25px;
   background-color: #ffffff;
-  height: 690px;
-  width: 550px;
   color: #f7f5e1;
   text-align: center;
-}
-
-.backgroundLabel2 {
-  width: 550px;
-  height: 85px;
-  padding-top: 30px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-  border-radius: 25px 25px 0px 0px;
-  background-color: #0B0909;
 }
 /*  */
 
@@ -234,17 +342,14 @@ body {
   overflow: hidden;
 }
 
+.container {
+  margin: auto;
+}
+
 .Footer {
   height: 550px;
   position: relative;
  }
-
-.container-fluid {
-  height: 345px;
-  width: 100%;
-  background-color: rgb(0, 0, 0);
-  text-align: center;
-}
 
 .A1 {
   margin-left: 150px;
@@ -261,23 +366,6 @@ body {
   text-align: center;
  }
 
- .A4 {
-  margin-left: 1012px;
-  position: absolute;
-  width: 22%;
-  height: 50px;
-  text-align: center;
-  color:rgb(0, 0, 0);
-  background-color: #f5f5f5;
-  border-radius: 15px;
-  padding: 5px;
- }
-
- .A5 {
-  margin-left: 10.85px;
-  text-align: center;
- }
-
  .A6 {
   margin-left: 1107px;
   text-align: center;
@@ -288,15 +376,10 @@ body {
   text-align: center;
  }
 
- .selectFlights {
-  margin-left: 287px;
- }
-
  .buttonUp {
   margin-top: 0px;
 }
 
- 
  header {
   margin: auto;
   width: 47.8%;
@@ -333,53 +416,6 @@ header h1 {
   font-size: 1em;
   padding: 10px 0 10px 0;
   text-align: center;
-}
-
-/* Seats */
-.section {
-  margin-left: auto;
-  margin-right: auto;
-    margin-top: 10px;
-    width: 150px;
-    text-align: center;
-    align-items: center;
-    display: grid ;
-    align-self: center;
-    grid-template-columns: repeat(4, 1fr);
-}
-
-.section > div {
-    border: 1px solid black;
-}
-.section > div:hover {
-    cursor: pointer;
-}
-
-.disabled {
-    background-color: grey;
-}
-.booked {
-    background-color: #19a0d9;
-}
-
-.section .disabled:hover {
-    cursor: not-allowed;
-}
-
-.vl {
-  position: absolute;
-  margin-top: 100px;
-  margin-left: 450px;
-  border-left: 4px solid rgb(0, 0, 0);
-  height: 800px;
-}
-
-.v2 {
-  position: absolute;
-  margin-top: 100px;
-  margin-left: 655px;
-  border-left: 4px solid rgb(0, 0, 0);
-  height: 800px;
 }
 
 button {

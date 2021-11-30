@@ -84,72 +84,52 @@ const SeatsSelection = () => {
 
     return (
 
-        <div className="AdvancedSearchResult2">
+        <div className="SeatsSelection">
+            <br />
+            <Box sx={{ width: '100%' }}>
+                <Stepper activeStep={1} alternativeLabel>
+                    {steps.map((label) => (
+                        <Step key={label}>
+                            <StepLabel>{label}</StepLabel>
+                        </Step>
+                    ))}
+                </Stepper>
+            </Box>
+            <br />
             <div className="container">
+                <div class="vl"></div>
+                <div class="v2"></div>
                 <div className="row">
-                    <div className="col-md-12">
+                    <div className="col-md-10 m-auto">
+                        <section className="lower">
+                        </section>
                         <br />
-                        <Box sx={{ width: '100%' }}>
-                            <Stepper activeStep={1} alternativeLabel>
-                                {steps.map((label) => (
-                                    <Step key={label}>
-                                        <StepLabel>{label}</StepLabel>
-                                    </Step>
-                                ))}
-                            </Stepper>
-                        </Box>
+                        <br />
+                        <section className="color">
+                                <h6>First Class Seats</h6>
+                            <Seats values={FirstClassSeats}
+                                availableSeats={availableSeats}
+                                bookedSeats={bookedSeats}
+                                addSeat={addSeat} />
+                            <br />
+                                <h6>Business Seats</h6>
+                            <Seats values={BusnissSeats}
+                                availableSeats={availableSeats}
+                                bookedSeats={bookedSeats}
+                                addSeat={addSeat} />
+                            <br />
+                                <h6>Economy Seats</h6>
+                            <Seats values={EconomySeats}
+                                availableSeats={availableSeats}
+                                bookedSeats={bookedSeats}
+                                addSeat={addSeat} />
+                        </section>
+                        <br />
+                        <br />
+                            <button class="button button1" onClick={confirmBooking}>Continue Booking</button>
+                        <p>{bookedStatus}</p>
                     </div>
                 </div>
-            </div>
-            <br />
-            <div className="seats">
-                <section className="upper">
-                    <section className="showcase">
-                        <div className="Seat Selection">
-                            <div className="container">
-                                <div class="vl"></div>
-                                <div class="v2"></div>
-                                <div className="row">
-                                    <div className="col-md-10 m-auto">
-                                        <section className="lower">
-                                        </section>
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <section className="color">
-                                            <div className="center3">
-                                                <h6>First Class Seats</h6>
-                                            </div>
-                                            <Seats values={FirstClassSeats}
-                                                availableSeats={availableSeats}
-                                                bookedSeats={bookedSeats}
-                                                addSeat={addSeat} />
-<br />
-                                            <div className="center3">
-                                                <h6>Business Seats</h6>
-                                            </div>
-                                            <Seats values={BusnissSeats}
-                                                availableSeats={availableSeats}
-                                                bookedSeats={bookedSeats}
-                                                addSeat={addSeat} />
-<br />
-                                            <div className="center3">
-                                                <h6>Economy Seats</h6>
-                                            </div>
-                                            <Seats values={EconomySeats}
-                                                availableSeats={availableSeats}
-                                                bookedSeats={bookedSeats}
-                                                addSeat={addSeat} />
-                                        </section>
-                                        <div className="center3">
-                                        <button class="button button1" onClick={confirmBooking}>Continue Booking</button></div>
-                                        <p>{bookedStatus}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </section>
             </div>
         </div>
     );

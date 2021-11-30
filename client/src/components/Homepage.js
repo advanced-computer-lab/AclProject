@@ -78,19 +78,18 @@ class Homepage extends Component {
         <div className="container-fluid">
           <br />
           <br />
+          <b style={{
+            fontSize: "50px"
+          }}>Search, Compare & Reserve Your Tickets</b>
           <br />
-          <h1 className="display-4 text-center" >Search, Compare & Reserve Your Tickets</h1>
           <br />
-          <p className="lead text-center">
-          </p>
+          <br />
           <form noValidate onSubmit={this.onSubmit}>
-          <div className="homepageItems">
-            <div className="A1">
-
+            <div class="HomepageRow">
               <Autocomplete
                 style={{
-                  position: "absolute",
                   width: "280px",
+                  margin: "auto",
                   backgroundColor: "white"
                 }}
                 id="size-large-filled"
@@ -119,12 +118,10 @@ class Homepage extends Component {
                   />
                 )}
               />
-            </div>
-            <div className="A2">
               <Autocomplete
                 style={{
-                  position: "absolute",
                   width: "280px",
+                  margin: "auto",
                   backgroundColor: "white"
                 }}
                 id="size-large-filled"
@@ -153,12 +150,11 @@ class Homepage extends Component {
                   />
                 )}
               />
-            </div>
 
-            <div className="A3">
               <TextField
                 style={{
                   width: "200px",
+                  margin: "auto",
                   backgroundColor: "white",
                 }}
                 id="filled-textarea"
@@ -176,6 +172,7 @@ class Homepage extends Component {
               <TextField
                 style={{
                   width: "200px",
+                  margin: "auto",
                   backgroundColor: "white"
                 }}
                 id="filled-textarea"
@@ -189,23 +186,19 @@ class Homepage extends Component {
                   shrink: true,
                 }}
               />
-            </div>
-
-
-            <div className="A6">
 
               <Autocomplete
                 style={{
                   top: "267px",
-                  position: "absolute",
                   width: "120px",
+                  margin: "auto",
                   backgroundColor: "white"
                 }}
                 id="size-large-filled"
                 size="large"
                 options={numberOfAdults}
                 getOptionLabel={(option) => option}
-                defaultValue= "1"
+                defaultValue="1"
                 onChange={(ev, value) => {
                   this.state.adults_number = value
                 }}
@@ -228,22 +221,18 @@ class Homepage extends Component {
                   />
                 )}
               />
-            </div>
-
-
-            <div className="A7">
 
               <Autocomplete
                 style={{
                   top: "267px",
-                  position: "absolute",
                   width: "120px",
+                  margin: "auto",
                   backgroundColor: "white"
                 }}
                 id="size-large-filled"
                 size="large"
                 options={numberOfChildreen}
-                defaultValue= "0"
+                defaultValue="0"
                 getOptionLabel={(option) => option}
                 onChange={(ev, value) => {
                   this.state.children_number = value
@@ -269,26 +258,25 @@ class Homepage extends Component {
               />
             </div>
 
-            <div className="A4">
-              <div className="A5">
+            <div className="HomepageRadioButtons1">
+              <div className="HomepageRadioButtons2">
                 <RadioGroup row aria-label="Cabin" onChange={this.onChange2} name="row-radio-buttons-group">
-                  <FormControlLabel  value="Economy" control={<Radio />} label="Economy" />
+                  <FormControlLabel value="Economy" control={<Radio />} label="Economy" />
                   <FormControlLabel value="Business" control={<Radio />} label="Business" />
                   <FormControlLabel value="First" control={<Radio />} label="First" />
                 </RadioGroup>
               </div>
             </div>
-            </div>
             <br />
             <Button type="submit" variant="contained" startIcon={<FlightIcon />}>
               Find Flights
             </Button>
-            
+
           </form>
           <br />
           <br />
         </div>
-        </div>
+      </div>
     );
   }
 }

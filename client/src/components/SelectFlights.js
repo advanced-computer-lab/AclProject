@@ -171,202 +171,172 @@ class selectFlights extends Component {
     const SeatsSelectionLink = result + "/" + this.state.departureFlightID + "/" + this.state.returnFlightID;
 
     return (
-      <div className="SelectFlights2">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <br />
-              <Box sx={{ width: '100%' }}>
-                <Stepper activeStep={0} alternativeLabel>
-                  {steps.map((label) => (
-                    <Step key={label}>
-                      <StepLabel>{label}</StepLabel>
-                    </Step>
-                  ))}
-                </Stepper>
-              </Box>
-              <br />
-              <header>
-                <h1>Select Departure Flight</h1>
-              </header>
-
-              <div className="selectFlights">
-                <div style={{ height: 400, width: '100%' }}>
-                  <DataGrid
-                    style={{
-                      width: "535px",
-                      height: "375px",
-                      position: "absolute",
-                      backgroundColor: "white"
-                    }}
-                    onSelectionModelChange={itm => this.onChange1(itm)}
-                    rows={departureFlights}
-                    getRowId={(row) => row._id}
-                    columns={columns}
-                    pageSize={5}
-                    rowsPerPageOptions={[5]}
-                  />
-                </div>
-                {((this.state.departureFlightID === '')) ? (
-                  <Button style={{
-                    marginLeft: "160px",
-
-                  }} variant="contained" disabled>
-                    Show flight details
-                  </Button>
-                ) : (
-                  <Button style={{
-                    marginLeft: "160px",
-
-                  }} onClick={this.onClickButton1} variant="contained">
-                    Show flight details
-                  </Button>
-                )}
-              </div>
-
-              <div className="col-md-11">
-                <br />
-                <br />
-                <hr />
-              </div>
-              <br />
-
-              <header>
-                <h1>Select Return Flight</h1>
-              </header>
-
-              <div className="selectFlights">
-                <div style={{ height: 400, width: '100%' }}>
-                  <DataGrid
-                    style={{
-                      width: "535px",
-                      height: "375px",
-                      position: "absolute",
-                      backgroundColor: "white"
-                    }}
-                    onSelectionModelChange={itm => this.onChange2(itm)}
-                    rows={returnFlights}
-                    getRowId={(row) => row._id}
-                    columns={columns}
-                    pageSize={5}
-                    rowsPerPageOptions={[5]}
-                  />
-                </div>
-                {((this.state.returnFlightID === '')) ? (
-                  <Button style={{
-                    marginLeft: "160px",
-
-                  }} variant="contained" disabled>
-                    Show flight details
-                  </Button>
-                ) : (
-                  <Button style={{
-                    marginLeft: "160px",
-
-                  }} onClick={this.onClickButton2} variant="contained">
-                    Show flight details
-                  </Button>
-                )}
-              </div>
-            </div>
-            <div className="col-md-11">
-              <br />
-              <br />
-              <hr />
-            </div>
-
-            <div>
-              <Modal open={this.state.openModal1} onClose={this.onCloseModal1}>
-                <br />
-                <br />
-                <TableContainer component={Paper}>
-                  <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>Flight Number</TableCell>
-                        <TableCell align="right">Departure Airport</TableCell>
-                        <TableCell align="right">Arrival Airport</TableCell>
-                        <TableCell align="right">Departure Time</TableCell>
-                        <TableCell align="right">Arrival Time</TableCell>
-                        <TableCell align="right">Trip Duration</TableCell>
-                        <TableCell align="right">Cabin Class</TableCell>
-                        <TableCell align="right">Baggage Allowance</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-
-                      <TableRow
-                      >
-                        <TableCell component="th" scope="row">{selectedDepartureFlight.flight_number}</TableCell>
-                        <TableCell align="right">{selectedDepartureFlight.departure_airport}</TableCell>
-                        <TableCell align="right">{selectedDepartureFlight.arrival_airport}</TableCell>
-                        <TableCell align="right">{selectedDepartureFlight.departure_time}</TableCell>
-                        <TableCell align="right">{selectedDepartureFlight.arrival_time}</TableCell>
-                        <TableCell align="right">{selectedDepartureFlight.arrival_time} - {selectedDepartureFlight.departure_time}</TableCell>
-                        <TableCell align="right">{selectedDepartureFlight.flight_number}</TableCell>
-                        <TableCell align="right">{selectedDepartureFlight.flight_number}</TableCell>
-                      </TableRow>
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </Modal>
-            </div>
-
-            <div>
-              <Modal open={this.state.openModal2} onClose={this.onCloseModal2}>
-                <br />
-                <br />
-                <TableContainer component={Paper}>
-                  <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>Flight Number</TableCell>
-                        <TableCell align="right">Departure Airport</TableCell>
-                        <TableCell align="right">Arivval Airport</TableCell>
-                        <TableCell align="right">Departure Time</TableCell>
-                        <TableCell align="right">Arrival Time</TableCell>
-                        <TableCell align="right">Trip Duration</TableCell>
-                        <TableCell align="right">Cabin Class</TableCell>
-                        <TableCell align="right">Baggage Allowance</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-
-                      <TableRow
-                      >
-                        <TableCell component="th" scope="row">{selectedReturnFlight.flight_number}</TableCell>
-                        <TableCell align="right">{selectedReturnFlight.departure_airport}</TableCell>
-                        <TableCell align="right">{selectedReturnFlight.arrival_airport}</TableCell>
-                        <TableCell align="right">{selectedReturnFlight.departure_time}</TableCell>
-                        <TableCell align="right">{selectedReturnFlight.arrival_time}</TableCell>
-                        <TableCell align="right">{selectedReturnFlight.arrival_time} - {selectedReturnFlight.departure_time}</TableCell>
-                        <TableCell align="right">{selectedReturnFlight.flight_number}</TableCell>
-                        <TableCell align="right">{selectedReturnFlight.flight_number}</TableCell>
-                      </TableRow>
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </Modal>
-            </div>
-
-            {((this.state.returnFlightID === '' || this.state.departureFlightID === '')) ? (
-              <Button style={{
-                marginLeft: "405px",
-
-              }} variant="contained" disabled>
-                Confirm Flights and Select Seats
-              </Button>
-            ) : (
-              <Button color="success" style={{
-                marginLeft: "405px",
-
-              }} href={SeatsSelectionLink} variant="contained">
-                Confirm Flights and Select Seats
-              </Button>
-            )}
-          </div>
-          <br/>
+      <div className="SelectFlights">
+        <br />
+        <Box sx={{ width: '100%' }}>
+          <Stepper activeStep={0} alternativeLabel>
+            {steps.map((label) => (
+              <Step key={label}>
+                <StepLabel>{label}</StepLabel>
+              </Step>
+            ))}
+          </Stepper>
+        </Box>
+        <br />
+        <div className="HeaderSelectFlight">
+          <h1>Select Departure Flight</h1>
         </div>
+
+          <DataGrid
+            style={{
+              width: "535px",
+              height: "375px",
+              margin: "auto",
+              backgroundColor: "white"
+            }}
+            onSelectionModelChange={itm => this.onChange1(itm)}
+            rows={departureFlights}
+            getRowId={(row) => row._id}
+            columns={columns}
+            pageSize={5}
+            rowsPerPageOptions={[5]}
+          />
+          <br />
+        {((this.state.departureFlightID === '')) ? (
+          <Button  variant="contained" disabled>
+            Show flight details
+          </Button>
+        ) : (
+          <Button  onClick={this.onClickButton1} variant="contained">
+            Show flight details
+          </Button>
+        )}
+
+        <div className="col-md-11">
+          <br />
+          <hr />
+        </div>
+        <br />
+
+        <div className="HeaderSelectFlight">
+          <h1>Select Return Flight</h1>
+        </div>
+
+          <DataGrid
+            style={{
+              width: "535px",
+              height: "375px",
+              margin: "auto",
+              backgroundColor: "white"
+            }}
+            onSelectionModelChange={itm => this.onChange2(itm)}
+            rows={returnFlights}
+            getRowId={(row) => row._id}
+            columns={columns}
+            pageSize={5}
+            rowsPerPageOptions={[5]}
+          />
+          <br />
+        {((this.state.returnFlightID === '')) ? (
+          <Button variant="contained" disabled>
+            Show flight details
+          </Button>
+        ) : (
+          <Button  onClick={this.onClickButton2} variant="contained">
+            Show flight details
+          </Button>
+        )}
+        <div className="col-md-11">
+          <br />
+          <br />
+          <hr />
+        </div>
+
+        <div>
+          <Modal open={this.state.openModal1} onClose={this.onCloseModal1}>
+            <br />
+            <br />
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Flight Number</TableCell>
+                    <TableCell align="right">Departure Airport</TableCell>
+                    <TableCell align="right">Arrival Airport</TableCell>
+                    <TableCell align="right">Departure Time</TableCell>
+                    <TableCell align="right">Arrival Time</TableCell>
+                    <TableCell align="right">Trip Duration</TableCell>
+                    <TableCell align="right">Cabin Class</TableCell>
+                    <TableCell align="right">Baggage Allowance</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+
+                  <TableRow
+                  >
+                    <TableCell component="th" scope="row">{selectedDepartureFlight.flight_number}</TableCell>
+                    <TableCell align="right">{selectedDepartureFlight.departure_airport}</TableCell>
+                    <TableCell align="right">{selectedDepartureFlight.arrival_airport}</TableCell>
+                    <TableCell align="right">{selectedDepartureFlight.departure_time}</TableCell>
+                    <TableCell align="right">{selectedDepartureFlight.arrival_time}</TableCell>
+                    <TableCell align="right">{selectedDepartureFlight.arrival_time} - {selectedDepartureFlight.departure_time}</TableCell>
+                    <TableCell align="right">{selectedDepartureFlight.flight_number}</TableCell>
+                    <TableCell align="right">{selectedDepartureFlight.flight_number}</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Modal>
+        </div>
+
+        <div>
+          <Modal open={this.state.openModal2} onClose={this.onCloseModal2}>
+            <br />
+            <br />
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Flight Number</TableCell>
+                    <TableCell align="right">Departure Airport</TableCell>
+                    <TableCell align="right">Arivval Airport</TableCell>
+                    <TableCell align="right">Departure Time</TableCell>
+                    <TableCell align="right">Arrival Time</TableCell>
+                    <TableCell align="right">Trip Duration</TableCell>
+                    <TableCell align="right">Cabin Class</TableCell>
+                    <TableCell align="right">Baggage Allowance</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+
+                  <TableRow
+                  >
+                    <TableCell component="th" scope="row">{selectedReturnFlight.flight_number}</TableCell>
+                    <TableCell align="right">{selectedReturnFlight.departure_airport}</TableCell>
+                    <TableCell align="right">{selectedReturnFlight.arrival_airport}</TableCell>
+                    <TableCell align="right">{selectedReturnFlight.departure_time}</TableCell>
+                    <TableCell align="right">{selectedReturnFlight.arrival_time}</TableCell>
+                    <TableCell align="right">{selectedReturnFlight.arrival_time} - {selectedReturnFlight.departure_time}</TableCell>
+                    <TableCell align="right">{selectedReturnFlight.flight_number}</TableCell>
+                    <TableCell align="right">{selectedReturnFlight.flight_number}</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Modal>
+        </div>
+
+        {((this.state.returnFlightID === '' || this.state.departureFlightID === '')) ? (
+          <Button  variant="contained" disabled>
+            Confirm Flights and Select Seats
+          </Button>
+        ) : (
+          <Button color="success" href={SeatsSelectionLink} variant="contained">
+            Confirm Flights and Select Seats
+          </Button>
+        )}
+        <br />
+        <br />
       </div>
     );
   }

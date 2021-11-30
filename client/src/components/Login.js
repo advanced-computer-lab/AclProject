@@ -70,87 +70,69 @@ class Login extends Component {
   render() {
     return (
       <div className="Login">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-8 m-auto">
-              <br />
-              <br />
-            </div>
-            <div className="col-md-8 m-auto">
-              <div className="backgroundLabel1">
-                <div className="Label1">
-                  <b style={{
-                    position: "absolute",
-                    fontSize: "40px",
-                    marginTop: "-22px",
-                    marginLeft: "-50px"
-                  }}>Login</b>
-                </div>
-              </div>
-              <div className="backgroundBox1">
-                <p className="lead text-center">
-
-                </p>
-                <img src={loginPic} width="160px" height="160px" alt="fireSpot" />
-                <br />
-                <br />
-                <form noValidate onSubmit={this.onSubmit}>
-
-
-                  {((invalidUsername === 'true')) ? (
-                    <TextField error
-                      onChange={this.onChangeUsername} style={{
-                        width: "350px"
-                      }}
-                      label="Username" helperText="Invalid Username" id="outlined-size-normal" defaultValue="" />
-                  ) : (
-                    <TextField
-                      onChange={this.onChangeUsername} style={{
-                        width: "350px"
-                      }}
-                      label="Username" id="outlined-size-normal" defaultValue="" />
-                  )}
-                  <br />
-                  <br />
-                  {((wrongPassword === 'true')) ? (
-                    <TextField
-                      onChange={this.onChangePassword}
-                      style={{
-                        width: "350px"
-                      }}
-                      error
-                      helperText="Wrong Password"
-                      id="outlined-password-input"
-                      label="Password"
-                      type="password"
-                      autoComplete="current-password"
-                    />
-                  ) : (
-                    <TextField
-                      onChange={this.onChangePassword}
-                      style={{
-                        width: "350px"
-                      }}
-                      id="outlined-password-input"
-                      label="Password"
-                      type="password"
-                      autoComplete="current-password"
-                    />
-                  )}
-                  <br />
-                  <br />
-                  <Button
-                    type="submit"
-                    style={{
-                      width: "180px",
-                      height: "50px",
-                    }} variant="contained">Log in</Button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
         <br />
+        <br />
+        <div className="backgroundLabelLogin">
+          <b>Login</b>
+        </div>
+        <div className="backgroundBoxLogin">
+          <br />
+          <img src={loginPic} width="160px" height="160px" alt="fireSpot" />
+          <br />
+          <br />
+          <form noValidate onSubmit={this.onSubmit}>
+
+
+            {((invalidUsername === 'true')) ? (
+              <TextField error
+                onChange={this.onChangeUsername} style={{
+                  width: "350px"
+                }}
+                label="Username" helperText="Invalid Username" id="outlined-size-normal" defaultValue="" />
+            ) : (
+              <TextField
+                onChange={this.onChangeUsername} style={{
+                  width: "350px"
+                }}
+                label="Username" id="outlined-size-normal" defaultValue="" />
+            )}
+            <br />
+            <br />
+            {((wrongPassword === 'true')) ? (
+              <TextField
+                onChange={this.onChangePassword}
+                style={{
+                  width: "350px"
+                }}
+                error
+                helperText="Wrong Password"
+                id="outlined-password-input"
+                label="Password"
+                type="password"
+                autoComplete="current-password"
+              />
+            ) : (
+              <TextField
+                onChange={this.onChangePassword}
+                style={{
+                  width: "350px"
+                }}
+                id="outlined-password-input"
+                label="Password"
+                type="password"
+                autoComplete="current-password"
+              />
+            )}
+            <br />
+            <br />
+            <Button
+              type="submit"
+              style={{
+                width: "180px",
+                height: "50px",
+              }} variant="contained">Log in</Button>
+          </form>
+        </div>
       </div>
     );
   }

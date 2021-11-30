@@ -20,7 +20,7 @@ class CreateFlight extends Component {
       LoggedInUser: jwt.decode(localStorage.getItem('token'))
     };
 
-    if (jwt.decode(localStorage.getItem('token')) === null){
+    if (jwt.decode(localStorage.getItem('token')) === null) {
       window.location.href = "http://localhost:3000/not-authorized";
     }
     else if (this.state.LoggedInUser.username !== "Administrator") {
@@ -73,17 +73,23 @@ class CreateFlight extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
+
               <br />
-              <Link to="/admin-show-flight-list" className="btn btn-outline-warning float-left">
-                Flight List
-              </Link>
             </div>
             <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Add Flight</h1>
-              <p className="lead text-center">
-                Create new flight
-              </p>
-
+              <div className="backgroundLabel2">
+                <div className="Label1">
+                  <b style={{
+                    position: "absolute",
+                    fontSize: "40px",
+                    marginTop: "-22px",
+                    marginLeft: "-110px"
+                  }}>Create Flight</b>
+                </div>
+              </div>
+              <div className="backgroundBox2">
+              <br />
+              <br />
               <form noValidate onSubmit={this.onSubmit}>
                 <div className='form-group'>
                   <input
@@ -190,6 +196,7 @@ class CreateFlight extends Component {
               </form>
             </div>
           </div>
+        </div>
         </div>
         <br />
       </div>
