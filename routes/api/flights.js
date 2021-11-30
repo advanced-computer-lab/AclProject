@@ -27,7 +27,14 @@ router.get('/:id', (req, res) => {
 });
 
 //Create flight
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
+  const flight = await Flight.findOne({
+		flight_number: req.body.flight_number,
+	})
+
+	if (flight) {
+		return res.json("A flight with the same flight number already exists")
+	}
   Flight.create(req.body)
     .then(flight => res.json({ msg: 'Flight added successfully' }))
     .catch(err => res.status(400).json({ error: 'Unable to add this flight' }));

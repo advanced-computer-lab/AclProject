@@ -2,7 +2,14 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../App.css';
+import '../App.css';
 import jwt from 'jsonwebtoken'
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import Chip from '@mui/material/Chip'
+
+const airports = require('../airports.json');
 
 class UpdateFlightInfo extends Component {
   constructor(props) {
@@ -17,17 +24,64 @@ class UpdateFlightInfo extends Component {
       economy_seats_number: '',
       business_seats_number: '',
       first_seats_number: '',
+      baggage_allowance: '',
+      price: '',
       LoggedInUser: jwt.decode(localStorage.getItem('token'))
     };
 
-    if (jwt.decode(localStorage.getItem('token')) === null){
+    if (jwt.decode(localStorage.getItem('token')) === null) {
       window.location.href = "http://localhost:3000/not-authorized";
     }
     else if (this.state.LoggedInUser.username !== "Administrator") {
       window.location.href = "http://localhost:3000/not-authorized";
     }
-      
+
   }
+
+  onChangeFlightNumber = e => {
+    this.state.flight_number = e.target.value
+    this.forceUpdate()
+  };
+
+  onChangeDate = e => {
+    this.state.date = e.target.value
+    this.forceUpdate()
+  };
+
+  onChangeDepartureTime = e => {
+    this.state.departure_time = e.target.value
+    this.forceUpdate()
+  };
+
+  onChangeArrivalTime = e => {
+    this.state.arrival_time = e.target.value
+    this.forceUpdate()
+  };
+
+  onChangeEconomySeatsNumber = e => {
+    this.state.economy_seats_number = e.target.value
+    this.forceUpdate()
+  };
+
+  onChangeBusinessSeatsNumber = e => {
+    this.state.business_seats_number = e.target.value
+    this.forceUpdate()
+  };
+
+  onChangeFirstSeatsNumber = e => {
+    this.state.first_seats_number = e.target.value
+    this.forceUpdate()
+  };
+
+  onChangeBaggageAllowance = e => {
+    this.state.baggage_allowance = e.target.value
+    this.forceUpdate()
+  };
+
+  onChangePrice = e => {
+    this.state.price = e.target.value
+    this.forceUpdate()
+  };
 
   componentDidMount() {
     // console.log("Print id: " + this.props.match.params.id);
@@ -44,7 +98,9 @@ class UpdateFlightInfo extends Component {
           date: res.data.date,
           economy_seats_number: res.data.economy_seats_number,
           business_seats_number: res.data.business_seats_number,
-          first_seats_number: res.data.first_seats_number
+          first_seats_number: res.data.first_seats_number,
+          baggage_allowance: res.data.baggage_allowance,
+          price: res.data.price
         })
       })
       .catch(err => {
@@ -68,7 +124,9 @@ class UpdateFlightInfo extends Component {
       date: this.state.date,
       economy_seats_number: this.state.economy_seats_number,
       business_seats_number: this.state.business_seats_number,
-      first_seats_number: this.state.first_seats_number
+      first_seats_number: this.state.first_seats_number,
+      baggage_allowance: this.state.baggage_allowance,
+      price: this.state.price
     };
 
     axios
@@ -84,139 +142,261 @@ class UpdateFlightInfo extends Component {
 
   render() {
     return (
-      <div className="UpdateFlightInfo">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-8 m-auto">
-              <br />
-              <Link to="/admin-show-flight-list" className="btn btn-outline-warning float-left">
-                Flight List
-              </Link>
-            </div>
-            <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Edit Flight</h1>
-              <p className="lead text-center">
-                Update Flight's Info
-              </p>
-            </div>
-          </div>
-
-          <div className="col-md-8 m-auto">
-            <form noValidate onSubmit={this.onSubmit}>
-              <div className='form-group'>
-                <label htmlFor="flight_number">Flight Number</label>
-                <input
-                  type='text'
-                  placeholder='Flight Number'
-                  name='flight_number'
-                  className='form-control'
-                  value={this.state.flight_number}
-                  onChange={this.onChange}
-                />
-              </div>
-
-              <div className='form-group'>
-                <label htmlFor="departure_airport">Departure Airport</label>
-                <input
-                  type='text'
-                  placeholder='Departure Airport'
-                  name='departure_airport'
-                  className='form-control'
-                  value={this.state.departure_airport}
-                  onChange={this.onChange}
-                />
-              </div>
-
-              <div className='form-group'>
-                <label htmlFor="arrival_airport">Arrival Airport</label>
-                <input
-                  type='text'
-                  placeholder='Arrival Airport'
-                  name='arrival_airport'
-                  className='form-control'
-                  value={this.state.arrival_airport}
-                  onChange={this.onChange}
-                />
-              </div>
-
-              <div className='form-group'>
-                <label htmlFor="departure_time">Departure Time</label>
-                <input
-                  type='text'
-                  placeholder='Departure Time'
-                  name='departure_time'
-                  className='form-control'
-                  value={this.state.departure_time}
-                  onChange={this.onChange}
-                />
-              </div>
-
-              <div className='form-group'>
-                <label htmlFor="arrival_time">Arrival Time</label>
-                <input
-                  type='text'
-                  placeholder='Arrival Time'
-                  name='arrival_time'
-                  className='form-control'
-                  value={this.state.arrival_time}
-                  onChange={this.onChange}
-                />
-              </div>
-
-              <div className='form-group'>
-                <label htmlFor="date">Date</label>
-                <input
-                  type='date'
-                  placeholder='Date'
-                  name='date'
-                  className='form-control'
-                  value={this.state.date}
-                  onChange={this.onChange}
-                />
-              </div>
-
-              <div className='form-group'>
-                <label htmlFor="economy_seats_number">Economy Seats Number</label>
-                <input
-                  type='text'
-                  placeholder='Economy Seats Number'
-                  name='economy_seats_number'
-                  className='form-control'
-                  value={this.state.economy_seats_number}
-                  onChange={this.onChange}
-                />
-              </div>
-
-              <div className='form-group'>
-                <label htmlFor="business_seats_number">Business Seats Number</label>
-                <input
-                  type='text'
-                  placeholder='Business Seats Number'
-                  name='business_seats_number'
-                  className='form-control'
-                  value={this.state.business_seats_number}
-                  onChange={this.onChange}
-                />
-              </div>
-
-              <div className='form-group'>
-                <label htmlFor="first_seats_number">First Seats Number</label>
-                <input
-                  type='text'
-                  placeholder='First Seats Number'
-                  name='first_seats_number'
-                  className='form-control'
-                  value={this.state.first_seats_number}
-                  onChange={this.onChange}
-                />
-              </div>
-
-              <button type="submit" className="btn btn-outline-info btn-lg btn-block">Update Flight</button>
-            </form>
-          </div>
-          <br />
-
+      <div className="UpdateFlight">
+        <br />
+        <br />
+        <div className="backgroundLabelUpdateFlight">
+          <b>Edit Flight</b>
         </div>
+        <div className="backgroundBoxUpdateFlight">
+          <br />
+          <br />
+          <form noValidate onSubmit={this.onSubmit}>
+            <TextField style={{
+              width: "400px",
+            }}
+              value={this.state.flight_number}
+              onChange={this.onChangeFlightNumber}
+              label="Flight Number" id="outlined-size-normal" defaultValue="" />
+            <br />
+            <br />
+            <Autocomplete
+              style={{
+                width: "400px",
+                margin: "auto",
+                backgroundColor: "white"
+              }}
+              id="size-large-filled"
+              size="large"
+              options={airports}
+              getOptionLabel={(option) => option}
+              value={this.state.departure_airport}
+              onChange={(ev, value) => {
+                this.state.departure_airport = value
+              }}
+              renderTags={(value, getTagProps) =>
+                value.map((option, index) => (
+                  <Chip
+                    variant="outlined"
+                    label={value}
+                    size="large"
+                    {...getTagProps({ index })}
+                  />
+                ))
+              }
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  variant="outlined"
+                  label="Depart from"
+                  placeholder="Airport"
+                />
+              )}
+            />
+            <br />
+            <Autocomplete
+              style={{
+                width: "400px",
+                margin: "auto",
+                backgroundColor: "white"
+              }}
+              id="size-large-filled"
+              size="large"
+              options={airports}
+              getOptionLabel={(option) => option}
+              value={this.state.arrival_airport}
+              onChange={(ev, value) => {
+                this.state.arrival_airport = value
+              }}
+              renderTags={(value, getTagProps) =>
+                value.map((option, index) => (
+                  <Chip
+                    variant="outlined"
+                    label={value}
+                    size="large"
+                    {...getTagProps({ index })}
+                  />
+                ))
+              }
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  variant="outlined"
+                  label="Destination"
+                  placeholder="Airport"
+                />
+              )}
+            />
+            <br />
+            <TextField
+              style={{
+                width: "400px",
+                margin: "auto",
+                backgroundColor: "white",
+              }}
+              id="filled-textarea"
+              label="Date"
+              type="date"
+              onFocus={this._onFocus} onBlur={this._onBlur}
+              placeholder=""
+              variant="outlined"
+              value={this.state.date}
+              onChange={this.onChangeDate}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <br />
+            <br />
+            <TextField
+              style={{
+                width: "190px",
+                margin: "auto",
+                backgroundColor: "white",
+              }}
+              id="filled-textarea"
+              label="Departure Time"
+              type="time"
+              onFocus={this._onFocus} onBlur={this._onBlur}
+              placeholder=""
+              variant="outlined"
+              value={this.state.departure_time}
+              onChange={this.onChangeDepartureTime}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            <TextField
+              style={{
+                width: "190px",
+                margin: "auto",
+                backgroundColor: "white",
+              }}
+              id="filled-textarea"
+              label="Arrival Time"
+              type="time"
+              onFocus={this._onFocus} onBlur={this._onBlur}
+              placeholder=""
+              variant="outlined"
+              value={this.state.arrival_time}
+              onChange={this.onChangeArrivalTime}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <br />
+            <br />
+            <TextField
+              style={{
+                width: "400px",
+                margin: "auto",
+                backgroundColor: "white",
+              }}
+              id="filled-textarea"
+              label="Economy Seats Number"
+              type="number"
+              onFocus={this._onFocus} onBlur={this._onBlur}
+              placeholder=""
+              variant="outlined"
+              value={this.state.economy_seats_number}
+              onChange={this.onChangeEconomySeatsNumber}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <br />
+            <br />
+            <TextField
+              style={{
+                width: "400px",
+                margin: "auto",
+                backgroundColor: "white",
+              }}
+              id="filled-textarea"
+              label="Business Seats Number"
+              type="number"
+              onFocus={this._onFocus} onBlur={this._onBlur}
+              placeholder=""
+              variant="outlined"
+              value={this.state.business_seats_number}
+              onChange={this.onChangeBusinessSeatsNumber}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <br />
+            <br />
+            <TextField
+              style={{
+                width: "400px",
+                margin: "auto",
+                backgroundColor: "white",
+              }}
+              id="filled-textarea"
+              label="First Seats Number"
+              type="number"
+              onFocus={this._onFocus} onBlur={this._onBlur}
+              placeholder=""
+              variant="outlined"
+              value={this.state.first_seats_number}
+              onChange={this.onChangeFirstSeatsNumber}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <br />
+            <br />
+            <TextField
+              style={{
+                width: "400px",
+                margin: "auto",
+                backgroundColor: "white",
+              }}
+              id="filled-textarea"
+              label="Baggage Allowance"
+              type="number"
+              onFocus={this._onFocus} onBlur={this._onBlur}
+              placeholder=""
+              variant="outlined"
+              value={this.state.baggage_allowance}
+              onChange={this.onChangeBaggageAllowance}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <br />
+            <br />
+            <TextField
+              style={{
+                width: "400px",
+                margin: "auto",
+                backgroundColor: "white",
+              }}
+              id="filled-textarea"
+              label="Price"
+              helperText="Economy = Price || Business = Price*125% || First = Price*150% || Childreen = Price*70%"
+              type="number"
+              onFocus={this._onFocus} onBlur={this._onBlur}
+              placeholder=""
+              variant="outlined"
+              value={this.state.price}
+              onChange={this.onChangePrice}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <br />
+            <br />
+            <Button type="submit" style={{
+              width: "180px",
+              height: "50px",
+            }} variant="contained">Edit Flight</Button>
+          </form>
+        </div>
+        <br />
       </div>
     );
   }

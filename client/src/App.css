@@ -43,12 +43,6 @@ body {
   width: 50%;
 }
 
-.CreateFlight {
-  background-color: #f7f5f5;
-  min-height: 100vh;
-  color: white;
-}
-
 .Registration {
   margin-left: auto;
   margin-right: auto;
@@ -277,6 +271,93 @@ body {
   background-color: #ffffff;
   color: #f7f5e1;
   text-align: center;
+}
+/*  */
+
+/* CreateFlight */
+.CreateFlight {
+  background-color: #f7f5f5;
+  min-height: 100vh;
+  color: white;
+}
+
+.backgroundLabelCreateFlight {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
+  width: 550px;
+  height: 85px;
+  font-size: 45px;
+  border-radius: 25px 25px 0px 0px;
+  background-color: #0B0909;
+}
+
+.backgroundBoxCreateFlight {
+  margin: auto;
+  height: 980px;
+  width: 550px;
+  border-color: rgb(0, 0, 0);
+  border-style: solid;
+  border-radius: 0px 0px 25px 25px;
+  background-color: #ffffff;
+  color: #f7f5e1;
+  text-align: center;
+}
+/*  */
+
+/* UpdateFlight */
+.UpdateFlight {
+  background-color: #f7f5f5;
+  min-height: 100vh;
+  color: white;
+}
+
+.backgroundLabelUpdateFlight {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
+  width: 550px;
+  height: 85px;
+  font-size: 45px;
+  border-radius: 25px 25px 0px 0px;
+  background-color: #0B0909;
+}
+
+.backgroundBoxUpdateFlight {
+  margin: auto;
+  height: 980px;
+  width: 550px;
+  border-color: rgb(0, 0, 0);
+  border-style: solid;
+  border-radius: 0px 0px 25px 25px;
+  background-color: #ffffff;
+  color: #f7f5e1;
+  text-align: center;
+}
+/*  */
+
+/* .ShowFlightList */
+.ShowFlightList {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
+  min-height: 100vh;
+  background-color: #f7f5f5;
+  color: white;
+}
+
+.FlightsTable {
+  margin: auto;
+  width: 1200px;
+  min-height: 100vh;
+  background-color: #f7f5f5;
+  color: white;
 }
 /*  */
 
