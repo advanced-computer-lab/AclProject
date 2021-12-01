@@ -24,8 +24,8 @@ Navbar = () => {
 
         <Bars />
         <NavMenu>
-          <NavLink to='/' activeStyle>
-            Flight Search
+          <NavLink to='/show-flight-list' activeStyle>
+            All Flights
           </NavLink>
           <NavLink to='/about' activeStyle>
             About
