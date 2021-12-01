@@ -148,7 +148,8 @@ class CreateFlight extends Component {
           <Alert variant="filled" style={{
             width: "500px",
             margin: "auto",
-            marginLeft: "25px"
+            marginTop: "-12px",
+            marginBottom: "-12px"
           }}severity="error">All fields must be filled</Alert>
         ) : (
           <br />
@@ -181,6 +182,8 @@ class CreateFlight extends Component {
               getOptionLabel={(option) => option}
               onChange={(ev, value) => {
                 this.state.departure_airport = value
+                emptyField = 'false';
+                  this.forceUpdate()
               }}
               renderTags={(value, getTagProps) =>
                 value.map((option, index) => (
@@ -214,6 +217,8 @@ class CreateFlight extends Component {
               getOptionLabel={(option) => option}
               onChange={(ev, value) => {
                 this.state.arrival_airport = value
+                emptyField = 'false';
+                  this.forceUpdate()
               }}
               renderTags={(value, getTagProps) =>
                 value.map((option, index) => (

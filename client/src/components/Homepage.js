@@ -101,9 +101,11 @@ class Homepage extends Component {
           <Alert variant="filled" style={{
             width: "500px",
             margin: "auto",
+            marginTop: "-12px",
+            marginBottom: "-12px"
           }}severity="error">All fields must be filled</Alert>
         ) : (
-         <br/>
+          <br />
         )}
                 <br />
             <div class="HomepageRow">
