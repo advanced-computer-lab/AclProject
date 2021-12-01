@@ -9,11 +9,13 @@ import FlightIcon from '@mui/icons-material/Flight';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import Alert from '@mui/material/Alert';
 
 const airports = require('../airports.json');
 
 const numberOfAdults = [1, 2, 3, 4, 5];
 const numberOfChildreen = [0, 1, 2, 3, 4, 5];
+var emptyField = 'false';
 
 class Homepage extends Component {
   constructor(props) {
@@ -32,16 +34,22 @@ class Homepage extends Component {
   onChange2 = e => {
     this.setState({ [e.target.name]: e.target.value });
     this.state.cabin = e.target.value
+    emptyField = 'false'
+    this.forceUpdate()
   };
 
   onChangeDepartureDate = e => {
     this.setState({ [e.target.name]: e.target.value });
     this.state.departure_date = e.target.value
+    emptyField = 'false'
+    this.forceUpdate()
   };
 
   onChangeReturnDate = e => {
     this.setState({ [e.target.name]: e.target.value });
     this.state.return_date = e.target.value
+    emptyField = 'false'
+    this.forceUpdate()
   };
 
   onSubmit = e => {
@@ -57,8 +65,12 @@ class Homepage extends Component {
       cabin: this.state.cabin
     };
 
+    if (this.state.departure_airport === '' || this.state.arrival_airport === '' || this.state.return_date === '' || this.state.adults_number === '' || this.state.children_number === '' || this.state.cabin === '' || this.state.departure_airport === null || this.state.arrival_airport === null || this.state.return_date === null || this.state.adults_number === null || this.state.children_number === null || this.state.cabin === null){
+      emptyField = 'true';
+      this.forceUpdate()
+    }
 
-
+    else {
     axios
       .get('http://localhost:8082/api/flights/', data)
       .then(res => {
@@ -68,6 +80,7 @@ class Homepage extends Component {
       .catch(err => {
         console.log("Error in CreateFlight!");
       })
+    }
   };
 
 
@@ -82,9 +95,17 @@ class Homepage extends Component {
             fontSize: "50px"
           }}>Search, Compare & Reserve Your Tickets</b>
           <br />
-          <br />
-          <br />
           <form noValidate onSubmit={this.onSubmit}>
+          <br />
+          {((emptyField === 'true')) ? (
+          <Alert variant="filled" style={{
+            width: "500px",
+            margin: "auto",
+          }}severity="error">All fields must be filled</Alert>
+        ) : (
+         <br/>
+        )}
+                <br />
             <div class="HomepageRow">
               <Autocomplete
                 style={{
@@ -97,7 +118,9 @@ class Homepage extends Component {
                 options={airports}
                 getOptionLabel={(option) => option}
                 onChange={(ev, value) => {
-                  this.state.departure_airport = value
+                  this.state.departure_airport = value;
+                  emptyField = 'false';
+                  this.forceUpdate()
                 }}
                 renderTags={(value, getTagProps) =>
                   value.map((option, index) => (
@@ -129,7 +152,9 @@ class Homepage extends Component {
                 options={airports}
                 getOptionLabel={(option) => option}
                 onChange={(ev, value) => {
-                  this.state.arrival_airport = value
+                  this.state.arrival_airport = value;
+                  emptyField = 'false';
+                  this.forceUpdate()
                 }}
                 renderTags={(value, getTagProps) =>
                   value.map((option, index) => (

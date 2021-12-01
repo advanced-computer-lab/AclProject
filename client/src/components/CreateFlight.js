@@ -7,9 +7,11 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Chip from '@mui/material/Chip'
+import Alert from '@mui/material/Alert';
 
 const airports = require('../airports.json');
 var flightAlreadyExists = 'false';
+var emptyField = 'false'
 
 class CreateFlight extends Component {
   constructor() {
@@ -39,38 +41,56 @@ class CreateFlight extends Component {
 
   onChangeFlightNumber = e => {
     this.state.flight_number = e.target.value
+    emptyField = 'false'
+    this.forceUpdate()
   };
 
   onChangeDate = e => {
     this.state.date = e.target.value
+    emptyField = 'false'
+    this.forceUpdate()
   };
 
   onChangeDepartureTime = e => {
     this.state.departure_time = e.target.value
+    emptyField = 'false'
+    this.forceUpdate()
   };
 
   onChangeArrivalTime = e => {
     this.state.arrival_time = e.target.value
+    emptyField = 'false'
+    this.forceUpdate()
   };
 
   onChangeEconomySeatsNumber = e => {
     this.state.economy_seats_number = e.target.value
+    emptyField = 'false'
+    this.forceUpdate()
   };
 
   onChangeBusinessSeatsNumber = e => {
     this.state.business_seats_number = e.target.value
+    emptyField = 'false'
+    this.forceUpdate()
   };
 
   onChangeFirstSeatsNumber = e => {
     this.state.first_seats_number = e.target.value
+    emptyField = 'false'
+    this.forceUpdate()
   };
 
   onChangeBaggageAllowance = e => {
     this.state.baggage_allowance = e.target.value
+    emptyField = 'false'
+    this.forceUpdate()
   };
 
   onChangePrice = e => {
     this.state.price = e.target.value
+    emptyField = 'false'
+    this.forceUpdate()
   };
 
   onSubmit = e => {
@@ -89,6 +109,12 @@ class CreateFlight extends Component {
       price: this.state.price
     };
 
+    if (this.state.flight_number === '' || this.state.departure_airport === '' || this.state.arrival_airport === '' || this.state.departure_time === '' || this.state.arrival_time === '' || this.state.date === '' || this.state.economy_seats_number === '' || this.state.business_seats_number === '' || this.state.first_seats_number === '' || this.state.baggage_allowance === '' || this.state.price === '' || this.state.flight_number === null || this.state.departure_airport === null || this.state.arrival_airport === null || this.state.departure_time === null || this.state.arrival_time === null || this.state.date === null || this.state.economy_seats_number === null || this.state.business_seats_number === null || this.state.first_seats_number === null || this.state.baggage_allowance === null || this.state.price === null){
+      emptyField = 'true';
+      this.forceUpdate()
+    }
+
+    else {
     axios
       .post('http://localhost:8082/api/flights', data)
       .then(res => {
@@ -104,6 +130,7 @@ class CreateFlight extends Component {
       .catch(err => {
         console.log("Error in CreateFlight!");
       })
+    }
   };
 
   render() {
@@ -115,9 +142,18 @@ class CreateFlight extends Component {
           <b >Create Flight</b>
         </div>
         <div className="backgroundBoxCreateFlight">
-          <br />
-          <br />
+        <br />
           <form noValidate onSubmit={this.onSubmit}>
+          {((emptyField === 'true')) ? (
+          <Alert variant="filled" style={{
+            width: "500px",
+            margin: "auto",
+            marginLeft: "25px"
+          }}severity="error">All fields must be filled</Alert>
+        ) : (
+          <br />
+        )}
+        <br />
             {((flightAlreadyExists === 'true')) ? (
               <TextField error style={{
                 width: "400px",
