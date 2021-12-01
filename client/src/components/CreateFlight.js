@@ -322,6 +322,7 @@ class CreateFlight extends Component {
               }}
               id="filled-textarea"
               label="Baggage Allowance"
+              helperText="Economy = Baggage Allowance || Business = Baggage Allowance + 1 || First = Baggage Allowance + 2"
               type="number"
               onFocus={this._onFocus} onBlur={this._onBlur}
               placeholder=""

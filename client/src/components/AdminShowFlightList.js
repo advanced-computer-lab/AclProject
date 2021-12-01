@@ -14,6 +14,9 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import InfoIcon from '@mui/icons-material/Info';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -128,8 +131,17 @@ class ShowFlightList extends Component {
                     <StyledTableCell align="center">{row.date.substring(0, 10)}</StyledTableCell>
                     <StyledTableCell align="center">{row.departure_time}</StyledTableCell>
                     <StyledTableCell align="center">{row.arrival_time}</StyledTableCell>
-                    <StyledTableCell align="center">{row.baggage_allowance}</StyledTableCell>
-                    <StyledTableCell align="center">{row.price}</StyledTableCell>
+                    <StyledTableCell align="center"><Tooltip title={"Economy = " + (row.baggage_allowance) + " || Business = " + (Number(row.baggage_allowance) + 1) + " || First = " + (Number(row.baggage_allowance) + 2)}>
+                      <IconButton>
+                        <InfoIcon />
+                      </IconButton>
+                    </Tooltip></StyledTableCell>
+
+                    <StyledTableCell align="center"><Tooltip title={"Economy = " + (row.price) + "LE || Business = " + (Number(row.price) + Number(row.price)*0.25) + "LE || First = " + (Number(row.price) + Number(row.price)*0.5) + "LE"}>
+                      <IconButton>
+                        <InfoIcon />
+                      </IconButton>
+                    </Tooltip></StyledTableCell>
                     <TableCell align="center">
                       <Button style={{
                         width: "70px",

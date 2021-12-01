@@ -132,7 +132,7 @@ class UpdateFlightInfo extends Component {
     axios
       .put('http://localhost:8082/api/flights/' + this.props.match.params.id, data)
       .then(res => {
-        this.props.history.push('/admin-show-flight/' + this.props.match.params.id);
+        this.props.history.push('/admin-show-flight-list/');
       })
       .catch(err => {
         console.log("Error in UpdateFlightInfo!");
@@ -357,6 +357,7 @@ class UpdateFlightInfo extends Component {
               }}
               id="filled-textarea"
               label="Baggage Allowance"
+              helperText="Economy = Baggage Allowance || Business = Baggage Allowance + 1 || First = Baggage Allowance + 2"
               type="number"
               onFocus={this._onFocus} onBlur={this._onBlur}
               placeholder=""
