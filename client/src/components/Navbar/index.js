@@ -22,7 +22,7 @@ var Navbar;
 
           <Bars />
           <NavMenu>
-            <NavLink to='/about' activeStyle>
+            <NavLink to='/' activeStyle>
               Flight Search
             </NavLink>
             <NavLink to='/about' activeStyle>
