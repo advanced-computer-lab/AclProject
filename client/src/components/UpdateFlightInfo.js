@@ -377,7 +377,7 @@ class UpdateFlightInfo extends Component {
               }}
               id="filled-textarea"
               label="Price"
-              helperText="Economy = Price || Business = Price*125% || First = Price*150% || Childreen = Price*70%"
+              helperText="Economy = Price || Business = Price*125% || First = Price*150% || Child = Price*70%"
               type="number"
               onFocus={this._onFocus} onBlur={this._onBlur}
               placeholder=""
