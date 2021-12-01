@@ -240,6 +240,49 @@ body {
 }
 /*  */
 
+.Profile {
+  margin: auto;
+  min-height: 100vh;
+  background-color: #f7f5f5;
+  color: white;
+}
+
+.backgroundLabelProfile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
+  width: 550px;
+  height: 85px;
+  font-size: 45px;
+  border-radius: 25px 25px 0px 0px;
+  background-color: #0B0909;
+}
+
+.backgroundBoxProfile {
+  margin: auto;
+  height: 430px;
+  width: 550px;
+  border-color: rgb(0, 0, 0);
+  border-style: solid;
+  border-radius: 0px 0px 25px 25px;
+  background-color: #ffffff;
+  color: #f7f5e1;
+  text-align: center;
+}
+
+.profileInfo {
+  
+  align-items: left;
+  justify-content: left;
+  text-align: left;
+  margin: 15px;
+  font-size: 30px;
+  background-color: white;
+  color: #0B0909;
+}
+
 /* Registeration */
 .Registration {
   margin: auto;
