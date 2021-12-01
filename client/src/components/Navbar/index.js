@@ -67,13 +67,15 @@ var Navbar;
 
                 <Dropdown.Menu>
                   <Dropdown.Item href="/profile">Profile</Dropdown.Item>
+                  <Dropdown.Item href="/reservedflights">Reservations</Dropdown.Item>
                   <Dropdown.Item href="/" onClick={function(event){localStorage.removeItem("token"); window.location.assign('http://localhost:3000/')}}>Log out</Dropdown.Item>
                   {/* <Dropdown.Item href="#/action-3">Something else</Dropdown.Item> */}
                 </Dropdown.Menu>
               </Dropdown>
             </NavBtn>
 
-          )}
+          )
+          }
 
         </Nav>
       </>

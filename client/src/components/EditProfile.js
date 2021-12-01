@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../App.css';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import loginPic from '../login.png';
 import jwt from 'jsonwebtoken';
 
 
@@ -47,6 +50,31 @@ class EditProfile extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  onChangeFirstName = e => {
+    this.setState({ [e.target.name]: e.target.value });
+    this.state.firstname = e.target.value
+  };
+
+  onChangeLastName = e => {
+    this.setState({ [e.target.name]: e.target.value });
+    this.state.lastname = e.target.value
+  };
+
+  onChangeUsername = e => {
+    this.setState({ [e.target.name]: e.target.value });
+    this.state.username = e.target.value
+  };
+
+  onChangePassportNumber = e => {
+    this.setState({ [e.target.name]: e.target.value });
+    this.state.passport = e.target.value
+  };
+
+  onChangeEmail = e => {
+    this.setState({ [e.target.name]: e.target.value });
+    this.state.email = e.target.value
+  };
+
   onSubmit = e => {
     e.preventDefault();
 
@@ -72,78 +100,55 @@ class EditProfile extends Component {
   render() {
     return (
       <div className="EditProfile">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-8 m-auto">
-              <br />
-              <Link to="/Profile" className="btn btn-outline-warning float-left">
-                  Profile
-              </Link>
-            </div>
-            <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Edit Profile</h1>
-              <p className="lead text-center">
-                  Update Your Info
-              </p>
-            </div>
-          </div>
-
-          <div className="col-md-8 m-auto">
-          <form noValidate onSubmit={this.onSubmit}>
-            <div className='form-group'>
-              <label htmlFor="firstname">First Name</label>
-              <input
-                type='text'
-                placeholder='First Name'
-                name='firstname'
-                className='form-control'
-                value={this.state.firstname}
-                onChange={this.onChange}
-              />
-            </div>
-
-            <div className='form-group'>
-            <label htmlFor="lastname">Last Name</label>
-              <input
-                type='text'
-                placeholder='Last Name'
-                name='lastname'
-                className='form-control'
-                value={this.state.lastname}
-                onChange={this.onChange}
-              />
-            </div>
-
-            <div className='form-group'>
-            <label htmlFor="email">Email </label>
-              <input
-                type='text'
-                placeholder='Email'
-                name='email'
-                className='form-control'
-                value={this.state.email}
-                onChange={this.onChange}
-              />
-            </div>
-
-            <div className='form-group'>
-            <label htmlFor="passport">Passport Number</label>
-              <input
-                type='text'
-                placeholder='Passport Number'
-                name='passport'
-                className='form-control'
-                value={this.state.passport}
-                onChange={this.onChange}
-              />
-            </div>
-
-            <button type="submit" className="btn btn-outline-info btn-lg btn-block">Update</button>
-            </form>
-          </div>
-		  <br />
-
+        <br />
+        <br />
+        <div className="backgroundLabelEditProfile">
+          <b >Edit Profile Info</b>
         </div>
+        <div className="backgroundBoxEditProfile">
+          <br />
+          <img src={loginPic} width="160px" height="160px" alt="fireSpot" />
+          <br />
+          <br />
+          <form noValidate onSubmit={this.onSubmit}>
+            <TextField
+              onChange={this.onChangeFirstName} style={{
+                width: "200px",
+              }} label="First Name" id="outlined-size-normal" defaultValue="" />
+            <TextField onChange={this.onChangeLastName} style={{
+              width: "200px"
+            }} label="Last Name" id="outlined-size-normal" defaultValue="" />
+            <br />
+            <br />
+            <TextField
+              onChange={this.onChangeUsername}
+              style={{
+                width: "400px",
+              }}
+              id="outlined-size-normal"
+              label="Username"
+              defaultValue=""
+             
+            />
+            <br />
+            <br />
+            <TextField onChange={this.onChangeEmail} style={{
+              width: "400px",
+            }} label="Email" id="outlined-size-normal" defaultValue=""/>
+            <br />
+            <br />
+            <TextField onChange={this.onChangePassportNumber} style={{
+              width: "400px",
+            }} label="Passport Number" id="outlined-size-normal" defaultValue=""/>
+            <br />
+            <br />
+            <Button type="submit" style={{
+              width: "180px",
+              height: "50px",
+            }} variant="contained">Update</Button>
+          </form>
+        </div>
+        <br />
       </div>
     );
   }
