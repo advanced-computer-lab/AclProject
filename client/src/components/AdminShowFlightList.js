@@ -11,7 +11,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Link } from 'react-router-dom'
+import Button from '@mui/material/Button';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -63,6 +65,34 @@ class ShowFlightList extends Component {
   };
 
 
+  submit = (id) => {
+    confirmAlert({
+      title: 'Confirmation',
+      message: 'Are you sure that you want to delete this flight?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => 
+		  
+		  
+		  axios
+      .delete('http://localhost:8082/api/flights/'+id)
+      .then(res => {
+        window.location.assign('http://localhost:3000/admin-show-flight-list')
+      })
+      .catch(err => {
+        console.log("Error form ShowFlightDetails_deleteClick");
+      })
+
+        },
+        {
+          label: 'No',
+        }
+      ]
+    });
+  };
+
+
   render() {
     const flights = this.state.flights;
 
@@ -84,7 +114,7 @@ class ShowFlightList extends Component {
                   <StyledTableCell align="center">Arrival Time</StyledTableCell>
                   <StyledTableCell align="center">Baggage Allowance</StyledTableCell>
                   <StyledTableCell align="center">Price</StyledTableCell>
-                  <StyledTableCell align="center">Edit Flight</StyledTableCell>
+                  <StyledTableCell align="center">Admin</StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -101,12 +131,21 @@ class ShowFlightList extends Component {
                     <StyledTableCell align="center">{row.baggage_allowance}</StyledTableCell>
                     <StyledTableCell align="center">{row.price}</StyledTableCell>
                     <TableCell align="center">
-                      <Link
-                        to={`/edit-flight/${row._id}`}
-                        style={{ textDecoration: 'none', color: 'red' }}
-                      >
-                        Edit Flight
-                      </Link>
+                      <Button style={{
+                        width: "70px",
+                        height: "30px",
+                        fontWeight: "bold"
+                      }} color="success" href={`/edit-flight/${row._id}`} variant="contained">
+                        Edit
+                      </Button>
+
+                      <Button style={{
+                        width: "70px",
+                        height: "30px",
+                        fontWeight: "bold"
+                      }} color="error" onClick={this.submit.bind(this,row._id)} variant="contained">
+                        Delete
+                      </Button>
                     </TableCell>
                   </StyledTableRow>
                 ))}
