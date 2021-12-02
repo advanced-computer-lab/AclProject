@@ -24,19 +24,36 @@ const steps = [
   'Summary and confirmation',
 ];
 
+var selectedCabin = ((window.location.pathname).split("/"))[8]
+var selectedField;
+
+if (selectedCabin === 'Economy'){
+  selectedField = 'price_economy'
+}
+
+else if (selectedCabin === 'Business'){
+  selectedField = 'price_business'
+}
+
+else {
+  selectedField = 'price_first'
+}
+
 const columns = [
-  { field: 'flight_number', headerName: 'Flight Number', width: 120 },
-  { field: 'departure_time', headerName: 'Departure Time', width: 130 },
-  { field: 'arrival_time', headerName: 'Arrival Time', width: 110 },
+  { field: 'flight_number', align: 'center', headerName: 'Flight Number', width: 120 },
+  { field: 'departure_time', align: 'center', headerName: 'Departure Time', width: 130 },
+  { field: 'arrival_time', align: 'center', headerName: 'Arrival Time', width: 110 },
   {
-    field: 'first_seats_number',
+    field: 'trip_duration',
     headerName: 'Trip Duration',
+    align: 'center',
     //type: 'number',
     width: 110,
   },
   {
-    field: 'economy_seats_number',
+    field: selectedField,
     headerName: 'Price',
+    align: 'center',
     //type: 'number',
     width: 60,
   },

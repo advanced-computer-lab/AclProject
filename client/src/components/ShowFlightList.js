@@ -71,9 +71,8 @@ class ShowFlightList extends Component {
                   <StyledTableCell align="center">Flight Number</StyledTableCell>
                   <StyledTableCell align="center">From</StyledTableCell>
                   <StyledTableCell align="center">To</StyledTableCell>
-                  <StyledTableCell align="center">Date</StyledTableCell>
-                  <StyledTableCell align="center">Departure Time</StyledTableCell>
-                  <StyledTableCell align="center">Arrival Time</StyledTableCell>
+                  <StyledTableCell align="center">Departure Date/Time</StyledTableCell>
+                  <StyledTableCell align="center">Arrival Date/Time</StyledTableCell>
                   <StyledTableCell align="center">Baggage Allowance</StyledTableCell>
                   <StyledTableCell align="center">Price</StyledTableCell>
                 </TableRow>
@@ -86,16 +85,15 @@ class ShowFlightList extends Component {
                     </StyledTableCell>
                     <StyledTableCell align="center">{row.departure_airport}</StyledTableCell>
                     <StyledTableCell align="center">{row.arrival_airport}</StyledTableCell>
-                    <StyledTableCell align="center">{row.date.substring(0, 10)}</StyledTableCell>
-                    <StyledTableCell align="center">{row.departure_time}</StyledTableCell>
-                    <StyledTableCell align="center">{row.arrival_time}</StyledTableCell>
-                    <StyledTableCell align="center"><Tooltip title={"Economy = " + (row.baggage_allowance) + " || Business = " + (Number(row.baggage_allowance) + 1) + " || First = " + (Number(row.baggage_allowance) + 2)}>
+                    <StyledTableCell align="center">{row.departure_date.substring(0, 10)} | {row.departure_time}</StyledTableCell>
+                    <StyledTableCell align="center">{row.arrival_date.substring(0, 10)} | {row.arrival_time}</StyledTableCell>
+                    <StyledTableCell align="center"><Tooltip title={"Economy = " + row.baggage_allowance_economy + " || Business = " + row.baggage_allowance_business + " || First = " + row.baggage_allowance_first}>
                       <IconButton>
                         <InfoIcon />
                       </IconButton>
                     </Tooltip></StyledTableCell>
 
-                    <StyledTableCell align="center"><Tooltip title={"Economy = " + (row.price) + "LE || Business = " + (Number(row.price) + Number(row.price)*0.25) + "LE || First = " + (Number(row.price) + Number(row.price)*0.5) + "LE"}>
+                    <StyledTableCell align="center"><Tooltip title={"Economy = " + row.price_economy + "LE || Business = " + row.price_business + "LE || First = " + row.price_first + "LE"}>
                       <IconButton>
                         <InfoIcon />
                       </IconButton>

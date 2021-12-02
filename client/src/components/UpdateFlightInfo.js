@@ -8,8 +8,12 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Chip from '@mui/material/Chip'
+import Alert from '@mui/material/Alert';
 
 const airports = require('../airports.json');
+var flightAlreadyExists = 'false';
+var emptyField = 'false'
+var original_flight_number;
 
 class UpdateFlightInfo extends Component {
   constructor(props) {
@@ -20,12 +24,17 @@ class UpdateFlightInfo extends Component {
       arrival_airport: '',
       departure_time: '',
       arrival_time: '',
-      date: '',
+      departure_date: '',
+      arrival_date: '',
       economy_seats_number: '',
       business_seats_number: '',
       first_seats_number: '',
-      baggage_allowance: '',
-      price: '',
+      baggage_allowance_economy: '',
+      price_economy: '',
+      baggage_allowance_business: '',
+      price_business: '',
+      baggage_allowance_first: '',
+      price_first: '',
       LoggedInUser: jwt.decode(localStorage.getItem('token'))
     };
 
@@ -40,46 +49,85 @@ class UpdateFlightInfo extends Component {
 
   onChangeFlightNumber = e => {
     this.state.flight_number = e.target.value
+    emptyField = 'false'
     this.forceUpdate()
   };
 
-  onChangeDate = e => {
-    this.state.date = e.target.value
+  onChangeDepartureDate = e => {
+    this.state.departure_date = e.target.value
+    emptyField = 'false'
+    this.forceUpdate()
+  };
+
+  onChangeArrivalDate = e => {
+    this.state.arrival_date = e.target.value
+    emptyField = 'false'
     this.forceUpdate()
   };
 
   onChangeDepartureTime = e => {
     this.state.departure_time = e.target.value
+    emptyField = 'false'
     this.forceUpdate()
   };
 
   onChangeArrivalTime = e => {
     this.state.arrival_time = e.target.value
+    emptyField = 'false'
     this.forceUpdate()
   };
 
   onChangeEconomySeatsNumber = e => {
     this.state.economy_seats_number = e.target.value
+    emptyField = 'false'
+    this.forceUpdate()
+  };
+
+  onChangeEconomyBaggageAllowance = e => {
+    this.state.baggage_allowance_economy = e.target.value
+    emptyField = 'false'
+    this.forceUpdate()
+  };
+
+  onChangeEconomyPrice = e => {
+    this.state.price_economy = e.target.value
+    emptyField = 'false'
     this.forceUpdate()
   };
 
   onChangeBusinessSeatsNumber = e => {
     this.state.business_seats_number = e.target.value
+    emptyField = 'false'
+    this.forceUpdate()
+  };
+
+  onChangeBusinessBaggageAllowance = e => {
+    this.state.baggage_allowance_business = e.target.value
+    emptyField = 'false'
+    this.forceUpdate()
+  };
+
+  onChangeBusinessPrice = e => {
+    this.state.price_business = e.target.value
+    emptyField = 'false'
     this.forceUpdate()
   };
 
   onChangeFirstSeatsNumber = e => {
     this.state.first_seats_number = e.target.value
+    emptyField = 'false'
     this.forceUpdate()
   };
 
-  onChangeBaggageAllowance = e => {
-    this.state.baggage_allowance = e.target.value
+  onChangeFirstBaggageAllowance = e => {
+    this.state.baggage_allowance_first = e.target.value
+    emptyField = 'false'
     this.forceUpdate()
   };
 
-  onChangePrice = e => {
-    this.state.price = e.target.value
+  onChangeFirstPrice = e => {
+    this.state.price_first = e.target.value
+    emptyField = 'false'
     this.forceUpdate()
   };
 
@@ -95,13 +143,19 @@ class UpdateFlightInfo extends Component {
           arrival_airport: res.data.arrival_airport,
           departure_time: res.data.departure_time,
           arrival_time: res.data.arrival_time,
-          date: res.data.date,
+          departure_date: (res.data.departure_date).substring(0, 10),
+          arrival_date: (res.data.arrival_date).substring(0, 10),
           economy_seats_number: res.data.economy_seats_number,
           business_seats_number: res.data.business_seats_number,
           first_seats_number: res.data.first_seats_number,
-          baggage_allowance: res.data.baggage_allowance,
-          price: res.data.price
+          baggage_allowance_economy: res.data.baggage_allowance_economy,
+          baggage_allowance_business: res.data.baggage_allowance_business,
+          baggage_allowance_first: res.data.baggage_allowance_first,
+          price_economy: res.data.price_economy,
+          price_business: res.data.price_business,
+          price_first: res.data.price_first
         })
+        original_flight_number = res.data.flight_number;
       })
       .catch(err => {
         console.log("Error from UpdateFlightInfo");
@@ -121,22 +175,57 @@ class UpdateFlightInfo extends Component {
       arrival_airport: this.state.arrival_airport,
       departure_time: this.state.departure_time,
       arrival_time: this.state.arrival_time,
-      date: this.state.date,
+      departure_date: this.state.departure_date,
+      arrival_date: this.state.arrival_date,
       economy_seats_number: this.state.economy_seats_number,
       business_seats_number: this.state.business_seats_number,
       first_seats_number: this.state.first_seats_number,
-      baggage_allowance: this.state.baggage_allowance,
-      price: this.state.price
+      baggage_allowance_economy: this.state.baggage_allowance_economy,
+      baggage_allowance_business: this.state.baggage_allowance_business,
+      baggage_allowance_first: this.state.baggage_allowance_first,
+      price_economy: this.state.price_economy,
+      price_business: this.state.price_business,
+      price_first: this.state.price_first,
+      trip_duration: parseInt(((new Date(this.state.arrival_date + ' ' + this.state.arrival_time + ':00') - new Date(this.state.departure_date + ' ' + this.state.departure_time + ':00')) / (1000 * 60 * 60)) % 24) + ':' + parseInt(((new Date(this.state.arrival_date + ' ' + this.state.arrival_time + ':00') - new Date(this.state.departure_date + ' ' + this.state.departure_time + ':00')) / (1000 * 60)) % 60)
     };
 
-    axios
-      .put('http://localhost:8082/api/flights/' + this.props.match.params.id, data)
-      .then(res => {
-        this.props.history.push('/admin-show-flight-list/');
-      })
-      .catch(err => {
-        console.log("Error in UpdateFlightInfo!");
-      })
+    if (this.state.flight_number === '' || this.state.departure_airport === '' || this.state.arrival_airport === '' || this.state.departure_time === '' || this.state.arrival_time === '' || this.state.departure_date === '' || this.state.arrival_date === '' || this.state.economy_seats_number === '' || this.state.business_seats_number === '' || this.state.first_seats_number === '' || this.state.baggage_allowance_economy === '' || this.state.baggage_allowance_business === '' || this.state.baggage_allowance_first === '' || this.state.price_economy === '' || this.state.price_business === '' || this.state.price_first === '' || this.state.flight_number === null || this.state.departure_airport === null || this.state.arrival_airport === null || this.state.departure_time === null || this.state.arrival_time === null || this.state.departure_date === null || this.state.arrival_date === null || this.state.economy_seats_number === null || this.state.business_seats_number === null || this.state.first_seats_number === null || this.state.baggage_allowance_economy === null || this.state.baggage_allowance_business === null || this.state.baggage_allowance_first === null || this.state.price_economy === null || this.state.price_business === null || this.state.price_first === null) {
+      emptyField = 'true';
+      this.forceUpdate()
+    }
+
+    else if (original_flight_number === this.state.flight_number) {
+      axios
+        .put('http://localhost:8082/api/flights/' + this.props.match.params.id, data)
+        .then(res => {
+          this.props.history.push('/admin-show-flight-list');
+        })
+        .catch(err => {
+          console.log("Error in UpdateFlightInfo!");
+        })
+    }
+    else {
+      axios
+        .put('http://localhost:8082/api/flights/search', { flight_number: this.state.flight_number })
+        .then(res => {
+          console.log(res.data)
+          if (!Object.keys(res.data).length) {
+            axios
+            .put('http://localhost:8082/api/flights/' + this.props.match.params.id, data)
+            .then(res => {
+              this.props.history.push('/admin-show-flight-list');
+            })
+            .catch(err => {
+              console.log("Error in UpdateFlightInfo!");
+            })
+          }
+          else {
+            //console.log('A flight with the same flight number already exists')
+            flightAlreadyExists = 'true';
+            this.forceUpdate()
+          }
+        })
+    }
   };
 
 
@@ -146,18 +235,36 @@ class UpdateFlightInfo extends Component {
         <br />
         <br />
         <div className="backgroundLabelUpdateFlight">
-          <b>Edit Flight</b>
+          <b >Edit Flight</b>
         </div>
         <div className="backgroundBoxUpdateFlight">
           <br />
-          <br />
           <form noValidate onSubmit={this.onSubmit}>
-            <TextField style={{
-              width: "400px",
-            }}
-              value={this.state.flight_number}
-              onChange={this.onChangeFlightNumber}
-              label="Flight Number" id="outlined-size-normal" defaultValue="" />
+            {((emptyField === 'true')) ? (
+              <Alert variant="filled" style={{
+                width: "500px",
+                margin: "auto",
+                marginTop: "-12px",
+                marginBottom: "-12px"
+              }} severity="error">All fields must be filled</Alert>
+            ) : (
+              <br />
+            )}
+            <br />
+            {((flightAlreadyExists === 'true')) ? (
+              <TextField error style={{
+                width: "400px",
+              }}
+                onChange={this.onChangeFlightNumber}
+                label="Flight Number" helperText="A flight with the same flight number already exists" id="outlined-size-normal" value={this.state.flight_number} />
+            ) : (
+              <TextField style={{
+                width: "400px",
+              }}
+                value={this.state.flight_number}
+                onChange={this.onChangeFlightNumber}
+                label="Flight Number" id="outlined-size-normal" defaultValue="" />
+            )}
             <br />
             <br />
             <Autocomplete
@@ -207,6 +314,8 @@ class UpdateFlightInfo extends Component {
               value={this.state.arrival_airport}
               onChange={(ev, value) => {
                 this.state.arrival_airport = value
+                emptyField = 'false';
+                this.forceUpdate()
               }}
               renderTags={(value, getTagProps) =>
                 value.map((option, index) => (
@@ -230,18 +339,39 @@ class UpdateFlightInfo extends Component {
             <br />
             <TextField
               style={{
-                width: "400px",
+                width: "190px",
                 margin: "auto",
                 backgroundColor: "white",
               }}
               id="filled-textarea"
-              label="Date"
+              label="Departure Date"
               type="date"
               onFocus={this._onFocus} onBlur={this._onBlur}
               placeholder=""
               variant="outlined"
-              value={this.state.date}
-              onChange={this.onChangeDate}
+              value={this.state.departure_date}
+              onChange={this.onChangeDepartureDate}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            <TextField
+              style={{
+                width: "190px",
+                margin: "auto",
+                backgroundColor: "white",
+              }}
+              id="filled-textarea"
+              label="Arrival Date"
+              type="date"
+              onFocus={this._onFocus} onBlur={this._onBlur}
+              placeholder=""
+              variant="outlined"
+              value={this.state.arrival_date}
+              onChange={this.onChangeArrivalDate}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -258,9 +388,9 @@ class UpdateFlightInfo extends Component {
               label="Departure Time"
               type="time"
               onFocus={this._onFocus} onBlur={this._onBlur}
+              value={this.state.departure_time}
               placeholder=""
               variant="outlined"
-              value={this.state.departure_time}
               onChange={this.onChangeDepartureTime}
               InputLabelProps={{
                 shrink: true,
@@ -279,9 +409,9 @@ class UpdateFlightInfo extends Component {
               label="Arrival Time"
               type="time"
               onFocus={this._onFocus} onBlur={this._onBlur}
+              value={this.state.arrival_time}
               placeholder=""
               variant="outlined"
-              value={this.state.arrival_time}
               onChange={this.onChangeArrivalTime}
               InputLabelProps={{
                 shrink: true,
@@ -289,112 +419,227 @@ class UpdateFlightInfo extends Component {
             />
             <br />
             <br />
+            <hr
+              style={{
+                color: "black",
+                width: "450px"
+              }}
+            />
+            <b style={{
+              fontSize: "20px",
+              color: "black"
+            }}> Economy Cabin </b>
+            <br />
+            <br />
             <TextField
               style={{
-                width: "400px",
+                width: "125px",
                 margin: "auto",
-                backgroundColor: "white",
+                backgroundColor: "white"
               }}
               id="filled-textarea"
-              label="Economy Seats Number"
+              label="Seats Number"
               type="number"
               onFocus={this._onFocus} onBlur={this._onBlur}
+              value={this.state.economy_seats_number}
               placeholder=""
               variant="outlined"
-              value={this.state.economy_seats_number}
               onChange={this.onChangeEconomySeatsNumber}
               InputLabelProps={{
                 shrink: true,
               }}
             />
-            <br />
-            <br />
+            &nbsp;
+            &nbsp;
             <TextField
               style={{
-                width: "400px",
-                margin: "auto",
-                backgroundColor: "white",
-              }}
-              id="filled-textarea"
-              label="Business Seats Number"
-              type="number"
-              onFocus={this._onFocus} onBlur={this._onBlur}
-              placeholder=""
-              variant="outlined"
-              value={this.state.business_seats_number}
-              onChange={this.onChangeBusinessSeatsNumber}
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-            <br />
-            <br />
-            <TextField
-              style={{
-                width: "400px",
-                margin: "auto",
-                backgroundColor: "white",
-              }}
-              id="filled-textarea"
-              label="First Seats Number"
-              type="number"
-              onFocus={this._onFocus} onBlur={this._onBlur}
-              placeholder=""
-              variant="outlined"
-              value={this.state.first_seats_number}
-              onChange={this.onChangeFirstSeatsNumber}
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-            <br />
-            <br />
-            <TextField
-              style={{
-                width: "400px",
+                width: "130px",
                 margin: "auto",
                 backgroundColor: "white",
               }}
               id="filled-textarea"
               label="Baggage Allowance"
-              helperText="Economy = Baggage Allowance || Business = Baggage Allowance + 1 || First = Baggage Allowance + 2"
               type="number"
               onFocus={this._onFocus} onBlur={this._onBlur}
+              value={this.state.baggage_allowance_economy}
               placeholder=""
               variant="outlined"
-              value={this.state.baggage_allowance}
-              onChange={this.onChangeBaggageAllowance}
+              onChange={this.onChangeEconomyBaggageAllowance}
               InputLabelProps={{
                 shrink: true,
               }}
             />
-            <br />
-            <br />
+            &nbsp;
+            &nbsp;
             <TextField
               style={{
-                width: "400px",
+                width: "125px",
                 margin: "auto",
                 backgroundColor: "white",
               }}
               id="filled-textarea"
-              label="Price"
-              helperText="Economy = Price || Business = Price*125% || First = Price*150% || Child = Price*70%"
+              label="Ticket Price"
               type="number"
               onFocus={this._onFocus} onBlur={this._onBlur}
+              value={this.state.price_economy}
               placeholder=""
               variant="outlined"
-              value={this.state.price}
-              onChange={this.onChangePrice}
+              onChange={this.onChangeEconomyPrice}
               InputLabelProps={{
                 shrink: true,
               }}
             />
+            <hr
+              style={{
+                color: "black",
+                width: "450px"
+              }}
+            />
+            <b style={{
+              fontSize: "20px",
+              color: "black"
+            }}> Business Cabin </b>
             <br />
+            <br />
+            <TextField
+              style={{
+                width: "125px",
+                margin: "auto",
+                backgroundColor: "white"
+              }}
+              id="filled-textarea"
+              label="Seats Number"
+              type="number"
+              onFocus={this._onFocus} onBlur={this._onBlur}
+              value={this.state.business_seats_number}
+              placeholder=""
+              variant="outlined"
+              onChange={this.onChangeBusinessSeatsNumber}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            &nbsp;
+            &nbsp;
+            <TextField
+              style={{
+                width: "130px",
+                margin: "auto",
+                backgroundColor: "white",
+              }}
+              id="filled-textarea"
+              label="Baggage Allowance"
+              type="number"
+              onFocus={this._onFocus} onBlur={this._onBlur}
+              value={this.state.baggage_allowance_business}
+              placeholder=""
+              variant="outlined"
+              onChange={this.onChangeBusinessBaggageAllowance}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            &nbsp;
+            &nbsp;
+            <TextField
+              style={{
+                width: "125px",
+                margin: "auto",
+                backgroundColor: "white",
+              }}
+              id="filled-textarea"
+              label="Ticket Price"
+              type="number"
+              onFocus={this._onFocus} onBlur={this._onBlur}
+              value={this.state.price_business}
+              placeholder=""
+              variant="outlined"
+              onChange={this.onChangeBusinessPrice}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <hr
+              style={{
+                color: "black",
+                width: "450px"
+              }}
+            />
+            <b style={{
+              fontSize: "20px",
+              color: "black"
+            }}> First Cabin </b>
+            <br />
+            <br />
+            <TextField
+              style={{
+                width: "125px",
+                margin: "auto",
+                backgroundColor: "white"
+              }}
+              id="filled-textarea"
+              label="Seats Number"
+              type="number"
+              onFocus={this._onFocus} onBlur={this._onBlur}
+              value={this.state.first_seats_number}
+              placeholder=""
+              variant="outlined"
+              onChange={this.onChangeFirstSeatsNumber}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            &nbsp;
+            &nbsp;
+            <TextField
+              style={{
+                width: "130px",
+                margin: "auto",
+                backgroundColor: "white",
+              }}
+              id="filled-textarea"
+              label="Baggage Allowance"
+              type="number"
+              onFocus={this._onFocus} onBlur={this._onBlur}
+              value={this.state.baggage_allowance_first}
+              placeholder=""
+              variant="outlined"
+              onChange={this.onChangeFirstBaggageAllowance}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            &nbsp;
+            &nbsp;
+            <TextField
+              style={{
+                width: "125px",
+                margin: "auto",
+                backgroundColor: "white",
+              }}
+              id="filled-textarea"
+              label="Ticket Price"
+              type="number"
+              onFocus={this._onFocus} onBlur={this._onBlur}
+              value={this.state.price_first}
+              placeholder=""
+              variant="outlined"
+              onChange={this.onChangeFirstPrice}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <hr
+              style={{
+                color: "black",
+                width: "450px"
+              }}
+            />
             <br />
             <Button type="submit" style={{
               width: "180px",
               height: "50px",
-            }} variant="contained">Edit Flight</Button>
+            }} variant="contained">Update Flight</Button>
           </form>
         </div>
         <br />

@@ -21,7 +21,11 @@ const FlightSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  date: {
+  departure_date: {
+    type: Date,
+    required: true
+  },
+  arrival_date: {
     type: Date,
     required: true
   },
@@ -37,11 +41,31 @@ const FlightSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  baggage_allowance: {
+  baggage_allowance_economy: {
     type: String,
     required: true
   },
-  price: {
+  baggage_allowance_business: {
+    type: String,
+    required: true
+  },
+  baggage_allowance_first: {
+    type: String,
+    required: true
+  },
+  price_economy: {
+    type: String,
+    required: true
+  },
+  price_business: {
+    type: String,
+    required: true
+  },
+  price_first: {
+    type: String,
+    required: true
+  },
+  trip_duration: {
     type: String,
     required: true
   }
