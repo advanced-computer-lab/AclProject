@@ -60,11 +60,6 @@ class EditProfile extends Component {
     this.state.lastname = e.target.value
   };
 
-  onChangeUsername = e => {
-    this.setState({ [e.target.name]: e.target.value });
-    this.state.username = e.target.value
-  };
-
   onChangePassportNumber = e => {
     this.setState({ [e.target.name]: e.target.value });
     this.state.passport = e.target.value
@@ -118,18 +113,6 @@ class EditProfile extends Component {
             <TextField onChange={this.onChangeLastName} style={{
               width: "200px"
             }} label="Last Name" id="outlined-size-normal" defaultValue="" />
-            <br />
-            <br />
-            <TextField
-              onChange={this.onChangeUsername}
-              style={{
-                width: "400px",
-              }}
-              id="outlined-size-normal"
-              label="Username"
-              defaultValue=""
-             
-            />
             <br />
             <br />
             <TextField onChange={this.onChangeEmail} style={{

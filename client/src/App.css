@@ -250,7 +250,7 @@ body {
 
 .backgroundBoxProfile {
   margin: auto;
-  height: 430px;
+  height: 455px;
   width: 550px;
   border-color: rgb(0, 0, 0);
   border-style: solid;
@@ -326,7 +326,7 @@ body {
 
 .backgroundBoxEditProfile {
   margin: auto;
-  height: 605px;
+  height: 530px;
   width: 550px;
   border-color: rgb(0, 0, 0);
   border-style: solid;

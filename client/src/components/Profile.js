@@ -62,8 +62,8 @@ class Profile extends Component {
             </div>
             
             <Button variant="contained" style={{
-              width: "90px",
-              height: "30px",
+              width: "180px",
+              height: "50px",
              
             }} href="./edit-profile">Edit</Button>
       </div>
