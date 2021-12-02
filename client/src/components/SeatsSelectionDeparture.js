@@ -10,9 +10,11 @@ import Button from '@mui/material/Button';
 var economySeatsNumber = parseInt(((window.location.pathname).split("/"))[11]);
 var businessSeatsNumber = parseInt(((window.location.pathname).split("/"))[12]);
 var firstSeatsNumber = parseInt(((window.location.pathname).split("/"))[13]);
+var reserved = String(((window.location.pathname).split("/"))[17]);
+const chars = reserved.split(',');
 
 var result;
-var bookedA = ['1A', '3B']
+var bookedA = chars
 
 const steps = [
     'Select departure and return flights',
@@ -142,11 +144,10 @@ const SeatsSelectionDeparture = () => {
                         </section>
                         <br />
                         <br />
-                        <Button color="success" onClick={confirmBooking} variant="contained">
+                        <Button color="success" onClick={confirmBooking} href={result +"/"+ (bookedStatus.replace(/ /g, "-")).substring(0, (bookedStatus.replace(/ /g, "-")).length - 1)} variant="contained">
                             Select Seats
                         </Button>
-                        <p>{bookedStatus}</p>
-                    </div>
+                     </div>
                 </div>
             </div>
         </div>

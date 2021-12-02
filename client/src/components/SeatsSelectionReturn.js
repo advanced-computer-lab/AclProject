@@ -7,11 +7,14 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 
-var economySeatsNumber = parseInt(((window.location.pathname).split("/"))[14]);
+var economySeatsNumber = parseInt(((window.location.pathname).split("/"))[16]);
 var businessSeatsNumber = parseInt(((window.location.pathname).split("/"))[15]);
-var firstSeatsNumber = parseInt(((window.location.pathname).split("/"))[16]);
+var firstSeatsNumber = parseInt(((window.location.pathname).split("/"))[14]);
+var reserved = String(((window.location.pathname).split("/"))[18]);
+const chars = reserved.split(',');
 
 var result;
+var bookedA = chars
 
 const steps = [
     'Select departure and return flights',
@@ -82,12 +85,19 @@ const SeatsSelectionReturn = () => {
             result = (window.location.pathname).replace("seats-selection-return", "summary");
         });
         const newAvailableSeats = availableSeats.filter(seat => !bookedSeats.includes(seat));
+        for (var i = 0; i < bookedA.length; i++){
+            delete newAvailableSeats[newAvailableSeats.indexOf(bookedA[i])];
+        }
         setAvailableSeats(newAvailableSeats);
         setBookedSeats([]);
         numberOfSeats = 0;
     };
     const myArray = (window.location.pathname).split("/");
     var numberOfSeats = parseInt(myArray[6]) + parseInt(myArray[7]);
+
+    window.onload = function() {
+        confirmBooking();
+      };
 
     return (
 
@@ -133,10 +143,9 @@ const SeatsSelectionReturn = () => {
                         </section>
                         <br />
                         <br />
-                        <Button color="success" onClick={confirmBooking} href={result + (bookedStatus.replace(/ /g, "-")).substring(0, (bookedStatus.replace(/ /g, "-")).length - 1) + "/"} variant="contained">
-                            Select Seats
-                        </Button>
-                        <p>{bookedStatus}</p>
+                        <Button color="success" onClick={confirmBooking} href={result +"/"+(bookedStatus.replace(/ /g, "-")).substring(0, (bookedStatus.replace(/ /g, "-")).length - 1) + "/"} variant="contained">
+                           Continue Booking
+                        </Button>                       
                     </div>
                 </div>
             </div>

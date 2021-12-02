@@ -218,8 +218,9 @@ class selectFlights extends Component {
       selectedBaggageAllowanceDeparture = selectedDepartureFlight.baggage_allowance_first
       selectedBaggageAllowanceReturn = selectedReturnFlight.baggage_allowance_first
     }
+    
     let result = (window.location.pathname).replace("select-flights", "seats-selection-departure");
-    const SeatsSelectionLink = result + "/" + this.state.departureFlightID + "/" + this.state.returnFlightID + "/" + selectedDepartureFlight.economy_seats_number + "/" + selectedDepartureFlight.business_seats_number + "/" + selectedDepartureFlight.first_seats_number + "/" + selectedReturnFlight.economy_seats_number + "/" + selectedReturnFlight.business_seats_number + "/" + selectedReturnFlight.first_seats_number;
+    const SeatsSelectionLink = result + "/" + this.state.departureFlightID + "/" + this.state.returnFlightID + "/" + selectedDepartureFlight.economy_seats_number + "/" + selectedDepartureFlight.business_seats_number + "/" + selectedDepartureFlight.first_seats_number + "/" + selectedReturnFlight.economy_seats_number + "/" + selectedReturnFlight.business_seats_number + "/" + selectedReturnFlight.first_seats_number + "/" + selectedDepartureFlight.BookedSeats1 +"/"+ selectedReturnFlight.BookedSeats1;
 
     return (
       <div className="SelectFlights">
