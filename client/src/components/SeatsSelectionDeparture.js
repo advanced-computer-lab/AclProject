@@ -5,7 +5,14 @@ import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
+import Button from '@mui/material/Button';
 
+var economySeatsNumber = parseInt(((window.location.pathname).split("/"))[11]);
+var businessSeatsNumber = parseInt(((window.location.pathname).split("/"))[12]);
+var firstSeatsNumber = parseInt(((window.location.pathname).split("/"))[13]);
+
+var result;
+var bookedA = ['1A', '3B']
 
 const steps = [
     'Select departure and return flights',
@@ -18,7 +25,7 @@ const createSeats = (rows, startIndex) => {
     let j = startIndex;
     let k = 'A';
     const section = [];
-    while (i < 25 && j <= rows) {
+    while (i < ((economySeatsNumber + businessSeatsNumber + firstSeatsNumber) / 4) && j <= rows) {
         if (k > 'D') {
             k = 'A';
             j++;
@@ -32,10 +39,10 @@ const createSeats = (rows, startIndex) => {
 
 }
 
-const SeatsSelection = () => {
-    const FirstClassSeats = createSeats(5, '1');
-    const BusnissSeats = createSeats(12, '6');
-    const EconomySeats = createSeats(25, '13');
+const SeatsSelectionDeparture = () => {
+    const FirstClassSeats = createSeats((firstSeatsNumber) / 4, '1');
+    const BusnissSeats = createSeats((businessSeatsNumber + firstSeatsNumber) / 4, String((firstSeatsNumber) / 4 + 1));
+    const EconomySeats = createSeats((economySeatsNumber + firstSeatsNumber + businessSeatsNumber) / 4, String((businessSeatsNumber + firstSeatsNumber) / 4 + 1));
     const myArray1 = (window.location.pathname).split("/");
     var u;
     if (myArray1[8] === "Economy") {
@@ -47,6 +54,7 @@ const SeatsSelection = () => {
     else if (myArray1[8] === "Business") {
         u = BusnissSeats;
     }
+    
     const [availableSeats, setAvailableSeats] = useState(u);
     const [bookedSeats, setBookedSeats] = useState([]);
     const [bookedStatus, setBookedStatus] = useState('');
@@ -73,14 +81,22 @@ const SeatsSelection = () => {
             setBookedStatus(prevState => {
                 return prevState + seat + ' ';
             })
+            result = (window.location.pathname).replace("seats-selection-departure", "seats-selection-return");
         });
         const newAvailableSeats = availableSeats.filter(seat => !bookedSeats.includes(seat));
-        setAvailableSeats(newAvailableSeats);
+        for (var i = 0; i < bookedA.length; i++){
+            delete newAvailableSeats[newAvailableSeats.indexOf(bookedA[i])];
+        }
+        setAvailableSeats(newAvailableSeats)
         setBookedSeats([]);
         numberOfSeats = 0;
     };
     const myArray = (window.location.pathname).split("/");
     var numberOfSeats = parseInt(myArray[6]) + parseInt(myArray[7]);
+
+    window.onload = function() {
+        confirmBooking();
+      };
 
     return (
 
@@ -97,28 +113,28 @@ const SeatsSelection = () => {
             </Box>
             <br />
             <div className="container">
-                <div class="vl"></div>
-                <div class="v2"></div>
                 <div className="row">
                     <div className="col-md-10 m-auto">
+                        <div class="vl"></div>
+                        <div class="v2"></div>
                         <section className="lower">
                         </section>
                         <br />
                         <br />
                         <section className="color">
-                                <h6>First Class Seats</h6>
+                            <h6>First Class Seats</h6>
                             <Seats values={FirstClassSeats}
                                 availableSeats={availableSeats}
                                 bookedSeats={bookedSeats}
                                 addSeat={addSeat} />
                             <br />
-                                <h6>Business Seats</h6>
+                            <h6>Business Seats</h6>
                             <Seats values={BusnissSeats}
                                 availableSeats={availableSeats}
                                 bookedSeats={bookedSeats}
                                 addSeat={addSeat} />
                             <br />
-                                <h6>Economy Seats</h6>
+                            <h6>Economy Seats</h6>
                             <Seats values={EconomySeats}
                                 availableSeats={availableSeats}
                                 bookedSeats={bookedSeats}
@@ -126,7 +142,9 @@ const SeatsSelection = () => {
                         </section>
                         <br />
                         <br />
-                            <button class="button button1" onClick={confirmBooking}>Continue Booking</button>
+                        <Button color="success" onClick={confirmBooking} variant="contained">
+                            Select Seats
+                        </Button>
                         <p>{bookedStatus}</p>
                     </div>
                 </div>
@@ -136,4 +154,4 @@ const SeatsSelection = () => {
 }
 
 
-export default SeatsSelection;
+export default SeatsSelectionDeparture;

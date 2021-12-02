@@ -22,7 +22,8 @@ import ReservedFlights from './components/ReservedFlights';
 import ReservedFlightSummary from './components/ReservedFlightSummary';
 import ReservedShowFlightDetails from './components/ReservedShowFlightDetails';
 import SelectFlights from './components/SelectFlights';
-import SeatsSelection from './components/SeatsSelection';
+import SeatsSelectionDeparture from './components/SeatsSelectionDeparture';
+import SeatsSelectionReturn from './components/SeatsSelectionReturn';
 
 class App extends Component {
   render() {
@@ -33,7 +34,8 @@ class App extends Component {
           <Route exact path='/' component={Homepage} />
 		  <Route exact path='/login' component={Login} />
 		  <Route path='/select-flights' component={SelectFlights} />
-		  <Route path='/seats-selection' component={SeatsSelection} />
+		  <Route path='/seats-selection-departure' component={SeatsSelectionDeparture} />
+      <Route path='/seats-selection-return' component={SeatsSelectionReturn} />
           <Route path='/create-flight' component={CreateFlight} />
           <Route path='/profile' component={Profile} />
 		      <Route path='/advanced-search' component={AdvancedSearch} />

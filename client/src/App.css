@@ -79,18 +79,27 @@ body {
 .SelectFlights {
   align-items: center;
   text-align: center;
-  margin: auto;
   background-color: #f7f5f5;
   min-height: 100vh;
   color: #000000;
 }
 
 .HeaderSelectFlight {
-  margin: auto;
   width: 562px;
   padding: 10px;
   text-align: center;
   background-color: rgb(255, 255, 255);
+}
+
+.row {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.block {
+  width: 600px;
 }
 /*  */
 
@@ -138,18 +147,18 @@ body {
   position: absolute;
   margin-bottom: auto;
   margin-top: 50px;
-  margin-left: 450px;
+  margin-left: 337px;
   border-left: 4px solid rgb(0, 0, 0);
-  height: 800px;
+  height: 100%;
 }
 
 .v2 {
   position: absolute;
   margin-bottom: auto;
   margin-top: 50px;
-  margin-left: 655px;
+  margin-left: 550px;
   border-left: 4px solid rgb(0, 0, 0);
-  height: 800px;
+  height: 100%;
 }
 /*  */
 
