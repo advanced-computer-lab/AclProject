@@ -28,11 +28,11 @@ var selectedCabin = ((window.location.pathname).split("/"))[8]
 var selectedField;
 var numberOfPassengers = parseInt(((window.location.pathname).split("/"))[6]) + parseInt(((window.location.pathname).split("/"))[7])
 
-if (selectedCabin === 'Economy'){
+if (selectedCabin === 'Economy') {
   selectedField = 'price_economy'
 }
 
-else if (selectedCabin === 'Business'){
+else if (selectedCabin === 'Business') {
   selectedField = 'price_business'
 }
 
@@ -182,20 +182,20 @@ class selectFlights extends Component {
 
   render() {
     const departureFlights = this.state.departureFlights;
-    for (var i=0; i < departureFlights.length; i++){
-      if(selectedCabin === 'Economy'){
-        
-        if(departureFlights[i].economy_seats_number < numberOfPassengers){
+    for (var i = 0; i < departureFlights.length; i++) {
+      if (selectedCabin === 'Economy') {
+
+        if (departureFlights[i].economy_seats_number < numberOfPassengers) {
           departureFlights.splice(departureFlights.indexOf(departureFlights[i]), 1);
         }
       }
-      else if(selectedCabin === 'Business'){
-        if(departureFlights[i].business_seats_number < numberOfPassengers){
+      else if (selectedCabin === 'Business') {
+        if (departureFlights[i].business_seats_number < numberOfPassengers) {
           departureFlights.splice(departureFlights.indexOf(departureFlights[i]), 1);
         }
       }
-      else if(selectedCabin === 'First'){
-        if(departureFlights[i].first_seats_number < numberOfPassengers){
+      else if (selectedCabin === 'First') {
+        if (departureFlights[i].first_seats_number < numberOfPassengers) {
           departureFlights.splice(departureFlights.indexOf(departureFlights[i]), 1);
         }
       }
@@ -206,15 +206,15 @@ class selectFlights extends Component {
     var selectedBaggageAllowanceDeparture;
     var selectedBaggageAllowanceReturn;
     const selectedReturnFlight = this.state.selectedReturnFlight;
-    if(selectedCabin === 'Economy'){
+    if (selectedCabin === 'Economy') {
       selectedBaggageAllowanceDeparture = selectedDepartureFlight.baggage_allowance_economy
       selectedBaggageAllowanceReturn = selectedReturnFlight.baggage_allowance_economy
     }
-    else if(selectedCabin === 'Business'){
+    else if (selectedCabin === 'Business') {
       selectedBaggageAllowanceDeparture = selectedDepartureFlight.baggage_allowance_business
       selectedBaggageAllowanceReturn = selectedReturnFlight.baggage_allowance_business
     }
-    else if(selectedCabin === 'First'){
+    else if (selectedCabin === 'First') {
       selectedBaggageAllowanceDeparture = selectedDepartureFlight.baggage_allowance_first
       selectedBaggageAllowanceReturn = selectedReturnFlight.baggage_allowance_first
     }
@@ -234,72 +234,85 @@ class selectFlights extends Component {
           </Stepper>
         </Box>
         <br />
-        <div className="HeaderSelectFlight">
-          <h1>Select Departure Flight</h1>
-        </div>
-
-          <DataGrid
-            style={{
-              width: "562px",
-              height: "375px",
-              margin: "auto",
-              backgroundColor: "white"
-            }}
-            onSelectionModelChange={itm => this.onChange1(itm)}
-            rows={departureFlights}
-            getRowId={(row) => row._id}
-            columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
-          />
-          <br />
-        {((this.state.departureFlightID === '')) ? (
-          <Button  variant="contained" disabled>
-            Show flight details
-          </Button>
-        ) : (
-          <Button  onClick={this.onClickButton1} variant="contained">
-            Show flight details
-          </Button>
-        )}
-
-        <div className="col-md-11">
-          <br />
-          <hr />
-        </div>
         <br />
 
-        <div className="HeaderSelectFlight">
-          <h1>Select Return Flight</h1>
+        <div className="row">
+          <div className="block">
+            <div style={{margin: "auto"
+            }} className="HeaderSelectFlight">
+              <h1>Select Departure Flight</h1>
+            </div>
+
+            <DataGrid
+              style={{
+                width: "562px",
+                height: "375px",
+                margin: "auto",
+                backgroundColor: "white"
+              }}
+              onSelectionModelChange={itm => this.onChange1(itm)}
+              rows={departureFlights}
+              getRowId={(row) => row._id}
+              columns={columns}
+              pageSize={5}
+              rowsPerPageOptions={[5]}
+            />
+            <br />
+            {((this.state.departureFlightID === '')) ? (
+              <Button style={{
+                margin: "auto"
+              }} variant="contained" disabled>
+                Show flight details
+              </Button>
+            ) : (
+              <Button style={{
+                margin: "auto"
+              }} onClick={this.onClickButton1} variant="contained">
+                Show flight details
+              </Button>
+            )}
+            <br />
+          </div>
+
+          <div className="block">
+            <div style={{
+              margin: "auto"
+            }} className="HeaderSelectFlight">
+              <h1>Select Return Flight</h1>
+            </div>
+
+            <DataGrid
+              style={{
+                width: "562px",
+                height: "375px",
+                margin: "auto",
+                backgroundColor: "white"
+              }}
+              onSelectionModelChange={itm => this.onChange2(itm)}
+              rows={returnFlights}
+              getRowId={(row) => row._id}
+              columns={columns}
+              pageSize={5}
+              rowsPerPageOptions={[5]}
+            />
+            <br />
+            {((this.state.returnFlightID === '')) ? (
+              <Button style={{
+                margin: "auto"
+              }} variant="contained" disabled>
+                Show flight details
+              </Button>
+            ) : (
+              <Button style={{
+                margin: "auto"
+              }} onClick={this.onClickButton2} variant="contained">
+                Show flight details
+              </Button>
+            )}
+          </div>
         </div>
 
-          <DataGrid
-            style={{
-              width: "562px",
-              height: "375px",
-              margin: "auto",
-              backgroundColor: "white"
-            }}
-            onSelectionModelChange={itm => this.onChange2(itm)}
-            rows={returnFlights}
-            getRowId={(row) => row._id}
-            columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
-          />
-          <br />
-        {((this.state.returnFlightID === '')) ? (
-          <Button variant="contained" disabled>
-            Show flight details
-          </Button>
-        ) : (
-          <Button  onClick={this.onClickButton2} variant="contained">
-            Show flight details
-          </Button>
-        )}
         <div className="col-md-11">
-          <br />
-          <br />
           <hr />
         </div>
 
@@ -378,7 +391,7 @@ class selectFlights extends Component {
         </div>
 
         {((this.state.returnFlightID === '' || this.state.departureFlightID === '')) ? (
-          <Button  variant="contained" disabled>
+          <Button variant="contained" disabled>
             Confirm Flights and Select Seats
           </Button>
         ) : (
