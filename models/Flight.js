@@ -68,6 +68,10 @@ const FlightSchema = new mongoose.Schema({
   trip_duration: {
     type: String,
     required: true
+  },
+  BookedSeats1:{
+    type: Array,
+    required: true
   }
 });
 
