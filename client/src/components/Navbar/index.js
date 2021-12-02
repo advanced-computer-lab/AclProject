@@ -67,23 +67,24 @@ Navbar = () => {
                 <Dropdown.Toggle variant="success" id="dropdown-basic">
                   Account
                 </Dropdown.Toggle>
-  
+
                 <Dropdown.Menu>
+                  <Dropdown.Item href="/profile">Profile</Dropdown.Item>
                   <Dropdown.Item href="/create-flight">Create Flight</Dropdown.Item>
                   <Dropdown.Item href="/admin-show-flight-list">Edit/Delete Flights</Dropdown.Item>
                   <Dropdown.Item href="/" onClick={function (event) { localStorage.removeItem("token"); window.location.assign('http://localhost:3000/') }}>Log out</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </NavBtn>
-  
+
           ) : (  //User logged in
-  
+
             <NavBtn>
               <Dropdown>
                 <Dropdown.Toggle variant="success" id="dropdown-basic">
                   Account
                 </Dropdown.Toggle>
-  
+
                 <Dropdown.Menu>
                   <Dropdown.Item href="/profile">Profile</Dropdown.Item>
                   <Dropdown.Item href="/reservedflights">Reservations</Dropdown.Item>
@@ -91,7 +92,7 @@ Navbar = () => {
                 </Dropdown.Menu>
               </Dropdown>
             </NavBtn>
-  
+
           )
 
         )}

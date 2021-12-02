@@ -87,13 +87,13 @@ class ShowFlightList extends Component {
                     <StyledTableCell align="center">{row.arrival_airport}</StyledTableCell>
                     <StyledTableCell align="center">{row.departure_date.substring(0, 10)} | {row.departure_time}</StyledTableCell>
                     <StyledTableCell align="center">{row.arrival_date.substring(0, 10)} | {row.arrival_time}</StyledTableCell>
-                    <StyledTableCell align="center"><Tooltip title={"Economy = " + row.baggage_allowance_economy + " || Business = " + row.baggage_allowance_business + " || First = " + row.baggage_allowance_first}>
+                    <StyledTableCell align="center"><Tooltip title={<span style={{ whiteSpace: 'pre-line' }}>{"Economy = " + row.baggage_allowance_economy + " Bags\nBusiness = " + row.baggage_allowance_business + " Bags \nFirst = " + row.baggage_allowance_first + " Bags"}</span>}>
                       <IconButton>
                         <InfoIcon />
                       </IconButton>
                     </Tooltip></StyledTableCell>
 
-                    <StyledTableCell align="center"><Tooltip title={"Economy = " + row.price_economy + "LE || Business = " + row.price_business + "LE || First = " + row.price_first + "LE"}>
+                    <StyledTableCell align="center"><Tooltip title={<span style={{ whiteSpace: 'pre-line' }}>{"Economy = " + row.price_economy + "LE\nBusiness = " + row.price_business + "LE\nFirst = " + row.price_first + "LE"}</span>}>
                       <IconButton>
                         <InfoIcon />
                       </IconButton>
