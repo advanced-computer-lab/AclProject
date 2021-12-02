@@ -26,6 +26,7 @@ const steps = [
 
 var selectedCabin = ((window.location.pathname).split("/"))[8]
 var selectedField;
+var numberOfPassengers = parseInt(((window.location.pathname).split("/"))[6]) + parseInt(((window.location.pathname).split("/"))[7])
 
 if (selectedCabin === 'Economy'){
   selectedField = 'price_economy'
@@ -52,10 +53,10 @@ const columns = [
   },
   {
     field: selectedField,
-    headerName: 'Price',
+    headerName: 'Price (LE)',
     align: 'center',
     //type: 'number',
-    width: 60,
+    width: 90,
   },
 ];
 
@@ -142,13 +143,13 @@ class selectFlights extends Component {
     const departureData = {
       departure_airport: myArray[2].replace(/%20/g, " "),
       arrival_airport: myArray[3].replace(/%20/g, " "),
-      date: myArray[4],
+      departure_date: myArray[4],
     };
 
     const returnData = {
       departure_airport: myArray[3].replace(/%20/g, " "),
       arrival_airport: myArray[2].replace(/%20/g, " "),
-      date: myArray[5],
+      departure_date: myArray[5],
     };
 
 
@@ -181,9 +182,42 @@ class selectFlights extends Component {
 
   render() {
     const departureFlights = this.state.departureFlights;
+    for (var i=0; i < departureFlights.length; i++){
+      if(selectedCabin === 'Economy'){
+        
+        if(departureFlights[i].economy_seats_number < numberOfPassengers){
+          departureFlights.splice(departureFlights.indexOf(departureFlights[i]), 1);
+        }
+      }
+      else if(selectedCabin === 'Business'){
+        if(departureFlights[i].business_seats_number < numberOfPassengers){
+          departureFlights.splice(departureFlights.indexOf(departureFlights[i]), 1);
+        }
+      }
+      else if(selectedCabin === 'First'){
+        if(departureFlights[i].first_seats_number < numberOfPassengers){
+          departureFlights.splice(departureFlights.indexOf(departureFlights[i]), 1);
+        }
+      }
+    }
+
     const returnFlights = this.state.returnFlights;
     const selectedDepartureFlight = this.state.selectedDepartureFlight;
+    var selectedBaggageAllowanceDeparture;
+    var selectedBaggageAllowanceReturn;
     const selectedReturnFlight = this.state.selectedReturnFlight;
+    if(selectedCabin === 'Economy'){
+      selectedBaggageAllowanceDeparture = selectedDepartureFlight.baggage_allowance_economy
+      selectedBaggageAllowanceReturn = selectedReturnFlight.baggage_allowance_economy
+    }
+    else if(selectedCabin === 'Business'){
+      selectedBaggageAllowanceDeparture = selectedDepartureFlight.baggage_allowance_business
+      selectedBaggageAllowanceReturn = selectedReturnFlight.baggage_allowance_business
+    }
+    else if(selectedCabin === 'First'){
+      selectedBaggageAllowanceDeparture = selectedDepartureFlight.baggage_allowance_first
+      selectedBaggageAllowanceReturn = selectedReturnFlight.baggage_allowance_first
+    }
     let result = (window.location.pathname).replace("select-flights", "seats-selection");
     const SeatsSelectionLink = result + "/" + this.state.departureFlightID + "/" + this.state.returnFlightID;
 
@@ -206,7 +240,7 @@ class selectFlights extends Component {
 
           <DataGrid
             style={{
-              width: "535px",
+              width: "562px",
               height: "375px",
               margin: "auto",
               backgroundColor: "white"
@@ -241,7 +275,7 @@ class selectFlights extends Component {
 
           <DataGrid
             style={{
-              width: "535px",
+              width: "562px",
               height: "375px",
               margin: "auto",
               backgroundColor: "white"
@@ -278,13 +312,13 @@ class selectFlights extends Component {
                 <TableHead>
                   <TableRow>
                     <TableCell>Flight Number</TableCell>
-                    <TableCell align="right">Departure Airport</TableCell>
-                    <TableCell align="right">Arrival Airport</TableCell>
-                    <TableCell align="right">Departure Time</TableCell>
-                    <TableCell align="right">Arrival Time</TableCell>
-                    <TableCell align="right">Trip Duration</TableCell>
-                    <TableCell align="right">Cabin Class</TableCell>
-                    <TableCell align="right">Baggage Allowance</TableCell>
+                    <TableCell align="center">Departure Airport</TableCell>
+                    <TableCell align="center">Arrival Airport</TableCell>
+                    <TableCell align="center">Departure Time</TableCell>
+                    <TableCell align="center">Arrival Time</TableCell>
+                    <TableCell align="center">Trip Duration</TableCell>
+                    <TableCell align="center">Cabin Class</TableCell>
+                    <TableCell align="center">Baggage Allowance</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -292,13 +326,13 @@ class selectFlights extends Component {
                   <TableRow
                   >
                     <TableCell component="th" scope="row">{selectedDepartureFlight.flight_number}</TableCell>
-                    <TableCell align="right">{selectedDepartureFlight.departure_airport}</TableCell>
-                    <TableCell align="right">{selectedDepartureFlight.arrival_airport}</TableCell>
-                    <TableCell align="right">{selectedDepartureFlight.departure_time}</TableCell>
-                    <TableCell align="right">{selectedDepartureFlight.arrival_time}</TableCell>
-                    <TableCell align="right">{selectedDepartureFlight.arrival_time} - {selectedDepartureFlight.departure_time}</TableCell>
-                    <TableCell align="right">{selectedDepartureFlight.flight_number}</TableCell>
-                    <TableCell align="right">{selectedDepartureFlight.flight_number}</TableCell>
+                    <TableCell align="center">{selectedDepartureFlight.departure_airport}</TableCell>
+                    <TableCell align="center">{selectedDepartureFlight.arrival_airport}</TableCell>
+                    <TableCell align="center">{selectedDepartureFlight.departure_time}</TableCell>
+                    <TableCell align="center">{selectedDepartureFlight.arrival_time}</TableCell>
+                    <TableCell align="center">{selectedDepartureFlight.trip_duration}</TableCell>
+                    <TableCell align="center">{selectedCabin}</TableCell>
+                    <TableCell align="center">{selectedBaggageAllowanceDeparture}</TableCell>
                   </TableRow>
                 </TableBody>
               </Table>
@@ -315,13 +349,13 @@ class selectFlights extends Component {
                 <TableHead>
                   <TableRow>
                     <TableCell>Flight Number</TableCell>
-                    <TableCell align="right">Departure Airport</TableCell>
-                    <TableCell align="right">Arivval Airport</TableCell>
-                    <TableCell align="right">Departure Time</TableCell>
-                    <TableCell align="right">Arrival Time</TableCell>
-                    <TableCell align="right">Trip Duration</TableCell>
-                    <TableCell align="right">Cabin Class</TableCell>
-                    <TableCell align="right">Baggage Allowance</TableCell>
+                    <TableCell align="center">Departure Airport</TableCell>
+                    <TableCell align="center">Arivval Airport</TableCell>
+                    <TableCell align="center">Departure Time</TableCell>
+                    <TableCell align="center">Arrival Time</TableCell>
+                    <TableCell align="center">Trip Duration</TableCell>
+                    <TableCell align="center">Cabin Class</TableCell>
+                    <TableCell align="center">Baggage Allowance</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -329,13 +363,13 @@ class selectFlights extends Component {
                   <TableRow
                   >
                     <TableCell component="th" scope="row">{selectedReturnFlight.flight_number}</TableCell>
-                    <TableCell align="right">{selectedReturnFlight.departure_airport}</TableCell>
-                    <TableCell align="right">{selectedReturnFlight.arrival_airport}</TableCell>
-                    <TableCell align="right">{selectedReturnFlight.departure_time}</TableCell>
-                    <TableCell align="right">{selectedReturnFlight.arrival_time}</TableCell>
-                    <TableCell align="right">{selectedReturnFlight.arrival_time} - {selectedReturnFlight.departure_time}</TableCell>
-                    <TableCell align="right">{selectedReturnFlight.flight_number}</TableCell>
-                    <TableCell align="right">{selectedReturnFlight.flight_number}</TableCell>
+                    <TableCell align="center">{selectedReturnFlight.departure_airport}</TableCell>
+                    <TableCell align="center">{selectedReturnFlight.arrival_airport}</TableCell>
+                    <TableCell align="center">{selectedReturnFlight.departure_time}</TableCell>
+                    <TableCell align="center">{selectedReturnFlight.arrival_time}</TableCell>
+                    <TableCell align="center">{selectedReturnFlight.trip_duration}</TableCell>
+                    <TableCell align="center">{selectedCabin}</TableCell>
+                    <TableCell align="center">{selectedBaggageAllowanceReturn}</TableCell>
                   </TableRow>
                 </TableBody>
               </Table>
