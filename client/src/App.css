@@ -79,18 +79,27 @@ body {
 .SelectFlights {
   align-items: center;
   text-align: center;
-  margin: auto;
   background-color: #f7f5f5;
   min-height: 100vh;
   color: #000000;
 }
 
 .HeaderSelectFlight {
-  margin: auto;
   width: 562px;
   padding: 10px;
   text-align: center;
   background-color: rgb(255, 255, 255);
+}
+
+.row {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.block {
+  width: 600px;
 }
 /*  */
 
