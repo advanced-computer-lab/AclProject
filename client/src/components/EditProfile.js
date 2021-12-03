@@ -109,20 +109,20 @@ class EditProfile extends Component {
             <TextField
               onChange={this.onChangeFirstName} style={{
                 width: "200px",
-              }} label="First Name" id="outlined-size-normal" defaultValue="" />
+              }} label="First Name" id="outlined-size-normal" value={this.state.firstname} />
             <TextField onChange={this.onChangeLastName} style={{
               width: "200px"
-            }} label="Last Name" id="outlined-size-normal" defaultValue="" />
+            }} label="Last Name" id="outlined-size-normal" value={this.state.lastname} />
             <br />
             <br />
             <TextField onChange={this.onChangeEmail} style={{
               width: "400px",
-            }} label="Email" id="outlined-size-normal" defaultValue=""/>
+            }} label="Email" id="outlined-size-normal" value={this.state.email}/>
             <br />
             <br />
             <TextField onChange={this.onChangePassportNumber} style={{
               width: "400px",
-            }} label="Passport Number" id="outlined-size-normal" defaultValue=""/>
+            }} label="Passport Number" id="outlined-size-normal" value={this.state.passport}/>
             <br />
             <br />
             <Button type="submit" style={{

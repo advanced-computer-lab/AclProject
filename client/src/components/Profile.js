@@ -53,11 +53,11 @@ class Profile extends Component {
         <br />  
         
         <div className='profileInfo'>
-            <label htmlFor="username">{this.state.userinfo.username}</label>
+            <label htmlFor="username">{"Username: " + this.state.userinfo.username}</label>
             <br />
-            <label htmlFor="email">{this.state.userinfo.email}</label>
+            <label htmlFor="email">{"Email: " + this.state.userinfo.email}</label>
             <br />
-            <label htmlFor="passport">{"Passport: " + this.state.userinfo.passport}</label>
+            <label htmlFor="passport">{"Passport No: " + this.state.userinfo.passport}</label>
              
             </div>
             
