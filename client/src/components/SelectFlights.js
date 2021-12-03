@@ -7,7 +7,6 @@ import { Modal } from 'react-responsive-modal';
 import 'react-responsive-modal/styles.css';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
@@ -16,7 +15,28 @@ import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
+import { styled } from '@mui/material/styles';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  '&:nth-of-type(odd)': {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  '&:last-child td, &:last-child th': {
+    border: 0,
+  },
+}));
 
 const steps = [
   'Select departure and return flights',
@@ -71,7 +91,11 @@ class selectFlights extends Component {
       selectedDepartureFlight: '',
       selectedReturnFlight: '',
       openModal1: false,
-      openModal2: false
+      openModal2: false,
+      selectedPriceDeparture: '',
+      selectedBaggageAllowanceDeparture: '',
+      selectedPriceReturn: '',
+      selectedBaggageAllowanceReturn: ''
     };
   }
 
@@ -185,42 +209,86 @@ class selectFlights extends Component {
     for (var i = 0; i < departureFlights.length; i++) {
       if (selectedCabin === 'Economy') {
 
-        if (departureFlights[i].economy_seats_number < numberOfPassengers) {
+        if (departureFlights[i].available_economy_seats < numberOfPassengers) {
           departureFlights.splice(departureFlights.indexOf(departureFlights[i]), 1);
         }
       }
       else if (selectedCabin === 'Business') {
-        if (departureFlights[i].business_seats_number < numberOfPassengers) {
+        if (departureFlights[i].available_business_seats < numberOfPassengers) {
           departureFlights.splice(departureFlights.indexOf(departureFlights[i]), 1);
         }
       }
       else if (selectedCabin === 'First') {
-        if (departureFlights[i].first_seats_number < numberOfPassengers) {
+        if (departureFlights[i].available_first_seats < numberOfPassengers) {
           departureFlights.splice(departureFlights.indexOf(departureFlights[i]), 1);
         }
       }
     }
 
     const returnFlights = this.state.returnFlights;
+
+    for (var j = 0; j < returnFlights.length; j++) {
+      if (selectedCabin === 'Economy') {
+
+        if (returnFlights[j].available_economy_seats < numberOfPassengers) {
+          returnFlights.splice(returnFlights.indexOf(returnFlights[j]), 1);
+        }
+      }
+      else if (selectedCabin === 'Business') {
+        if (returnFlights[j].available_business_seats < numberOfPassengers) {
+          returnFlights.splice(returnFlights.indexOf(returnFlights[j]), 1);
+        }
+      }
+      else if (selectedCabin === 'First') {
+        if (returnFlights[j].available_first_seats < numberOfPassengers) {
+          returnFlights.splice(returnFlights.indexOf(returnFlights[j]), 1);
+        }
+      }
+    }
+
     const selectedDepartureFlight = this.state.selectedDepartureFlight;
     var selectedBaggageAllowanceDeparture;
     var selectedBaggageAllowanceReturn;
+    var selectedPriceDeparture;
+    var selectedPriceReturn;
+    var depDate1;
+    var arrDate1;
+    var depDate2;
+    var arrDate2;
     const selectedReturnFlight = this.state.selectedReturnFlight;
+    if (selectedDepartureFlight.departure_date !== undefined){
+      depDate1 = selectedDepartureFlight.departure_date.substring(0, 10)
+    }
+    if(selectedDepartureFlight.arrival_date !== undefined){
+      arrDate1 = selectedDepartureFlight.arrival_date.substring(0, 10)
+    }
+    if (selectedReturnFlight.departure_date !== undefined){
+      depDate2 = selectedReturnFlight.departure_date.substring(0, 10)
+    }
+    if(selectedReturnFlight.arrival_date !== undefined){
+      arrDate2 = selectedReturnFlight.arrival_date.substring(0, 10)
+    }
     if (selectedCabin === 'Economy') {
-      selectedBaggageAllowanceDeparture = selectedDepartureFlight.baggage_allowance_economy
-      selectedBaggageAllowanceReturn = selectedReturnFlight.baggage_allowance_economy
+      this.state.selectedBaggageAllowanceDeparture = selectedDepartureFlight.baggage_allowance_economy
+      this.state.selectedBaggageAllowanceReturn = selectedReturnFlight.baggage_allowance_economy
+      this.state.selectedPriceDeparture = selectedDepartureFlight.price_economy
+      this.state.selectedPriceReturn = selectedReturnFlight.price_economy
     }
     else if (selectedCabin === 'Business') {
-      selectedBaggageAllowanceDeparture = selectedDepartureFlight.baggage_allowance_business
-      selectedBaggageAllowanceReturn = selectedReturnFlight.baggage_allowance_business
+      this.state.selectedBaggageAllowanceDeparture = selectedDepartureFlight.baggage_allowance_business
+      this.state.selectedBaggageAllowanceReturn = selectedReturnFlight.baggage_allowance_business
+      this.state.selectedPriceDeparture = selectedDepartureFlight.price_business
+      this.state.selectedPriceReturn = selectedReturnFlight.price_business
     }
     else if (selectedCabin === 'First') {
-      selectedBaggageAllowanceDeparture = selectedDepartureFlight.baggage_allowance_first
-      selectedBaggageAllowanceReturn = selectedReturnFlight.baggage_allowance_first
+      this.state.selectedBaggageAllowanceDeparture = selectedDepartureFlight.baggage_allowance_first
+      this.state.selectedBaggageAllowanceReturn = selectedReturnFlight.baggage_allowance_first
+      this.state.selectedPriceDeparture = selectedDepartureFlight.price_first
+      this.state.selectedPriceReturn = selectedReturnFlight.price_first
     }
     
     let result = (window.location.pathname).replace("select-flights", "seats-selection-departure");
-    const SeatsSelectionLink = result + "/" + this.state.departureFlightID + "/" + this.state.returnFlightID + "/" + selectedDepartureFlight.economy_seats_number + "/" + selectedDepartureFlight.business_seats_number + "/" + selectedDepartureFlight.first_seats_number + "/" + selectedReturnFlight.economy_seats_number + "/" + selectedReturnFlight.business_seats_number + "/" + selectedReturnFlight.first_seats_number + "/" + selectedDepartureFlight.BookedSeats1 +"/"+ selectedReturnFlight.BookedSeats1;
+    const SeatsSelectionLink = result + "/" + this.state.departureFlightID + "/" + this.state.returnFlightID + "/" + selectedDepartureFlight.economy_seats_number + "/" + selectedDepartureFlight.business_seats_number + "/" + selectedDepartureFlight.first_seats_number + "/" + selectedReturnFlight.economy_seats_number + "/" + selectedReturnFlight.business_seats_number + "/" + selectedReturnFlight.first_seats_number + "/" + selectedDepartureFlight.booked_seats +"/"+ selectedReturnFlight.booked_seats;
 
     return (
       <div className="SelectFlights">
@@ -318,73 +386,69 @@ class selectFlights extends Component {
         </div>
 
         <div>
-          <Modal open={this.state.openModal1} onClose={this.onCloseModal1}>
+        <Modal styles={{modal: {width: "100%", overflowX: "hidden"}}} open={this.state.openModal1} onClose={this.onCloseModal1}>
             <br />
             <br />
-            <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+            <TableContainer style={{width: "100%", overflowX: "hidden"}} component={Paper}>
+              <Table aria-label="customized table">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Flight Number</TableCell>
-                    <TableCell align="center">Departure Airport</TableCell>
-                    <TableCell align="center">Arrival Airport</TableCell>
-                    <TableCell align="center">Departure Time</TableCell>
-                    <TableCell align="center">Arrival Time</TableCell>
-                    <TableCell align="center">Trip Duration</TableCell>
-                    <TableCell align="center">Cabin Class</TableCell>
-                    <TableCell align="center">Baggage Allowance</TableCell>
+                    <StyledTableCell align="center">Flight Number</StyledTableCell>
+                    <StyledTableCell align="center">From</StyledTableCell>
+                    <StyledTableCell align="center">To</StyledTableCell>
+                    <StyledTableCell align="center">Departure Date/Time</StyledTableCell>
+                    <StyledTableCell align="center">Arrival Date/Time</StyledTableCell>
+                    <StyledTableCell align="center">Cabin</StyledTableCell>
+                    <StyledTableCell align="center">Baggage Allowance</StyledTableCell>
+                    <StyledTableCell align="center">Price</StyledTableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
 
-                  <TableRow
-                  >
-                    <TableCell component="th" scope="row">{selectedDepartureFlight.flight_number}</TableCell>
-                    <TableCell align="center">{selectedDepartureFlight.departure_airport}</TableCell>
-                    <TableCell align="center">{selectedDepartureFlight.arrival_airport}</TableCell>
-                    <TableCell align="center">{selectedDepartureFlight.departure_time}</TableCell>
-                    <TableCell align="center">{selectedDepartureFlight.arrival_time}</TableCell>
-                    <TableCell align="center">{selectedDepartureFlight.trip_duration}</TableCell>
-                    <TableCell align="center">{selectedCabin}</TableCell>
-                    <TableCell align="center">{selectedBaggageAllowanceDeparture}</TableCell>
-                  </TableRow>
+                  <StyledTableRow key={selectedDepartureFlight._id}>
+                    <StyledTableCell align="center" component="th" scope="row">{selectedDepartureFlight.flight_number}</StyledTableCell>
+                    <StyledTableCell align="center">{selectedDepartureFlight.departure_airport}</StyledTableCell>
+                    <StyledTableCell align="center">{selectedDepartureFlight.arrival_airport}</StyledTableCell>
+                    <StyledTableCell align="center">{depDate1} | {selectedDepartureFlight.departure_time}</StyledTableCell>
+                    <StyledTableCell align="center">{arrDate1} | {selectedDepartureFlight.arrival_time}</StyledTableCell>
+                    <StyledTableCell align="center">{selectedCabin}</StyledTableCell>
+                    <StyledTableCell align="center">{this.state.selectedBaggageAllowanceDeparture}</StyledTableCell>
+                    <StyledTableCell align="center">{this.state.selectedPriceDeparture}LE</StyledTableCell>
+                  </StyledTableRow>
                 </TableBody>
               </Table>
             </TableContainer>
           </Modal>
-        </div>
 
-        <div>
           <Modal open={this.state.openModal2} onClose={this.onCloseModal2}>
             <br />
             <br />
-            <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+            <TableContainer style={{width: "100%", overflowX: "hidden"}} component={Paper}>
+              <Table aria-label="customized table">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Flight Number</TableCell>
-                    <TableCell align="center">Departure Airport</TableCell>
-                    <TableCell align="center">Arivval Airport</TableCell>
-                    <TableCell align="center">Departure Time</TableCell>
-                    <TableCell align="center">Arrival Time</TableCell>
-                    <TableCell align="center">Trip Duration</TableCell>
-                    <TableCell align="center">Cabin Class</TableCell>
-                    <TableCell align="center">Baggage Allowance</TableCell>
+                    <StyledTableCell align="center">Flight Number</StyledTableCell>
+                    <StyledTableCell align="center">From</StyledTableCell>
+                    <StyledTableCell align="center">To</StyledTableCell>
+                    <StyledTableCell align="center">Departure Date/Time</StyledTableCell>
+                    <StyledTableCell align="center">Arrival Date/Time</StyledTableCell>
+                    <StyledTableCell align="center">Cabin</StyledTableCell>
+                    <StyledTableCell align="center">Baggage Allowance</StyledTableCell>
+                    <StyledTableCell align="center">Price</StyledTableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
 
-                  <TableRow
-                  >
-                    <TableCell component="th" scope="row">{selectedReturnFlight.flight_number}</TableCell>
-                    <TableCell align="center">{selectedReturnFlight.departure_airport}</TableCell>
-                    <TableCell align="center">{selectedReturnFlight.arrival_airport}</TableCell>
-                    <TableCell align="center">{selectedReturnFlight.departure_time}</TableCell>
-                    <TableCell align="center">{selectedReturnFlight.arrival_time}</TableCell>
-                    <TableCell align="center">{selectedReturnFlight.trip_duration}</TableCell>
-                    <TableCell align="center">{selectedCabin}</TableCell>
-                    <TableCell align="center">{selectedBaggageAllowanceReturn}</TableCell>
-                  </TableRow>
+                  <StyledTableRow key={selectedReturnFlight._id}>
+                    <StyledTableCell align="center" component="th" scope="row">{selectedReturnFlight.flight_number}</StyledTableCell>
+                    <StyledTableCell align="center">{selectedReturnFlight.departure_airport}</StyledTableCell>
+                    <StyledTableCell align="center">{selectedReturnFlight.arrival_airport}</StyledTableCell>
+                    <StyledTableCell align="center">{depDate2} | {selectedReturnFlight.departure_time}</StyledTableCell>
+                    <StyledTableCell align="center">{arrDate2} | {selectedReturnFlight.arrival_time}</StyledTableCell>
+                    <StyledTableCell align="center">{selectedCabin}</StyledTableCell>
+                    <StyledTableCell align="center">{this.state.selectedBaggageAllowanceReturn}</StyledTableCell>
+                    <StyledTableCell align="center">{this.state.selectedPriceReturn}LE</StyledTableCell>
+                  </StyledTableRow>
                 </TableBody>
               </Table>
             </TableContainer>

@@ -11,7 +11,7 @@ var economySeatsNumber = parseInt(((window.location.pathname).split("/"))[16]);
 var businessSeatsNumber = parseInt(((window.location.pathname).split("/"))[15]);
 var firstSeatsNumber = parseInt(((window.location.pathname).split("/"))[14]);
 var reserved = String(((window.location.pathname).split("/"))[18]);
-const chars = reserved.split(',');
+const chars = reserved.split('-');
 
 var result;
 var bookedA = chars
@@ -82,7 +82,7 @@ const SeatsSelectionReturn = () => {
             setBookedStatus(prevState => {
                 return prevState + seat + ' ';
             })
-            result = (window.location.pathname).replace("seats-selection-return", "summary");
+            result = (window.location.pathname).replace("seats-selection-return", "reservation-summary");
         });
         const newAvailableSeats = availableSeats.filter(seat => !bookedSeats.includes(seat));
         for (var i = 0; i < bookedA.length; i++){
