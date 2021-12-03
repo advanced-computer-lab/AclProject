@@ -132,6 +132,7 @@ class selectFlights extends Component {
 
   onClickButton1 = e => {
     e.preventDefault()
+    this.forceUpdate()
     this.setState({ openModal1: true })
   }
 
@@ -141,6 +142,7 @@ class selectFlights extends Component {
 
   onClickButton2 = e => {
     e.preventDefault()
+    this.forceUpdate()
     this.setState({ openModal2: true })
   }
 
