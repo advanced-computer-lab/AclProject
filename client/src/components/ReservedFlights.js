@@ -4,48 +4,33 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import ReservedFlightSummary from './ReservedFlightSummary';
 import jwt from 'jsonwebtoken';
-import { styled } from '@mui/material/styles';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import InfoIcon from '@mui/icons-material/Info';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
-var nums=[]; 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
+import { DataGrid } from '@mui/x-data-grid';
+import Button from '@mui/material/Button';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  '&:last-child td, &:last-child th': {
-    border: 0,
-  },
-}));
+
+var nums=[];
+var bookedSeats=[];
+
+
 class ReservedFlights extends Component {
   constructor(props) {
     super(props);
     this.state = {
       flights: [],
+      returnFlightID: '',
+      flight: {},
+      selectedReturnFlight: '',
+      userflight: {},
+      openModal2: false,
       LoggedInUser: jwt.decode(localStorage.getItem('token'))
     };
   }
 
   componentDidMount() {
-    axios
+
+      axios
       .get('http://localhost:8082/api/userflights')
       .then(res => {
 
@@ -53,6 +38,7 @@ class ReservedFlights extends Component {
         for (var i = 0; i < res.data.length; i++) {
           if(res.data[i].username === this.state.LoggedInUser.username){
             nums.push(res.data[i].flight_number);
+            bookedSeats.push(res.data[i].seats_booked);
             
         }
       }
@@ -87,20 +73,102 @@ class ReservedFlights extends Component {
 
   };
 
+  onChange2(x) {
+    axios
+      .put('http://localhost:8082/api/flights/search', { _id: x })
+      .then(res => {
+        this.setState({
+          selectedReturnFlight: res.data[0]
+        })
+      })
+      .catch(err => {
+        console.log('Error from ShowFlightList');
+      })
+    this.state.returnFlightID = x;
+   
+    
+    axios
+      .get('http://localhost:8082/api/flights/'+this.state.returnFlightID)
+      .then(res => {
+          axios.get('http://localhost:8082/api/userflights')
+          .then(res=>{for(var i=0;i<res.data.length;i++){
+            
+              if(res.data[i].flight_id == this.state.returnFlightID){
+                this.setState({
+                    userflight: res.data[i]
+                  })
+                  break;
+              }
+          }})
+          .catch(err => {
+            console.log("Error from ReservedShowFlightDetails12");
+          })
+          
+        this.setState({
+          flight: res.data
+        })
+      })
+      .catch(err => {
+        console.log("Error from ReservedShowFlightDetails");
+      })
+    
+    this.forceUpdate()
+
+
+
+  };
+
+  onClickButton2 = e => {
+    
+    e.preventDefault()
+    
+    this.setState({ openModal2: true })
+
+
+      confirmAlert({
+        title: 'Confirmation',
+        message: 'Are you sure that you want to cancel this reservation?',
+        buttons: [
+          {
+            label: 'Yes',
+            onClick: () => {
+
+        axios
+        .delete('http://localhost:8082/api/userflights/'+this.state.userflight._id)
+        .then(res => {
+          window.location.reload(false);
+        })
+        .catch(err => {
+          console.log("Error form ReservedShowFlightDetails_deleteClick");
+        })
+      }
+        
+          },
+          {
+            label: 'No',
+          }
+        ]
+      });
+  }
+
+  onCloseModal2 = () => {
+    this.setState({ openModal2: false })
+  }
 
   render() {
     const flights = this.state.flights;
-    
-    let flightList;
+const columns = [
+  { field: 'flight_number', align: 'center', headerName: 'Flight Number', width: 120 },
+  { field: 'departure_airport', align: 'center', headerName: 'From', width: 230 },
+  { field: 'arrival_airport', align: 'center', headerName: 'To', width: 230 },
+  { field: 'departure_date', align: 'center', headerName: 'Departure Date', width: 150 },
+  { field: 'departure_time', align: 'center', headerName: 'Departure Time', width: 150 },
+  { field: 'arrival_date', align: 'center', headerName: 'Arrival Date', width: 150 },
+  { field: 'arrival_time', align: 'center', headerName: 'Arrival Time', width: 150 },
 
-    if(!flights) {
-      flightList = "there is no flight record!";
-    } else {
-      flightList = flights.map((flight, k) =>
-        <ReservedFlightSummary flight={flight} key={k} />
-      );
-      nums=[];
-    }
+];
+
+nums = [];
 
     return (
       <div className="ShowFlightList">
@@ -108,45 +176,34 @@ class ReservedFlights extends Component {
         <br />
         <br />
         <br />
-        <TableContainer component={Paper}>
-          <Table aria-label="customized table">
-            <TableHead>
-              <TableRow>
-                <StyledTableCell align="center">Flight Number</StyledTableCell>
-                <StyledTableCell align="center">From</StyledTableCell>
-                <StyledTableCell align="center">To</StyledTableCell>
-                <StyledTableCell align="center">Departure Date/Time</StyledTableCell>
-                <StyledTableCell align="center">Arrival Date/Time</StyledTableCell>
-                <StyledTableCell align="center">Baggage Allowance</StyledTableCell>
-                <StyledTableCell align="center">Price</StyledTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {flights.map((row) => (
-                <StyledTableRow key={row._id}>
-                  <StyledTableCell align="center" component="th" scope="row">
-                    {row.flight_number}
-                  </StyledTableCell>
-                  <StyledTableCell align="center">{row.departure_airport}</StyledTableCell>
-                  <StyledTableCell align="center">{row.arrival_airport}</StyledTableCell>
-                  <StyledTableCell align="center">{row.departure_date.substring(0, 10)} | {row.departure_time}</StyledTableCell>
-                  <StyledTableCell align="center">{row.arrival_date.substring(0, 10)} | {row.arrival_time}</StyledTableCell>
-                  <StyledTableCell align="center"><Tooltip title={<span style={{ whiteSpace: 'pre-line' }}>{"Economy = " + row.baggage_allowance_economy + " Bags\nBusiness = " + row.baggage_allowance_business + " Bags \nFirst = " + row.baggage_allowance_first + " Bags"}</span>}>
-                    <IconButton>
-                      <InfoIcon />
-                    </IconButton>
-                  </Tooltip></StyledTableCell>
-
-                  <StyledTableCell align="center"><Tooltip title={<span style={{ whiteSpace: 'pre-line' }}>{"Economy = " + row.price_economy + "LE\nBusiness = " + row.price_business + "LE\nFirst = " + row.price_first + "LE"}</span>}>
-                    <IconButton>
-                      <InfoIcon />
-                    </IconButton>
-                  </Tooltip></StyledTableCell>
-                </StyledTableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        <DataGrid
+              style={{
+                height: "550px",
+                margin: "auto",
+                backgroundColor: "white"
+              }}
+              onSelectionModelChange={itm => this.onChange2(itm)}
+              rows={flights}
+             
+              getRowId={(row) => row._id}
+              columns={columns}
+              pageSize={5}
+              rowsPerPageOptions={[5]}
+            />
+            <br />
+            {((this.state.returnFlightID === '')) ? (
+              <Button style={{
+                margin: "auto"
+              }} variant="contained" disabled>
+                Select a Reservation to Cancel
+              </Button>
+            ) : (
+              <Button style={{
+                margin: "auto"
+              }} onClick={this.onClickButton2} variant="contained">
+                Cancel Reservation
+              </Button>
+            )}
         <br />
         <br />
         <br />
