@@ -81,10 +81,10 @@ class ReservationSummary extends Component {
 
 
     axios
-      .put('http://localhost:8082/api/flights/search', departureData)
+      .get('http://localhost:8082/api/flights/'+ myArray[9])
       .then(res => {
         this.setState({
-          departureFlight: res.data[0]
+          departureFlight: res.data
         })
       })
       .catch(err => {
@@ -93,10 +93,10 @@ class ReservationSummary extends Component {
 
 
     axios
-      .put('http://localhost:8082/api/flights/search', returnData)
+    .get('http://localhost:8082/api/flights/'+ myArray[10])
       .then(res => {
         this.setState({
-          returnFlight: res.data[0]
+          returnFlight: res.data
         })
       })
       .catch(err => {

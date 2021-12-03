@@ -95,7 +95,8 @@ class selectFlights extends Component {
       selectedPriceDeparture: '',
       selectedBaggageAllowanceDeparture: '',
       selectedPriceReturn: '',
-      selectedBaggageAllowanceReturn: ''
+      selectedBaggageAllowanceReturn: '',
+      selectedCabin: ''
     };
   }
 
@@ -286,6 +287,7 @@ class selectFlights extends Component {
       this.state.selectedPriceDeparture = selectedDepartureFlight.price_first
       this.state.selectedPriceReturn = selectedReturnFlight.price_first
     }
+    this.state.selectedCabin = selectedCabin;
     
     let result = (window.location.pathname).replace("select-flights", "seats-selection-departure");
     const SeatsSelectionLink = result + "/" + this.state.departureFlightID + "/" + this.state.returnFlightID + "/" + selectedDepartureFlight.economy_seats_number + "/" + selectedDepartureFlight.business_seats_number + "/" + selectedDepartureFlight.first_seats_number + "/" + selectedReturnFlight.economy_seats_number + "/" + selectedReturnFlight.business_seats_number + "/" + selectedReturnFlight.first_seats_number + "/" + selectedDepartureFlight.booked_seats +"/"+ selectedReturnFlight.booked_seats;
@@ -411,7 +413,7 @@ class selectFlights extends Component {
                     <StyledTableCell align="center">{selectedDepartureFlight.arrival_airport}</StyledTableCell>
                     <StyledTableCell align="center">{depDate1} | {selectedDepartureFlight.departure_time}</StyledTableCell>
                     <StyledTableCell align="center">{arrDate1} | {selectedDepartureFlight.arrival_time}</StyledTableCell>
-                    <StyledTableCell align="center">{selectedCabin}</StyledTableCell>
+                    <StyledTableCell align="center">{this.state.selectedCabin}</StyledTableCell>
                     <StyledTableCell align="center">{this.state.selectedBaggageAllowanceDeparture}</StyledTableCell>
                     <StyledTableCell align="center">{this.state.selectedPriceDeparture}LE</StyledTableCell>
                   </StyledTableRow>
@@ -445,7 +447,7 @@ class selectFlights extends Component {
                     <StyledTableCell align="center">{selectedReturnFlight.arrival_airport}</StyledTableCell>
                     <StyledTableCell align="center">{depDate2} | {selectedReturnFlight.departure_time}</StyledTableCell>
                     <StyledTableCell align="center">{arrDate2} | {selectedReturnFlight.arrival_time}</StyledTableCell>
-                    <StyledTableCell align="center">{selectedCabin}</StyledTableCell>
+                    <StyledTableCell align="center">{this.state.selectedCabin}</StyledTableCell>
                     <StyledTableCell align="center">{this.state.selectedBaggageAllowanceReturn}</StyledTableCell>
                     <StyledTableCell align="center">{this.state.selectedPriceReturn}LE</StyledTableCell>
                   </StyledTableRow>
