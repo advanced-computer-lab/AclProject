@@ -65,21 +65,21 @@ class Homepage extends Component {
       cabin: this.state.cabin
     };
 
-    if (this.state.departure_airport === '' || this.state.arrival_airport === '' || this.state.return_date === '' || this.state.adults_number === '' || this.state.children_number === '' || this.state.cabin === '' || this.state.departure_airport === null || this.state.arrival_airport === null || this.state.return_date === null || this.state.adults_number === null || this.state.children_number === null || this.state.cabin === null){
+    if (this.state.departure_airport === '' || this.state.arrival_airport === '' || this.state.return_date === '' || this.state.adults_number === '' || this.state.children_number === '' || this.state.cabin === '' || this.state.departure_airport === null || this.state.arrival_airport === null || this.state.return_date === null || this.state.adults_number === null || this.state.children_number === null || this.state.cabin === null) {
       emptyField = 'true';
       this.forceUpdate()
     }
 
     else {
-    axios
-      .get('http://localhost:8082/api/flights/', data)
-      .then(res => {
-        console.log(data.departure_airport + '/' + data.arrival_airport + '/' + data.departure_date + '/' + data.return_date + '/' + data.adults_number + '/' + data.children_number + '/' + data.cabin)
-        this.props.history.push('/select-flights/' + data.departure_airport + '/' + data.arrival_airport + '/' + data.departure_date + '/' + data.return_date + '/' + data.adults_number + '/' + data.children_number + '/' + data.cabin);
-      })
-      .catch(err => {
-        console.log("Error in CreateFlight!");
-      })
+      axios
+        .get('http://localhost:8082/api/flights/', data)
+        .then(res => {
+          console.log(data.departure_airport + '/' + data.arrival_airport + '/' + data.departure_date + '/' + data.return_date + '/' + data.adults_number + '/' + data.children_number + '/' + data.cabin)
+          this.props.history.push('/select-flights/' + data.departure_airport + '/' + data.arrival_airport + '/' + data.departure_date + '/' + data.return_date + '/' + data.adults_number + '/' + data.children_number + '/' + data.cabin);
+        })
+        .catch(err => {
+          console.log("Error in CreateFlight!");
+        })
     }
   };
 
@@ -96,22 +96,22 @@ class Homepage extends Component {
           }}>Search, Compare & Reserve Your Tickets</b>
           <br />
           <form noValidate onSubmit={this.onSubmit}>
-          <br />
-          {((emptyField === 'true')) ? (
-          <Alert variant="filled" style={{
-            width: "500px",
-            margin: "auto",
-            marginTop: "-12px",
-            marginBottom: "-12px"
-          }}severity="error">All fields must be filled</Alert>
-        ) : (
-          <br />
-        )}
-                <br />
+            <br />
+            {((emptyField === 'true')) ? (
+              <Alert variant="filled" style={{
+                width: "500px",
+                margin: "auto",
+                marginTop: "-12px",
+                marginBottom: "-12px"
+              }} severity="error">All fields must be filled</Alert>
+            ) : (
+              <br />
+            )}
+            <br />
             <div class="HomepageRow">
               <Autocomplete
                 style={{
-                  width: "280px",
+                  width: "330px",
                   margin: "auto",
                   backgroundColor: "white"
                 }}
@@ -145,7 +145,7 @@ class Homepage extends Component {
               />
               <Autocomplete
                 style={{
-                  width: "280px",
+                  width: "330px",
                   margin: "auto",
                   backgroundColor: "white"
                 }}
@@ -178,122 +178,123 @@ class Homepage extends Component {
                 )}
               />
 
-              <TextField
-                style={{
-                  width: "200px",
-                  margin: "auto",
-                  backgroundColor: "white",
-                }}
-                id="filled-textarea"
-                label="Depart Date"
-                type="date"
-                onFocus={this._onFocus} onBlur={this._onBlur}
-                placeholder=""
-                variant="filled"
-                //value={this.state.departure_date}
-                onChange={this.onChangeDepartureDate}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
-              <TextField
-                style={{
-                  width: "200px",
-                  margin: "auto",
-                  backgroundColor: "white"
-                }}
-                id="filled-textarea"
-                label="Return Date"
-                type="date"
-                onFocus={this._onFocus} onBlur={this._onBlur}
-                placeholder=""
-                variant="filled"
-                onChange={this.onChangeReturnDate}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
+              <div className="together">
+                <TextField
+                  style={{
+                    width: "165px",
+                    margin: "auto",
+                    backgroundColor: "white"
+                  }}
+                  id="filled-textarea"
+                  label="Depart Date"
+                  type="date"
+                  onFocus={this._onFocus} onBlur={this._onBlur}
+                  placeholder=""
+                  variant="filled"
+                  //value={this.state.departure_date}
+                  onChange={this.onChangeDepartureDate}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+                <TextField
+                  style={{
+                    width: "165px",
+                    margin: "auto",
+                    backgroundColor: "white"
+                  }}
+                  id="filled-textarea"
+                  label="Return Date"
+                  type="date"
+                  onFocus={this._onFocus} onBlur={this._onBlur}
+                  placeholder=""
+                  variant="filled"
+                  onChange={this.onChangeReturnDate}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </div>
 
-              <Autocomplete
-                style={{
-                  top: "267px",
-                  width: "120px",
-                  margin: "auto",
-                  backgroundColor: "white"
-                }}
-                id="size-large-filled"
-                size="large"
-                options={numberOfAdults}
-                getOptionLabel={(option) => option}
-                defaultValue="1"
-                onChange={(ev, value) => {
-                  this.state.adults_number = value
-                }}
-                renderTags={(value, getTagProps) =>
-                  value.map((option, index) => (
-                    <Chip
-                      variant="outlined"
-                      label={value}
-                      size="large"
-                      {...getTagProps({ index })}
+              <div className="together">
+                <Autocomplete
+                  style={{
+                    width: "165px",
+                    margin: "auto",
+                    backgroundColor: "white"
+                  }}
+                  id="size-large-filled"
+                  size="large"
+                  options={numberOfAdults}
+                  getOptionLabel={(option) => option}
+                  defaultValue="1"
+                  onChange={(ev, value) => {
+                    this.state.adults_number = value
+                  }}
+                  renderTags={(value, getTagProps) =>
+                    value.map((option, index) => (
+                      <Chip
+                        variant="outlined"
+                        label={value}
+                        size="large"
+                        {...getTagProps({ index })}
+                      />
+                    ))
+                  }
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      variant="filled"
+                      label="# of Adults"
+                      placeholder=""
                     />
-                  ))
-                }
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    variant="filled"
-                    label="# of Adults"
-                    placeholder=""
-                  />
-                )}
-              />
+                  )}
+                />
 
-              <Autocomplete
-                style={{
-                  top: "267px",
-                  width: "120px",
-                  margin: "auto",
-                  backgroundColor: "white"
-                }}
-                id="size-large-filled"
-                size="large"
-                options={numberOfChildreen}
-                defaultValue="0"
-                getOptionLabel={(option) => option}
-                onChange={(ev, value) => {
-                  this.state.children_number = value
-                }}
-                renderTags={(value, getTagProps) =>
-                  value.map((option, index) => (
-                    <Chip
-                      variant="outlined"
-                      label={value}
-                      size="large"
-                      {...getTagProps({ index })}
+                <Autocomplete
+                  style={{
+                    width: "165px",
+                    margin: "auto",
+                    backgroundColor: "white"
+                  }}
+                  id="size-large-filled"
+                  size="large"
+                  options={numberOfChildreen}
+                  defaultValue="0"
+                  getOptionLabel={(option) => option}
+                  onChange={(ev, value) => {
+                    this.state.children_number = value
+                  }}
+                  renderTags={(value, getTagProps) =>
+                    value.map((option, index) => (
+                      <Chip
+                        variant="outlined"
+                        label={value}
+                        size="large"
+                        {...getTagProps({ index })}
+                      />
+                    ))
+                  }
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      variant="filled"
+                      label="# of Children"
+                      placeholder=""
                     />
-                  ))
-                }
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    variant="filled"
-                    label="# of Children"
-                    placeholder=""
-                  />
-                )}
-              />
-            </div>
-
-            <div className="HomepageRadioButtons1">
-              <div className="HomepageRadioButtons2">
-                <RadioGroup row aria-label="Cabin" onChange={this.onChange2} name="row-radio-buttons-group">
-                  <FormControlLabel value="Economy" control={<Radio />} label="Economy" />
-                  <FormControlLabel value="Business" control={<Radio />} label="Business" />
-                  <FormControlLabel value="First" control={<Radio />} label="First" />
-                </RadioGroup>
+                  )}
+                />
               </div>
             </div>
+
+            <div className="HomepageRadioButtons">
+                <RadioGroup row aria-label="Cabin" onChange={this.onChange2} name="row-radio-buttons-group">
+                  <FormControlLabel style={{ paddingLeft: '18px', paddingTop: '5px' }} value="Economy" control={<Radio />} label="Economy" />
+                  <FormControlLabel style={{paddingTop: '5px' }}value="Business" control={<Radio />} label="Business" />
+                  <FormControlLabel style={{paddingTop: '5px' }} value="First" control={<Radio />} label="First" />
+                </RadioGroup>
+            </div>
+
             <br />
             <Button type="submit" variant="contained" startIcon={<FlightIcon />}>
               Find Flights
