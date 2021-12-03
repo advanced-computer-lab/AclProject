@@ -91,7 +91,11 @@ class selectFlights extends Component {
       selectedDepartureFlight: '',
       selectedReturnFlight: '',
       openModal1: false,
-      openModal2: false
+      openModal2: false,
+      selectedPriceDeparture: '',
+      selectedBaggageAllowanceDeparture: '',
+      selectedPriceReturn: '',
+      selectedBaggageAllowanceReturn: ''
     };
   }
 
@@ -265,22 +269,22 @@ class selectFlights extends Component {
       arrDate2 = selectedReturnFlight.arrival_date.substring(0, 10)
     }
     if (selectedCabin === 'Economy') {
-      selectedBaggageAllowanceDeparture = selectedDepartureFlight.baggage_allowance_economy
-      selectedBaggageAllowanceReturn = selectedReturnFlight.baggage_allowance_economy
-      selectedPriceDeparture = selectedDepartureFlight.price_economy
-      selectedPriceReturn = selectedReturnFlight.price_economy
+      this.state.selectedBaggageAllowanceDeparture = selectedDepartureFlight.baggage_allowance_economy
+      this.state.selectedBaggageAllowanceReturn = selectedReturnFlight.baggage_allowance_economy
+      this.state.selectedPriceDeparture = selectedDepartureFlight.price_economy
+      this.state.selectedPriceReturn = selectedReturnFlight.price_economy
     }
     else if (selectedCabin === 'Business') {
-      selectedBaggageAllowanceDeparture = selectedDepartureFlight.baggage_allowance_business
-      selectedBaggageAllowanceReturn = selectedReturnFlight.baggage_allowance_business
-      selectedPriceDeparture = selectedDepartureFlight.price_business
-      selectedPriceReturn = selectedReturnFlight.price_business
+      this.state.selectedBaggageAllowanceDeparture = selectedDepartureFlight.baggage_allowance_business
+      this.state.selectedBaggageAllowanceReturn = selectedReturnFlight.baggage_allowance_business
+      this.state.selectedPriceDeparture = selectedDepartureFlight.price_business
+      this.state.selectedPriceReturn = selectedReturnFlight.price_business
     }
     else if (selectedCabin === 'First') {
-      selectedBaggageAllowanceDeparture = selectedDepartureFlight.baggage_allowance_first
-      selectedBaggageAllowanceReturn = selectedReturnFlight.baggage_allowance_first
-      selectedPriceDeparture = selectedDepartureFlight.price_first
-      selectedPriceReturn = selectedReturnFlight.price_first
+      this.state.selectedBaggageAllowanceDeparture = selectedDepartureFlight.baggage_allowance_first
+      this.state.selectedBaggageAllowanceReturn = selectedReturnFlight.baggage_allowance_first
+      this.state.selectedPriceDeparture = selectedDepartureFlight.price_first
+      this.state.selectedPriceReturn = selectedReturnFlight.price_first
     }
     
     let result = (window.location.pathname).replace("select-flights", "seats-selection-departure");
@@ -408,8 +412,8 @@ class selectFlights extends Component {
                     <StyledTableCell align="center">{depDate1} | {selectedDepartureFlight.departure_time}</StyledTableCell>
                     <StyledTableCell align="center">{arrDate1} | {selectedDepartureFlight.arrival_time}</StyledTableCell>
                     <StyledTableCell align="center">{selectedCabin}</StyledTableCell>
-                    <StyledTableCell align="center">{selectedBaggageAllowanceDeparture}</StyledTableCell>
-                    <StyledTableCell align="center">{selectedPriceDeparture}LE</StyledTableCell>
+                    <StyledTableCell align="center">{this.state.selectedBaggageAllowanceDeparture}</StyledTableCell>
+                    <StyledTableCell align="center">{this.state.selectedPriceDeparture}LE</StyledTableCell>
                   </StyledTableRow>
                 </TableBody>
               </Table>
@@ -442,8 +446,8 @@ class selectFlights extends Component {
                     <StyledTableCell align="center">{depDate2} | {selectedReturnFlight.departure_time}</StyledTableCell>
                     <StyledTableCell align="center">{arrDate2} | {selectedReturnFlight.arrival_time}</StyledTableCell>
                     <StyledTableCell align="center">{selectedCabin}</StyledTableCell>
-                    <StyledTableCell align="center">{selectedBaggageAllowanceReturn}</StyledTableCell>
-                    <StyledTableCell align="center">{selectedPriceReturn}LE</StyledTableCell>
+                    <StyledTableCell align="center">{this.state.selectedBaggageAllowanceReturn}</StyledTableCell>
+                    <StyledTableCell align="center">{this.state.selectedPriceReturn}LE</StyledTableCell>
                   </StyledTableRow>
                 </TableBody>
               </Table>
