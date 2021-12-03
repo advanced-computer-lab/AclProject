@@ -75,6 +75,45 @@ body {
   color: white;
 }
 
+/* ReservationSummary */
+.ReservationSummary {
+  align-items: center;
+  text-align: center;
+  background-color: #f7f5f5;
+  min-height: 100vh;
+  color: #000000;
+}
+
+.backgroundLabelRS {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
+  width: 1200px;
+  height: 85px;
+  font-size: 45px;
+  border-radius: 25px 25px 0px 0px;
+  background-color: #ffffff;
+}
+
+.backgroundLabelTotal {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
+  margin-left: 1020px;
+  margin-top: -20px;
+  width: 350px;
+  height: 85px;
+  font-size: 30px;
+  border-radius: 25px 25px 0px 0px;
+  background-color: #ffffff;
+}
+/*  */
+
 /* Select Flights */
 .SelectFlights {
   align-items: center;
@@ -434,29 +473,36 @@ body {
 /*  */
 
 /* Not Authorized */
-.backgroundBox3 {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: -100px;
+.NotAuthorized {
+  margin: auto;
+  min-height: 100vh;
+  background-color: #f7f5f5;
+  color: white;
+}
+
+.backgroundLabelNA {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
+  width: 550px;
+  height: 85px;
+  font-size: 45px;
+  border-radius: 25px 25px 0px 0px;
+  background-color: #0B0909;
+}
+
+.backgroundBoxNA {
+  margin: auto;
+  height: 350px;
+  width: 550px;
   border-color: rgb(0, 0, 0);
   border-style: solid;
   border-radius: 0px 0px 25px 25px;
   background-color: #ffffff;
-  height: 330px;
-  width: 550px;
   color: #f7f5e1;
   text-align: center;
-}
-
-.backgroundLabel3 {
-  width: 550px;
-  height: 185px;
-  padding-top: 30px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-  border-radius: 25px 25px 0px 0px;
-  background-color: #0B0909;
 }
 /*  */
 

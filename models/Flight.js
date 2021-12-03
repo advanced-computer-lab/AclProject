@@ -69,9 +69,21 @@ const FlightSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  BookedSeats1:{
-    type: Array,
-    required: true
+  available_economy_seats: {
+    type: String,
+    required: false,
+  },
+  available_business_seats: {
+    type: String,
+    required: false,
+  },
+  available_first_seats: {
+    type: String,
+    required: false,
+  },
+  booked_seats: {
+    type: String,
+    required: false
   }
 });
 

@@ -11,7 +11,7 @@ var economySeatsNumber = parseInt(((window.location.pathname).split("/"))[11]);
 var businessSeatsNumber = parseInt(((window.location.pathname).split("/"))[12]);
 var firstSeatsNumber = parseInt(((window.location.pathname).split("/"))[13]);
 var reserved = String(((window.location.pathname).split("/"))[17]);
-const chars = reserved.split(',');
+const chars = reserved.split('-');
 
 var result;
 var bookedA = chars

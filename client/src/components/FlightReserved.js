@@ -6,8 +6,6 @@ class NotAuthorized extends Component {
   constructor() {
     super();
     this.state = {
-      username: '',
-      password: ''
     };
   }
 
@@ -18,12 +16,12 @@ class NotAuthorized extends Component {
         <br/>
         <br/>
         <div className="backgroundLabelNA">
-                  <b>Not Authorized</b>
+                  <b>Flight Reserved</b>
                 </div>
               <div className="backgroundBoxNA">
               
-                <h1 style={{ color: 'red', fontWeight: 'bold' }} className="display-4 text-center">You are not authorized to access this page. Please Log in</h1>
-                <Button href="/login" variant="contained">Click here to login</Button>
+                <h1 style={{ color: 'black', fontWeight: 'bold' }} className="display-4 text-center">Congratulations! You have reserved your tickets successfully</h1>
+                <Button href="/" variant="contained">Back to homepage</Button>
                 <p className="lead text-center">
                 </p>
           <br />

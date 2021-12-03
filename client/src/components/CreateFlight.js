@@ -147,6 +147,9 @@ class CreateFlight extends Component {
       price_economy: this.state.price_economy,
       price_business: this.state.price_business,
       price_first: this.state.price_first,
+      available_economy_seats: this.state.economy_seats_number,
+      available_business_seats: this.state.business_seats_number,
+      available_first_seats: this.state.first_seats_number,
       trip_duration: parseInt(((new Date(this.state.arrival_date + ' ' + this.state.arrival_time + ':00') - new Date(this.state.departure_date + ' ' + this.state.departure_time + ':00')) / (1000 * 60 * 60)) % 24) + 'hr:' + parseInt(((new Date(this.state.arrival_date + ' ' + this.state.arrival_time + ':00') - new Date(this.state.departure_date + ' ' + this.state.departure_time + ':00')) / (1000 * 60)) % 60) + 'min'
     };
 

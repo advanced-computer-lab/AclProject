@@ -14,7 +14,7 @@ const UserFlightSchema = new mongoose.Schema({
     required: true
   },
   seats_booked: {
-    type: Array,
+    type: String,
     required: true
   },
 });
