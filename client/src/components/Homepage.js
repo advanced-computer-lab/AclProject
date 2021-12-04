@@ -75,7 +75,8 @@ class Homepage extends Component {
         .get('http://localhost:8082/api/flights/', data)
         .then(res => {
           console.log(data.departure_airport + '/' + data.arrival_airport + '/' + data.departure_date + '/' + data.return_date + '/' + data.adults_number + '/' + data.children_number + '/' + data.cabin)
-          this.props.history.push('/select-flights/' + data.departure_airport + '/' + data.arrival_airport + '/' + data.departure_date + '/' + data.return_date + '/' + data.adults_number + '/' + data.children_number + '/' + data.cabin);
+          window.location.assign('http://localhost:3000/select-flights/' + data.departure_airport + '/' + data.arrival_airport + '/' + data.departure_date + '/' + data.return_date + '/' + data.adults_number + '/' + data.children_number + '/' + data.cabin);
+          //this.props.history.push('/select-flights/' + data.departure_airport + '/' + data.arrival_airport + '/' + data.departure_date + '/' + data.return_date + '/' + data.adults_number + '/' + data.children_number + '/' + data.cabin);
         })
         .catch(err => {
           console.log("Error in CreateFlight!");

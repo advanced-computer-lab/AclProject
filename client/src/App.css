@@ -252,7 +252,7 @@ body {
   flex-wrap: wrap;
  }
 
- @media (max-width:960px) {
+ @media (max-width:1535px) {
   .HomepageRadioButtons {
     margin: auto;
     width: 330px;
