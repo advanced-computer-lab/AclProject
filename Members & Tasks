@@ -1,6 +1,11 @@
 Name           Tasks
 Youssef Magdy: Models(schemes), Flight Summary(component), Admin Flight Summary(component)
+
 Ahmed Hussein: ShowFlightDetails(component), ShowFlightList(component), AdminShowFlightDetails(component), AdminShowFlightList(component)
-Noureldin Hesham: App.js frontend/backend, App.css frontend, MongoDB configration/connection, routes/axios, AdvancedSearchResults(component), UpdateFlight(component)
-Mohamed Mahmoud: AdvancedSearch(component), CreateFlight(component), Login(component)
-Omar Alhadi: Registration(component), ShowFlightList(component)
+
+Noureldin Hesham: FR (11 -> 16) and the NFRs required for sprint 2 for these pages. Changed the UI in the pages created in sprint 1 to match with our new UI (and implemented the
+NFRs on them). Authentication.
+
+Mohamed Mahmoud: FR (19 -> 22) and the NFRs required for sprint 2 for these pages.
+
+Omar Alhadi: FR (17 - 18) and the NFRs required for sprint 2 for these pages.
