@@ -24,7 +24,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     color: theme.palette.common.white,
   },
   [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
+    fontSize: 16,
   },
 }));
 
@@ -51,7 +51,6 @@ class ReservedFlights extends Component {
       selectedReturnFlight: '',
       userflight: {},
       openModal1: false,
-      openModal2: false,
       LoggedInUser: jwt.decode(localStorage.getItem('token'))
     };
   }
@@ -144,8 +143,6 @@ class ReservedFlights extends Component {
 
     this.forceUpdate()
 
-
-
   };
 
   onClickButton1 = e => {
@@ -168,7 +165,7 @@ class ReservedFlights extends Component {
             axios
               .delete('http://localhost:8082/api/userflights/' + this.state.userflight._id)
               .then(res => {
-                 window.location.reload(false);
+                window.location.reload(false);
               })
               .catch(err => {
                 console.log("Error form ReservedShowFlightDetails_deleteClick");
