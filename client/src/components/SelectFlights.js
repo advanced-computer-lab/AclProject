@@ -402,9 +402,10 @@ class selectFlights extends Component {
                     <StyledTableCell align="center">To</StyledTableCell>
                     <StyledTableCell align="center">Departure Date/Time</StyledTableCell>
                     <StyledTableCell align="center">Arrival Date/Time</StyledTableCell>
+                    <StyledTableCell align="center">Trip Duration</StyledTableCell>
                     <StyledTableCell align="center">Cabin</StyledTableCell>
                     <StyledTableCell align="center">Baggage Allowance</StyledTableCell>
-                    <StyledTableCell align="center">Price</StyledTableCell>
+                    {/* <StyledTableCell align="center">Price</StyledTableCell> */}
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -415,9 +416,10 @@ class selectFlights extends Component {
                     <StyledTableCell align="center">{selectedDepartureFlight.arrival_airport}</StyledTableCell>
                     <StyledTableCell align="center">{depDate1} | {selectedDepartureFlight.departure_time}</StyledTableCell>
                     <StyledTableCell align="center">{arrDate1} | {selectedDepartureFlight.arrival_time}</StyledTableCell>
+                    <StyledTableCell align="center">{selectedDepartureFlight.trip_duration}</StyledTableCell>
                     <StyledTableCell align="center">{this.state.selectedCabin}</StyledTableCell>
                     <StyledTableCell align="center">{this.state.selectedBaggageAllowanceDeparture}</StyledTableCell>
-                    <StyledTableCell align="center">{this.state.selectedPriceDeparture}LE</StyledTableCell>
+                    {/* <StyledTableCell align="center">{this.state.selectedPriceDeparture}LE</StyledTableCell> */}
                   </StyledTableRow>
                 </TableBody>
               </Table>
@@ -436,9 +438,10 @@ class selectFlights extends Component {
                     <StyledTableCell align="center">To</StyledTableCell>
                     <StyledTableCell align="center">Departure Date/Time</StyledTableCell>
                     <StyledTableCell align="center">Arrival Date/Time</StyledTableCell>
+                    <StyledTableCell align="center">Trip Duration</StyledTableCell>
                     <StyledTableCell align="center">Cabin</StyledTableCell>
                     <StyledTableCell align="center">Baggage Allowance</StyledTableCell>
-                    <StyledTableCell align="center">Price</StyledTableCell>
+                    {/* <StyledTableCell align="center">Price</StyledTableCell> */}
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -449,9 +452,10 @@ class selectFlights extends Component {
                     <StyledTableCell align="center">{selectedReturnFlight.arrival_airport}</StyledTableCell>
                     <StyledTableCell align="center">{depDate2} | {selectedReturnFlight.departure_time}</StyledTableCell>
                     <StyledTableCell align="center">{arrDate2} | {selectedReturnFlight.arrival_time}</StyledTableCell>
+                    <StyledTableCell align="center">{selectedReturnFlight.trip_duration}</StyledTableCell>
                     <StyledTableCell align="center">{this.state.selectedCabin}</StyledTableCell>
                     <StyledTableCell align="center">{this.state.selectedBaggageAllowanceReturn}</StyledTableCell>
-                    <StyledTableCell align="center">{this.state.selectedPriceReturn}LE</StyledTableCell>
+                    {/* <StyledTableCell align="center">{this.state.selectedPriceReturn}LE</StyledTableCell> */}
                   </StyledTableRow>
                 </TableBody>
               </Table>

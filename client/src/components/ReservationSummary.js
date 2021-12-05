@@ -105,6 +105,11 @@ class ReservationSummary extends Component {
   };
 
   onSubmit = e => {
+    
+    if (jwt.decode(localStorage.getItem('token')) === null) {
+      window.location.href = "http://localhost:3000/not-authorized";
+    }
+
     const myArray = (window.location.pathname).split("/");
     const selectedCabin = myArray[8]
     e.preventDefault();
