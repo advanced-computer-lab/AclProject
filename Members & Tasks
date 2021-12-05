@@ -1,11 +1,11 @@
 Name           Tasks
-Youssef Magdy: Models(schemes), Flight Summary(component), Admin Flight Summary(component)
-
-Ahmed Hussein: ShowFlightDetails(component), ShowFlightList(component), AdminShowFlightDetails(component), AdminShowFlightList(component)
-
 Noureldin Hesham: FR (11 -> 16) and the NFRs required for sprint 2 for these pages. Changed the UI in the pages created in sprint 1 to match with our new UI (and implemented the
 NFRs on them). Authentication.
 
 Mohamed Mahmoud: FR (19 -> 22) and the NFRs required for sprint 2 for these pages.
 
 Omar Alhadi: FR (17 - 18)
+
+Youssef Magdy: FR(26, 29) and the NFRs required for sprint 2 for these pages.
+
+Ahmed Hussein: FR(27, 27.1, 29.1) and the NFRs required for sprint 2 for these pages.
