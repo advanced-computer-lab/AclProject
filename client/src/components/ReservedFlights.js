@@ -40,7 +40,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 var nums = [];
 
-
 class ReservedFlights extends Component {
   constructor(props) {
     super(props);
@@ -162,6 +161,16 @@ class ReservedFlights extends Component {
         {
           label: 'Yes',
           onClick: () => {
+            axios
+              .post('http://localhost:8082/api/userflights/sendemail', {email: jwt.decode(localStorage.getItem('token')).email})
+              .then(res => {
+                console.log('here')
+                window.location.reload(false);
+              })
+              .catch(err => {
+                console.log("Error form ReservedShowFlightDetails_deleteClick");
+              })
+
             axios
               .delete('http://localhost:8082/api/userflights/' + this.state.userflight._id)
               .then(res => {

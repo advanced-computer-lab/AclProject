@@ -2,6 +2,15 @@ const express = require('express');
 const router = express.Router();
 
 const Flight = require('../../models/UserFlight');
+var nodemailer = require('nodemailer');
+
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'aclprojectguc@gmail.com',
+      pass: 'ASDfgh123123'
+    }
+  });
 
 
 router.get('/', (req, res) => {
@@ -9,6 +18,31 @@ router.get('/', (req, res) => {
     .then(flights => res.json(flights))
     .catch(err => res.status(404).json({ noflightsfound: 'No Flights found' }));
 });
+
+router.post('/sendemail', (req, res) => {
+	try {
+		var mailOptions = {
+			from: 'aclprojectguc@gmail.com',
+			to: req.body.email,
+			subject: 'Reservation deleted',
+			text: 'You deleted your reservation successfully'
+		  };
+		  
+		  console.log('Email sent')
+		  
+		  
+		  transporter.sendMail(mailOptions, function(error, info){
+			if (error) {
+			  console.log(error);
+			} else {
+			  console.log('Email sent: ' + info.response);
+			}
+		  })
+		res.json({ status: 'ok' })
+	} catch (err) {
+		res.json({ status: 'error', error: 'Duplicate email' })
+	}
+})
 
 router.delete('/:id', (req, res) => {
   Flight.findByIdAndRemove(req.params.id, req.body)
