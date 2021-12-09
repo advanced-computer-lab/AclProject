@@ -207,6 +207,7 @@ class Homepage extends Component {
                   id="filled-textarea"
                   label="Return Date"
                   type="date"
+                  InputProps={{inputProps: {min: this.state.departure_date}}}
                   onFocus={this._onFocus} onBlur={this._onBlur}
                   placeholder=""
                   variant="filled"
