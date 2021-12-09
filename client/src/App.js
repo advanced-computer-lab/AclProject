@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
+import Footer from "./components/Footer";
 
 import Navbar from './components/Navbar';
 import Homepage from './components/Homepage';
@@ -57,6 +58,7 @@ class App extends Component {
           <Route path='/ReservedFlightSummary/' component={ReservedFlightSummary} />
           <Route path='/reserved-show-flight/:id' component={ReservedShowFlightDetails} />
         </div>
+		<Footer />
       </Router>
     );
   }

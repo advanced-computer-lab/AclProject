@@ -75,7 +75,7 @@ class ShowFlightList extends Component {
       buttons: [
         {
           label: 'Yes',
-          onClick: () =>
+          onClick: () =>{
 
 
             axios
@@ -85,9 +85,16 @@ class ShowFlightList extends Component {
               })
               .catch(err => {
                 console.log("Error form ShowFlightDetails_deleteClick");
-              })
+              });
 
-        },
+              axios
+              .put('http://localhost:8082/api/userflights/deletedflight/', {flight_id: id})
+              .then(res => {
+              })
+              .catch(err => {
+                console.log("Error form ShowFlightDetails_deleteClick");
+              })
+        }},
         {
           label: 'No',
         }

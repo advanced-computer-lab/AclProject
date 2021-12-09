@@ -50,6 +50,12 @@ router.delete('/:id', (req, res) => {
     .catch(err => res.status(404).json({ error: 'No such a flight' }));
 });
 
+router.put('/deletedflight', (req, res) => {
+	Flight.remove({flight_id: req.body.flight_id})
+	  .then(flight => res.json({ mgs: 'Flight entry deleted successfully' }))
+	  .catch(err => res.status(404).json({ error: 'No such a flight' }));
+  });
+
 router.post('/reserve', async (req, res) => {
 	console.log(req.body)
 	try {

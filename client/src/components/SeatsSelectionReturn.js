@@ -6,6 +6,7 @@ import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom'
 
 var economySeatsNumber = parseInt(((window.location.pathname).split("/"))[16]);
 var businessSeatsNumber = parseInt(((window.location.pathname).split("/"))[15]);
@@ -16,10 +17,32 @@ const chars = reserved.split('-');
 var result;
 var bookedA = chars
 
+const myArray5 = (window.location.pathname).split("/");
+var pp;
+var arr2 = "";
+for (var ii = 0; ii < myArray5.length; ii++){
+    if (ii < 19){
+        arr2 = arr2 + "/" + myArray5[ii];
+    }
+}
+
+var previousPage = (arr2).replace("/seats-selection-return", "seats-selection-departure");
+var previousPage = (previousPage).replace("/reservation-summary", "seats-selection-departure");
+
+var ppp;
+var arr3 = "";
+for (var ii = 0; ii < myArray5.length; ii++){
+    if (ii < 9){
+        arr3 = arr3 + "/" + myArray5[ii];
+    }
+}
+
+var previousPage2 = (arr3).replace("/seats-selection-return", "select-flights");
+console.log('pp ' + previousPage)
 const steps = [
-    'Select departure and return flights',
-    'Select plane seats',
-    'Summary and confirmation',
+    <Link to={previousPage2}>Select departure and return flights</Link>,
+    <Link to={previousPage}>Select plane seats</Link>,
+  'Summary and confirmation',
 ];
 
 const createSeats = (rows, startIndex) => {

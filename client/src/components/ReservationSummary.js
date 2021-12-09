@@ -20,6 +20,7 @@ import jwt from 'jsonwebtoken'
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import { Link } from 'react-router-dom'
 
 var numberOfDepartureSeats
 var numberOfReturnSeats;
@@ -45,9 +46,30 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
+const myArray5 = (window.location.pathname).split("/");
+var pp;
+var arr2 = "";
+for (var ii = 0; ii < myArray5.length; ii++){
+    if (ii < 20){
+        arr2 = arr2 + "/" + myArray5[ii];
+    }
+}
+
+var previousPage = (arr2).replace("/reservation-summary", "seats-selection-return");
+
+var ppp;
+var arr3 = "";
+for (var ii = 0; ii < myArray5.length; ii++){
+    if (ii < 9){
+        arr3 = arr3 + "/" + myArray5[ii];
+    }
+}
+
+var previousPage2 = (arr3).replace("/reservation-summary", "select-flights");
+
 const steps = [
-  'Select departure and return flights',
-  'Select plane seats',
+    <Link to={previousPage2}>Select departure and return flights</Link>,
+  <Link to={previousPage}>Select plane seats</Link>,
   'Summary and confirmation',
 ];
 
