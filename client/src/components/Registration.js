@@ -16,7 +16,12 @@ class Registration extends Component {
       firstname: '',
       lastname: '',
       email: '',
-      passport: '',
+      address: '',
+      countrycode: '',
+      telenumber1: '',
+      telenumber2: '',
+      telenumber3: '',
+      passport:'' ,
       password: ''
     };
   }
@@ -60,6 +65,41 @@ class Registration extends Component {
     this.forceUpdate()
   };
 
+  onChangeAddress = e => {
+    this.setState({ [e.target.name]: e.target.value });
+    this.state.address = e.target.value
+    emptyField = 'false'
+    this.forceUpdate()
+  };
+
+  onChangeCountryCode = e => {
+    this.setState({ [e.target.name]: e.target.value });
+    this.state.countrycode = e.target.value
+    emptyField = 'false'
+    this.forceUpdate()
+  };
+
+  onChangeTeleNumber1 = e => {
+    this.setState({ [e.target.name]: e.target.value });
+    this.state.telenumber1 = e.target.value
+    emptyField = 'false'
+    this.forceUpdate()
+  };
+
+  onChangeTeleNumber2 = e => {
+    this.setState({ [e.target.name]: e.target.value });
+    this.state.telenumber2 = e.target.value
+    emptyField = 'false'
+    this.forceUpdate()
+  };
+
+  onChangeTeleNumber3 = e => {
+    this.setState({ [e.target.name]: e.target.value });
+    this.state.telenumber3 = e.target.value
+    emptyField = 'false'
+    this.forceUpdate()
+  };
+
   onChangeEmail = e => {
     this.setState({ [e.target.name]: e.target.value });
     this.state.email = e.target.value
@@ -75,11 +115,16 @@ class Registration extends Component {
       firstname: this.state.firstname,
       lastname: this.state.lastname,
       email: this.state.email,
+      countrycode: this.state.countrycode,
+      address: this.state.address,
+      telenumber1: this.state.telenumber1,
+      telenumber2: this.state.telenumber2,
+      telenumber3: this.state.telenumber3,
       password: this.state.password,
       passport: this.state.passport,
     };
 
-    if (this.state.username === '' || this.state.firstname === '' || this.state.lastname === '' || this.state.email === '' || this.state.passport === '' || this.state.password === ''){
+    if (this.state.username === '' || this.state.firstname === '' || this.state.lastname === '' || this.state.email === '' || this.state.address === '' || this.state.countrycode === '' || this.state.telenumber1 === ''|| this.state.passport === '' || this.state.password === ''){
       emptyField = 'true';
       this.forceUpdate()
     }
@@ -93,6 +138,11 @@ class Registration extends Component {
           firstname: '',
           lastname: '',
           email: '',
+          address: '',
+      countrycode: '',
+      telenumber1: '',
+      telenumber2: '',
+      telenumber3: '',
           password: '',
           passport: '',
         })
@@ -169,6 +219,31 @@ class Registration extends Component {
             <TextField onChange={this.onChangePassportNumber} style={{
               width: "400px",
             }} label="Passport Number" id="outlined-size-normal" defaultValue="" />
+            <br />
+            <br />
+            <TextField onChange={this.onChangeAddress} style={{
+              width: "400px",
+            }} label="Home Address" id="outlined-size-normal" defaultValue="" />
+            <br />
+            <br />
+            <TextField onChange={this.onChangeCountryCode} style={{
+              width: "400px",
+            }} label="Country Code" id="outlined-size-normal" defaultValue="" />
+            <br />
+            <br />
+            <TextField onChange={this.onChangeTeleNumber1} style={{
+              width: "400px",
+            }} label="Telephone Number 1" id="outlined-size-normal" defaultValue="" />
+            <br />
+            <br />
+            <TextField onChange={this.onChangeTeleNumber2} style={{
+              width: "400px",
+            }} label="Telephone Number 2 (optional)" id="outlined-size-normal" defaultValue="" />
+            <br />
+            <br />
+            <TextField onChange={this.onChangeTeleNumber3} style={{
+              width: "400px",
+            }} label="Telephone Number 3 (optional)" id="outlined-size-normal" defaultValue="" />
             <br />
             <br />
             <Button type="submit" style={{

@@ -21,6 +21,11 @@ router.post('/registration', async (req, res) => {
 			firstname: req.body.firstname,
 			lastname: req.body.lastname,
 			email: req.body.email,
+			address: req.body.address,
+			countrycode: req.body.countrycode,
+			telenumber1: req.body.telenumber1,
+			telenumber2: req.body.telenumber2,
+			telenumber3: req.body.telenumber3,
 			password: newPassword,
 			passport: req.body.passport,
 		})
