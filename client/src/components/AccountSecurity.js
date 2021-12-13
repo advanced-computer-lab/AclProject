@@ -8,7 +8,7 @@ import loginPic from '../login.png';
 import jwt from 'jsonwebtoken';
 
 
-class EditProfile extends Component {
+class AccountSecurity extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -98,12 +98,11 @@ class EditProfile extends Component {
         <br />
         <br />
         <div className="backgroundLabelEditProfile">
-          <b >Edit Profile Information</b>
+          <b >Account Security</b>
         </div>
-        <div className="backgroundBoxEditProfile">
+        <div className="backgroundBoxAccountSecurity">
           <br />
-          <img src={loginPic} width="160px" height="160px" alt="fireSpot" />
-          <br />
+          <div className="labels">  <label > Change Password </label></div>
           <br />
           <form noValidate onSubmit={this.onSubmit}>
             <TextField
@@ -137,4 +136,4 @@ class EditProfile extends Component {
   }
 }
 
-export default EditProfile;
+export default AccountSecurity;

@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 
 import Navbar from './components/Navbar';
 import Homepage from './components/Homepage';
+import AccountSecurity from './components/AccountSecurity';
 import CreateFlight from './components/CreateFlight';
 import ShowFlightList from './components/ShowFlightList';
 import ShowFlightDetails from './components/ShowFlightDetails';
@@ -49,6 +50,7 @@ class App extends Component {
           <Route path='/not-authorized' component={NotAuthorized} />
           <Route path='/registration' component={Registration} />
           <Route path='/edit-profile' component={EditProfile} />
+          <Route path='/account-security' component={AccountSecurity} />
           <Route path='/show-flight-list' component={ShowFlightList} />
           <Route path='/edit-flight/:id' component={UpdateFlightInfo} />
           <Route path='/show-flight/:id' component={ShowFlightDetails} />
