@@ -15,7 +15,25 @@ router.get('/', (req, res) => {
 router.post('/registration', async (req, res) => {
 	console.log(req.body)
 	try {
-		const newPassword = await bcrypt.hash(req.body.password, 10)
+		const user = await User.findOne({
+			username: req.body.username,
+		})
+		const email = await User.findOne({
+			email: req.body.email,
+		})
+		
+
+	
+		if (user) {
+			return res.json("Username already taken")
+		}
+		if(email){
+
+     	return res.json("Another account is registered by this email")
+		}
+
+		else{
+				const newPassword = await bcrypt.hash(req.body.password, 10)
 		await User.create({
 			username: req.body.username,
 			firstname: req.body.firstname,
@@ -28,8 +46,8 @@ router.post('/registration', async (req, res) => {
 			telenumber3: req.body.telenumber3,
 			password: newPassword,
 			passport: req.body.passport,
-		})
-		res.json({ status: 'ok' })
+		})}
+		return res.json("User Created")
 	} catch (err) {
 		res.json({ status: 'error', error: 'Duplicate email' })
 	}

@@ -7,6 +7,9 @@ import loginPic from '../login.png';
 import Alert from '@mui/material/Alert';
 
 var emptyField = 'false'
+var UsernameTaken = 'false';
+var EmailTaken = 'false';
+
 
 class Registration extends Component {
   constructor() {
@@ -108,8 +111,7 @@ class Registration extends Component {
   };
 
   onSubmit = e => {
-    e.preventDefault();
-
+    e.preventDefault();  
     const data = {
       username: this.state.username,
       firstname: this.state.firstname,
@@ -123,16 +125,29 @@ class Registration extends Component {
       password: this.state.password,
       passport: this.state.passport,
     };
-
     if (this.state.username === '' || this.state.firstname === '' || this.state.lastname === '' || this.state.email === '' || this.state.address === '' || this.state.countrycode === '' || this.state.telenumber1 === ''|| this.state.passport === '' || this.state.password === ''){
       emptyField = 'true';
       this.forceUpdate()
     }
-
     else {
     axios
       .post('http://localhost:8082/api/users/registration', data)
       .then(res => {
+        if (res.data === 'Username already taken') {
+          console.log('Username already taken')
+          UsernameTaken = 'true';
+          EmailTaken = 'false';
+          this.forceUpdate()
+        }
+        else {if (res.data === 'Another account is registered by this email') {
+          console.log('Another account is registered by this email already taken')
+          EmailTaken = 'true';
+          UsernameTaken = 'false';
+          this.forceUpdate()
+        } 
+        if(res.data==='User Created'){
+          EmailTaken = 'false';
+          UsernameTaken = 'false';
         this.setState({
           username: '',
           firstname: '',
@@ -147,6 +162,7 @@ class Registration extends Component {
           passport: '',
         })
         this.props.history.push('/');
+      }}
       })
       .catch(err => {
         console.log("Error in Registration!");
@@ -186,7 +202,15 @@ class Registration extends Component {
             }} label="Last Name" id="outlined-size-normal" defaultValue="" />
             <br />
             <br />
-            <TextField
+
+            {((UsernameTaken === 'true')) ? (
+              <TextField error
+                onChange={this.onChangeUsername} style={{
+                  width: "400px"
+                }}
+                label="Username" helperText="Username already taken" id="outlined-size-normal" defaultValue=""  variant="filled" />
+            ) : (
+               <TextField
               onChange={this.onChangeUsername}
               style={{
                 width: "400px",
@@ -197,6 +221,7 @@ class Registration extends Component {
               helperText="You will use the username and password to login"
               variant="filled"
             />
+            )}
             <br />
             <TextField
               onChange={this.onChangePassword}
@@ -211,9 +236,26 @@ class Registration extends Component {
             />
             <br />
             <br />
-            <TextField onChange={this.onChangeEmail} style={{
-              width: "400px",
-            }} label="Email" id="outlined-size-normal" defaultValue="" />
+
+
+            {((EmailTaken === 'true')) ? (
+              <TextField error
+                onChange={this.onChangeEmail} style={{
+                  width: "400px"
+                }}
+                label="Email" helperText="Another account is registered by this email" id="outlined-size-normal" defaultValue=""  variant="filled" />
+            ) : (
+               <TextField
+              onChange={this.onChangeEmail}
+              style={{
+                width: "400px",
+              }}
+              id="filled-helperText"
+              label="Email"
+              defaultValue=""
+              variant="filled"
+            />
+            )}
             <br />
             <br />
             <TextField onChange={this.onChangePassportNumber} style={{
