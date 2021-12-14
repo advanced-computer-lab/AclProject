@@ -86,11 +86,44 @@ router.post('/login', async (req, res) => {
 })
 
 router.put('/:id', (req, res) => {
+
 	User.findByIdAndUpdate(req.params.id, req.body)
 	  .then(user => res.json({ msg: 'Updated successfully' }))
 	  .catch(err =>
 		res.status(400).json({ error: 'Unable to update the Database' })
 	  );
   });
+
+router.put('/password/:id', async (req, res) => {
+
+	const newPassword = await bcrypt.hash(req.body.password, 10)
+	var datapassword ={password: newPassword}
+
+	User.findByIdAndUpdate(req.params.id, datapassword)
+	  .then(user => res.json({ msg: 'Updated successfully' }))
+	  .catch(err =>
+		res.status(400).json({ error: 'Unable to update the Database' })
+	  );
+  });
+
+router.post('/:id', async (req, res) => {
+	try{
+		const user = await User.findById(req.params.id)
+		const isPasswordValid = await bcrypt.compare(
+			req.body.oldpassword,
+			user.password
+		)
+		if(isPasswordValid)
+		{
+			return res.json('Match')
+		}
+	
+	}
+	catch (err) {
+		res.json({ status: 'error', error: 'Error Old Password' })
+	}
+  });
+
+
 
 module.exports = router;

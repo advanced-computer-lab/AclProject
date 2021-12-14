@@ -4,41 +4,39 @@ import axios from 'axios';
 import '../App.css';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import loginPic from '../login.png';
 import jwt from 'jsonwebtoken';
 
+var match = 'false';
+var wrongpassword = 'false';
+var confirmpassword = 'false';
 
 class AccountSecurity extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstname: '',
-      lastname: '',
-      email: '',
-      passport: '',
+      oldpassword: '',
+      newpassword: '',
+      confirmpassword: '',
+      id: '',
+      match: 'false',
       LoggedInUser: jwt.decode(localStorage.getItem('token'))
     };
   }
 
   componentDidMount() {
-  
     axios
       .get('http://localhost:8082/api/users')
       .then(res => {
         var data = {};
         for (var i = 0; i < res.data.length; i++) {
-          if(res.data[i].username === this.state.LoggedInUser.username){
+          if (res.data[i].username === this.state.LoggedInUser.username) {
             data = res.data[i];
             break;
+          }
         }
-      }
-        
+
         this.setState({
-          id: data._id,
-          firstname: data.firstname,
-          lastname: data.lastname,
-          email: data.email,
-          passport: data.passport
+          id: data._id
         })
       })
       .catch(err => {
@@ -50,45 +48,83 @@ class AccountSecurity extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  onChangeFirstName = e => {
+  onChangeOldPassword = e => {
     this.setState({ [e.target.name]: e.target.value });
-    this.state.firstname = e.target.value
+    this.state.oldpassword = e.target.value
+    this.forceUpdate()
   };
 
-  onChangeLastName = e => {
+  onChangeNewPassword = e => {
     this.setState({ [e.target.name]: e.target.value });
-    this.state.lastname = e.target.value
+    this.state.newpassword = e.target.value
+    this.forceUpdate()
   };
 
-  onChangePassportNumber = e => {
+  onChangeConfirmPassword = e => {
     this.setState({ [e.target.name]: e.target.value });
-    this.state.passport = e.target.value
-  };
-
-  onChangeEmail = e => {
-    this.setState({ [e.target.name]: e.target.value });
-    this.state.email = e.target.value
+    this.state.confirmpassword = e.target.value
+    this.forceUpdate()
   };
 
   onSubmit = e => {
-    e.preventDefault();
 
+    wrongpassword = 'false';
+    confirmpassword = 'false';
+    this.setState({
+      match: 'false'
+    });
+    e.preventDefault();
     const data = {
-      firstname: this.state.firstname,
-      lastname: this.state.lastname,
-      email: this.state.email,
-      passport: this.state.passport
-      
+      password: this.state.newpassword,
+      oldpassword: this.state.oldpassword
     };
 
     axios
-      .put('http://localhost:8082/api/users/'+this.state.id, data)
+      .post('http://localhost:8082/api/users/' + this.state.id, data)
       .then(res => {
-        this.props.history.push('/profile');
+        if (res.data === 'Match') {
+          this.setState({
+            match: 'true'
+          });
+          console.log(res.data)
+        }
       })
-      .catch(err => {
-        console.log("Error in Edit Profile!");
-      })
+      .catch(err => { console.log("Error in Old password!"); })
+
+    if (this.state.match === 'false') {
+
+      wrongpassword = 'true';
+      confirmpassword = 'false';
+      console.log('No Match');
+      this.forceUpdate()
+
+    }
+    if (this.state.newpassword !== this.state.confirmpassword) {
+      confirmpassword = 'true';
+      wrongpassword = 'false';
+      console.log('Confrim Password Error');
+      this.forceUpdate()
+    }
+    if (this.state.match === 'true') {
+      axios
+        .put('http://localhost:8082/api/users/password/' + this.state.id, data)
+        .then(res => {
+          this.setState({
+            oldpassword: '',
+            newpassword: '',
+            confirmpassword: '',
+            match: 'false'
+          })
+          console.log('Updated');
+          this.props.history.push('/');
+          this.forceUpdate()
+        })
+        .catch(err => {
+          console.log("Error in Edit Profile!");
+        })
+    }
+
+
   };
 
 
@@ -105,23 +141,35 @@ class AccountSecurity extends Component {
           <div className="labels">  <label > Change Password </label></div>
           <br />
           <form noValidate onSubmit={this.onSubmit}>
-            <TextField
-              onChange={this.onChangeFirstName} style={{
-                width: "200px",
-              }} label="First Name" id="outlined-size-normal" value={this.state.firstname} />
-            <TextField onChange={this.onChangeLastName} style={{
-              width: "200px"
-            }} label="Last Name" id="outlined-size-normal" value={this.state.lastname} />
+
+            {((wrongpassword === 'false')) ? (
+              <TextField onChange={this.onChangeOldPassword} style={{
+                width: "400px",
+              }} label="Old Password" id="outlined-size-normal" />
+            ) : (
+
+              <TextField error onChange={this.onChangeOldPassword} style={{
+                width: "400px",
+              }} label="Old Password" helperText="Wrong Password" id="outlined-size-normal" />
+            )}
+
             <br />
             <br />
-            <TextField onChange={this.onChangeEmail} style={{
+            <TextField onChange={this.onChangeNewPassword} style={{
               width: "400px",
-            }} label="Email" id="outlined-size-normal" value={this.state.email}/>
+            }} label="New Password" id="outlined-size-normal" />
             <br />
             <br />
-            <TextField onChange={this.onChangePassportNumber} style={{
-              width: "400px",
-            }} label="Passport Number" id="outlined-size-normal" value={this.state.passport}/>
+            {((confirmpassword === 'false')) ? (
+              <TextField onChange={this.onChangeConfirmPassword} style={{
+                width: "400px",
+              }} label="Confirm New Password" id="outlined-size-normal" />
+            ) : (
+
+              <TextField error onChange={this.onChangeConfirmPassword} style={{
+                width: "400px",
+              }} label="Confirm New Password" helperText="Password Doesn't Match" id="outlined-size-normal" />
+            )}
             <br />
             <br />
             <Button type="submit" style={{
