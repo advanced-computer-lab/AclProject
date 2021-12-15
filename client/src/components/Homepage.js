@@ -11,6 +11,9 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Alert from '@mui/material/Alert';
 
+var td = new Date();
+var today = td.getFullYear()+'-'+(td.getMonth()+1)+'-'+td.getDate();
+
 const airports = require('../airports.json');
 
 const numberOfAdults = [1, 2, 3, 4, 5];
@@ -83,7 +86,6 @@ class Homepage extends Component {
         })
     }
   };
-
 
   render() {
     return (
@@ -187,12 +189,12 @@ class Homepage extends Component {
                     backgroundColor: "white"
                   }}
                   id="filled-textarea"
-                  label="Depart Date"
+                  label={"Depart Date"}
                   type="date"
+                  InputProps={{inputProps: {min: today}}}
                   onFocus={this._onFocus} onBlur={this._onBlur}
                   placeholder=""
                   variant="filled"
-                  //value={this.state.departure_date}
                   onChange={this.onChangeDepartureDate}
                   InputLabelProps={{
                     shrink: true,

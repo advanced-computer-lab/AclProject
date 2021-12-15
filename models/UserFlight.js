@@ -17,6 +17,14 @@ const UserFlightSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  cabin: {
+    type: String,
+    required: true
+  },
+  price: {
+    type: Number,
+    required: true
+  },
 });
 
 module.exports = UserFlight = mongoose.model('userflight', UserFlightSchema);

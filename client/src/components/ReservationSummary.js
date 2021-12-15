@@ -81,7 +81,9 @@ class ReservationSummary extends Component {
       returnFlight: '',
       LoggedInUser: jwt.decode(localStorage.getItem('token')),
       numberOfDepartureSeats: (myArray3[19].split("-").length - 1) + 1,
-    numberOfReturnSeats: (myArray3[20].split("-").length - 1) + 1
+    numberOfReturnSeats: (myArray3[20].split("-").length - 1) + 1,
+    priceDeparture: 0,
+    priceReturn: 0
     };
   }
 
@@ -140,14 +142,18 @@ class ReservationSummary extends Component {
       username: this.state.LoggedInUser.username,
       flight_number: this.state.departureFlight.flight_number,
       flight_id: this.state.departureFlight._id,
-      seats_booked: myArray[19]
+      seats_booked: myArray[19],
+      cabin: selectedCabin,
+      price: this.state.priceDeparture
     };
 
     const returnData = {
       username: this.state.LoggedInUser.username,
       flight_number: this.state.returnFlight.flight_number,
       flight_id: this.state.returnFlight._id,
-      seats_booked: myArray[20]
+      seats_booked: myArray[20],
+      cabin: selectedCabin,
+      price: this.state.priceReturn
     };
 
     var newBookedSeatsDeparture;
@@ -297,6 +303,8 @@ class ReservationSummary extends Component {
       selectedPriceReturn = this.state.returnFlight.price_first
     }
     var totalPrice = (parseInt(selectedPriceDeparture) * this.state.numberOfDepartureSeats) + (parseInt(selectedPriceReturn) * this.state.numberOfReturnSeats)
+    this.state.priceDeparture = (parseInt(selectedPriceDeparture) * this.state.numberOfDepartureSeats);
+    this.state.priceReturn = (parseInt(selectedPriceReturn) * this.state.numberOfReturnSeats);
 
 
     return (

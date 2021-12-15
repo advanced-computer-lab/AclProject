@@ -63,7 +63,9 @@ router.post('/reserve', async (req, res) => {
 			username: req.body.username,
 			flight_number: req.body.flight_number,
 			flight_id: req.body.flight_id,
-			seats_booked: req.body.seats_booked
+			seats_booked: req.body.seats_booked,
+			cabin: req.body.cabin,
+			price: req.body.price
 		})
 		res.json({ status: 'ok' })
 	} catch (err) {
