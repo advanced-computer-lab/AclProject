@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
 import axios from 'axios';
-import { DataGrid } from '@mui/x-data-grid';
-import Button from '@mui/material/Button';
-import { Modal } from 'react-responsive-modal';
 import 'react-responsive-modal/styles.css';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -18,9 +15,8 @@ import StepLabel from '@mui/material/StepLabel';
 import { styled } from '@mui/material/styles';
 import jwt from 'jsonwebtoken'
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import { confirmAlert } from 'react-confirm-alert';
-import 'react-confirm-alert/src/react-confirm-alert.css';
 import { Link } from 'react-router-dom'
+import StripeCheckout from 'react-stripe-checkout';
 
 var numberOfDepartureSeats
 var numberOfReturnSeats;
@@ -49,26 +45,26 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const myArray5 = (window.location.pathname).split("/");
 var pp;
 var arr2 = "";
-for (var ii = 0; ii < myArray5.length; ii++){
-    if (ii < 20){
-        arr2 = arr2 + "/" + myArray5[ii];
-    }
+for (var ii = 0; ii < myArray5.length; ii++) {
+  if (ii < 20) {
+    arr2 = arr2 + "/" + myArray5[ii];
+  }
 }
 
 var previousPage = (arr2).replace("/reservation-summary", "seats-selection-return");
 
 var ppp;
 var arr3 = "";
-for (var ii = 0; ii < myArray5.length; ii++){
-    if (ii < 9){
-        arr3 = arr3 + "/" + myArray5[ii];
-    }
+for (var ii = 0; ii < myArray5.length; ii++) {
+  if (ii < 9) {
+    arr3 = arr3 + "/" + myArray5[ii];
+  }
 }
 
 var previousPage2 = (arr3).replace("/reservation-summary", "select-flights");
 
 const steps = [
-    <Link to={previousPage2}>Select departure and return flights</Link>,
+  <Link to={previousPage2}>Select departure and return flights</Link>,
   <Link to={previousPage}>Select plane seats</Link>,
   'Summary and confirmation',
 ];
@@ -81,9 +77,9 @@ class ReservationSummary extends Component {
       returnFlight: '',
       LoggedInUser: jwt.decode(localStorage.getItem('token')),
       numberOfDepartureSeats: (myArray3[19].split("-").length - 1) + 1,
-    numberOfReturnSeats: (myArray3[20].split("-").length - 1) + 1,
-    priceDeparture: 0,
-    priceReturn: 0
+      numberOfReturnSeats: (myArray3[20].split("-").length - 1) + 1,
+      priceDeparture: 0,
+      priceReturn: 0
     };
   }
 
@@ -105,7 +101,7 @@ class ReservationSummary extends Component {
 
 
     axios
-      .get('http://localhost:8082/api/flights/'+ myArray[9])
+      .get('http://localhost:8082/api/flights/' + myArray[9])
       .then(res => {
         this.setState({
           departureFlight: res.data
@@ -117,7 +113,7 @@ class ReservationSummary extends Component {
 
 
     axios
-    .get('http://localhost:8082/api/flights/'+ myArray[10])
+      .get('http://localhost:8082/api/flights/' + myArray[10])
       .then(res => {
         this.setState({
           returnFlight: res.data
@@ -128,15 +124,14 @@ class ReservationSummary extends Component {
       })
   };
 
-  onSubmit = e => {
-    
+  onToken = e => {
+
     if (jwt.decode(localStorage.getItem('token')) === null) {
       window.location.href = "http://localhost:3000/not-authorized";
     }
 
     const myArray = (window.location.pathname).split("/");
     const selectedCabin = myArray[8]
-    e.preventDefault();
 
     const departureData = {
       username: this.state.LoggedInUser.username,
@@ -208,13 +203,6 @@ class ReservationSummary extends Component {
       newBookedSeatsReturn = returnData.seats_booked
     }
 
-    confirmAlert({
-      title: 'Confirmation',
-      message: 'Are you sure that you want to reserve these flight tickets?',
-      buttons: [
-        {
-          label: 'Yes',
-          onClick: () => {
             axios
               .post('http://localhost:8082/api/userflights/reserve', departureData)
               .then(res => {
@@ -247,14 +235,6 @@ class ReservationSummary extends Component {
               .catch(err => {
                 console.log("Error in UpdateFlightInfo!");
               })
-          }
-
-        },
-        {
-          label: 'No',
-        }
-      ]
-    });
   };
 
 
@@ -401,7 +381,7 @@ class ReservationSummary extends Component {
           <b>Total Price = {totalPrice}LE</b>
         </div>
         <br />
-        <form noValidate onSubmit={this.onSubmit}>
+        {/* <form noValidate onSubmit={this.onSubmit}>
           <Button
             type="submit"
             style={{
@@ -410,7 +390,23 @@ class ReservationSummary extends Component {
             }} variant="contained">Book Tickets</Button>
           <br />
           <br />
-        </form>
+        </form> */}
+        <StripeCheckout
+          amount={parseInt(totalPrice) * 100}
+          currency="EGP"
+          description="Roundtrip ticket"
+          image={require('../logo.svg').default}
+          locale="auto"
+          name="AclProject"
+          email={this.state.LoggedInUser.email}
+          token={this.onToken}
+          stripeKey="pk_test_51K6u4OGxGwnu0rJwX9bgwFSvMrTcivqO65wFVtfyNCX55gq0Idy4mq15RjSdRv9KTRhBx1DuYdq9mKuFQyATyrkB003DSAH9Yk"
+          billingAddress={false}
+          shippingAddress={false}>
+          <button style={{width:"180px", height:"50px", fontSize:"25px", textAlign:"center"}} className="btn btn-primary">Pay By Card</button>
+        </StripeCheckout>
+        <br />
+        <br />
       </div>
     );
   }
