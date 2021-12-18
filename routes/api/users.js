@@ -16,10 +16,10 @@ router.post('/registration', async (req, res) => {
 	console.log(req.body)
 	try {
 		const user = await User.findOne({
-			username: req.body.username,
+			username: req.body.username.toLowerCase(),
 		})
 		const email = await User.findOne({
-			email: req.body.email,
+			email: req.body.email.toLowerCase(),
 		})
 		
 
@@ -35,10 +35,10 @@ router.post('/registration', async (req, res) => {
 		else{
 				const newPassword = await bcrypt.hash(req.body.password, 10)
 		await User.create({
-			username: req.body.username,
+			username: req.body.username.toLowerCase(),
 			firstname: req.body.firstname,
 			lastname: req.body.lastname,
-			email: req.body.email,
+			email: req.body.email.toLowerCase(),
 			address: req.body.address,
 			countrycode: req.body.countrycode,
 			telenumber1: req.body.telenumber1,
@@ -55,7 +55,7 @@ router.post('/registration', async (req, res) => {
 
 router.post('/login', async (req, res) => {
 	const user = await User.findOne({
-		username: req.body.username,
+		username: req.body.username.toLowerCase(),
 	})
 
 	if (!user) {

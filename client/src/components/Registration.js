@@ -10,6 +10,7 @@ var emptyField = 'false'
 var UsernameTaken = 'false';
 var EmailTaken = 'false';
 
+var EmailInForm = 'true';
 
 class Registration extends Component {
   constructor() {
@@ -24,7 +25,7 @@ class Registration extends Component {
       telenumber1: '',
       telenumber2: '',
       telenumber3: '',
-      passport:'' ,
+      passport: '',
       password: ''
     };
   }
@@ -107,11 +108,13 @@ class Registration extends Component {
     this.setState({ [e.target.name]: e.target.value });
     this.state.email = e.target.value
     emptyField = 'false'
+    EmailInForm = 'true'
+    EmailTaken = 'false'
     this.forceUpdate()
   };
 
   onSubmit = e => {
-    e.preventDefault();  
+    e.preventDefault();
     const data = {
       username: this.state.username,
       firstname: this.state.firstname,
@@ -125,48 +128,55 @@ class Registration extends Component {
       password: this.state.password,
       passport: this.state.passport,
     };
-    if (this.state.username === '' || this.state.firstname === '' || this.state.lastname === '' || this.state.email === '' || this.state.address === '' || this.state.countrycode === '' || this.state.telenumber1 === ''|| this.state.passport === '' || this.state.password === ''){
+    if (this.state.username === '' || this.state.firstname === '' || this.state.lastname === '' || this.state.email === '' || this.state.address === '' || this.state.countrycode === '' || this.state.telenumber1 === '' || this.state.passport === '' || this.state.password === '') {
       emptyField = 'true';
       this.forceUpdate()
     }
+    else if ((this.state.email.includes("@") === false) || (this.state.email.includes(".com") === false) || this.state.email.length < 11) {
+      EmailInForm = 'false'
+      this.forceUpdate()
+    }
+
     else {
-    axios
-      .post('http://localhost:8082/api/users/registration', data)
-      .then(res => {
-        if (res.data === 'Username already taken') {
-          console.log('Username already taken')
-          UsernameTaken = 'true';
-          EmailTaken = 'false';
-          this.forceUpdate()
-        }
-        else {if (res.data === 'Another account is registered by this email') {
-          console.log('Another account is registered by this email already taken')
-          EmailTaken = 'true';
-          UsernameTaken = 'false';
-          this.forceUpdate()
-        } 
-        if(res.data==='User Created'){
-          EmailTaken = 'false';
-          UsernameTaken = 'false';
-        this.setState({
-          username: '',
-          firstname: '',
-          lastname: '',
-          email: '',
-          address: '',
-      countrycode: '',
-      telenumber1: '',
-      telenumber2: '',
-      telenumber3: '',
-          password: '',
-          passport: '',
+      axios
+        .post('http://localhost:8082/api/users/registration', data)
+        .then(res => {
+          if (res.data === 'Username already taken') {
+            console.log('Username already taken')
+            UsernameTaken = 'true';
+            EmailTaken = 'false';
+            this.forceUpdate()
+          }
+          else {
+            if (res.data === 'Another account is registered by this email') {
+              console.log('Another account is registered by this email already taken')
+              EmailTaken = 'true';
+              UsernameTaken = 'false';
+              this.forceUpdate()
+            }
+            if (res.data === 'User Created') {
+              EmailTaken = 'false';
+              UsernameTaken = 'false';
+              this.setState({
+                username: '',
+                firstname: '',
+                lastname: '',
+                email: '',
+                address: '',
+                countrycode: '',
+                telenumber1: '',
+                telenumber2: '',
+                telenumber3: '',
+                password: '',
+                passport: '',
+              })
+              this.props.history.push('/');
+            }
+          }
         })
-        this.props.history.push('/');
-      }}
-      })
-      .catch(err => {
-        console.log("Error in Registration!");
-      })
+        .catch(err => {
+          console.log("Error in Registration!");
+        })
     }
   };
 
@@ -183,16 +193,17 @@ class Registration extends Component {
           <img src={loginPic} width="160px" height="160px" alt="fireSpot" />
           <br />
           <form noValidate onSubmit={this.onSubmit}>
-          {((emptyField === 'true')) ? (
-          <Alert variant="filled" style={{
-            width: "500px",
-            margin: "auto",
-            marginTop: "10px",
-            marginBottom: "15px"
-          }}severity="error">All fields must be filled</Alert>
-        ) : (
-          <br />
-        )}
+            {((emptyField === 'true')) ? (
+              <Alert variant="filled" style={{
+                width: "500px",
+                margin: "auto",
+                marginTop: "5px",
+                marginBottom: "-13px"
+              }} severity="error">All fields must be filled</Alert>
+            ) : (
+              <br />
+            )}
+            <br />
             <TextField
               onChange={this.onChangeFirstName} style={{
                 width: "200px",
@@ -208,19 +219,19 @@ class Registration extends Component {
                 onChange={this.onChangeUsername} style={{
                   width: "400px"
                 }}
-                label="Username" helperText="Username already taken" id="outlined-size-normal" defaultValue=""  variant="filled" />
+                label="Username" helperText="Username already taken" id="outlined-size-normal" defaultValue="" variant="filled" />
             ) : (
-               <TextField
-              onChange={this.onChangeUsername}
-              style={{
-                width: "400px",
-              }}
-              id="filled-helperText"
-              label="Username"
-              defaultValue=""
-              helperText="You will use the username and password to login"
-              variant="filled"
-            />
+              <TextField
+                onChange={this.onChangeUsername}
+                style={{
+                  width: "400px",
+                }}
+                id="filled-helperText"
+                label="Username"
+                defaultValue=""
+                helperText="You will use the username and password to login"
+                variant="filled"
+              />
             )}
             <br />
             <TextField
@@ -243,18 +254,26 @@ class Registration extends Component {
                 onChange={this.onChangeEmail} style={{
                   width: "400px"
                 }}
-                label="Email" helperText="Another account is registered by this email" id="outlined-size-normal" defaultValue=""  variant="filled" />
+                label="Email" helperText="Another account is registered by this email" id="outlined-size-normal" defaultValue="" variant="filled" />
             ) : (
-               <TextField
-              onChange={this.onChangeEmail}
-              style={{
-                width: "400px",
-              }}
-              id="filled-helperText"
-              label="Email"
-              defaultValue=""
-              variant="filled"
-            />
+              ((EmailInForm === 'true')) ? (
+                <TextField
+                  onChange={this.onChangeEmail}
+                  style={{
+                    width: "400px",
+                  }}
+                  id="filled-helperText"
+                  label="Email"
+                  defaultValue=""
+                  variant="filled"
+                />
+              ) : (
+                <TextField error
+                  onChange={this.onChangeEmail} style={{
+                    width: "400px"
+                  }}
+                  label="Email" helperText="Email is not in the correct form (user@email.com)" id="outlined-size-normal" defaultValue="" variant="filled" />
+              )
             )}
             <br />
             <br />
@@ -270,22 +289,22 @@ class Registration extends Component {
             <br />
             <TextField onChange={this.onChangeCountryCode} style={{
               width: "400px",
-            }} label="Country Code" id="outlined-size-normal" defaultValue="" />
+            }} label="Country Code" id="outlined-size-normal" type="number" defaultValue="" />
             <br />
             <br />
             <TextField onChange={this.onChangeTeleNumber1} style={{
               width: "400px",
-            }} label="Telephone Number 1" id="outlined-size-normal" defaultValue="" />
+            }} label="Telephone Number 1" id="outlined-size-normal" type="number" defaultValue="" />
             <br />
             <br />
             <TextField onChange={this.onChangeTeleNumber2} style={{
               width: "400px",
-            }} label="Telephone Number 2 (optional)" id="outlined-size-normal" defaultValue="" />
+            }} label="Telephone Number 2 (optional)" id="outlined-size-normal" type="number" defaultValue="" />
             <br />
             <br />
             <TextField onChange={this.onChangeTeleNumber3} style={{
               width: "400px",
-            }} label="Telephone Number 3 (optional)" id="outlined-size-normal" defaultValue="" />
+            }} label="Telephone Number 3 (optional)" id="outlined-size-normal" type="number" defaultValue="" />
             <br />
             <br />
             <Button type="submit" style={{
