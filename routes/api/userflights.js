@@ -12,6 +12,11 @@ var transporter = nodemailer.createTransport({
     }
   });
 
+router.get('/:id', (req, res) => {
+	UserFlight.findById(req.params.id)
+	  .then(flight => res.json(flight))
+	  .catch(err => res.status(404).json({ noflightfound: 'No Flight found' }));
+  });
 
 router.get('/', (req, res) => {
   UserFlight.find()

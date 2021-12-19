@@ -38,17 +38,17 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-var nums = [];
+var flightnums = [];
+var buttonflag = 'false';
 
 class ReservedFlights extends Component {
   constructor(props) {
     super(props);
     this.state = {
       flights: [],
-      returnFlightID: '',
-      flight: {},
-      selectedReturnFlight: '',
-      userflight: {},
+      userflights: [],
+      selectedflight: {},
+      selectedflightID: '',
       openModal1: false,
       LoggedInUser: jwt.decode(localStorage.getItem('token'))
     };
@@ -59,11 +59,12 @@ class ReservedFlights extends Component {
     axios
       .get('http://localhost:8082/api/userflights')
       .then(res => {
-
-
+        this.setState({
+          userflights: res.data
+        })
         for (var i = 0; i < res.data.length; i++) {
           if (res.data[i].username === this.state.LoggedInUser.username) {
-            nums.push(res.data[i].flight_number);
+            flightnums.push(res.data[i].flight_number);
 
 
           }
@@ -74,8 +75,8 @@ class ReservedFlights extends Component {
             var data = [];
 
             for (var i = 0; i < res.data.length; i++) {
-              for (var j = 0; j < nums.length; j++) {
-                if (res.data[i].flight_number === nums[j]) {
+              for (var j = 0; j < flightnums.length; j++) {
+                if (res.data[i].flight_number === flightnums[j]) {
                   data.push(res.data[i]);
 
                 }
@@ -100,62 +101,42 @@ class ReservedFlights extends Component {
   };
 
   onChange2(x) {
+
     axios
-      .put('http://localhost:8082/api/flights/search', { _id: x })
+      .get('http://localhost:8082/api/userflights/'+ x )
       .then(res => {
-        this.setState({
-          selectedReturnFlight: res.data[0]
-        })
+        for(var i = 0;i < this.state.flights.length; i++)
+        {
+          if(res.data.flight_number === this.state.flights[i].flight_number)
+          {
+            this.setState({ selectedflight: this.state.flights[i] ,
+            selectedflightID: x})
+          }
+          
+    
+        }
       })
       .catch(err => {
         console.log('Error from ShowFlightList');
       })
-    this.state.returnFlightID = x;
-
-
-    axios
-      .get('http://localhost:8082/api/flights/' + this.state.returnFlightID)
-      .then(res => {
-        axios.get('http://localhost:8082/api/userflights')
-          .then(res => {
-            for (var i = 0; i < res.data.length; i++) {
-
-              if (res.data[i].flight_id == this.state.returnFlightID) {
-                this.setState({
-                  userflight: res.data[i]
-                })
-                break;
-              }
-            }
-          })
-          .catch(err => {
-            console.log("Error from ReservedShowFlightDetails12");
-          })
-
-        this.setState({
-          flight: res.data
-        })
-      })
-      .catch(err => {
-        console.log("Error from ReservedShowFlightDetails");
-      })
-
+    
+    buttonflag = 'true'
     this.forceUpdate()
+   
     
   };
 
   onClickButton1 = e => {
     e.preventDefault()
-
     this.setState({ openModal1: true })
   };
 
   onClickButton2 = e => {
 
-    const booked_seats = (this.state.selectedReturnFlight.booked_seats).split("-");
-    const seats_booked = (this.state.userflight.seats_booked).split("-");
-    console.log(booked_seats)
-    console.log(seats_booked)
+    // const booked_seats = (this.state.selectedReturnFlight.booked_seats).split("-");
+    // const seats_booked = (this.state.userflight.seats_booked).split("-");
+    // console.log(booked_seats)
+    // console.log(seats_booked)
 
     e.preventDefault()
 
@@ -178,7 +159,7 @@ class ReservedFlights extends Component {
               })
 
             axios
-              .delete('http://localhost:8082/api/userflights/' + this.state.userflight._id)
+              .delete('http://localhost:8082/api/userflights/' + this.state.selectedflightID)
               .then(res => {
                 window.location.reload(false);
               })
@@ -201,19 +182,18 @@ class ReservedFlights extends Component {
   }
 
   render() {
-    const flights = this.state.flights;
+    const flights = this.state.userflights;
     const columns = [
-      { field: 'flight_number', align: 'center', headerName: 'Flight Number', width: 120 },
-      { field: 'departure_airport', align: 'center', headerName: 'From', width: 230 },
-      { field: 'arrival_airport', align: 'center', headerName: 'To', width: 230 },
-      { field: 'departure_date', align: 'center', headerName: 'Departure Date', width: 150 },
-      { field: 'departure_time', align: 'center', headerName: 'Departure Time', width: 150 },
-      { field: 'arrival_date', align: 'center', headerName: 'Arrival Date', width: 150 },
-      { field: 'arrival_time', align: 'center', headerName: 'Arrival Time', width: 150 },
+      { field: 'booking_reference', align: 'center', headerName: 'Booking Reference', flex: 1},
+      { field: 'flight_number', align: 'center', headerName: 'Flight Number', flex: 1},
+      { field: 'cabin', align: 'center', headerName: 'Cabin', flex: 1},
+      { field: 'seats_booked', align: 'center', headerName: 'Seats', flex: 1},
+      { field: 'price', align: 'center', headerName: 'Price (EGP)', flex: 1},
+      
 
     ];
 
-    nums = [];
+    flightnums = [];
 
     return (
       <div className="ShowFlightList">
@@ -229,12 +209,22 @@ class ReservedFlights extends Component {
                 <Table aria-label="customized table">
                   <TableHead>
                     <TableRow>
-                      <StyledTableCell align="center">Seats</StyledTableCell>
+                      <StyledTableCell align="center">Departure Airport</StyledTableCell>
+                      <StyledTableCell align="center">Departure Date</StyledTableCell>
+                      <StyledTableCell align="center">Departure Time</StyledTableCell>
+                      <StyledTableCell align="center">Arrival Airport</StyledTableCell>
+                      <StyledTableCell align="center">Arrival Date</StyledTableCell>
+                      <StyledTableCell align="center">Arrival Time</StyledTableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     <StyledTableRow>
-                      <StyledTableCell align="center">{this.state.userflight.seats_booked}</StyledTableCell>
+                      <StyledTableCell align="center">{this.state.selectedflight.departure_airport}</StyledTableCell>
+                      <StyledTableCell align="center">{this.state.selectedflight.departure_date}</StyledTableCell>
+                      <StyledTableCell align="center">{this.state.selectedflight.departure_time}</StyledTableCell>
+                      <StyledTableCell align="center">{this.state.selectedflight.arrival_airport}</StyledTableCell>
+                      <StyledTableCell align="center">{this.state.selectedflight.arrival_date}</StyledTableCell>
+                      <StyledTableCell align="center">{this.state.selectedflight.arrival_time}</StyledTableCell>
                     </StyledTableRow>
                   </TableBody>
                 </Table>
@@ -256,7 +246,7 @@ class ReservedFlights extends Component {
             rowsPerPageOptions={[5]}
           />
           <br />
-          {((this.state.returnFlightID === '')) ? (
+          {((buttonflag == 'false')) ? (
             <Button style={{
               margin: "auto"
             }} variant="contained" disabled>
@@ -271,7 +261,7 @@ class ReservedFlights extends Component {
           )}
           &nbsp
           &nbsp
-          {((this.state.returnFlightID === '')) ? (
+          {((buttonflag == 'false')) ? (
             <Button style={{
               margin: "auto"
             }} variant="contained" disabled>
