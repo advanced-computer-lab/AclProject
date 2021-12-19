@@ -13,6 +13,9 @@ const airports = require('../airports.json');
 var flightAlreadyExists = 'false';
 var emptyField = 'false'
 
+var td = new Date();
+var today = td.getFullYear()+'-'+(td.getMonth()+1)+'-'+td.getDate();
+
 class CreateFlight extends Component {
   constructor() {
     super();
@@ -293,6 +296,7 @@ class CreateFlight extends Component {
               id="filled-textarea"
               label="Departure Date"
               type="date"
+              InputProps={{inputProps: {min: today}}}
               onFocus={this._onFocus} onBlur={this._onBlur}
               placeholder=""
               variant="outlined"

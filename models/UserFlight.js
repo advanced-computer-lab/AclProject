@@ -25,6 +25,10 @@ const UserFlightSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
+  booking_reference: {
+    type: Number,
+    required: true
+  }
 });
 
 module.exports = UserFlight = mongoose.model('userflight', UserFlightSchema);
