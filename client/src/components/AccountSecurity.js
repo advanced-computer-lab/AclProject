@@ -145,30 +145,35 @@ class AccountSecurity extends Component {
             {((wrongpassword === 'false')) ? (
               <TextField onChange={this.onChangeOldPassword} style={{
                 width: "400px",
-              }} label="Old Password" id="outlined-size-normal" />
+              }} label="Old Password" id="outlined-password-input"
+              type="password" />
             ) : (
 
               <TextField error onChange={this.onChangeOldPassword} style={{
                 width: "400px",
-              }} label="Old Password" helperText="Wrong Password" id="outlined-size-normal" />
+              }} label="Old Password" helperText="Wrong Password" id="outlined-password-input"
+              type="password" />
             )}
 
             <br />
             <br />
             <TextField onChange={this.onChangeNewPassword} style={{
               width: "400px",
-            }} label="New Password" id="outlined-size-normal" />
+            }} label="New Password"id="outlined-password-input"
+            type="password" />
             <br />
             <br />
             {((confirmpassword === 'false')) ? (
               <TextField onChange={this.onChangeConfirmPassword} style={{
                 width: "400px",
-              }} label="Confirm New Password" id="outlined-size-normal" />
+              }} label="Confirm New Password" id="outlined-password-input"
+              type="password" />
             ) : (
 
               <TextField error onChange={this.onChangeConfirmPassword} style={{
                 width: "400px",
-              }} label="Confirm New Password" helperText="Password Doesn't Match" id="outlined-size-normal" />
+              }} label="Confirm New Password" helperText="Password Doesn't Match" id="outlined-password-input"
+              type="password" />
             )}
             <br />
             <br />

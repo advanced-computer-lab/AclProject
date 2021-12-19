@@ -118,8 +118,8 @@ class Login extends Component {
                   width: "350px"
                 }}
                 id="outlined-password-input"
-                label="Password"
                 type="password"
+                label="Password"
                 autoComplete="current-password"
               />
             )}

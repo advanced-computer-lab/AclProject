@@ -141,7 +141,7 @@ class ReservedFlights extends Component {
       })
 
     this.forceUpdate()
-
+    
   };
 
   onClickButton1 = e => {
@@ -152,6 +152,11 @@ class ReservedFlights extends Component {
 
   onClickButton2 = e => {
 
+    const booked_seats = (this.state.selectedReturnFlight.booked_seats).split("-");
+    const seats_booked = (this.state.userflight.seats_booked).split("-");
+    console.log(booked_seats)
+    console.log(seats_booked)
+
     e.preventDefault()
 
     confirmAlert({
@@ -161,6 +166,7 @@ class ReservedFlights extends Component {
         {
           label: 'Yes',
           onClick: () => {
+
             axios
               .post('http://localhost:8082/api/userflights/sendemail', {email: jwt.decode(localStorage.getItem('token')).email})
               .then(res => {
@@ -179,6 +185,7 @@ class ReservedFlights extends Component {
               .catch(err => {
                 console.log("Error form ReservedShowFlightDetails_deleteClick");
               })
+
           }
 
         },
