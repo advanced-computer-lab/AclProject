@@ -250,17 +250,25 @@ class ReservedFlights extends Component {
   render() {
     const flights = this.state.userflights;
     const columns = [
-      { field: 'booking_reference', align: 'center', headerName: 'Booking Reference', flex: 1 },
-      { field: 'flight_number', align: 'center', headerName: 'Flight Number', flex: 1 },
-      { field: 'cabin', align: 'center', headerName: 'Cabin', flex: 1 },
-      { field: 'seats_booked', align: 'center', headerName: 'Seats', flex: 1 },
-      { field: 'price', align: 'center', headerName: 'Price (EGP)', flex: 1 },
+      { field: 'booking_reference', align: 'center', headerName: '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0Booking Reference', flex: 1 },
+      { field: 'flight_number', align: 'center', headerName: '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0Flight Number', flex: 1 },
+      { field: 'cabin', align: 'center', headerName: '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0Cabin', flex: 1 },
+      { field: 'seats_booked', align: 'center', headerName: '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0Seats', flex: 1 },
+      { field: 'price', align: 'center', headerName: '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0Price (EGP)', flex: 1 },
 
 
     ];
 
     flightnums = [];
-
+    const selectedflight = this.state.selectedflight;
+    var depDate1;
+    var arrDate1;
+    if (selectedflight.departure_date !== undefined){
+      depDate1 = selectedflight.departure_date.substring(0, 10)
+    }
+    if(selectedflight.arrival_date !== undefined){
+      arrDate1 = selectedflight.arrival_date.substring(0, 10)
+    }
     return (
       <div className="ShowFlightList">
         <div className="FlightsTable">
@@ -286,10 +294,10 @@ class ReservedFlights extends Component {
                   <TableBody>
                     <StyledTableRow>
                       <StyledTableCell align="center">{this.state.selectedflight.departure_airport}</StyledTableCell>
-                      <StyledTableCell align="center">{this.state.selectedflight.departure_date}</StyledTableCell>
+                      <StyledTableCell align="center">{depDate1}</StyledTableCell>
                       <StyledTableCell align="center">{this.state.selectedflight.departure_time}</StyledTableCell>
                       <StyledTableCell align="center">{this.state.selectedflight.arrival_airport}</StyledTableCell>
-                      <StyledTableCell align="center">{this.state.selectedflight.arrival_date}</StyledTableCell>
+                      <StyledTableCell align="center">{arrDate1}</StyledTableCell>
                       <StyledTableCell align="center">{this.state.selectedflight.arrival_time}</StyledTableCell>
                     </StyledTableRow>
                   </TableBody>
@@ -316,7 +324,7 @@ class ReservedFlights extends Component {
             <Button style={{
               margin: "auto"
             }} variant="contained" disabled>
-              Select a Reservation
+              Cancel Reservation
             </Button>
           ) : (
             <Button style={{
@@ -325,13 +333,16 @@ class ReservedFlights extends Component {
               Cancel Reservation
             </Button>
           )}
-          &nbsp
-          &nbsp
+          &nbsp;
+          &nbsp;
+          &nbsp;
+          &nbsp;
+          &nbsp;
           {((buttonflag == 'false')) ? (
             <Button style={{
               margin: "auto"
             }} variant="contained" disabled>
-              Select a Reservation
+              More Details
             </Button>
           ) : (
             <Button style={{
