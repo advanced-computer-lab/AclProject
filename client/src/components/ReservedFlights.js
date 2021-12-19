@@ -40,6 +40,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 var flightnums = [];
 var buttonflag = 'false';
+var stringseats = '';
 
 class ReservedFlights extends Component {
   constructor(props) {
@@ -48,7 +49,7 @@ class ReservedFlights extends Component {
       flights: [],
       userflights: [],
       selectedflight: {},
-      selectedflightID: '',
+      selecteduserflight: {},
       openModal1: false,
       LoggedInUser: jwt.decode(localStorage.getItem('token'))
     };
@@ -103,27 +104,25 @@ class ReservedFlights extends Component {
   onChange2(x) {
 
     axios
-      .get('http://localhost:8082/api/userflights/'+ x )
+      .get('http://localhost:8082/api/userflights/' + x)
       .then(res => {
-        for(var i = 0;i < this.state.flights.length; i++)
-        {
-          if(res.data.flight_number === this.state.flights[i].flight_number)
-          {
-            this.setState({ selectedflight: this.state.flights[i] ,
-            selectedflightID: x})
+        for (var i = 0; i < this.state.flights.length; i++) {
+          if (res.data.flight_number === this.state.flights[i].flight_number) {
+            this.setState({
+              selectedflight: this.state.flights[i],
+              selecteduserflight: res.data,
+            })
           }
-          
-    
+
+
         }
       })
       .catch(err => {
         console.log('Error from ShowFlightList');
       })
-    
+
     buttonflag = 'true'
     this.forceUpdate()
-   
-    
   };
 
   onClickButton1 = e => {
@@ -132,14 +131,7 @@ class ReservedFlights extends Component {
   };
 
   onClickButton2 = e => {
-
-    // const booked_seats = (this.state.selectedReturnFlight.booked_seats).split("-");
-    // const seats_booked = (this.state.userflight.seats_booked).split("-");
-    // console.log(booked_seats)
-    // console.log(seats_booked)
-
     e.preventDefault()
-
     confirmAlert({
       title: 'Confirmation',
       message: 'Are you sure that you want to cancel this reservation?',
@@ -149,7 +141,7 @@ class ReservedFlights extends Component {
           onClick: () => {
 
             axios
-              .post('http://localhost:8082/api/userflights/sendemail', {email: jwt.decode(localStorage.getItem('token')).email})
+              .post('http://localhost:8082/api/userflights/sendemail', { email: jwt.decode(localStorage.getItem('token')).email })
               .then(res => {
                 console.log('here')
                 window.location.reload(false);
@@ -159,13 +151,86 @@ class ReservedFlights extends Component {
               })
 
             axios
-              .delete('http://localhost:8082/api/userflights/' + this.state.selectedflightID)
+              .delete('http://localhost:8082/api/userflights/' + this.state.selecteduserflight._id)
               .then(res => {
                 window.location.reload(false);
               })
               .catch(err => {
                 console.log("Error form ReservedShowFlightDetails_deleteClick");
               })
+
+              const booked_seats = (this.state.selectedflight.booked_seats).split("-");
+              const seats_booked = (this.state.selecteduserflight.seats_booked).split("-")
+              const new_booked_seats = []
+              const increment = seats_booked.length
+          
+              for (var i = 0; i < booked_seats.length; i++) {
+                if (booked_seats[i] === seats_booked[0]) {
+                  i = i + (seats_booked.length - 1)
+                }
+                else {
+                  new_booked_seats.push(booked_seats[i])
+                }
+                
+              }
+              for(var j = 0;j < new_booked_seats.length; j++)
+              {
+                stringseats += new_booked_seats[j];
+                if((j+1) < new_booked_seats.length)
+                stringseats += '-';
+              }
+          
+          
+              if(this.state.selecteduserflight.cabin === 'Business')
+              { const data = {
+                booked_seats: stringseats,
+                available_business_seats: (parseInt(this.state.selectedflight.available_business_seats) + increment).toString()
+              }
+          
+              axios
+              .put('http://localhost:8082/api/flights/' + this.state.selectedflight._id, data)
+              .then(res => {
+               
+              })
+              .catch(err => {
+                console.log("Error in UpdateFlightInfo!");
+              })
+              
+            }
+
+            if(this.state.selecteduserflight.cabin === 'Economy')
+              { const data = {
+                booked_seats: stringseats,
+                available_economy_seats: (parseInt(this.state.selectedflight.available_economy_seats) + increment).toString()
+              }
+          
+              axios
+              .put('http://localhost:8082/api/flights/' + this.state.selectedflight._id, data)
+              .then(res => {
+               
+              })
+              .catch(err => {
+                console.log("Error in UpdateFlightInfo!");
+              })
+              
+            }
+
+            if(this.state.selecteduserflight.cabin === 'First')
+              { const data = {
+                booked_seats: stringseats,
+                available_first_seats: (parseInt(this.state.selectedflight.available_first_seats) + increment).toString()
+              } 
+          
+              axios
+              .put('http://localhost:8082/api/flights/' + this.state.selectedflight._id, data)
+              .then(res => {
+               
+              })
+              .catch(err => {
+                console.log("Error in UpdateFlightInfo!");
+              })
+              
+            }
 
           }
 
@@ -174,6 +239,7 @@ class ReservedFlights extends Component {
           label: 'No',
         }
       ]
+      
     });
   }
 
@@ -184,12 +250,12 @@ class ReservedFlights extends Component {
   render() {
     const flights = this.state.userflights;
     const columns = [
-      { field: 'booking_reference', align: 'center', headerName: 'Booking Reference', flex: 1},
-      { field: 'flight_number', align: 'center', headerName: 'Flight Number', flex: 1},
-      { field: 'cabin', align: 'center', headerName: 'Cabin', flex: 1},
-      { field: 'seats_booked', align: 'center', headerName: 'Seats', flex: 1},
-      { field: 'price', align: 'center', headerName: 'Price (EGP)', flex: 1},
-      
+      { field: 'booking_reference', align: 'center', headerName: 'Booking Reference', flex: 1 },
+      { field: 'flight_number', align: 'center', headerName: 'Flight Number', flex: 1 },
+      { field: 'cabin', align: 'center', headerName: 'Cabin', flex: 1 },
+      { field: 'seats_booked', align: 'center', headerName: 'Seats', flex: 1 },
+      { field: 'price', align: 'center', headerName: 'Price (EGP)', flex: 1 },
+
 
     ];
 
