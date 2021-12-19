@@ -87,17 +87,17 @@ class ReservationSummary extends Component {
 
     const myArray = (window.location.pathname).split("/");
 
-    const departureData = {
-      departure_airport: myArray[2].replace(/%20/g, " "),
-      arrival_airport: myArray[3].replace(/%20/g, " "),
-      departure_date: myArray[4],
-    };
+    // const departureData = {
+    //   departure_airport: myArray[2].replace(/%20/g, " "),
+    //   arrival_airport: myArray[3].replace(/%20/g, " "),
+    //   departure_date: myArray[4],
+    // };
 
-    const returnData = {
-      departure_airport: myArray[3].replace(/%20/g, " "),
-      arrival_airport: myArray[2].replace(/%20/g, " "),
-      departure_date: myArray[5],
-    };
+    // const returnData = {
+    //   departure_airport: myArray[3].replace(/%20/g, " "),
+    //   arrival_airport: myArray[2].replace(/%20/g, " "),
+    //   departure_date: myArray[5],
+    // };
 
 
     axios
@@ -139,7 +139,8 @@ class ReservationSummary extends Component {
       flight_id: this.state.departureFlight._id,
       seats_booked: myArray[19],
       cabin: selectedCabin,
-      price: this.state.priceDeparture
+      price: this.state.priceDeparture,
+      booking_reference: Math.floor(Math.pow(10, 9) + Math.random() * 9 * Math.pow(10, 9))
     };
 
     const returnData = {
@@ -148,7 +149,8 @@ class ReservationSummary extends Component {
       flight_id: this.state.returnFlight._id,
       seats_booked: myArray[20],
       cabin: selectedCabin,
-      price: this.state.priceReturn
+      price: this.state.priceReturn,
+      booking_reference: Math.floor(Math.pow(10, 9) + Math.random() * 9 * Math.pow(10, 9))
     };
 
     var newBookedSeatsDeparture;
