@@ -40,6 +40,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 var flightnums = [];
 var tabledata = [];
+var tabledataR = [];
+var tabledataD = [];
 var buttonflag = 'false';
 var stringseats = '';
 
@@ -49,6 +51,8 @@ class ReservedFlights extends Component {
     this.state = {
       flights: [],
       userflights: [],
+      userflightsD: [],
+      userflightsR: [],
       selectedflight: {},
       selecteduserflight: {},
       openModal1: false,
@@ -70,9 +74,19 @@ class ReservedFlights extends Component {
 
           }
         }
+
+        for(var i = 0; i < tabledata.length; i++)
+        {
+          if(tabledata[i].booking_reference[((tabledata[i].booking_reference).length) -1] === 'D')
+          tabledataD.push(tabledata[i]);
+          if(tabledata[i].booking_reference[((tabledata[i].booking_reference).length) -1] === 'R')
+          tabledataR.push(tabledata[i]);
+        }
         
         this.setState({
-          userflights: tabledata
+          userflights: tabledata,
+          userflightsD: tabledataD,
+          userflightsR: tabledataR
         })
 
         axios.get('http://localhost:8082/api/flights').then(
@@ -253,6 +267,9 @@ class ReservedFlights extends Component {
 
   render() {
     const flights = this.state.userflights;
+    const flightsD = this.state.userflightsD;
+    const flightsR = this.state.userflightsR;
+
     const columns = [
       { field: 'booking_reference', align: 'center', headerName: '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0Booking Reference', flex: 1 },
       { field: 'flight_number', align: 'center', headerName: '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0Flight Number', flex: 1 },
@@ -276,9 +293,8 @@ class ReservedFlights extends Component {
     return (
       <div className="ShowFlightList">
         <div className="FlightsTable">
-          <br />
-          <br />
-          <br />
+         
+        
           <div>
             <Modal styles={{ modal: { width: "100%", overflowX: "hidden" } }} open={this.state.openModal1} onClose={this.onCloseModal1}>
               <br />
@@ -309,14 +325,21 @@ class ReservedFlights extends Component {
               </TableContainer>
             </Modal>
           </div>
+          <br />
+          <div style={{
+              margin: "auto"
+            }} className="HeaderReservations">
+              <h1>Departure Flights</h1>
+            </div>
+            <br />
           <DataGrid
             style={{
-              height: "550px",
+              height: "300px",
               margin: "auto",
               backgroundColor: "white"
             }}
             onSelectionModelChange={itm => this.onChange2(itm)}
-            rows={flights}
+            rows={flightsD}
 
             getRowId={(row) => row._id}
             columns={columns}
@@ -324,6 +347,27 @@ class ReservedFlights extends Component {
             rowsPerPageOptions={[5]}
           />
           <br />
+          <div style={{
+              margin: "auto"
+            }} className="HeaderReservations">
+              <h1>Return Flights</h1>
+            </div>
+            <br />
+          <DataGrid
+            style={{
+              height: "300px",
+              margin: "auto",
+              backgroundColor: "white"
+            }}
+            onSelectionModelChange={itm => this.onChange2(itm)}
+            rows={flightsR}
+
+            getRowId={(row) => row._id}
+            columns={columns}
+            pageSize={5}
+            rowsPerPageOptions={[5]}
+          />
+           <br />
           {((buttonflag == 'false')) ? (
             <Button style={{
               margin: "auto"
@@ -337,11 +381,11 @@ class ReservedFlights extends Component {
               Cancel Reservation
             </Button>
           )}
-          &nbsp;
-          &nbsp;
-          &nbsp;
-          &nbsp;
-          &nbsp;
+          &nbsp
+          &nbsp
+          &nbsp
+          &nbsp
+          &nbsp
           {((buttonflag == 'false')) ? (
             <Button style={{
               margin: "auto"

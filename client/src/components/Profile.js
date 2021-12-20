@@ -59,7 +59,7 @@ class Profile extends Component {
         <div style={{ display: 'flex' }}>
         <Card elevation={0}
         style={{
-          width:"275px",
+         width:"550px",
           backgroundColor: "white",
         }}
       >
@@ -76,11 +76,13 @@ class Profile extends Component {
           </Typography>
         </CardContent>
       </Card> 
-
+      </div>
+      <div style={{ display: 'flex' }}>
       <Card elevation={0}
         style={{
-          width:"275px",
+          width:"550px",
           backgroundColor: "white",
+          
         }}
       >
         <CardContent>

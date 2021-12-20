@@ -139,6 +139,13 @@ body {
   background-color: rgb(255, 255, 255);
 }
 
+.HeaderReservations {
+  width: 562px;
+  padding: 10px;
+  text-align: center;
+  color: #000000;
+}
+
 .row {
   width: 100%;
   margin: auto;
@@ -323,7 +330,7 @@ body {
 
 .backgroundBoxProfile {
   margin: auto;
-  height: 650px;
+  height: 785px;
   width: 550px;
   border-color: rgb(0, 0, 0);
   border-style: solid;
