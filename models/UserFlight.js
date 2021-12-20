@@ -26,7 +26,7 @@ const UserFlightSchema = new mongoose.Schema({
     required: true
   },
   booking_reference: {
-    type: Number,
+    type: String,
     required: true
   }
 });

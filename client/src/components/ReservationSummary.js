@@ -126,6 +126,8 @@ class ReservationSummary extends Component {
 
   onToken = e => {
 
+    const booking_r = Math.floor(Math.pow(10, 9) + Math.random() * 9 * Math.pow(10, 9));
+
     if (jwt.decode(localStorage.getItem('token')) === null) {
       window.location.href = "http://localhost:3000/not-authorized";
     }
@@ -140,7 +142,7 @@ class ReservationSummary extends Component {
       seats_booked: myArray[19],
       cabin: selectedCabin,
       price: this.state.priceDeparture,
-      booking_reference: Math.floor(Math.pow(10, 9) + Math.random() * 9 * Math.pow(10, 9))
+      booking_reference: booking_r + "D"
     };
 
     const returnData = {
@@ -150,7 +152,7 @@ class ReservationSummary extends Component {
       seats_booked: myArray[20],
       cabin: selectedCabin,
       price: this.state.priceReturn,
-      booking_reference: Math.floor(Math.pow(10, 9) + Math.random() * 9 * Math.pow(10, 9))
+      booking_reference: booking_r + "R"
     };
 
     var newBookedSeatsDeparture;
