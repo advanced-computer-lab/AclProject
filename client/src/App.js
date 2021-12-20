@@ -30,6 +30,7 @@ import SeatsSelectionReturn from './components/SeatsSelectionReturn';
 import ReservationSummary from './components/ReservationSummary';
 import FlightReserved from './components/FlightReserved';
 import ChangeReservation from './components/ChangeReservation';
+import ChangeSeats from './components/ChangeSeats';
 
 class App extends Component {
   render() {
@@ -42,7 +43,7 @@ class App extends Component {
           <Route path='/select-flights' component={SelectFlights} />
           <Route path='/change-flight' component={ChangeFlight} />
           <Route path='/seats-selection-departure' component={SeatsSelectionDeparture} />
-		  <Route path='/flight-reserved' component={FlightReserved} />
+          <Route path='/flight-reserved' component={FlightReserved} />
           <Route path='/reservation-summary' component={ReservationSummary} />
           <Route path='/seats-selection-return' component={SeatsSelectionReturn} />
           <Route path='/create-flight' component={CreateFlight} />
@@ -61,10 +62,11 @@ class App extends Component {
           <Route path='/admin-show-flight/:id' component={AdminShowFlightDetails} />
           <Route path='/reserved-flights/' component={ReservedFlights} />
           <Route path='/change-reservation/' component={ChangeReservation} />
+          <Route path='/change-seats/' component={ChangeSeats} />
           <Route path='/ReservedFlightSummary/' component={ReservedFlightSummary} />
           <Route path='/reserved-show-flight/:id' component={ReservedShowFlightDetails} />
         </div>
-		<Footer />
+        <Footer />
       </Router>
     );
   }

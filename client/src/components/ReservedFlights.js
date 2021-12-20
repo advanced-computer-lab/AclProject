@@ -57,6 +57,9 @@ class ReservedFlights extends Component {
       selectedflight: {},
       selecteduserflight: {},
       openModal1: false,
+      selectedCabin: '',
+      availableNewSeats: '',
+      numberOfSeats: '',
       LoggedInUser: jwt.decode(localStorage.getItem('token'))
     };
   }
@@ -127,11 +130,12 @@ class ReservedFlights extends Component {
         for (var i = 0; i < this.state.flights.length; i++) {
           if (res.data.flight_number === this.state.flights[i].flight_number) {
             this.setState({
+              availableNewSeats: '',
               selectedflight: this.state.flights[i],
               selecteduserflight: res.data,
+              selectedCabin: this.state.selecteduserflight.cabin
             })
           }
-
 
         }
       })
@@ -269,7 +273,28 @@ class ReservedFlights extends Component {
     const flights = this.state.userflights;
     const flightsD = this.state.userflightsD;
     const flightsR = this.state.userflightsR;
+    var chars;
+    var chars2;
+    if (this.state.selectedflight.booked_seats !== undefined && this.state.selecteduserflight.seats_booked !== undefined){
+      chars = this.state.selectedflight.booked_seats.split('-');
+      chars2 = this.state.selecteduserflight.seats_booked.split('-');
+      var removeSeat = false;
+      this.state.numberOfSeats = chars2.length;
+      console.log(chars)
+    for (var i = 0; i < chars.length; i++){
+      removeSeat = false;
+      for (var ii = 0; ii < chars2.length; ii++){
+       if (chars[i] === chars2[ii]){
+          removeSeat = true;
+       }
+      }
+      if (removeSeat === false){
+        this.state.availableNewSeats = this.state.availableNewSeats + "-" + chars[i] + "-";
+      }
+    }
+    }
     const changeReservationLink = '/change-reservation'+ '/'+(this.state.selectedflight.departure_airport)+'/'+(this.state.selectedflight.arrival_airport)+'/'+(this.state.selecteduserflight._id);
+    const changeSeatsLink = '/change-seats/'+ this.state.selectedflight._id + "/" + this.state.selectedflight.economy_seats_number + "/" + this.state.selectedflight.business_seats_number + "/" + this.state.selectedflight.first_seats_number + "/" + this.state.availableNewSeats + "/" + this.state.selectedCabin + "/" + this.state.numberOfSeats;
     const columns = [
       { field: 'booking_reference', align: 'center', headerName: '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0Booking Reference', flex: 1 },
       { field: 'flight_number', align: 'center', headerName: '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0Flight Number', flex: 1 },
@@ -410,7 +435,7 @@ class ReservedFlights extends Component {
             ) : (
               <Button style={{
                 margin: "35px"
-              }} variant="contained">
+              }} href={changeSeatsLink} variant="contained">
                 Change Seats
               </Button>
             )}
