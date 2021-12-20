@@ -38,10 +38,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-var flightnums = [];
-var tabledata = [];
-var tabledataR = [];
-var tabledataD = [];
+let result = ('/change-reservation');
+const changeReservationLink = result;
+
+var flightnums = []; //used to display flight info
+var tabledata = []; //used to display booking in table
+var tabledataR = []; //used to display booking in table
+var tabledataD = []; //used to display booking in table
 var buttonflag = 'false';
 var stringseats = '';
 
@@ -75,14 +78,13 @@ class ReservedFlights extends Component {
           }
         }
 
-        for(var i = 0; i < tabledata.length; i++)
-        {
-          if(tabledata[i].booking_reference[((tabledata[i].booking_reference).length) -1] === 'D')
-          tabledataD.push(tabledata[i]);
-          if(tabledata[i].booking_reference[((tabledata[i].booking_reference).length) -1] === 'R')
-          tabledataR.push(tabledata[i]);
+        for (var i = 0; i < tabledata.length; i++) {
+          if (tabledata[i].booking_reference[((tabledata[i].booking_reference).length) - 1] === 'D')
+            tabledataD.push(tabledata[i]);
+          if (tabledata[i].booking_reference[((tabledata[i].booking_reference).length) - 1] === 'R')
+            tabledataR.push(tabledata[i]);
         }
-        
+
         this.setState({
           userflights: tabledata,
           userflightsD: tabledataD,
@@ -104,7 +106,7 @@ class ReservedFlights extends Component {
             this.setState({
               flights: data
             })
-           
+
           }
 
         ).catch(err => {
@@ -148,6 +150,7 @@ class ReservedFlights extends Component {
     this.setState({ openModal1: true })
   };
 
+
   onClickButton2 = e => {
     e.preventDefault()
     confirmAlert({
@@ -177,77 +180,76 @@ class ReservedFlights extends Component {
                 console.log("Error form ReservedShowFlightDetails_deleteClick");
               })
 
-              const booked_seats = (this.state.selectedflight.booked_seats).split("-");
-              const seats_booked = (this.state.selecteduserflight.seats_booked).split("-")
-              const new_booked_seats = []
-              const increment = seats_booked.length
-          
-              for (var i = 0; i < booked_seats.length; i++) {
-                if (booked_seats[i] === seats_booked[0]) {
-                  i = i + (seats_booked.length - 1)
-                }
-                else {
-                  new_booked_seats.push(booked_seats[i])
-                }
-                
+            const booked_seats = (this.state.selectedflight.booked_seats).split("-");
+            const seats_booked = (this.state.selecteduserflight.seats_booked).split("-")
+            const new_booked_seats = []
+            const increment = seats_booked.length
+
+            for (var i = 0; i < booked_seats.length; i++) {
+              if (booked_seats[i] === seats_booked[0]) {
+                i = i + (seats_booked.length - 1)
               }
-              for(var j = 0;j < new_booked_seats.length; j++)
-              {
-                stringseats += new_booked_seats[j];
-                if((j+1) < new_booked_seats.length)
+              else {
+                new_booked_seats.push(booked_seats[i])
+              }
+
+            }
+            for (var j = 0; j < new_booked_seats.length; j++) {
+              stringseats += new_booked_seats[j];
+              if ((j + 1) < new_booked_seats.length)
                 stringseats += '-';
-              }
-          
-          
-              if(this.state.selecteduserflight.cabin === 'Business')
-              { const data = {
+            }
+
+
+            if (this.state.selecteduserflight.cabin === 'Business') {
+              const data = {
                 booked_seats: stringseats,
                 available_business_seats: (parseInt(this.state.selectedflight.available_business_seats) + increment).toString()
               }
-          
+
               axios
-              .put('http://localhost:8082/api/flights/' + this.state.selectedflight._id, data)
-              .then(res => {
-               
-              })
-              .catch(err => {
-                console.log("Error in UpdateFlightInfo!");
-              })
-              
+                .put('http://localhost:8082/api/flights/' + this.state.selectedflight._id, data)
+                .then(res => {
+
+                })
+                .catch(err => {
+                  console.log("Error in UpdateFlightInfo!");
+                })
+
             }
 
-            if(this.state.selecteduserflight.cabin === 'Economy')
-              { const data = {
+            if (this.state.selecteduserflight.cabin === 'Economy') {
+              const data = {
                 booked_seats: stringseats,
                 available_economy_seats: (parseInt(this.state.selectedflight.available_economy_seats) + increment).toString()
               }
-          
+
               axios
-              .put('http://localhost:8082/api/flights/' + this.state.selectedflight._id, data)
-              .then(res => {
-               
-              })
-              .catch(err => {
-                console.log("Error in UpdateFlightInfo!");
-              })
-              
+                .put('http://localhost:8082/api/flights/' + this.state.selectedflight._id, data)
+                .then(res => {
+
+                })
+                .catch(err => {
+                  console.log("Error in UpdateFlightInfo!");
+                })
+
             }
 
-            if(this.state.selecteduserflight.cabin === 'First')
-              { const data = {
+            if (this.state.selecteduserflight.cabin === 'First') {
+              const data = {
                 booked_seats: stringseats,
                 available_first_seats: (parseInt(this.state.selectedflight.available_first_seats) + increment).toString()
-              } 
-          
+              }
+
               axios
-              .put('http://localhost:8082/api/flights/' + this.state.selectedflight._id, data)
-              .then(res => {
-               
-              })
-              .catch(err => {
-                console.log("Error in UpdateFlightInfo!");
-              })
-              
+                .put('http://localhost:8082/api/flights/' + this.state.selectedflight._id, data)
+                .then(res => {
+
+                })
+                .catch(err => {
+                  console.log("Error in UpdateFlightInfo!");
+                })
+
             }
 
           }
@@ -257,7 +259,7 @@ class ReservedFlights extends Component {
           label: 'No',
         }
       ]
-      
+
     });
   }
 
@@ -280,21 +282,21 @@ class ReservedFlights extends Component {
 
     ];
 
-    
+
     const selectedflight = this.state.selectedflight;
     var depDate1;
     var arrDate1;
-    if (selectedflight.departure_date !== undefined){
+    if (selectedflight.departure_date !== undefined) {
       depDate1 = selectedflight.departure_date.substring(0, 10)
     }
-    if(selectedflight.arrival_date !== undefined){
+    if (selectedflight.arrival_date !== undefined) {
       arrDate1 = selectedflight.arrival_date.substring(0, 10)
     }
     return (
       <div className="ShowFlightList">
         <div className="FlightsTable">
-         
-        
+
+
           <div>
             <Modal styles={{ modal: { width: "100%", overflowX: "hidden" } }} open={this.state.openModal1} onClose={this.onCloseModal1}>
               <br />
@@ -327,11 +329,11 @@ class ReservedFlights extends Component {
           </div>
           <br />
           <div style={{
-              margin: "auto"
-            }} className="HeaderReservations">
-              <h1>Departure Flights</h1>
-            </div>
-            <br />
+            margin: "auto"
+          }} className="HeaderReservations">
+            <h1>Departure Flights</h1>
+          </div>
+          <br />
           <DataGrid
             style={{
               height: "300px",
@@ -348,11 +350,11 @@ class ReservedFlights extends Component {
           />
           <br />
           <div style={{
-              margin: "auto"
-            }} className="HeaderReservations">
-              <h1>Return Flights</h1>
-            </div>
-            <br />
+            margin: "auto"
+          }} className="HeaderReservations">
+            <h1>Return Flights</h1>
+          </div>
+          <br />
           <DataGrid
             style={{
               height: "300px",
@@ -367,41 +369,71 @@ class ReservedFlights extends Component {
             pageSize={5}
             rowsPerPageOptions={[5]}
           />
-           <br />
-          {((buttonflag == 'false')) ? (
-            <Button style={{
-              margin: "auto"
-            }} variant="contained" disabled>
-              Cancel Reservation
-            </Button>
-          ) : (
-            <Button style={{
-              margin: "auto"
-            }} onClick={this.onClickButton2} variant="contained">
-              Cancel Reservation
-            </Button>
-          )}
-          &nbsp
-          &nbsp
-          &nbsp
-          &nbsp
-          &nbsp
-          {((buttonflag == 'false')) ? (
-            <Button style={{
-              margin: "auto"
-            }} variant="contained" disabled>
-              More Details
-            </Button>
-          ) : (
-            <Button style={{
-              margin: "auto"
-            }} onClick={this.onClickButton1} variant="contained">
-              More Details
-            </Button>
-          )}
-          <br />
-          <br />
-          <br />
+
+          <div style={{
+
+          }}>
+
+            {((buttonflag == 'false')) ? (
+              <Button style={{
+
+                margin: "35px"
+              }} variant="contained" disabled>
+                Cancel Reservation
+              </Button>
+            ) : (
+              <Button style={{
+                margin: "35px"
+              }} onClick={this.onClickButton2} variant="contained">
+                Cancel Reservation
+              </Button>
+            )}
+
+            {((buttonflag == 'false')) ? (
+              <Button style={{
+                margin: "35px"
+              }} variant="contained" disabled>
+                Change Reservation
+              </Button>
+            ) : (
+              <Button href={changeReservationLink} style={{
+                margin: "35px"
+              }} variant="contained">
+                Change Reservation
+              </Button>
+            )}
+
+            {((buttonflag == 'false')) ? (
+              <Button style={{
+                margin: "35px"
+              }} variant="contained" disabled>
+                Change Seats
+              </Button>
+            ) : (
+              <Button  style={{
+                margin: "35px"
+              }} variant="contained">
+                Change Seats
+              </Button>
+            )}
+
+            {((buttonflag == 'false')) ? (
+              <Button style={{
+                margin: "35px"
+              }} variant="contained" disabled>
+                More Details
+              </Button>
+            ) : (
+              <Button style={{
+                margin: "35px"
+              }} onClick={this.onClickButton1} variant="contained">
+                More Details
+              </Button>
+            )}
+          </div>
+
+
+
         </div>
       </div>
     );
