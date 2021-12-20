@@ -39,6 +39,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 var flightnums = [];
+var tabledata = [];
 var buttonflag = 'false';
 var stringseats = '';
 
@@ -60,16 +61,19 @@ class ReservedFlights extends Component {
     axios
       .get('http://localhost:8082/api/userflights')
       .then(res => {
-        this.setState({
-          userflights: res.data
-        })
         for (var i = 0; i < res.data.length; i++) {
           if (res.data[i].username === this.state.LoggedInUser.username) {
             flightnums.push(res.data[i].flight_number);
+            tabledata.push(res.data[i])
+
 
 
           }
         }
+        
+        this.setState({
+          userflights: tabledata
+        })
 
         axios.get('http://localhost:8082/api/flights').then(
           res => {
@@ -86,7 +90,7 @@ class ReservedFlights extends Component {
             this.setState({
               flights: data
             })
-
+           
           }
 
         ).catch(err => {
@@ -259,7 +263,7 @@ class ReservedFlights extends Component {
 
     ];
 
-    flightnums = [];
+    
     const selectedflight = this.state.selectedflight;
     var depDate1;
     var arrDate1;
