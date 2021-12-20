@@ -225,6 +225,13 @@ body {
   color: #f7f5f5;
 }
 
+.Homepage-2 {
+  margin: auto;
+  min-height: 100vh;
+  background:#000000;
+  color: #f7f5f5;
+}
+
 .together {
   margin: auto;
   display: flex;
@@ -238,6 +245,8 @@ body {
   background-color: rgb(0, 0, 0);
   text-align: center;
 }
+
+
 
 .HomepageRow {
   margin: auto;

@@ -38,8 +38,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-let result = ('/change-reservation');
-const changeReservationLink = result;
 
 var flightnums = []; //used to display flight info
 var tabledata = []; //used to display booking in table
@@ -271,13 +269,13 @@ class ReservedFlights extends Component {
     const flights = this.state.userflights;
     const flightsD = this.state.userflightsD;
     const flightsR = this.state.userflightsR;
-
+    const changeReservationLink = '/change-reservation'+ '/'+(this.state.selectedflight.departure_airport)+'/'+(this.state.selectedflight.arrival_airport)+'/'+(this.state.selecteduserflight._id);
     const columns = [
       { field: 'booking_reference', align: 'center', headerName: '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0Booking Reference', flex: 1 },
       { field: 'flight_number', align: 'center', headerName: '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0Flight Number', flex: 1 },
       { field: 'cabin', align: 'center', headerName: '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0Cabin', flex: 1 },
       { field: 'seats_booked', align: 'center', headerName: '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0Seats', flex: 1 },
-      { field: 'price', align: 'center', headerName: '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0Price (EGP)', flex: 1 },
+      { field: 'price', align: 'center', headerName: '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0Price (LE)', flex: 1 },
 
 
     ];
@@ -410,7 +408,7 @@ class ReservedFlights extends Component {
                 Change Seats
               </Button>
             ) : (
-              <Button  style={{
+              <Button style={{
                 margin: "35px"
               }} variant="contained">
                 Change Seats

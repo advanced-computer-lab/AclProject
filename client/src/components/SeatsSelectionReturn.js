@@ -38,7 +38,7 @@ for (var ii = 0; ii < myArray5.length; ii++){
 }
 
 var previousPage2 = (arr3).replace("/seats-selection-return", "select-flights");
-console.log('pp ' + previousPage)
+
 const steps = [
     <Link to={previousPage2}>Select departure and return flights</Link>,
     <Link to={previousPage}>Select plane seats</Link>,
