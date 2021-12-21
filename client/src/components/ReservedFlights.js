@@ -38,7 +38,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-
+var numberOfp = ''; //number of passengers for selected userflight
 var flightnums = []; //used to display flight info
 var tabledata = []; //used to display booking in table
 var tabledataR = []; //used to display booking in table
@@ -278,9 +278,9 @@ class ReservedFlights extends Component {
     if (this.state.selectedflight.booked_seats !== undefined && this.state.selecteduserflight.seats_booked !== undefined){
       chars = this.state.selectedflight.booked_seats.split('-');
       chars2 = this.state.selecteduserflight.seats_booked.split('-');
+      numberOfp = chars2.length;
       var removeSeat = false;
       this.state.numberOfSeats = chars2.length;
-      console.log(chars)
     for (var i = 0; i < chars.length; i++){
       removeSeat = false;
       for (var ii = 0; ii < chars2.length; ii++){
@@ -293,7 +293,7 @@ class ReservedFlights extends Component {
       }
     }
     }
-    const changeReservationLink = '/change-reservation'+ '/'+(this.state.selectedflight.departure_airport)+'/'+(this.state.selectedflight.arrival_airport)+'/'+(this.state.selecteduserflight._id);
+    const changeReservationLink = '/change-reservation'+ '/'+(this.state.selectedflight.departure_airport)+'/'+(this.state.selectedflight.arrival_airport)+'/'+ numberOfp + '/'+(this.state.selecteduserflight._id);
     const changeSeatsLink = '/change-seats/'+ this.state.selectedflight._id + "/" + this.state.selectedflight.economy_seats_number + "/" + this.state.selectedflight.business_seats_number + "/" + this.state.selectedflight.first_seats_number + "/" + this.state.availableNewSeats + "/" + this.state.selectedCabin + "/" + this.state.numberOfSeats;
     const columns = [
       { field: 'booking_reference', align: 'center', headerName: '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0Booking Reference', flex: 1 },

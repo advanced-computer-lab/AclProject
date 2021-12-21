@@ -16,8 +16,6 @@ var airports = window.location.pathname;
 var pathlist=[];
 var td = new Date();
 var today = td.getFullYear()+'-'+(td.getMonth()+1)+'-'+td.getDate();
-const numberOfAdults = [1, 2, 3, 4, 5];
-const numberOfChildreen = [0, 1, 2, 3, 4, 5];
 var emptyField = 'false';
 
 class ChangeReservation extends Component {
@@ -27,7 +25,6 @@ class ChangeReservation extends Component {
        arrival_airport:'',
         departure_airport:'',
         departure_date: '',
-        return_date: '',
         adults_number: 1,
         children_number: 0,
         cabin: '',
@@ -38,9 +35,11 @@ class ChangeReservation extends Component {
   componentDidMount() {
    airports = (airports).replace("/change-reservation/", "")
    pathlist = airports.split('/');
+   console.log(pathlist)
    this.setState({
             departure_airport: (pathlist[0]).replaceAll("%20"," "),
-            arrival_airport: (pathlist[1]).replaceAll("%20"," ")
+            arrival_airport: (pathlist[1]).replaceAll("%20"," "),
+            adults_number: pathlist[2]
         });
 
   };
@@ -59,13 +58,6 @@ class ChangeReservation extends Component {
     this.forceUpdate()
   };
 
-  onChangeReturnDate = e => {
-    this.setState({ [e.target.name]: e.target.value });
-    this.state.return_date = e.target.value
-    emptyField = 'false'
-    this.forceUpdate()
-  };
-
   onSubmit = e => {
     e.preventDefault();
 
@@ -73,13 +65,12 @@ class ChangeReservation extends Component {
       departure_airport: this.state.departure_airport,
       arrival_airport: this.state.arrival_airport,
       departure_date: this.state.departure_date,
-      return_date: this.state.return_date,
       adults_number: this.state.adults_number,
       children_number: this.state.children_number,
       cabin: this.state.cabin
     };
 
-    if (this.state.return_date === '' || this.state.adults_number === '' || this.state.children_number === '' || this.state.cabin === '' || this.state.departure_airport === null || this.state.arrival_airport === null || this.state.return_date === null || this.state.adults_number === null || this.state.children_number === null || this.state.cabin === null) {
+    if (this.state.cabin === '' || this.state.departure_airport === null || this.state.arrival_airport === null || this.state.adults_number === null || this.state.children_number === null || this.state.cabin === null) {
       emptyField = 'true';
       this.forceUpdate()
     }
@@ -89,7 +80,7 @@ class ChangeReservation extends Component {
         .get('http://localhost:8082/api/flights/', data)
         .then(res => {
           console.log(data.departure_airport + '/' + data.arrival_airport + '/' + data.departure_date + '/' + data.return_date + '/' + data.adults_number + '/' + data.children_number + '/' + data.cabin)
-          window.location.assign('http://localhost:3000/change-flight/' + data.departure_airport + '/' + data.arrival_airport + '/' + data.departure_date + '/' + data.return_date + '/' + data.adults_number + '/' + data.children_number + '/' + data.cabin +'/'+pathlist[2]);
+          window.location.assign('http://localhost:3000/change-flight/' + data.departure_airport + '/' + data.arrival_airport + '/' + data.departure_date + '/' + data.adults_number + '/' + data.children_number + '/' + data.cabin+'/'+pathlist[3]);
         })
         .catch(err => {
           console.log("Error in FindFlight!");
@@ -142,98 +133,10 @@ class ChangeReservation extends Component {
                     shrink: true,
                   }}
                 />
-                <TextField
-                  style={{
-                    width: "165px",
-                    margin: "auto",
-                    backgroundColor: "white"
-                  }}
-                  id="filled-textarea"
-                  label="Return Date"
-                  type="date"
-                  InputProps={{inputProps: {min: this.state.departure_date}}}
-                  onFocus={this._onFocus} onBlur={this._onBlur}
-                  placeholder=""
-                  variant="filled"
-                  onChange={this.onChangeReturnDate}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-              </div>
-
-              <div className="together">
-                <Autocomplete
-                  style={{
-                    width: "165px",
-                    margin: "auto",
-                    backgroundColor: "white"
-                  }}
-                  id="size-large-filled"
-                  size="large"
-                  options={numberOfAdults}
-                  getOptionLabel={(option) => option}
-                  defaultValue="1"
-                  onChange={(ev, value) => {
-                    this.state.adults_number = value
-                  }}
-                  renderTags={(value, getTagProps) =>
-                    value.map((option, index) => (
-                      <Chip
-                        variant="outlined"
-                        label={value}
-                        size="large"
-                        {...getTagProps({ index })}
-                      />
-                    ))
-                  }
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      variant="filled"
-                      label="# of Adults"
-                      placeholder=""
-                    />
-                  )}
-                />
-
-                <Autocomplete
-                  style={{
-                    width: "165px",
-                    margin: "auto",
-                    backgroundColor: "white"
-                  }}
-                  id="size-large-filled"
-                  size="large"
-                  options={numberOfChildreen}
-                  defaultValue="0"
-                  getOptionLabel={(option) => option}
-                  onChange={(ev, value) => {
-                    this.state.children_number = value
-                  }}
-                  renderTags={(value, getTagProps) =>
-                    value.map((option, index) => (
-                      <Chip
-                        variant="outlined"
-                        label={value}
-                        size="large"
-                        {...getTagProps({ index })}
-                      />
-                    ))
-                  }
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      variant="filled"
-                      label="# of Children"
-                      placeholder=""
-                    />
-                  )}
-                />
               </div>
             </div>
 
-            <div className="HomepageRadioButtons">
+            <div className="HomepageRadioButtons-2">
                 <RadioGroup row aria-label="Cabin" onChange={this.onChange2} name="row-radio-buttons-group">
                   <FormControlLabel style={{ paddingLeft: '18px', paddingTop: '5px' }} value="Economy" control={<Radio />} label="Economy" />
                   <FormControlLabel style={{paddingTop: '5px' }}value="Business" control={<Radio />} label="Business" />

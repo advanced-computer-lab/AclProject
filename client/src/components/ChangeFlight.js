@@ -44,8 +44,8 @@ const steps = [
   'Summary and confirmation',
 ];
 
-var selectedCabin = ((window.location.pathname).split("/"))[8]
-var userflightID = ((window.location.pathname).split("/"))[9]
+var selectedCabin = ((window.location.pathname).split("/"))[7]
+var userflightID = ((window.location.pathname).split("/"))[8]
 var selectedField;
 var numberOfPassengers = parseInt(((window.location.pathname).split("/"))[6]) + parseInt(((window.location.pathname).split("/"))[7])
 
@@ -89,6 +89,7 @@ class ChangeFlight extends Component {
       departureFlightID: '',
       selectedDepartureFlight: '',
       openModal1: false,
+      openModal2: false,
       selectedPriceDeparture: '',
       oldPrice: '',
       selectedBaggageAllowanceDeparture: '',
@@ -118,8 +119,19 @@ class ChangeFlight extends Component {
     this.setState({ openModal1: true })
   }
 
+  onClickButton2 = e => {
+    e.preventDefault()
+    this.forceUpdate()
+    this.setState({ openModal2: true })
+
+  }
+
   onCloseModal1 = () => {
     this.setState({ openModal1: false })
+  }
+
+  onCloseModal2 = () => {
+    this.setState({ openModal2: false })
   }
 
   componentDidMount() {
@@ -155,37 +167,37 @@ class ChangeFlight extends Component {
         console.log('Error from ShowFlightList');
       })
 
-      axios
-      .get('http://localhost:8082/api/userflights/' + userflightID )
+    axios
+      .get('http://localhost:8082/api/userflights/' + userflightID)
       .then(res => {
         let flightID = res.data.flight_id;
         let cabin = res.data.cabin;
-        
+
         axios
-        .get('http://localhost:8082/api/flights/' + flightID)
-        .then(res => {
-          if (cabin === 'Economy') {
-            this.setState({
-              oldPrice: res.data.price_economy
-            }) 
-          }
-          
-          else if (cabin === 'Business') {
-            this.setState({
-              oldPrice: res.data.price_business
-            }) 
-          }
-          
-          else {
-            this.setState({
-              oldPrice: res.data.price_first
-            }) 
-          }
-          console.log(this.state.oldPrice)
-        })
-        .catch(err => {
-          console.log('Error from ShowFlightListInside');
-        })
+          .get('http://localhost:8082/api/flights/' + flightID)
+          .then(res => {
+            if (cabin === 'Economy') {
+              this.setState({
+                oldPrice: res.data.price_economy
+              })
+            }
+
+            else if (cabin === 'Business') {
+              this.setState({
+                oldPrice: res.data.price_business
+              })
+            }
+
+            else {
+              this.setState({
+                oldPrice: res.data.price_first
+              })
+            }
+            console.log(this.state.oldPrice)
+          })
+          .catch(err => {
+            console.log('Error from ShowFlightListInside');
+          })
       })
       .catch(err => {
         console.log('Error from ShowFlightList');
@@ -223,14 +235,14 @@ class ChangeFlight extends Component {
     var selectedPriceDeparture;
     var depDate1;
     var arrDate1;
-  
-    if (selectedDepartureFlight.departure_date !== undefined){
+
+    if (selectedDepartureFlight.departure_date !== undefined) {
       depDate1 = selectedDepartureFlight.departure_date.substring(0, 10)
     }
-    if(selectedDepartureFlight.arrival_date !== undefined){
+    if (selectedDepartureFlight.arrival_date !== undefined) {
       arrDate1 = selectedDepartureFlight.arrival_date.substring(0, 10)
     }
-   
+
     if (selectedCabin === 'Economy') {
       this.state.selectedBaggageAllowanceDeparture = selectedDepartureFlight.baggage_allowance_economy
       this.state.selectedPriceDeparture = selectedDepartureFlight.price_economy
@@ -245,9 +257,9 @@ class ChangeFlight extends Component {
       this.state.selectedPriceDeparture = selectedDepartureFlight.price_first
     }
     this.state.selectedCabin = selectedCabin;
-  
+
     let result = (window.location.pathname).replace("select-flights", "seats-selection-departure");
-    const SeatsSelectionLink = result + "/" + this.state.departureFlightID + "/"  + selectedDepartureFlight.economy_seats_number + "/" + selectedDepartureFlight.business_seats_number + "/" + selectedDepartureFlight.first_seats_number + "/" + selectedDepartureFlight.booked_seats;
+    const SeatsSelectionLink = result + "/" + this.state.departureFlightID + "/" + selectedDepartureFlight.economy_seats_number + "/" + selectedDepartureFlight.business_seats_number + "/" + selectedDepartureFlight.first_seats_number + "/" + selectedDepartureFlight.booked_seats;
 
     return (
       <div className="SelectFlights">
@@ -266,14 +278,15 @@ class ChangeFlight extends Component {
 
         <div className="row">
           <div className="block">
-            <div style={{margin: "auto", width:"600px"
+            <div style={{
+              margin: "auto", width: "600px"
             }} className="HeaderSelectFlight">
               <h1>Select Flight</h1>
             </div>
 
             <DataGrid
               style={{
-               
+
                 height: "375px",
                 margin: "auto",
                 backgroundColor: "white"
@@ -288,15 +301,29 @@ class ChangeFlight extends Component {
             <br />
             {((this.state.departureFlightID === '')) ? (
               <Button style={{
-                margin: "auto"
+                margin: "15px"
               }} variant="contained" disabled>
                 Show flight details
               </Button>
             ) : (
               <Button style={{
-                margin: "auto"
+                margin: "15 px"
               }} onClick={this.onClickButton1} variant="contained">
                 Show flight details
+              </Button>
+            )}
+
+            {((this.state.departureFlightID === '')) ? (
+              <Button style={{
+                margin: "15 px"
+              }} variant="contained" disabled>
+                Calculate Price Difference
+              </Button>
+            ) : (
+              <Button style={{
+                margin: "15 px"
+              }} onClick={this.onClickButton2} variant="contained">
+                Calculate Price Difference
               </Button>
             )}
             <br />
@@ -308,10 +335,10 @@ class ChangeFlight extends Component {
         </div>
 
         <div>
-        <Modal styles={{modal: {width: "100%", overflowX: "hidden"}}} open={this.state.openModal1} onClose={this.onCloseModal1}>
+          <Modal styles={{ modal: { width: "100%", overflowX: "hidden" } }} open={this.state.openModal1} onClose={this.onCloseModal1}>
             <br />
             <br />
-            <TableContainer style={{width: "100%", overflowX: "hidden"}} component={Paper}>
+            <TableContainer style={{ width: "100%", overflowX: "hidden" }} component={Paper}>
               <Table aria-label="customized table">
                 <TableHead>
                   <TableRow>
@@ -337,6 +364,30 @@ class ChangeFlight extends Component {
                     <StyledTableCell align="center">{selectedDepartureFlight.trip_duration}</StyledTableCell>
                     <StyledTableCell align="center">{this.state.selectedCabin}</StyledTableCell>
                     <StyledTableCell align="center">{this.state.selectedBaggageAllowanceDeparture}</StyledTableCell>
+                    {/* <StyledTableCell align="center">{this.state.selectedPriceDeparture}LE</StyledTableCell> */}
+                  </StyledTableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Modal>
+        </div>
+
+        <div>
+          <Modal styles={{ modal: { width: "100%", overflowX: "hidden" } }} open={this.state.openModal2} onClose={this.onCloseModal2}>
+            <br />
+            <br />
+            <TableContainer style={{ width: "100%", overflowX: "hidden" }} component={Paper}>
+              <Table aria-label="customized table">
+                <TableHead>
+                  <TableRow>
+                    <StyledTableCell align="center">Price Difference</StyledTableCell>
+                    {/* <StyledTableCell align="center">Price</StyledTableCell> */}
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+
+                  <StyledTableRow key={selectedDepartureFlight._id}>
+                    <StyledTableCell align="center" component="th" scope="row">{    this.state.oldPrice - this.state.selectedPriceDeparture}</StyledTableCell>
                     {/* <StyledTableCell align="center">{this.state.selectedPriceDeparture}LE</StyledTableCell> */}
                   </StyledTableRow>
                 </TableBody>
