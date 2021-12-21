@@ -48,6 +48,7 @@ var selectedCabin = ((window.location.pathname).split("/"))[7]
 var userflightID = ((window.location.pathname).split("/"))[8]
 var selectedField;
 var numberOfPassengers = parseInt(((window.location.pathname).split("/"))[6]) + parseInt(((window.location.pathname).split("/"))[7])
+var type = '';
 
 if (selectedCabin === 'Economy') {
   selectedField = 'price_economy'
@@ -261,6 +262,18 @@ class ChangeFlight extends Component {
     let result = (window.location.pathname).replace("select-flights", "seats-selection-departure");
     const SeatsSelectionLink = result + "/" + this.state.departureFlightID + "/" + selectedDepartureFlight.economy_seats_number + "/" + selectedDepartureFlight.business_seats_number + "/" + selectedDepartureFlight.first_seats_number + "/" + selectedDepartureFlight.booked_seats;
 
+    const price = parseInt(this.state.selectedPriceDeparture);
+    const oldprice = parseInt(this.state.oldPrice);
+    var priceD =  this.state.oldPrice - this.state.selectedPriceDeparture;
+    if(price < oldprice )
+    {
+      type = 'To be refunded';
+    }
+    else{
+      type = 'To pay';
+      priceD*= -1;
+
+    }
     return (
       <div className="SelectFlights">
         <br />
@@ -381,13 +394,15 @@ class ChangeFlight extends Component {
                 <TableHead>
                   <TableRow>
                     <StyledTableCell align="center">Price Difference</StyledTableCell>
+                    <StyledTableCell align="center"></StyledTableCell>
                     {/* <StyledTableCell align="center">Price</StyledTableCell> */}
                   </TableRow>
                 </TableHead>
                 <TableBody>
 
                   <StyledTableRow key={selectedDepartureFlight._id}>
-                    <StyledTableCell align="center" component="th" scope="row">{    this.state.oldPrice - this.state.selectedPriceDeparture}</StyledTableCell>
+                    <StyledTableCell align="center" component="th" scope="row">{priceD}</StyledTableCell>
+                    <StyledTableCell align="center" component="th" scope="row">{type}</StyledTableCell>
                     {/* <StyledTableCell align="center">{this.state.selectedPriceDeparture}LE</StyledTableCell> */}
                   </StyledTableRow>
                 </TableBody>
