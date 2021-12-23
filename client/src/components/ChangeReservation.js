@@ -13,37 +13,49 @@ import Alert from '@mui/material/Alert';
 import jwt from 'jsonwebtoken';
 
 var airports = window.location.pathname;
-var pathlist=[];
+var pathlist = [];
 var td = new Date();
-var today = td.getFullYear()+'-'+(td.getMonth()+1)+'-'+td.getDate();
+var today = td.getFullYear() + '-' + (td.getMonth() + 1) + '-' + td.getDate();
 var emptyField = 'false';
-
 class ChangeReservation extends Component {
   constructor(props) {
     super(props);
     this.state = {
-       arrival_airport:'',
-        departure_airport:'',
-        departure_date: '',
-        adults_number: 1,
-        children_number: 0,
-        cabin: '',
+      arrival_airport: '',
+      departure_airport: '',
+      departure_date: '',
+      adults_number: 1,
+      children_number: 0,
+      cabin: '',
+      selectedFlight: '',
       LoggedInUser: jwt.decode(localStorage.getItem('token'))
     };
   }
 
   componentDidMount() {
-   airports = (airports).replace("/change-reservation/", "")
-   pathlist = airports.split('/');
-   console.log(pathlist)
-   this.setState({
-            departure_airport: (pathlist[0]).replaceAll("%20"," "),
-            arrival_airport: (pathlist[1]).replaceAll("%20"," "),
-            adults_number: pathlist[2]
-        });
+    airports = (airports).replace("/change-reservation/", "")
+    pathlist = airports.split('/');
+    console.log(pathlist)
+    this.setState({
+      departure_airport: (pathlist[0]).replaceAll("%20", " "),
+      arrival_airport: (pathlist[1]).replaceAll("%20", " "),
+      adults_number: pathlist[2]
+    });
+
+    axios
+      .put('http://localhost:8082/api/flights/search', { _id: ((window.location.pathname).split("/"))[7] })
+      .then(res => {
+        this.setState({
+          selectedFlight: res.data[0]
+        })
+        console.log("aa " + this.state.selectedFlight.business_seats_number)
+      })
+      .catch(err => {
+        console.log('Error from ShowFlightList');
+      })
 
   };
-  
+
   onChange2 = e => {
     this.setState({ [e.target.name]: e.target.value });
     this.state.cabin = e.target.value
@@ -60,7 +72,6 @@ class ChangeReservation extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-
     const data = {
       departure_airport: this.state.departure_airport,
       arrival_airport: this.state.arrival_airport,
@@ -79,30 +90,30 @@ class ChangeReservation extends Component {
       axios
         .get('http://localhost:8082/api/flights/', data)
         .then(res => {
-          console.log(data.departure_airport + '/' + data.arrival_airport + '/' + data.departure_date + '/' + data.return_date + '/' + data.adults_number + '/' + data.children_number + '/' + data.cabin)
-          window.location.assign('http://localhost:3000/change-flight/' + data.departure_airport + '/' + data.arrival_airport + '/' + data.departure_date + '/' + data.adults_number + '/' + data.children_number + '/' + data.cabin+'/'+pathlist[3]);
+          let result = (window.location.pathname).replace("change-reservation", "change-flight");
+          window.location.assign(result + "/" + data.departure_date + '/' + data.cabin);
         })
         .catch(err => {
           console.log("Error in FindFlight!");
         })
     }
   };
-  
+
   render() {
-  
+
     return (
-     
-        <div className="changeReservation">
-          <br />
-          <br />
-          <br />
-          <div className="backgroundLabelChangeReservation">
+
+      <div className="changeReservation">
+        <br />
+        <br />
+        <br />
+        <div className="backgroundLabelChangeReservation">
           <b>Change Reservation</b>
         </div>
         <div className="backgroundBoxChangeReservation">
           <b style={{
             fontSize: "50px",
-            color:"black"
+            color: "black"
           }}>Search For Alternative Flight</b>
           <br />
           <form noValidate onSubmit={this.onSubmit}>
@@ -128,7 +139,7 @@ class ChangeReservation extends Component {
                   id="filled-textarea"
                   label={"Depart Date"}
                   type="date"
-                  InputProps={{inputProps: {min: today}}}
+                  InputProps={{ inputProps: { min: today } }}
                   onFocus={this._onFocus} onBlur={this._onBlur}
                   placeholder=""
                   variant="filled"
@@ -141,23 +152,23 @@ class ChangeReservation extends Component {
             </div>
 
             <div className="HomepageRadioButtons-2">
-                <RadioGroup row aria-label="Cabin" onChange={this.onChange2} name="row-radio-buttons-group">
-                  <FormControlLabel style={{ paddingLeft: '18px', paddingTop: '5px' }} value="Economy" control={<Radio />} label="Economy" />
-                  <FormControlLabel style={{paddingTop: '5px' }}value="Business" control={<Radio />} label="Business" />
-                  <FormControlLabel style={{paddingTop: '5px' }} value="First" control={<Radio />} label="First" />
-                </RadioGroup>
+              <RadioGroup row aria-label="Cabin" onChange={this.onChange2} name="row-radio-buttons-group">
+                <FormControlLabel style={{ paddingLeft: '18px', paddingTop: '5px' }} value="Economy" control={<Radio />} label="Economy" />
+                <FormControlLabel style={{ paddingTop: '5px' }} value="Business" control={<Radio />} label="Business" />
+                <FormControlLabel style={{ paddingTop: '5px' }} value="First" control={<Radio />} label="First" />
+              </RadioGroup>
             </div>
 
             <br />
             <Button type="submit" variant="contained" startIcon={<FlightIcon />}>
               Find Flights
-            </Button>   
+            </Button>
 
           </form>
           <br />
           <br />
         </div>
-        </div>
+      </div>
     );
   }
 }

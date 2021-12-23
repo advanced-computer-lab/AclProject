@@ -32,6 +32,8 @@ import FlightReserved from './components/FlightReserved';
 import ChangeReservation from './components/ChangeReservation';
 import ChangeSeats from './components/ChangeSeats';
 import ChangeSeats2 from './components/ChangeSeats2';
+import SeatsSelectionWhenChangingFlight from './components/SeatsSelectionWhenChangingFlight';
+import ChangeFlightSummary from './components/ChangeFlightSummary';
 
 class App extends Component {
   render() {
@@ -43,7 +45,9 @@ class App extends Component {
           <Route exact path='/login' component={Login} />
           <Route path='/select-flights' component={SelectFlights} />
           <Route path='/change-flight' component={ChangeFlight} />
+		  <Route path='/seats-selection-when-changing-flight' component={SeatsSelectionWhenChangingFlight} />
           <Route path='/seats-selection-departure' component={SeatsSelectionDeparture} />
+		  <Route path='/change-flight-summary' component={ChangeFlightSummary} />
           <Route path='/flight-reserved' component={FlightReserved} />
           <Route path='/reservation-summary' component={ReservationSummary} />
           <Route path='/seats-selection-return' component={SeatsSelectionReturn} />
