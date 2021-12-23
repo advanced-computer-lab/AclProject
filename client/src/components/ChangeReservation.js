@@ -92,12 +92,17 @@ class ChangeReservation extends Component {
   
     return (
      
-        <div className="Homepage-2">
-        <div className="container-fluid">
+        <div className="changeReservation">
           <br />
           <br />
+          <br />
+          <div className="backgroundLabelChangeReservation">
+          <b>Change Reservation</b>
+        </div>
+        <div className="backgroundBoxChangeReservation">
           <b style={{
-            fontSize: "50px"
+            fontSize: "50px",
+            color:"black"
           }}>Search For Alternative Flight</b>
           <br />
           <form noValidate onSubmit={this.onSubmit}>
@@ -112,12 +117,11 @@ class ChangeReservation extends Component {
             ) : (
               <br />
             )}
-            <br />
             <div class="HomepageRow">
               <div className="together">
                 <TextField
                   style={{
-                    width: "165px",
+                    width: "330px",
                     margin: "auto",
                     backgroundColor: "white"
                   }}
@@ -153,7 +157,7 @@ class ChangeReservation extends Component {
           <br />
           <br />
         </div>
-      </div>
+        </div>
     );
   }
 }

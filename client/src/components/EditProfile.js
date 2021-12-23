@@ -84,6 +84,15 @@ class EditProfile extends Component {
     axios
       .put('http://localhost:8082/api/users/'+this.state.id, data)
       .then(res => {
+        const token = jwt.sign(
+          {
+            id: this.state.LoggedInUser._id,
+            username: this.state.LoggedInUser.username,
+            email: this.state.email,
+          },
+          'secret123'
+        )
+        localStorage.setItem('token', token)
         this.props.history.push('/profile');
       })
       .catch(err => {
