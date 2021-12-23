@@ -11,6 +11,7 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
+import Button from '@mui/material/Button';
 import StepLabel from '@mui/material/StepLabel';
 import { styled } from '@mui/material/styles';
 import jwt from 'jsonwebtoken'
@@ -407,7 +408,7 @@ class ReservationSummary extends Component {
           stripeKey="pk_test_51K6u4OGxGwnu0rJwX9bgwFSvMrTcivqO65wFVtfyNCX55gq0Idy4mq15RjSdRv9KTRhBx1DuYdq9mKuFQyATyrkB003DSAH9Yk"
           billingAddress={false}
           shippingAddress={false}>
-          <button style={{width:"180px", height:"50px", fontSize:"25px", textAlign:"center"}} className="btn btn-primary">Pay By Card</button>
+          <Button style={{height:"60px", width:"200px", fontSize:"23px", fontWeight:"bold"}}variant="contained">Pay By Card</Button>
         </StripeCheckout>
         <br />
         <br />
