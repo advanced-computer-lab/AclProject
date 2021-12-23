@@ -18,6 +18,10 @@ import StepLabel from '@mui/material/StepLabel';
 import { styled } from '@mui/material/styles';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 
+var theSame = false;
+var type;
+var oldPrice = parseInt(((window.location.pathname).split("/"))[10]);
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -44,11 +48,10 @@ const steps = [
   'Summary and confirmation',
 ];
 
-var selectedCabin = ((window.location.pathname).split("/"))[7]
+var selectedCabin = ((window.location.pathname).split("/"))[13]
 var userflightID = ((window.location.pathname).split("/"))[8]
 var selectedField;
-var numberOfPassengers = parseInt(((window.location.pathname).split("/"))[6]) + parseInt(((window.location.pathname).split("/"))[7])
-var type = '';
+var numberOfPassengers = parseInt(((window.location.pathname).split("/"))[4])
 
 if (selectedCabin === 'Economy') {
   selectedField = 'price_economy'
@@ -87,12 +90,14 @@ class ChangeFlight extends Component {
     super(props);
     this.state = {
       departureFlights: [],
+      departureFlights2: [],
       departureFlightID: '',
       selectedDepartureFlight: '',
       openModal1: false,
       openModal2: false,
       selectedPriceDeparture: '',
-      oldPrice: '',
+      priceD: '',
+      priceDdisplayed: '',
       selectedBaggageAllowanceDeparture: '',
       selectedCabin: ''
     };
@@ -105,6 +110,17 @@ class ChangeFlight extends Component {
         this.setState({
           selectedDepartureFlight: res.data[0]
         })
+
+        if (parseInt(this.state.selectedPriceDeparture) - parseInt(oldPrice) > 0){
+          type = "To pay";
+        }
+        else if(parseInt(this.state.selectedPriceDeparture) - parseInt(oldPrice) < 0){
+          type = "To be refunded";
+        }
+        else {
+          type = "No price difference";
+        }
+        
       })
       .catch(err => {
         console.log('Error from ShowFlightList');
@@ -151,10 +167,15 @@ class ChangeFlight extends Component {
       departureFlightID: this.state.departureFlightID
     };
 
+    if (myArray[7] === myArray[13] && myArray[8] === myArray[12]) {
+      console.log("THE SAME FLIGHT")
+      theSame = true;
+    }
+
     const departureData = {
       departure_airport: myArray[2].replace(/%20/g, " "),
       arrival_airport: myArray[3].replace(/%20/g, " "),
-      departure_date: myArray[4],
+      departure_date: myArray[12],
     };
 
     axios
@@ -163,6 +184,25 @@ class ChangeFlight extends Component {
         this.setState({
           departureFlights: res.data
         })
+
+        if (theSame === true && this.state.departureFlights.length > 0) {
+          for (var z = 0; z < this.state.departureFlights.length; z++) {
+            if (this.state.departureFlights[z]._id === myArray[6]) {
+              console.log("true")
+            }
+            else {
+              this.state.departureFlights2[z] = this.state.departureFlights[z]
+            }
+          }
+        }
+        else {
+          for (var z = 0; z < this.state.departureFlights.length; z++) {
+            this.state.departureFlights2[z] = this.state.departureFlights[z]
+          }
+        }
+        this.state.departureFlights = this.state.departureFlights2;
+        this.forceUpdate();
+
       })
       .catch(err => {
         console.log('Error from ShowFlightList');
@@ -173,37 +213,11 @@ class ChangeFlight extends Component {
       .then(res => {
         let flightID = res.data.flight_id;
         let cabin = res.data.cabin;
-
-        axios
-          .get('http://localhost:8082/api/flights/' + flightID)
-          .then(res => {
-            if (cabin === 'Economy') {
-              this.setState({
-                oldPrice: res.data.price_economy
-              })
-            }
-
-            else if (cabin === 'Business') {
-              this.setState({
-                oldPrice: res.data.price_business
-              })
-            }
-
-            else {
-              this.setState({
-                oldPrice: res.data.price_first
-              })
-            }
-            console.log(this.state.oldPrice)
-          })
-          .catch(err => {
-            console.log('Error from ShowFlightListInside');
-          })
+        console.log(cabin)
       })
       .catch(err => {
         console.log('Error from ShowFlightList');
       })
-
   };
 
 
@@ -259,21 +273,20 @@ class ChangeFlight extends Component {
     }
     this.state.selectedCabin = selectedCabin;
 
-    let result = (window.location.pathname).replace("select-flights", "seats-selection-departure");
-    const SeatsSelectionLink = result + "/" + this.state.departureFlightID + "/" + selectedDepartureFlight.economy_seats_number + "/" + selectedDepartureFlight.business_seats_number + "/" + selectedDepartureFlight.first_seats_number + "/" + selectedDepartureFlight.booked_seats;
-
-    const price = parseInt(this.state.selectedPriceDeparture);
-    const oldprice = parseInt(this.state.oldPrice);
-    var priceD =  this.state.oldPrice - this.state.selectedPriceDeparture;
-    if(price < oldprice )
-    {
-      type = 'To be refunded';
+    this.state.priceD = oldPrice - this.state.selectedPriceDeparture;
+    if (String(this.state.priceD).charAt(0) === '-') {
+      this.state.priceDdisplayed = String(oldPrice - this.state.selectedPriceDeparture).substring(1);
     }
-    else{
-      type = 'To pay';
-      priceD*= -1;
-
+    else {
+      this.state.priceDdisplayed = oldPrice - this.state.selectedPriceDeparture;
     }
+    console.log("old price " + oldPrice)
+    console.log(("new price " + this.state.selectedPriceDeparture));
+
+    let result = (window.location.pathname).replace("change-flight", "seats-selection-when-changing-flight");
+    this.state.priceD = this.state.priceD * -1;
+    const SeatsSelectionLink = result + "/" + this.state.selectedDepartureFlight._id + "/" + this.state.selectedDepartureFlight.economy_seats_number + "/" + this.state.selectedDepartureFlight.business_seats_number + "/" + this.state.selectedDepartureFlight.first_seats_number + "/" + this.state.selectedDepartureFlight.booked_seats + "/" + this.state.priceD;
+
     return (
       <div className="SelectFlights">
         <br />
@@ -401,7 +414,7 @@ class ChangeFlight extends Component {
                 <TableBody>
 
                   <StyledTableRow key={selectedDepartureFlight._id}>
-                    <StyledTableCell align="center" component="th" scope="row">{priceD}</StyledTableCell>
+                    <StyledTableCell align="center" component="th" scope="row">{this.state.priceDdisplayed}</StyledTableCell>
                     <StyledTableCell align="center" component="th" scope="row">{type}</StyledTableCell>
                     {/* <StyledTableCell align="center">{this.state.selectedPriceDeparture}LE</StyledTableCell> */}
                   </StyledTableRow>
@@ -410,14 +423,13 @@ class ChangeFlight extends Component {
             </TableContainer>
           </Modal>
         </div>
-
         {((this.state.departureFlightID === '')) ? (
           <Button variant="contained" disabled>
             Confirm Flights and Select Seats
           </Button>
         ) : (
-          <Button color="success" href={window.location.pathname} variant="contained">
-            Confirm Flights and Select Seats
+          <Button color="success" href={SeatsSelectionLink} variant="contained">
+            Confirm Flight and Select Seats
           </Button>
         )}
         <br />

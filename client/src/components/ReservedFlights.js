@@ -17,6 +17,7 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import EmailIcon from '@mui/icons-material/Email';
+import { integerPropType } from '@mui/utils';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -360,7 +361,17 @@ class ReservedFlights extends Component {
     console.log("Available new seats " + this.state.bookedSeatsWithoutSelectedReservation);
     console.log("Selected flight Selected Seats " + this.state.selecteduserflight.seats_booked)
     console.log("Selected Cabin " + this.state.selecteduserflight.cabin)
-    const changeReservationLink = '/change-reservation' + '/'+(this.state.selectedflight.departure_airport)+'/'+(this.state.selectedflight.arrival_airport)+'/'+ numberOfp + '/'+(this.state.selecteduserflight._id);
+    var date1;
+    var zz;
+    if (this.state.selectedflight.departure_date !== undefined){
+      date1 = this.state.selectedflight.departure_date.substring(0,10);
+    }
+
+    if (this.state.selecteduserflight.booking_reference !== undefined){
+      zz = this.state.selecteduserflight.booking_reference.slice(-1);
+    }
+
+    const changeReservationLink = '/change-reservation' + '/'+(this.state.selectedflight.departure_airport)+'/'+(this.state.selectedflight.arrival_airport)+'/'+ numberOfp + '/'+(this.state.selecteduserflight._id) + "/" + this.state.selectedflight._id + "/" + this.state.selecteduserflight.cabin + "/" + date1 + "/" + this.state.bookedSeatsWithoutSelectedReservation + "/" + (parseInt(this.state.selecteduserflight.price)/parseInt(numberOfp)) + "/" + zz;
     const changeSeatsLink = '/change-seats/'+ this.state.selectedflight._id + "/" + this.state.selectedflight.economy_seats_number + "/" + this.state.selectedflight.business_seats_number + "/" + this.state.selectedflight.first_seats_number + "/" + this.state.bookedSeatsWithoutSelectedReservation + "/" + this.state.selecteduserflight.cabin + "/" + this.state.numberOfSeats + "/" + this.state.selecteduserflight.booking_reference + "/" + this.state.selecteduserflight.seats_booked;
     const columns = [
       { field: 'booking_reference', align: 'center', headerName: '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0Booking Reference', flex: 1 },
