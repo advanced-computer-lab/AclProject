@@ -61,6 +61,7 @@ class ReservedFlights extends Component {
       selectedCabin: '',
       availableNewSeats: '',
       numberOfSeats: '',
+      bookedSeatsWithoutSelectedReservation: '',
       LoggedInUser: jwt.decode(localStorage.getItem('token'))
     };
   }
@@ -131,10 +132,9 @@ class ReservedFlights extends Component {
         for (var i = 0; i < this.state.flights.length; i++) {
           if (res.data.flight_number === this.state.flights[i].flight_number) {
             this.setState({
-              availableNewSeats: '',
+              bookedSeatsWithoutSelectedReservation: '',
               selectedflight: this.state.flights[i],
               selecteduserflight: res.data,
-              selectedCabin: this.state.selecteduserflight.cabin
             })
           }
 
@@ -339,12 +339,29 @@ class ReservedFlights extends Component {
           }
         }
         if (removeSeat === false) {
-          this.state.availableNewSeats = this.state.availableNewSeats + "-" + chars[i] + "-";
+          this.state.bookedSeatsWithoutSelectedReservation = this.state.bookedSeatsWithoutSelectedReservation + "-" + chars[i] + "-";
         }
       }
     }
-    const changeReservationLink = '/change-reservation' + '/' + (this.state.selectedflight.departure_airport) + '/' + (this.state.selectedflight.arrival_airport) + '/' + numberOfp + '/' + (this.state.selecteduserflight._id);
-    const changeSeatsLink = '/change-seats/' + this.state.selectedflight._id + "/" + this.state.selectedflight.economy_seats_number + "/" + this.state.selectedflight.business_seats_number + "/" + this.state.selectedflight.first_seats_number + "/" + this.state.availableNewSeats + "/" + this.state.selectedCabin + "/" + this.state.numberOfSeats;
+    var temp = "";
+    if (this.state.bookedSeatsWithoutSelectedReservation.charAt(0) === '-'){
+      this.state.bookedSeatsWithoutSelectedReservation = this.state.bookedSeatsWithoutSelectedReservation.substring(1);
+    }
+    for (var z = 0; z < this.state.bookedSeatsWithoutSelectedReservation.length-1; z++){
+      if(this.state.bookedSeatsWithoutSelectedReservation.charAt(z) === '-' && this.state.bookedSeatsWithoutSelectedReservation.charAt(z+1) === '-'){
+          temp = temp + this.state.bookedSeatsWithoutSelectedReservation.charAt(z);
+          z++;
+      }
+      else {
+        temp = temp + this.state.bookedSeatsWithoutSelectedReservation.charAt(z);
+      }
+    }
+    this.state.bookedSeatsWithoutSelectedReservation = temp;
+    console.log("Available new seats " + this.state.bookedSeatsWithoutSelectedReservation);
+    console.log("Selected flight Selected Seats " + this.state.selecteduserflight.seats_booked)
+    console.log("Selected Cabin " + this.state.selecteduserflight.cabin)
+    const changeReservationLink = '/change-reservation' + '/'+(this.state.selectedflight.departure_airport)+'/'+(this.state.selectedflight.arrival_airport)+'/'+ numberOfp + '/'+(this.state.selecteduserflight._id);
+    const changeSeatsLink = '/change-seats/'+ this.state.selectedflight._id + "/" + this.state.selectedflight.economy_seats_number + "/" + this.state.selectedflight.business_seats_number + "/" + this.state.selectedflight.first_seats_number + "/" + this.state.bookedSeatsWithoutSelectedReservation + "/" + this.state.selecteduserflight.cabin + "/" + this.state.numberOfSeats + "/" + this.state.selecteduserflight.booking_reference + "/" + this.state.selecteduserflight.seats_booked;
     const columns = [
       { field: 'booking_reference', align: 'center', headerName: '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0Booking Reference', flex: 1 },
       { field: 'flight_number', align: 'center', headerName: '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0Flight Number', flex: 1 },

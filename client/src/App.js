@@ -31,6 +31,7 @@ import ReservationSummary from './components/ReservationSummary';
 import FlightReserved from './components/FlightReserved';
 import ChangeReservation from './components/ChangeReservation';
 import ChangeSeats from './components/ChangeSeats';
+import ChangeSeats2 from './components/ChangeSeats2';
 
 class App extends Component {
   render() {
@@ -63,6 +64,7 @@ class App extends Component {
           <Route path='/reserved-flights/' component={ReservedFlights} />
           <Route path='/change-reservation/' component={ChangeReservation} />
           <Route path='/change-seats/' component={ChangeSeats} />
+          <Route path='/change-seats2/' component={ChangeSeats2} />
           <Route path='/ReservedFlightSummary/' component={ReservedFlightSummary} />
           <Route path='/reserved-show-flight/:id' component={ReservedShowFlightDetails} />
         </div>

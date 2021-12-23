@@ -225,12 +225,39 @@ body {
   color: #f7f5f5;
 }
 
-.Homepage-2 {
+/* Change Reservation */
+.changeReservation {
   margin: auto;
   min-height: 100vh;
-  background:#000000;
+  background:#f7f5f5;
   color: #f7f5f5;
 }
+
+.backgroundLabelChangeReservation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
+  width: 550px;
+  height: 85px;
+  font-size: 45px;
+  border-radius: 25px 25px 0px 0px;
+  background-color: #0B0909;
+}
+
+.backgroundBoxChangeReservation {
+  margin: auto;
+  height: 450px;
+  width: 550px;
+  border-color: rgb(0, 0, 0);
+  border-style: solid;
+  border-radius: 0px 0px 25px 25px;
+  background-color: #ffffff;
+  color: #f7f5e1;
+  text-align: center;
+}
+/* /// */
 
 .together {
   margin: auto;
@@ -555,6 +582,40 @@ body {
 }
 
 .backgroundBoxNA {
+  margin: auto;
+  height: 350px;
+  width: 550px;
+  border-color: rgb(0, 0, 0);
+  border-style: solid;
+  border-radius: 0px 0px 25px 25px;
+  background-color: #ffffff;
+  color: #f7f5e1;
+  text-align: center;
+}
+/*  */
+
+/* Not Authorized */
+.ChangeSeats2 {
+  margin: auto;
+  min-height: 100vh;
+  background-color: #f7f5f5;
+  color: white;
+}
+
+.backgroundLabelChangeSeats2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
+  width: 550px;
+  height: 85px;
+  font-size: 45px;
+  border-radius: 25px 25px 0px 0px;
+  background-color: #0B0909;
+}
+
+.backgroundBoxChangeSeats2 {
   margin: auto;
   height: 350px;
   width: 550px;

@@ -12,6 +12,7 @@ var economySeatsNumber = parseInt(((window.location.pathname).split("/"))[3]);
 var businessSeatsNumber = parseInt(((window.location.pathname).split("/"))[4]);
 var firstSeatsNumber = parseInt(((window.location.pathname).split("/"))[5]);
 var reserved = String(((window.location.pathname).split("/"))[6]);
+var booking_reference = String(((window.location.pathname).split("/"))[9]);
 const chars = reserved.split('-');
 
 var result;
@@ -112,9 +113,7 @@ const SeatsSelectionDeparture = () => {
     window.onload = function() {
         confirmBooking();
       };
-
     return (
-
         <div className="SeatsSelection">
             <br />
             <br />
@@ -149,7 +148,7 @@ const SeatsSelectionDeparture = () => {
                         <br />
                         <br />
                         {/* onClick={confirmBooking} href={result +"/"+ (bookedStatus.replace(/ /g, "-")).substring(0, (bookedStatus.replace(/ /g, "-")).length - 1)} */}
-                        <Button color="success" variant="contained">
+                        <Button color="success" onClick={confirmBooking} href={'/change-seats2/' + String(((window.location.pathname).split("/"))[2]) + "/"+ String(((window.location.pathname).split("/"))[6]) + "-" + (bookedStatus.replace(/ /g, "-")).substring(0, (bookedStatus.replace(/ /g, "-")).length - 1) + "/" + (bookedStatus.replace(/ /g, "-")).substring(0, (bookedStatus.replace(/ /g, "-")).length - 1) + "/" + booking_reference + "/" + String(((window.location.pathname).split("/"))[10])} variant="contained">
                             Select Seats
                         </Button>
                      </div>

@@ -53,6 +53,17 @@ router.put('/deletedflight', (req, res) => {
 	  .catch(err => res.status(404).json({ error: 'No such a flight' }));
   });
 
+//Update userflight
+router.put('/:id', (req, res) => {
+	console.log(req.params.id)
+	console.log(req.body)
+	UserFlight.findByIdAndUpdate(req.params.id, req.body)
+	  .then(flight => res.json({ msg: 'Updated successfully' }))
+	  .catch(err =>
+		res.status(400).json({ error: 'Unable to update the Database' })
+	  );
+  });
+
 router.post('/reserve', async (req, res) => {
 	console.log(req.body)
 	try {
