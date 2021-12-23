@@ -25,18 +25,10 @@ router.get('/', (req, res) => {
 });
 
 router.post('/sendemail', (req, res) => {
-	try {
-		var mailOptions = {
-			from: 'aclprojectguc@gmail.com',
-			to: req.body.email,
-			subject: 'Reservation deleted',
-			text: 'You deleted your reservation successfully'
-		  };
-		  
+	try {  
 		  console.log('Email sent')
 		  
-		  
-		  transporter.sendMail(mailOptions, function(error, info){
+		  transporter.sendMail(req.body, function(error, info){
 			if (error) {
 			  console.log(error);
 			} else {

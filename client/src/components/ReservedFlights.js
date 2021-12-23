@@ -16,6 +16,7 @@ import { styled } from '@mui/material/styles';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import EmailIcon from '@mui/icons-material/Email';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -152,6 +153,48 @@ class ReservedFlights extends Component {
     this.setState({ openModal1: true })
   };
 
+  onClickButton3 = e => {
+    e.preventDefault()
+
+    var text = 'Departure Flights:'+'\n';
+    text+= '\n';
+    for(var i = 0;i < this.state.userflightsD.length; i++)
+    {
+      text+= 'Booking Reference: ' + this.state.userflightsD[i].booking_reference + '\n';
+      text+= 'Flight Number: ' + this.state.userflightsD[i].flight_number + '\n';
+      text+= 'Cabin: ' + this.state.userflightsD[i].cabin + '\n';
+      text+= 'Seats: ' + this.state.userflightsD[i].seats_booked + '\n';
+      text+= 'Price: ' + this.state.userflightsD[i].price + '\n';
+      text+= '\n';
+    }
+    text += 'Return Flights:'+'\n';
+    text+= '\n';
+    for(var i = 0;i < this.state.userflightsR.length; i++)
+    {
+      text+= 'Booking Reference: ' + this.state.userflightsR[i].booking_reference + '\n';
+      text+= 'Flight Number: ' + this.state.userflightsR[i].flight_number + '\n';
+      text+= 'Cabin: ' + this.state.userflightsR[i].cabin + '\n';
+      text+= 'Seats: ' + this.state.userflightsR[i].seats_booked + '\n';
+      text+= 'Price: ' + this.state.userflightsR[i].price + '\n';
+      text+= '\n';
+    }
+    const mailOptions = {
+			from: 'aclprojectguc@gmail.com',
+			to: jwt.decode(localStorage.getItem('token')).email,
+			subject: 'Your Itinerary',
+			text: text
+		  };
+
+    axios
+      .post('http://localhost:8082/api/userflights/sendemail', mailOptions)
+      .then(res => {
+        console.log('here')
+        window.location.reload(false);
+      })
+      .catch(err => {
+        console.log("Error form ReservedShowFlightDetails_deleteClick");
+      })
+  };
 
   onClickButton2 = e => {
     e.preventDefault()
@@ -163,8 +206,15 @@ class ReservedFlights extends Component {
           label: 'Yes',
           onClick: () => {
 
+            const mailOptions = {
+              from: 'aclprojectguc@gmail.com',
+              to: jwt.decode(localStorage.getItem('token')).email,
+              subject: 'Reservation deleted',
+              text: "Reservation deleted successfully, "+ this.state.selecteduserflight.price+" LE will be refunded to you shortly."
+              };
+
             axios
-              .post('http://localhost:8082/api/userflights/sendemail', { email: jwt.decode(localStorage.getItem('token')).email })
+              .post('http://localhost:8082/api/userflights/sendemail', mailOptions )
               .then(res => {
                 console.log('here')
                 window.location.reload(false);
@@ -275,26 +325,26 @@ class ReservedFlights extends Component {
     const flightsR = this.state.userflightsR;
     var chars;
     var chars2;
-    if (this.state.selectedflight.booked_seats !== undefined && this.state.selecteduserflight.seats_booked !== undefined){
+    if (this.state.selectedflight.booked_seats !== undefined && this.state.selecteduserflight.seats_booked !== undefined) {
       chars = this.state.selectedflight.booked_seats.split('-');
       chars2 = this.state.selecteduserflight.seats_booked.split('-');
       numberOfp = chars2.length;
       var removeSeat = false;
       this.state.numberOfSeats = chars2.length;
-    for (var i = 0; i < chars.length; i++){
-      removeSeat = false;
-      for (var ii = 0; ii < chars2.length; ii++){
-       if (chars[i] === chars2[ii]){
-          removeSeat = true;
-       }
-      }
-      if (removeSeat === false){
-        this.state.availableNewSeats = this.state.availableNewSeats + "-" + chars[i] + "-";
+      for (var i = 0; i < chars.length; i++) {
+        removeSeat = false;
+        for (var ii = 0; ii < chars2.length; ii++) {
+          if (chars[i] === chars2[ii]) {
+            removeSeat = true;
+          }
+        }
+        if (removeSeat === false) {
+          this.state.availableNewSeats = this.state.availableNewSeats + "-" + chars[i] + "-";
+        }
       }
     }
-    }
-    const changeReservationLink = '/change-reservation'+ '/'+(this.state.selectedflight.departure_airport)+'/'+(this.state.selectedflight.arrival_airport)+'/'+ numberOfp + '/'+(this.state.selecteduserflight._id);
-    const changeSeatsLink = '/change-seats/'+ this.state.selectedflight._id + "/" + this.state.selectedflight.economy_seats_number + "/" + this.state.selectedflight.business_seats_number + "/" + this.state.selectedflight.first_seats_number + "/" + this.state.availableNewSeats + "/" + this.state.selectedCabin + "/" + this.state.numberOfSeats;
+    const changeReservationLink = '/change-reservation' + '/' + (this.state.selectedflight.departure_airport) + '/' + (this.state.selectedflight.arrival_airport) + '/' + numberOfp + '/' + (this.state.selecteduserflight._id);
+    const changeSeatsLink = '/change-seats/' + this.state.selectedflight._id + "/" + this.state.selectedflight.economy_seats_number + "/" + this.state.selectedflight.business_seats_number + "/" + this.state.selectedflight.first_seats_number + "/" + this.state.availableNewSeats + "/" + this.state.selectedCabin + "/" + this.state.numberOfSeats;
     const columns = [
       { field: 'booking_reference', align: 'center', headerName: '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0Booking Reference', flex: 1 },
       { field: 'flight_number', align: 'center', headerName: '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0Flight Number', flex: 1 },
@@ -350,6 +400,14 @@ class ReservedFlights extends Component {
               </TableContainer>
             </Modal>
           </div>
+
+          <Button style={{
+            margin: "35px"
+            , float: 'left'
+          }} onClick={this.onClickButton3} variant="contained" startIcon={<EmailIcon />}>
+            Summary
+          </Button>
+
           <br />
           <div style={{
             margin: "auto"
@@ -376,6 +434,8 @@ class ReservedFlights extends Component {
             margin: "auto"
           }} className="HeaderReservations">
             <h1>Return Flights</h1>
+
+
           </div>
           <br />
           <DataGrid
