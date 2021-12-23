@@ -82,10 +82,22 @@ class AccountSecurity extends Component {
     axios
       .post('http://localhost:8082/api/users/' + this.state.id, data)
       .then(res => {
-        if (res.data === 'Match') {
+        if (res.data === 'Match' && confirmpassword == 'false' ) {
+          wrongpassword = 'false';
+          confirmpassword = 'false';
           this.setState({
             match: 'true'
           });
+          axios
+          .put('http://localhost:8082/api/users/password/' + this.state.id, data)
+          .then(res => {
+            console.log('Updated');
+            window.location.reload(false);
+            this.forceUpdate()
+          })
+          .catch(err => {
+            console.log("Error in Edit Profile!");
+          })
           console.log(res.data)
         }
       })
@@ -105,25 +117,6 @@ class AccountSecurity extends Component {
       console.log('Confrim Password Error');
       this.forceUpdate()
     }
-    if (this.state.match === 'true') {
-      axios
-        .put('http://localhost:8082/api/users/password/' + this.state.id, data)
-        .then(res => {
-          this.setState({
-            oldpassword: '',
-            newpassword: '',
-            confirmpassword: '',
-            match: 'false'
-          })
-          console.log('Updated');
-          this.props.history.push('/');
-          this.forceUpdate()
-        })
-        .catch(err => {
-          console.log("Error in Edit Profile!");
-        })
-    }
-
 
   };
 
