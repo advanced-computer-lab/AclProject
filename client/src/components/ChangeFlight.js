@@ -112,10 +112,10 @@ class ChangeFlight extends Component {
         })
 
         if (parseInt(this.state.selectedPriceDeparture) - parseInt(oldPrice) > 0){
-          type = "To pay";
+          type = "To pay per ticket";
         }
         else if(parseInt(this.state.selectedPriceDeparture) - parseInt(oldPrice) < 0){
-          type = "To be refunded";
+          type = "To be refunded per ticket";
         }
         else {
           type = "No price difference";
