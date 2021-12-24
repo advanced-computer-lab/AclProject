@@ -81,8 +81,8 @@ class ChangeSeats2 extends Component {
         <div className="backgroundBoxChangeSeats2">
           <h1 style={{ color: 'red', fontWeight: 'bold', fontSize: "40px" }} className="display-4 text-center">Please confirm that you want to change your seats</h1>
           <br />
-          <p style={{ color: 'black', fontWeight: 'bold', fontSize: "40px" }}>Old Seats: {String(((window.location.pathname).split("/"))[6])}</p>
-          <p style={{ color: 'black', fontWeight: 'bold', fontSize: "40px" }}>New Seats: {String(((window.location.pathname).split("/"))[4])}</p>
+          <p style={{ color: 'black', fontWeight: 'bold', fontSize: "35px" }}>Old Seats: {String(((window.location.pathname).split("/"))[6])}</p>
+          <p style={{ color: 'black', fontWeight: 'bold', fontSize: "35px" }}>New Seats: {String(((window.location.pathname).split("/"))[4])}</p>
           <form noValidate onSubmit={this.onSubmit}>
           <Button type="submit" variant="contained">Confirm</Button>
           </form>

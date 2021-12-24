@@ -51,7 +51,7 @@ for (var ii = 0; ii < myArray5.length; ii++) {
   }
 }
 
-var previousPage = (arr2).replace("/reservation-summary", "seats-selection-return");
+var previousPage = (arr2).replace("/change-flight-summary", "seats-selection-when-changing-flight");
 
 var ppp;
 var arr3 = "";
@@ -61,7 +61,7 @@ for (var ii = 0; ii < myArray5.length; ii++) {
   }
 }
 
-var previousPage2 = (arr3).replace("/reservation-summary", "select-flights");
+var previousPage2 = (arr3).replace("/change-flight-summary", "change-flight");
 
 const steps = [
   <Link to={previousPage2}>Select departure and return flights</Link>,

@@ -123,8 +123,8 @@ class ChangeReservation extends Component {
                 width: "500px",
                 height: "45px",
                 margin: "auto",
-                marginTop: "-20px",
-                marginBottom: "5px"
+                marginTop: "-23px",
+                marginBottom: "8px"
               }} severity="error">All fields must be filled</Alert>
             ) : (
               <div />

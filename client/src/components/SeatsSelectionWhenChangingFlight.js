@@ -26,8 +26,8 @@ for (var ii = 0; ii < myArray5.length; ii++){
     }
 }
 
-var previousPage = (arr2).replace("/seats-selection-departure", "select-flights");
-var previousPage = (previousPage).replace("/reservation-summary", "select-flights");
+var previousPage = (arr2).replace("/seats-selection-when-changing-flight", "change-flight");
+var previousPage = (previousPage).replace("/change-flight-summary", "change-flight");
 
 const steps = [
   <Link to={previousPage}>Select departure and return flights</Link>,
