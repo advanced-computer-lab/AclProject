@@ -208,38 +208,38 @@ class ReservationSummary extends Component {
       newBookedSeatsReturn = returnData.seats_booked
     }
 
-            axios
-              .post('http://localhost:8082/api/userflights/reserve', departureData)
-              .then(res => {
-              })
-              .catch(err => {
-                console.log("Error in Login!");
-              })
+    axios
+      .post('http://localhost:8082/api/userflights/reserve', departureData)
+      .then(res => {
+      })
+      .catch(err => {
+        console.log("Error in Login!");
+      })
 
-            axios
-              .post('http://localhost:8082/api/userflights/reserve', returnData)
-              .then(res => {
-              })
-              .catch(err => {
-                console.log("Error in Login!");
-              })
+    axios
+      .post('http://localhost:8082/api/userflights/reserve', returnData)
+      .then(res => {
+      })
+      .catch(err => {
+        console.log("Error in Login!");
+      })
 
-            axios
-              .put('http://localhost:8082/api/flights/' + this.state.departureFlight._id, { booked_seats: newBookedSeatsDeparture, available_economy_seats: numberOfAvailableDEconomySeatsAfterBooking, available_business_seats: numberOfAvailableDBusinessSeatsAfterBooking, available_first_seats: numberOfAvailableDFirstSeatsAfterBooking })
-              .then(res => {
-              })
-              .catch(err => {
-                console.log("Error in UpdateFlightInfo!");
-              })
+    axios
+      .put('http://localhost:8082/api/flights/' + this.state.departureFlight._id, { booked_seats: newBookedSeatsDeparture, available_economy_seats: numberOfAvailableDEconomySeatsAfterBooking, available_business_seats: numberOfAvailableDBusinessSeatsAfterBooking, available_first_seats: numberOfAvailableDFirstSeatsAfterBooking })
+      .then(res => {
+      })
+      .catch(err => {
+        console.log("Error in UpdateFlightInfo!");
+      })
 
-            axios
-              .put('http://localhost:8082/api/flights/' + this.state.returnFlight._id, { booked_seats: newBookedSeatsReturn, available_economy_seats: numberOfAvailableREconomySeatsAfterBooking, available_business_seats: numberOfAvailableRBusinessSeatsAfterBooking, available_first_seats: numberOfAvailableRFirstSeatsAfterBooking })
-              .then(res => {
-                this.props.history.push('/flight-reserved');
-              })
-              .catch(err => {
-                console.log("Error in UpdateFlightInfo!");
-              })
+    axios
+      .put('http://localhost:8082/api/flights/' + this.state.returnFlight._id, { booked_seats: newBookedSeatsReturn, available_economy_seats: numberOfAvailableREconomySeatsAfterBooking, available_business_seats: numberOfAvailableRBusinessSeatsAfterBooking, available_first_seats: numberOfAvailableRFirstSeatsAfterBooking })
+      .then(res => {
+        this.props.history.push('/flight-reserved');
+      })
+      .catch(err => {
+        console.log("Error in UpdateFlightInfo!");
+      })
   };
 
 
@@ -408,7 +408,7 @@ class ReservationSummary extends Component {
           stripeKey="pk_test_51K6u4OGxGwnu0rJwX9bgwFSvMrTcivqO65wFVtfyNCX55gq0Idy4mq15RjSdRv9KTRhBx1DuYdq9mKuFQyATyrkB003DSAH9Yk"
           billingAddress={false}
           shippingAddress={false}>
-          <Button style={{height:"60px", width:"200px", fontSize:"23px", fontWeight:"bold"}}variant="contained">Pay By Card</Button>
+          <Button style={{ height: "60px", width: "200px", fontSize: "23px", fontWeight: "bold" }} variant="contained">Pay By Card</Button>
         </StripeCheckout>
         <br />
         <br />
