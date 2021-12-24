@@ -8,9 +8,9 @@ import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom'
 
-var economySeatsNumber = parseInt(((window.location.pathname).split("/"))[16]);
+var economySeatsNumber = parseInt(((window.location.pathname).split("/"))[14]);
 var businessSeatsNumber = parseInt(((window.location.pathname).split("/"))[15]);
-var firstSeatsNumber = parseInt(((window.location.pathname).split("/"))[14]);
+var firstSeatsNumber = parseInt(((window.location.pathname).split("/"))[16]);
 var reserved = String(((window.location.pathname).split("/"))[18]);
 const chars = reserved.split('-');
 
