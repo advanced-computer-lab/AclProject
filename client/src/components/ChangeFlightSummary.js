@@ -152,7 +152,12 @@ class ChangeFlightSummary extends Component {
 
 
     if (myArray[18] !== "undefined") {
-      newBookedSeatsDeparture = myArray[18] + "-" + departureData.seats_booked
+      if (myArray[6] === this.state.departureFlight._id){
+        newBookedSeatsDeparture = myArray[9] + "-" + departureData.seats_booked
+      }
+      else {
+        newBookedSeatsDeparture = myArray[18] + "-" + departureData.seats_booked
+      }
     }
     else {
       newBookedSeatsDeparture = departureData.seats_booked
