@@ -111,22 +111,23 @@ class ChangeReservation extends Component {
           <b>Change Reservation</b>
         </div>
         <div className="backgroundBoxChangeReservation">
+        <br />
           <b style={{
-            fontSize: "50px",
+            fontSize: "35px",
             color: "black"
           }}>Search For Alternative Flight</b>
-          <br />
           <form noValidate onSubmit={this.onSubmit}>
             <br />
             {((emptyField === 'true')) ? (
               <Alert variant="filled" style={{
                 width: "500px",
+                height: "45px",
                 margin: "auto",
-                marginTop: "-12px",
-                marginBottom: "-12px"
+                marginTop: "-20px",
+                marginBottom: "5px"
               }} severity="error">All fields must be filled</Alert>
             ) : (
-              <br />
+              <div />
             )}
             <div class="HomepageRow">
               <div className="together">
