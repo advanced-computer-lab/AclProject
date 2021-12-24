@@ -315,7 +315,7 @@ class Homepage extends Component {
         <br />
         <br />
         <div class="image-container">
-          <img src={l1} width="1000px" height="275px" alt="fireSpot" />
+          <img src={l1} onClick={()=> window.open("show-flight-list", "_blank")} width="1000px" height="275px" alt="fireSpot" />
         </div>
         <br />
         <br />
@@ -326,15 +326,15 @@ class Homepage extends Component {
         <div style={{ borderTop: "2px solid #fff ", marginLeft: 20, marginRight: 20 }}></div>
         <br />
         <br />
-        <div className="rectangleWrapper"> 
-        <div className="togetheraa"> 
-        <div className="rectangle1"> <img src={l2}height="250px" alt="fireSpot"/></div>
-        <div className="rectangle11"> <b style={{textAlign:"center", color: "#1975d2", fontSize: "25px"}}>How to Save</b> <br/><b style={{color:"black", fontSize:"20px"}}>We all want the cheapest flights possible! Learn how to find the cheapest days to fly and get the best deals on airfare.</b> <br/><Button style={{marginLeft:"50%", textAlign:"center"}}variant="outlined">Learn more</Button></div>
-        </div>
-        <div className="togetheraa"> 
-        <div className="rectangle2"> <img src={l3}height="250px" alt="fireSpot"/></div>
-        <div className="rectangle22"> <b style={{textAlign:"center", color: "#1975d2", fontSize: "25px"}}>Travel Tips & Advice</b> <br/><b style={{color:"black", fontSize:"20px"}}>Read the most up-to-date travel advice. Get tips from some of the most trusted experts in the industry.</b> <br/><br/><Button style={{marginLeft:"50%", textAlign:"center"}}variant="outlined">Learn more</Button></div>
-        </div>
+        <div className="rectangleWrapper">
+          <div className="togetheraa">
+            <div className="rectangle1"> <img src={l2} height="250px" alt="fireSpot" /></div>
+            <div className="rectangle11"> <b style={{ textAlign: "center", color: "#1975d2", fontSize: "25px"}}>How to Save</b> <br /><b style={{color: "black", fontSize: "20px" }}>We all want the cheapest flights possible! Learn how to find the cheapest days to fly and get the best deals on airfare.</b> <br /><Button style={{ marginLeft: "50%", textAlign: "center" }} variant="outlined">Learn more</Button></div>
+          </div>
+          <div className="togetheraa">
+            <div className="rectangle2"> <img src={l3} height="250px" alt="fireSpot" /></div>
+            <div className="rectangle22"> <b style={{ textAlign: "center", color: "#1975d2", fontSize: "25px"}}>Travel Tips & Advice</b> <br /><b style={{color: "black", fontSize: "20px" }}>Read the most up-to-date travel advice. Get tips from some of the most trusted experts in the industry.</b> <br /><br /><Button style={{ marginLeft: "50%", textAlign: "center" }} variant="outlined">Learn more</Button></div>
+          </div>
         </div>
         <br />
         <br />

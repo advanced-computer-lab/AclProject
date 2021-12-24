@@ -28,8 +28,8 @@ function Footer() {
             <h4>Top Regional Destinations</h4>
             <ui className="list-unstyled">
               <li>Cairo</li>
-              <li>Cairo</li>
-              <li>Cairo</li>
+              <li>France</li>
+              <li>Rome</li>
             </ui>
           </div>
           {/* Column3 */}
