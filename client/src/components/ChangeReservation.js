@@ -81,7 +81,7 @@ class ChangeReservation extends Component {
       cabin: this.state.cabin
     };
 
-    if (this.state.cabin === '' || this.state.departure_airport === null || this.state.arrival_airport === null || this.state.adults_number === null || this.state.children_number === null || this.state.cabin === null) {
+    if (this.state.cabin === '' || this.state.departure_date === null || this.state.departure_date === '' || this.state.cabin === null) {
       emptyField = 'true';
       this.forceUpdate()
     }
