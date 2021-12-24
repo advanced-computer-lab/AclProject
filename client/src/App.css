@@ -277,13 +277,72 @@ body {
   text-align: center;
 }
 
+.rectangleWrapper {
+  display: flex;
+  flex-direction: row;
+  margin-left: 50px;
+}
 
+.togetheraa {
+  margin: auto;
+  display: inline-block;
+  width: 37%;
+  height: 250px;
+}
+
+.rectangle1 {
+  margin: auto;
+  display: inline-block;
+  width: 18.5%;
+  height: 250px;
+  position: absolute;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+  background: rgb(255, 255, 255);
+}
+
+.rectangle11 {
+  margin: auto;
+  display: inline-block;
+  width: 18.5%;
+  height: 250px;
+  margin-left: 280px;
+  position: absolute;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+  background: rgb(255, 255, 255);
+}
+
+.rectangle2 {
+  margin: auto;
+  display: inline-block;
+  width: 18.5%;
+  height: 250px;
+  margin-left: -100px;
+  position: absolute;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+  background: rgb(255, 255, 255);
+}
+
+.rectangle22 {
+  margin: auto;
+  display: inline-block;
+  width: 18.5%;
+  height: 250px;
+  margin-left: 210px;
+  position: absolute;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+  background: rgb(255, 255, 255);
+}
 
 .HomepageRow {
   margin: auto;
   display: flex;
   flex-wrap: wrap;
   width: 88.65%;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
 }
 
 .HomepageRadioButtons {

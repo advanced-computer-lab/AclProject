@@ -10,9 +10,12 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Alert from '@mui/material/Alert';
+import l1 from '../l1.png';
+import l2 from '../l2.jpg';
+import l3 from '../l3.jpg';
 
 var td = new Date();
-var today = td.getFullYear()+'-'+(td.getMonth()+1)+'-'+td.getDate();
+var today = td.getFullYear() + '-' + (td.getMonth() + 1) + '-' + td.getDate();
 
 const airports = require('../airports.json');
 
@@ -191,7 +194,7 @@ class Homepage extends Component {
                   id="filled-textarea"
                   label={"Depart Date"}
                   type="date"
-                  InputProps={{inputProps: {min: today}}}
+                  InputProps={{ inputProps: { min: today } }}
                   onFocus={this._onFocus} onBlur={this._onBlur}
                   placeholder=""
                   variant="filled"
@@ -209,7 +212,7 @@ class Homepage extends Component {
                   id="filled-textarea"
                   label="Return Date"
                   type="date"
-                  InputProps={{inputProps: {min: this.state.departure_date}}}
+                  InputProps={{ inputProps: { min: this.state.departure_date } }}
                   onFocus={this._onFocus} onBlur={this._onBlur}
                   placeholder=""
                   variant="filled"
@@ -292,11 +295,11 @@ class Homepage extends Component {
             </div>
 
             <div className="HomepageRadioButtons">
-                <RadioGroup row aria-label="Cabin" onChange={this.onChange2} name="row-radio-buttons-group">
-                  <FormControlLabel style={{ paddingLeft: '18px', paddingTop: '5px' }} value="Economy" control={<Radio />} label="Economy" />
-                  <FormControlLabel style={{paddingTop: '5px' }}value="Business" control={<Radio />} label="Business" />
-                  <FormControlLabel style={{paddingTop: '5px' }} value="First" control={<Radio />} label="First" />
-                </RadioGroup>
+              <RadioGroup row aria-label="Cabin" onChange={this.onChange2} name="row-radio-buttons-group">
+                <FormControlLabel style={{ paddingLeft: '18px', paddingTop: '5px' }} value="Economy" control={<Radio />} label="Economy" />
+                <FormControlLabel style={{ paddingTop: '5px' }} value="Business" control={<Radio />} label="Business" />
+                <FormControlLabel style={{ paddingTop: '5px' }} value="First" control={<Radio />} label="First" />
+              </RadioGroup>
             </div>
 
             <br />
@@ -308,6 +311,36 @@ class Homepage extends Component {
           <br />
           <br />
         </div>
+        <br />
+        <br />
+        <br />
+        <div class="image-container">
+          <img src={l1} width="1000px" height="275px" alt="fireSpot" />
+        </div>
+        <br />
+        <br />
+        <br />
+        <h1 style={{ textAlign: "center", margin: "auto", color: "#1975d2", fontSize: "55px" }}>── Airline Flight Comparison Tips ──</h1>
+        <br />
+        <br />
+        <div style={{ borderTop: "2px solid #fff ", marginLeft: 20, marginRight: 20 }}></div>
+        <br />
+        <br />
+        <div className="rectangleWrapper"> 
+        <div className="togetheraa"> 
+        <div className="rectangle1"> <img src={l2}height="250px" alt="fireSpot"/></div>
+        <div className="rectangle11"> <b style={{textAlign:"center", color: "#1975d2", fontSize: "25px"}}>How to Save</b> <br/><b style={{color:"black", fontSize:"20px"}}>We all want the cheapest flights possible! Learn how to find the cheapest days to fly and get the best deals on airfare.</b> <br/><Button style={{marginLeft:"50%", textAlign:"center"}}variant="outlined">Learn more</Button></div>
+        </div>
+        <div className="togetheraa"> 
+        <div className="rectangle2"> <img src={l3}height="250px" alt="fireSpot"/></div>
+        <div className="rectangle22"> <b style={{textAlign:"center", color: "#1975d2", fontSize: "25px"}}>Travel Tips & Advice</b> <br/><b style={{color:"black", fontSize:"20px"}}>Read the most up-to-date travel advice. Get tips from some of the most trusted experts in the industry.</b> <br/><br/><Button style={{marginLeft:"50%", textAlign:"center"}}variant="outlined">Learn more</Button></div>
+        </div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
       </div>
     );
   }
