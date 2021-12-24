@@ -315,7 +315,7 @@ class Homepage extends Component {
         <br />
         <br />
         <div class="image-container">
-          <img src={l1} onClick={()=> window.open("show-flight-list", "_blank")} width="1000px" height="275px" alt="fireSpot" />
+          <img src={l1} onClick={()=> window.open("show-flight-list", "_blank")} width="70%" height="275px" alt="fireSpot" />
         </div>
         <br />
         <br />
