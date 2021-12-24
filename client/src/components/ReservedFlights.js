@@ -157,34 +157,32 @@ class ReservedFlights extends Component {
   onClickButton3 = e => {
     e.preventDefault()
 
-    var text = 'Departure Flights:'+'\n';
-    text+= '\n';
-    for(var i = 0;i < this.state.userflightsD.length; i++)
-    {
-      text+= 'Booking Reference: ' + this.state.userflightsD[i].booking_reference + '\n';
-      text+= 'Flight Number: ' + this.state.userflightsD[i].flight_number + '\n';
-      text+= 'Cabin: ' + this.state.userflightsD[i].cabin + '\n';
-      text+= 'Seats: ' + this.state.userflightsD[i].seats_booked + '\n';
-      text+= 'Price: ' + this.state.userflightsD[i].price + '\n';
-      text+= '\n';
+    var text = 'Departure Flights:' + '\n';
+    text += '\n';
+    for (var i = 0; i < this.state.userflightsD.length; i++) {
+      text += 'Booking Reference: ' + this.state.userflightsD[i].booking_reference + '\n';
+      text += 'Flight Number: ' + this.state.userflightsD[i].flight_number + '\n';
+      text += 'Cabin: ' + this.state.userflightsD[i].cabin + '\n';
+      text += 'Seats: ' + this.state.userflightsD[i].seats_booked + '\n';
+      text += 'Price: ' + this.state.userflightsD[i].price + '\n';
+      text += '\n';
     }
-    text += 'Return Flights:'+'\n';
-    text+= '\n';
-    for(var i = 0;i < this.state.userflightsR.length; i++)
-    {
-      text+= 'Booking Reference: ' + this.state.userflightsR[i].booking_reference + '\n';
-      text+= 'Flight Number: ' + this.state.userflightsR[i].flight_number + '\n';
-      text+= 'Cabin: ' + this.state.userflightsR[i].cabin + '\n';
-      text+= 'Seats: ' + this.state.userflightsR[i].seats_booked + '\n';
-      text+= 'Price: ' + this.state.userflightsR[i].price + '\n';
-      text+= '\n';
+    text += 'Return Flights:' + '\n';
+    text += '\n';
+    for (var i = 0; i < this.state.userflightsR.length; i++) {
+      text += 'Booking Reference: ' + this.state.userflightsR[i].booking_reference + '\n';
+      text += 'Flight Number: ' + this.state.userflightsR[i].flight_number + '\n';
+      text += 'Cabin: ' + this.state.userflightsR[i].cabin + '\n';
+      text += 'Seats: ' + this.state.userflightsR[i].seats_booked + '\n';
+      text += 'Price: ' + this.state.userflightsR[i].price + '\n';
+      text += '\n';
     }
     const mailOptions = {
-			from: 'aclprojectguc@gmail.com',
-			to: jwt.decode(localStorage.getItem('token')).email,
-			subject: 'Your Itinerary',
-			text: text
-		  };
+      from: 'aclprojectguc@gmail.com',
+      to: jwt.decode(localStorage.getItem('token')).email,
+      subject: 'Your Itinerary',
+      text: text
+    };
 
     axios
       .post('http://localhost:8082/api/userflights/sendemail', mailOptions)
@@ -211,11 +209,11 @@ class ReservedFlights extends Component {
               from: 'aclprojectguc@gmail.com',
               to: jwt.decode(localStorage.getItem('token')).email,
               subject: 'Reservation deleted',
-              text: "Reservation deleted successfully, "+ this.state.selecteduserflight.price+" LE will be refunded to you shortly."
-              };
+              text: "Reservation deleted successfully, " + this.state.selecteduserflight.price + " LE will be refunded to you shortly."
+            };
 
             axios
-              .post('http://localhost:8082/api/userflights/sendemail', mailOptions )
+              .post('http://localhost:8082/api/userflights/sendemail', mailOptions)
               .then(res => {
                 console.log('here')
                 window.location.reload(false);
@@ -345,13 +343,13 @@ class ReservedFlights extends Component {
       }
     }
     var temp = "";
-    if (this.state.bookedSeatsWithoutSelectedReservation.charAt(0) === '-'){
+    if (this.state.bookedSeatsWithoutSelectedReservation.charAt(0) === '-') {
       this.state.bookedSeatsWithoutSelectedReservation = this.state.bookedSeatsWithoutSelectedReservation.substring(1);
     }
-    for (var z = 0; z < this.state.bookedSeatsWithoutSelectedReservation.length-1; z++){
-      if(this.state.bookedSeatsWithoutSelectedReservation.charAt(z) === '-' && this.state.bookedSeatsWithoutSelectedReservation.charAt(z+1) === '-'){
-          temp = temp + this.state.bookedSeatsWithoutSelectedReservation.charAt(z);
-          z++;
+    for (var z = 0; z < this.state.bookedSeatsWithoutSelectedReservation.length - 1; z++) {
+      if (this.state.bookedSeatsWithoutSelectedReservation.charAt(z) === '-' && this.state.bookedSeatsWithoutSelectedReservation.charAt(z + 1) === '-') {
+        temp = temp + this.state.bookedSeatsWithoutSelectedReservation.charAt(z);
+        z++;
       }
       else {
         temp = temp + this.state.bookedSeatsWithoutSelectedReservation.charAt(z);
@@ -363,16 +361,16 @@ class ReservedFlights extends Component {
     console.log("Selected Cabin " + this.state.selecteduserflight.cabin)
     var date1;
     var zz;
-    if (this.state.selectedflight.departure_date !== undefined){
-      date1 = this.state.selectedflight.departure_date.substring(0,10);
+    if (this.state.selectedflight.departure_date !== undefined) {
+      date1 = this.state.selectedflight.departure_date.substring(0, 10);
     }
 
-    if (this.state.selecteduserflight.booking_reference !== undefined){
+    if (this.state.selecteduserflight.booking_reference !== undefined) {
       zz = this.state.selecteduserflight.booking_reference.slice(-1);
     }
 
-    const changeReservationLink = '/change-reservation' + '/'+(this.state.selectedflight.departure_airport)+'/'+(this.state.selectedflight.arrival_airport)+'/'+ numberOfp + '/'+(this.state.selecteduserflight._id) + "/" + this.state.selectedflight._id + "/" + this.state.selecteduserflight.cabin + "/" + date1 + "/" + this.state.bookedSeatsWithoutSelectedReservation + "/" + (parseInt(this.state.selecteduserflight.price)/parseInt(numberOfp)) + "/" + zz;
-    const changeSeatsLink = '/change-seats/'+ this.state.selectedflight._id + "/" + this.state.selectedflight.economy_seats_number + "/" + this.state.selectedflight.business_seats_number + "/" + this.state.selectedflight.first_seats_number + "/" + this.state.bookedSeatsWithoutSelectedReservation + "/" + this.state.selecteduserflight.cabin + "/" + this.state.numberOfSeats + "/" + this.state.selecteduserflight.booking_reference + "/" + this.state.selecteduserflight.seats_booked;
+    const changeReservationLink = '/change-reservation' + '/' + (this.state.selectedflight.departure_airport) + '/' + (this.state.selectedflight.arrival_airport) + '/' + numberOfp + '/' + (this.state.selecteduserflight._id) + "/" + this.state.selectedflight._id + "/" + this.state.selecteduserflight.cabin + "/" + date1 + "/" + this.state.bookedSeatsWithoutSelectedReservation + "/" + (parseInt(this.state.selecteduserflight.price) / parseInt(numberOfp)) + "/" + zz;
+    const changeSeatsLink = '/change-seats/' + this.state.selectedflight._id + "/" + this.state.selectedflight.economy_seats_number + "/" + this.state.selectedflight.business_seats_number + "/" + this.state.selectedflight.first_seats_number + "/" + this.state.bookedSeatsWithoutSelectedReservation + "/" + this.state.selecteduserflight.cabin + "/" + this.state.numberOfSeats + "/" + this.state.selecteduserflight.booking_reference + "/" + this.state.selecteduserflight.seats_booked;
     const columns = [
       { field: 'booking_reference', align: 'center', headerName: '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0Booking Reference', flex: 1 },
       { field: 'flight_number', align: 'center', headerName: '\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0Flight Number', flex: 1 },
@@ -437,12 +435,13 @@ class ReservedFlights extends Component {
           </Button>
 
           <br />
+          <br />
+          <br />
           <div style={{
             margin: "auto"
           }} className="HeaderReservations">
             <h1>Departure Flights</h1>
           </div>
-          <br />
           <DataGrid
             style={{
               height: "300px",
@@ -462,10 +461,7 @@ class ReservedFlights extends Component {
             margin: "auto"
           }} className="HeaderReservations">
             <h1>Return Flights</h1>
-
-
           </div>
-          <br />
           <DataGrid
             style={{
               height: "300px",
