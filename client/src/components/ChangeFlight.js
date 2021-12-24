@@ -111,16 +111,16 @@ class ChangeFlight extends Component {
           selectedDepartureFlight: res.data[0]
         })
 
-        if (parseInt(this.state.selectedPriceDeparture) - parseInt(oldPrice) > 0){
+        if (parseInt(this.state.selectedPriceDeparture) - parseInt(oldPrice) > 0) {
           type = "To pay per ticket";
         }
-        else if(parseInt(this.state.selectedPriceDeparture) - parseInt(oldPrice) < 0){
+        else if (parseInt(this.state.selectedPriceDeparture) - parseInt(oldPrice) < 0) {
           type = "To be refunded per ticket";
         }
         else {
           type = "No price difference";
         }
-        
+
       })
       .catch(err => {
         console.log('Error from ShowFlightList');
@@ -201,6 +201,15 @@ class ChangeFlight extends Component {
           }
         }
         this.state.departureFlights = this.state.departureFlights2;
+
+        console.log("A")
+        console.log(this.state.departureFlights)
+
+        for(var c = 0; c < this.state.departureFlights.length; c++){
+          if(this.state.departureFlights[c] === undefined){
+            this.state.departureFlights.splice(c, 1);
+          }
+        }
         this.forceUpdate();
 
       })
@@ -224,10 +233,10 @@ class ChangeFlight extends Component {
 
 
   render() {
-    const departureFlights = this.state.departureFlights;
+    var departureFlights = this.state.departureFlights;
+
     for (var i = 0; i < departureFlights.length; i++) {
       if (selectedCabin === 'Economy') {
-
         if (departureFlights[i].available_economy_seats < numberOfPassengers) {
           departureFlights.splice(departureFlights.indexOf(departureFlights[i]), 1);
         }
