@@ -105,8 +105,6 @@ class ChangeFlightSummary extends Component {
 
   onToken = e => {
 
-    const booking_r = Math.floor(Math.pow(10, 9) + Math.random() * 9 * Math.pow(10, 9));
-
     if (jwt.decode(localStorage.getItem('token')) === null) {
       window.location.href = "http://localhost:3000/not-authorized";
     }
@@ -121,7 +119,7 @@ class ChangeFlightSummary extends Component {
       seats_booked: myArray[20],
       cabin: selectedCabin,
       price: this.state.priceDeparture,
-      booking_reference: booking_r + myArray[11]
+      booking_reference: myArray[11]
     };
 
     var newBookedSeatsDeparture;

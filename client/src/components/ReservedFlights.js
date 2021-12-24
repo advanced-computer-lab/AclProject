@@ -366,7 +366,7 @@ class ReservedFlights extends Component {
     }
 
     if (this.state.selecteduserflight.booking_reference !== undefined) {
-      zz = this.state.selecteduserflight.booking_reference.slice(-1);
+      zz = this.state.selecteduserflight.booking_reference;
     }
 
     const changeReservationLink = '/change-reservation' + '/' + (this.state.selectedflight.departure_airport) + '/' + (this.state.selectedflight.arrival_airport) + '/' + numberOfp + '/' + (this.state.selecteduserflight._id) + "/" + this.state.selectedflight._id + "/" + this.state.selecteduserflight.cabin + "/" + date1 + "/" + this.state.bookedSeatsWithoutSelectedReservation + "/" + (parseInt(this.state.selecteduserflight.price) / parseInt(numberOfp)) + "/" + zz;
