@@ -320,7 +320,7 @@ class Homepage extends Component {
         <br />
         <br />
         <br />
-        <h1 style={{ textAlign: "center", margin: "auto", color: "#1975d2", fontSize: "55px" }}>── Airline Flight Comparison Tips ──</h1>
+        <h1 style={{ textAlign: "center", margin: "auto", color: "#1975d2", fontSize: "55px" }}>── Airline Flight Booking Tips ──</h1>
         <br />
         <br />
         <div style={{ borderTop: "2px solid #fff ", marginLeft: 20, marginRight: 20 }}></div>
