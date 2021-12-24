@@ -340,7 +340,6 @@ class Homepage extends Component {
         <br />
         <br />
         <br />
-        <br />
       </div>
     );
   }
