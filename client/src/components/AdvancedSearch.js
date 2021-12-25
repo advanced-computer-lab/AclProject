@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../App.css';
 import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 class AdvancedSearch extends Component {
   constructor(props) {
@@ -210,7 +211,9 @@ class AdvancedSearch extends Component {
               />
             </div>
 
-            <button style={{ margin: "auto", width: "350px" }} type="submit" className="btn btn-outline-info btn-lg btn-block">Search For Flight</button>
+            <Button
+              type="submit"
+              style={{ margin: "auto", width: "350px", height:"45px" }} type="submit" variant="contained">Search for flight</Button>
           </form>
           <br />
 

@@ -27,11 +27,11 @@ Navbar = () => {
           <NavLink to='/show-flight-list' activeStyle>
             All Flights
           </NavLink>
-          <NavLink to='/about' activeStyle>
+          <NavLink to='/about-us' activeStyle>
             About
           </NavLink>
-          <NavLink to='/services' activeStyle>
-            Services
+          <NavLink as="a" href="https://www.webglearth.com/#ll=12.83527,26.59724;alt=17001052" target="_blank" activeStyle>
+            World Map
           </NavLink>
           <NavLink to='/contact-us' activeStyle>
             Contact Us
