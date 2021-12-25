@@ -26,7 +26,7 @@ class ChangeSeats2 extends Component {
           userflights: res.data
         })
         console.log("Length " + this.state.userflights.length);
-      if (this.state.userflights.length !== 0){
+      if (this.state.userflights.length > 0){
       for (var a = 0; a < this.state.userflights.length; a++){
         if (this.state.userflights[a].booking_reference === booking_reference){
           this.state.selectedFlightUserflightId = this.state.userflights[a]._id;
