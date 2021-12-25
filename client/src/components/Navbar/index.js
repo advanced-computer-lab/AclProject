@@ -72,6 +72,7 @@ Navbar = () => {
                   <Dropdown.Item href="/profile">Your Profile</Dropdown.Item>
                   <Dropdown.Item href="/create-flight">Create Flight</Dropdown.Item>
                   <Dropdown.Item href="/admin-show-flight-list">Edit/Delete Flights</Dropdown.Item>
+                  <Dropdown.Item href="/advanced-search">Flight Search</Dropdown.Item>
                   <Dropdown.Item href="/reserved-flights">Your Itinerary</Dropdown.Item>
                   <Dropdown.Item href="/account-security">Account Security</Dropdown.Item>
                   <Dropdown.Item href="/" onClick={function (event) { localStorage.removeItem("token"); window.location.assign('http://localhost:3000/') }}>Log out</Dropdown.Item>

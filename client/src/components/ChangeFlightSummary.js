@@ -63,9 +63,15 @@ for (var ii = 0; ii < myArray5.length; ii++) {
 
 var previousPage2 = (arr3).replace("/change-flight-summary", "change-flight");
 
+// const steps = [
+//   <Link to={previousPage2}>Select departure and return flights</Link>,
+//   <Link to={previousPage}>Select plane seats</Link>,
+//   'Summary and confirmation',
+// ];
+
 const steps = [
-  <Link to={previousPage2}>Select departure and return flights</Link>,
-  <Link to={previousPage}>Select plane seats</Link>,
+  'Select flight',
+  'Select plane seats',
   'Summary and confirmation',
 ];
 
@@ -295,7 +301,7 @@ class ChangeFlightSummary extends Component {
         <br />
         {((myArray[19].charAt(0) === '-')) ? (
           <Button color="success" onClick={this.onToken} variant="contained">
-            Confirm
+            Confirm and change flight
           </Button>
         ) : (
           <StripeCheckout
