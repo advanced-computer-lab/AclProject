@@ -12,7 +12,7 @@ const FlightSummary = (props) => {
 			    <h3>Flight #: {flight.flight_number} </h3>
                 <h3>From: {flight.departure_airport}  &nbsp; To: {flight.arrival_airport}</h3>
 				<h3>Departure: {flight.departure_time}  &nbsp; Arrival: {flight.arrival_time}</h3>
-                <p>Date: {flight.date.substring(0, 10)}</p>
+                <p>Date: {flight.departure_date.substring(0, 10)}</p>
 				<h2>
                      <Link to={`/admin-show-flight/${flight._id}`}>
                          Show Flight

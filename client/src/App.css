@@ -76,12 +76,6 @@ body {
   color: white;
 }
 
-.AdvancedSearch {
-  background-color: #f7f5f5;
-  min-height: 100vh;
-  color: white;
-}
-
 .AdvancedSearchResults {
   background-color: #f7f5f5;
   min-height: 100vh;
@@ -412,6 +406,40 @@ body {
   margin: auto;
   height: 450px;
   width: 550px;
+  border-color: rgb(0, 0, 0);
+  border-style: solid;
+  border-radius: 0px 0px 25px 25px;
+  background-color: #ffffff;
+  color: #f7f5e1;
+  text-align: center;
+}
+/*  */
+
+/* Flight Search Admin */
+.AdvancedSearch {
+  margin: auto;
+  min-height: 100vh;
+  background-color: #f7f5f5;
+  color: white;
+}
+
+.backgroundLabelAS {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
+  width: 540px;
+  height: 85px;
+  font-size: 45px;
+  border-radius: 25px 25px 0px 0px;
+  background-color: #0B0909;
+}
+
+.backgroundBoxAS {
+  margin: auto;
+  height: 650px;
+  width: 540px;
   border-color: rgb(0, 0, 0);
   border-style: solid;
   border-radius: 0px 0px 25px 25px;
