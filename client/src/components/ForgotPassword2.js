@@ -119,7 +119,7 @@ class ForgotPassword2 extends Component {
                 width: "500px",
                 margin: "auto",
                 marginTop: "-10px",
-                marginBottom: "-18px"
+                marginBottom: "-12px"
               }} severity="success">Password updated successfully</Alert>
             ) : (
               <div></div>
@@ -130,7 +130,7 @@ class ForgotPassword2 extends Component {
                 width: "500px",
                 margin: "auto",
                 marginTop: "-10px",
-                marginBottom: "-18px"
+                marginBottom: "-12px"
               }} severity="error">The token doesn't match!!</Alert>
             ) : (
               <div></div>
