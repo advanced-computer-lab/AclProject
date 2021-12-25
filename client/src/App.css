@@ -415,6 +415,18 @@ body {
 }
 /*  */
 
+.backgroundBoxContactUs {
+  margin: auto;
+  height: 500px;
+  width: 550px;
+  border-color: rgb(0, 0, 0);
+  border-style: solid;
+  border-radius: 0px 0px 25px 25px;
+  background-color: #ffffff;
+  color: #f7f5e1;
+  text-align: center;
+}
+
 .backgroundBoxForgotPassword {
   margin: auto;
   height: 420px;
