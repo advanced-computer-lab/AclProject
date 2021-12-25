@@ -43,12 +43,15 @@ npm install nodemailer
 ## Usage
 To be able to run the project the following codes will be run on two terminals:
 Terminal 1
-```npm run app
+```sh
+npm run app
 ```
 Terminal 2
-```cd client
+```sh
+cd client
 ```
-```npm start
+```sh
+npm start
 ```
 
 ## Contributing
