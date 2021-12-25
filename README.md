@@ -4,9 +4,9 @@
 ## Table of Contents
 
 - [Motivation](#motivation)
-- [Build Status](#BuildStatus)
-- [Code Style](#CodeStyle)
-- [Code Examples](#CodeExamples)
+- [Build Status](#Build-Status)
+- [Code Style](#Code-Style)
+- [Code Examples](#Code-Examples)
 - [Install](#Install)
 - [Usage](#usage)
 - [Screenshots](#Screenshots)
@@ -33,9 +33,11 @@ The following project was written with a standard javascript coding.
 
 ## Install
 
-```npm install express node mongoose
+```sh
+npm install express node mongoose
 ```
-```npm install nodemailer 
+```sh
+npm install nodemailer 
 ```
 
 ## Usage
