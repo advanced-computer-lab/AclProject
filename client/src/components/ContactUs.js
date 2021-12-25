@@ -49,8 +49,8 @@ class ContactUs extends Component {
 
     var text = 'Message From:' + this.state.name + '\n';
     text += 'Email: ' + this.state.email + '\n';
-    text += '\n';
-    text += 'Message: ' + this.state.message + '\n';
+    text += 'Message:- ' + '\n';
+    text += this.state.message + '\n';
 
     const mailOptions = {
       from: 'aclprojectguc@gmail.com',
