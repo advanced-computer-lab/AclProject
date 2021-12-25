@@ -110,17 +110,16 @@ class ForgotPassword2 extends Component {
         <div className="backgroundLabelEditProfile">
           <b >Account Security</b>
         </div>
-        <div className="backgroundBoxAccountSecurity">
+        <div className="backgroundBoxAccountSecurity2">
           <br />
           <div className="labels">  <label> Reset Password </label></div>
-          <br />
           <form noValidate onSubmit={this.onSubmit}>
             {((passwordUpadted === 'true')) ? (
               <Alert variant="filled" style={{
                 width: "500px",
                 margin: "auto",
-                marginTop: "0px",
-                marginBottom: "10px"
+                marginTop: "-10px",
+                marginBottom: "-18px"
               }} severity="success">Password updated successfully</Alert>
             ) : (
               <div></div>
@@ -130,8 +129,8 @@ class ForgotPassword2 extends Component {
               <Alert variant="filled" style={{
                 width: "500px",
                 margin: "auto",
-                marginTop: "0px",
-                marginBottom: "10px"
+                marginTop: "-10px",
+                marginBottom: "-18px"
               }} severity="error">The token doesn't match!!</Alert>
             ) : (
               <div></div>

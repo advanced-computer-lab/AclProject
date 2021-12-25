@@ -571,6 +571,18 @@ body {
   text-align: center;
 }
 
+.backgroundBoxAccountSecurity2 {
+  margin: auto;
+  height: 345px;
+  width: 550px;
+  border-color: rgb(0, 0, 0);
+  border-style: solid;
+  border-radius: 0px 0px 25px 25px;
+  background-color: #ffffff;
+  color: #f7f5e1;
+  text-align: center;
+}
+
 .labels {
   color: #797979;
   text-align: center;
