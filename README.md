@@ -12,6 +12,7 @@ simulate a thorough experience of reserving a flight.
 - [Code Examples](#Code-Examples)
 - [Install](#Install)
 - [Usage](#usage)
+- [Tests](#Tests)
 - [Contribute](#Contribute)
 - [Credits](#Credits)
 - [License](#License)
@@ -42,6 +43,10 @@ The following project was written with a standard javascript coding where semico
 function or class and curly braces on same line.
 
 ## Screenshots
+ <img src="images/register.png">
+ <img src="images/login.png">
+ <img src="images/Profile.png">
+ <img src="images/flight creation.png">
  <img src="images/homepage.png">
  <img src="images/flight selection.png">
  <img src="images/seat selection.png">
@@ -179,6 +184,11 @@ cd client
 ```sh
 npm start
 ```
+## Tests
+Every aspect of the project could be tested like for example creating a flight and reserving it,Cancelling
+a reservation and getting refunded,deleting/editing a flight,changing seats or flights to see the reflection 
+of these things on the database.
+
 ## Contribute
 For anyone who would like to contribute in the development of the project 
 just clone the repository using the link that you can find in 'code' button 
