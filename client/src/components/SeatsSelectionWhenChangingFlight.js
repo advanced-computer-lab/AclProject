@@ -6,7 +6,6 @@ import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom'
 
 var economySeatsNumber = parseInt(((window.location.pathname).split("/"))[15]);
 var businessSeatsNumber = parseInt(((window.location.pathname).split("/"))[16]);

@@ -1,5 +1,6 @@
 # AclProject
-The following Project is a complete implementation of a Flight Booking Website using MERN stack 
+The following Project is a complete implementation of a Flight Booking Website using MERN stack that 
+simulate a thorough experience of reserving a flight.
 
 ## Table of Contents
 
@@ -14,15 +15,15 @@ The following Project is a complete implementation of a Flight Booking Website u
 
 ## Motivation
 The reason behind this project is to have the ability of creating a full working flightbooking website with the every feature 
-needed to ensure a satisfying experience for all the users.
+needed to ensure a satisfying experience for all the users with minimal effort.
 
 ## Build Status
 The code fully works and does not contain any bugs/errors.
 
 ## Code Style
-The following project was written with a standard javascript coding
-React and React Router for the frontend
-Express and Mongoose for the backend
+The following project was written with a standard javascript coding where semicolon are always used
+,Creating the function happens before calling it,Horizontal and vertical indents to seperate each 
+function or class and curly braces on same line.
 
 ## Screenshots
  <img src="images/homepage.png">
