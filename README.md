@@ -60,6 +60,7 @@ function or class and curly braces on same line.
  3-Change username, password and your-cluster-url to your info. where you will find them in your connection.
 
 ## Install
+Back-end installation:
 
 ```sh
 npm install express node mongoose react
@@ -85,6 +86,9 @@ npm install config
 ```sh
 npm install nodemon
 ```
+
+Front-end installation:
+
 ```sh
 cd client
 npm install
