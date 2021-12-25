@@ -1,8 +1,8 @@
 Name           Tasks
-Noureldin Hesham: FR (11 -> 16) and the NFRs required for sprint 2 for these pages. Changed the UI in the pages created in sprint 1 to match with our new UI (and implemented the
-NFRs on them). Authentication.
+Noureldin Hesham: FR (23, 25, 37, 38, 40, 41, 42, 49, 50, 51, 53 and 54) and the NFRs required for these pages. Authentication. The option to reset the password using the email
+(the forgot password in the login page) Bonus. The option to send feedback/message to the website owners (the contact us button) Bonus. The homepage elements.
 
-Mohamed Mahmoud: FR (19 -> 22) and the NFRs required for sprint 2 for these pages.
+Mohamed Mahmoud: FR (32, 39, 44, and 52) and the NFRs required for these pages. The Readme file.
 
 Omar Alhadi: FR (17 - 18)
 
