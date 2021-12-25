@@ -10,7 +10,7 @@
 - [Install](#Install)
 - [Usage](#usage)
 - [Screenshots](#Screenshots)
-- [Contributing](#contributing)
+- [Credits](#Credits)
 
 ## Motivation
 The reason behind this project is to have the ability of creating a full working flightbooking website with the every feature 
@@ -42,6 +42,7 @@ npm install nodemailer
 
 ## Usage
 To be able to run the project the following codes will be run on two terminals:
+
 Terminal 1
 ```sh
 npm run app
@@ -54,6 +55,8 @@ cd client
 npm start
 ```
 
-## Contributing
-
+## Credits
+Name | Mohamed Mahmoud | Noureldin Hesham | Youssef Magdy | Ahmed Hussein | Omar Alhadi
+--- | --- | --- | --- | --- | ---
+ID | 46-14531 | 46-12946 | 46-0929 | 46-0726 | 46-
 
