@@ -329,11 +329,11 @@ class Homepage extends Component {
         <div className="rectangleWrapper">
           <div className="togetheraa">
             <div className="rectangle1"> <img src={l2} height="250px" alt="fireSpot" /></div>
-            <div className="rectangle11"> <b style={{ textAlign: "center", color: "#1975d2", fontSize: "25px"}}>How to Save</b> <br /><b style={{color: "black", fontSize: "20px" }}>We all want the cheapest flights possible! Learn how to find the cheapest days to fly and get the best deals on airfare.</b> <br /><Button target="_blank" href="https://www.cleartrip.com/collections/13-best-ways-save-flight-tickets/" style={{ marginLeft: "50%", textAlign: "center" }} variant="outlined">Learn more</Button></div>
+            <div className="rectangle11"> <b style={{ textAlign: "center", color: "#1975d2", fontSize: "25px"}}>How to Save</b> <br /><b style={{color: "black", fontSize: "18px" }}>We all want the cheapest flights possible! Learn how to find the cheapest days to fly and get the best deals on airfare.</b> <br /><Button target="_blank" href="https://www.cleartrip.com/collections/13-best-ways-save-flight-tickets/" style={{ marginLeft: "50%", textAlign: "center" }} variant="outlined">Learn more</Button></div>
           </div>
           <div className="togetheraa">
             <div className="rectangle2"> <img src={l3} height="250px" alt="fireSpot" /></div>
-            <div className="rectangle22"> <b style={{ textAlign: "center", color: "#1975d2", fontSize: "25px"}}>Travel Tips & Advice</b> <br /><b style={{color: "black", fontSize: "20px" }}>Read the most up-to-date travel advice. Get tips from some of the most trusted experts in the industry.</b> <br /><br /><Button target="_blank" href="https://www.nomadicmatt.com/travel-blogs/61-travel-tips/" style={{ marginLeft: "50%", textAlign: "center" }} variant="outlined">Learn more</Button></div>
+            <div className="rectangle22"> <b style={{ textAlign: "center", color: "#1975d2", fontSize: "25px"}}>Travel Tips & Advice</b> <br /><b style={{color: "black", fontSize: "18px" }}>Read the most up-to-date travel advice. Get tips from some of the most trusted experts in the industry.</b> <br /><br /><Button target="_blank" href="https://www.nomadicmatt.com/travel-blogs/61-travel-tips/" style={{ marginLeft: "50%", textAlign: "center" }} variant="outlined">Learn more</Button></div>
           </div>
         </div>
         <br />
