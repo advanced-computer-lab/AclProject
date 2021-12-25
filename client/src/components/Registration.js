@@ -11,6 +11,7 @@ var UsernameTaken = 'false';
 var EmailTaken = 'false';
 
 var EmailInForm = 'true';
+var teleNumberLength = 'true';
 
 class Registration extends Component {
   constructor() {
@@ -87,6 +88,7 @@ class Registration extends Component {
     this.setState({ [e.target.name]: e.target.value });
     this.state.telenumber1 = e.target.value
     emptyField = 'false'
+    teleNumberLength = 'true'
     this.forceUpdate()
   };
 
@@ -134,6 +136,10 @@ class Registration extends Component {
     }
     else if ((this.state.email.includes("@") === false) || (this.state.email.includes(".com") === false) || this.state.email.length < 11) {
       EmailInForm = 'false'
+      this.forceUpdate()
+    }
+    else if ((this.state.telenumber1.length < 11)) {
+      teleNumberLength = 'false'
       this.forceUpdate()
     }
 
@@ -262,6 +268,7 @@ class Registration extends Component {
                   style={{
                     width: "400px",
                   }}
+                  placeholder="user@email.com"
                   id="filled-helperText"
                   label="Email"
                   defaultValue=""
@@ -284,7 +291,7 @@ class Registration extends Component {
             <br />
             <TextField onChange={this.onChangeAddress} style={{
               width: "400px",
-            }} label="Home Address" id="outlined-size-normal" defaultValue="" />
+            }} label="Home Address" placeholder="Street, City, Country" id="outlined-size-normal" defaultValue="" />
             <br />
             <br />
             <TextField onChange={this.onChangeCountryCode} style={{
@@ -292,19 +299,34 @@ class Registration extends Component {
             }} label="Country Code" id="outlined-size-normal" type="number" defaultValue="" />
             <br />
             <br />
-            <TextField onChange={this.onChangeTeleNumber1} style={{
-              width: "400px",
-            }} label="Telephone Number 1" id="outlined-size-normal" type="number" defaultValue="" />
+
+
+
+
+            {((teleNumberLength === 'false')) ? (
+                <TextField error onChange={this.onChangeTeleNumber1} style={{
+                  width: "400px",
+                }} label="Telephone Number 1" helperText="The telephone number must consist of 11 digits" placeholder='01xxxxxxxxx' id="outlined-size-normal" type="number" defaultValue="" />
+            ) : (
+              <TextField onChange={this.onChangeTeleNumber1} style={{
+                width: "400px",
+              }} label="Telephone Number 1" placeholder='01xxxxxxxxx' id="outlined-size-normal" type="number" defaultValue="" />
+            )}
+
+
+
+
+          
             <br />
             <br />
             <TextField onChange={this.onChangeTeleNumber2} style={{
               width: "400px",
-            }} label="Telephone Number 2 (optional)" id="outlined-size-normal" type="number" defaultValue="" />
+            }} label="Telephone Number 2 (optional)" placeholder='01xxxxxxxxx' id="outlined-size-normal" type="number" defaultValue="" />
             <br />
             <br />
             <TextField onChange={this.onChangeTeleNumber3} style={{
               width: "400px",
-            }} label="Telephone Number 3 (optional)" id="outlined-size-normal" type="number" defaultValue="" />
+            }} label="Telephone Number 3 (optional)" placeholder='01xxxxxxxxx' id="outlined-size-normal" type="number" defaultValue="" />
             <br />
             <br />
             <Button type="submit" style={{
