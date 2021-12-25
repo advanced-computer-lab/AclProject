@@ -1,5 +1,5 @@
 # AclProject
-
+The following Project is a complete implementation of a Flight Booking Website using MERN stack 
 
 ## Table of Contents
 
@@ -17,10 +17,12 @@ The reason behind this project is to have the ability of creating a full working
 needed to ensure a satisfying experience for all the users.
 
 ## Build Status
-the code fully works and does not contain any bugs/errors.
+The code fully works and does not contain any bugs/errors.
 
 ## Code Style
-The following project was written with a standard javascript coding.
+The following project was written with a standard javascript coding
+React and React Router for the frontend
+Express and Mongoose for the backend
 
 ## Screenshots
  <img src="images/homepage.png">
@@ -58,5 +60,5 @@ npm start
 ## Credits
 Name | Mohamed Mahmoud | Noureldin Hesham | Youssef Magdy | Ahmed Hussein | Omar Alhadi
 --- | --- | --- | --- | --- | ---
-ID | 46-14531 | 46-12946 | 46-0929 | 46-0726 | 46-
+ID | 46-14531 | 46-12946 | 46-0929 | 46-0726 | 46-14114
 
