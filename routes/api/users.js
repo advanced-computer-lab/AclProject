@@ -3,6 +3,15 @@ const router = express.Router();
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const User = require('../../models/User');
+var nodemailer = require('nodemailer');
+
+var transporter = nodemailer.createTransport({
+	service: 'gmail',
+	auth: {
+		user: 'aclprojectguc@gmail.com',
+		pass: 'ASDfgh123123'
+	}
+});
 
 
 router.get('/', (req, res) => {
@@ -91,6 +100,25 @@ router.post('/login', async (req, res) => {
 	} else {
 		return res.json("Wrong password")
 	}
+})
+
+router.post('/forgotpassword', async (req, res) => {
+	var user;
+	user = await User.findOne({
+		email: req.body.email.toLowerCase(),
+	})
+
+	if (!user) {
+		return res.json("User not found")
+	}
+	transporter.sendMail(req.body.mailOptions, function (error, info) {
+		if (error) {
+			console.log(error);
+		} else {
+			console.log('Email sent: ' + info.response);
+		}
+		return res.json("sss")
+	})
 })
 
 router.put('/:id', (req, res) => {

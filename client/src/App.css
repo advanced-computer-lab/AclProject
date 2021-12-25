@@ -404,7 +404,7 @@ body {
 
 .backgroundBoxLogin {
   margin: auto;
-  height: 450px;
+  height: 570px;
   width: 550px;
   border-color: rgb(0, 0, 0);
   border-style: solid;
@@ -414,6 +414,18 @@ body {
   text-align: center;
 }
 /*  */
+
+.backgroundBoxForgotPassword {
+  margin: auto;
+  height: 420px;
+  width: 550px;
+  border-color: rgb(0, 0, 0);
+  border-style: solid;
+  border-radius: 0px 0px 25px 25px;
+  background-color: #ffffff;
+  color: #f7f5e1;
+  text-align: center;
+}
 
 /* Flight Search Admin */
 .AdvancedSearch {

@@ -5,6 +5,8 @@ import TextField from '@mui/material/TextField';
 import jwt from 'jsonwebtoken'
 import Button from '@mui/material/Button';
 import loginPic from '../login.png';
+import { Link } from 'react-router-dom';
+import { getFormGroupUtilityClass } from '@mui/material';
 
 var invalidUsername = 'false';
 var wrongPassword = 'false';
@@ -124,15 +126,28 @@ class Login extends Component {
               />
             )}
             <br />
+            <Link style={{ marginLeft: '220px' }} to="forgot-password">
+              Forgot password?
+            </Link>
+            <br />
             <br />
             <Button
               type="submit"
               style={{
-                width: "180px",
+                width: "350px",
                 height: "50px",
+                fontSize: "20px"
               }} variant="contained">Log in</Button>
           </form>
+          <br />
+          <h1 style={{ textAlign: "center", margin: "auto", color: "gray", fontSize: "5px" }}>────────────────────────────────────────────────────────────────────────────────────────────────</h1>
+          <br />
+          <Button color="success" href="Registration" variant="contained">
+            Create New Account
+          </Button>
         </div>
+        <br />
+        <br />
       </div>
     );
   }

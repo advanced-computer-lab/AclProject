@@ -34,6 +34,8 @@ import ChangeSeats from './components/ChangeSeats';
 import ChangeSeats2 from './components/ChangeSeats2';
 import SeatsSelectionWhenChangingFlight from './components/SeatsSelectionWhenChangingFlight';
 import ChangeFlightSummary from './components/ChangeFlightSummary';
+import ForgotPassword from './components/ForgotPassword';
+import ForgotPassword2 from './components/ForgotPassword2';
 
 class App extends Component {
   render() {
@@ -47,6 +49,8 @@ class App extends Component {
           <Route path='/change-flight' component={ChangeFlight} />
 		  <Route path='/seats-selection-when-changing-flight' component={SeatsSelectionWhenChangingFlight} />
           <Route path='/seats-selection-departure' component={SeatsSelectionDeparture} />
+		  <Route path='/forgot-password' component={ForgotPassword} />
+		  <Route path='/forgot-password2' component={ForgotPassword2} />
 		  <Route path='/change-flight-summary' component={ChangeFlightSummary} />
           <Route path='/flight-reserved' component={FlightReserved} />
           <Route path='/reservation-summary' component={ReservationSummary} />

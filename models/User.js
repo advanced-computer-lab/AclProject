@@ -44,6 +44,10 @@ const UserSchema = new mongoose.Schema({
   passport: {
     type: String,
     required: true
+  },
+  passwordresetid: {
+    type: String,
+    required: false
   }
 });
 
