@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
 import Seats from './Seats';
 import '../App.css';
-import Box from '@mui/material/Box';
-import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom'
+
 
 var economySeatsNumber = parseInt(((window.location.pathname).split("/"))[3]);
 var businessSeatsNumber = parseInt(((window.location.pathname).split("/"))[4]);
@@ -29,12 +25,6 @@ for (var ii = 0; ii < myArray5.length; ii++){
 
 var previousPage = (arr2).replace("/seats-selection-departure", "select-flights");
 var previousPage = (previousPage).replace("/reservation-summary", "select-flights");
-
-const steps = [
-  <Link to={previousPage}>Select departure and return flights</Link>,
-  'Select plane seats',
-  'Summary and confirmation',
-];
 
 const createSeats = (rows, startIndex) => {
     let i = 0;
@@ -147,9 +137,8 @@ const SeatsSelectionDeparture = () => {
                         </section>
                         <br />
                         <br />
-                        {/* onClick={confirmBooking} href={result +"/"+ (bookedStatus.replace(/ /g, "-")).substring(0, (bookedStatus.replace(/ /g, "-")).length - 1)} */}
                         <Button color="success" onClick={confirmBooking} href={'/change-seats2/' + String(((window.location.pathname).split("/"))[2]) + "/"+ String(((window.location.pathname).split("/"))[6]) + "-" + (bookedStatus.replace(/ /g, "-")).substring(0, (bookedStatus.replace(/ /g, "-")).length - 1) + "/" + (bookedStatus.replace(/ /g, "-")).substring(0, (bookedStatus.replace(/ /g, "-")).length - 1) + "/" + booking_reference + "/" + String(((window.location.pathname).split("/"))[10])} variant="contained">
-                            Select Seats
+                            Confirm Seat
                         </Button>
                      </div>
                 </div>
