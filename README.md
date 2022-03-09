@@ -9,7 +9,6 @@ simulate a thorough experience of reserving a flight.
 - [Build Status](#Build-Status)
 - [Code Style](#Code-Style)
 - [Screenshots](#Screenshots)
-- [Code Examples](#Code-Examples)
 - [Install](#Install)
 - [Usage](#usage)
 - [Tests](#Tests)
@@ -28,19 +27,14 @@ The user also has the ability to sign up in order to have their data stored in o
 visiting the website as a guest.
 
 The user can also check their reserved flight as well as change any criteria they do not like form changing the seats that they
-chose to changing the whole flight from beginning to end ,also they can cancel their flight simply and get their money back.
+chose to changing the whole flight from beginning to end, also they can cancel their flight simply and get their money back.
 
 ## Motivation
-The reason behind this project is to have the ability of creating a full working flightbooking website with the every feature 
+The reason behind this project is creating a full working flightbooking website with the every feature 
 needed to ensure a satisfying experience for all the users with minimal effort.
 
 ## Build Status
 The code fully works and does not contain any bugs/errors.
-
-## Code Style
-The following project was written with a standard javascript coding where semicolon are always used
-,Creating the function happens before calling it,Horizontal and vertical indents to seperate each 
-function or class and curly braces on same line.
 
 ## Screenshots
  <img src="images/register.png">
@@ -185,8 +179,8 @@ cd client
 npm start
 ```
 ## Tests
-Every aspect of the project could be tested like for example creating a flight and reserving it,Cancelling
-a reservation and getting refunded,deleting/editing a flight,changing seats or flights to see the reflection 
+Every aspect of the project could be tested like for example creating a flight and reserving it, cancelling
+a reservation and getting refunded, deleting/editing a flight, changing seats or flights to see the reflection 
 of these things on the database.
 
 ## Contribute
@@ -199,6 +193,7 @@ git clone https://github.com/advanced-computer-lab/AclProject.git
 ```
 
 ## Credits
+German University in Cairo
 Name | Mohamed Mahmoud | Noureldin Hesham | Youssef Magdy | Ahmed Hussein | Omar Alhadi
 --- | --- | --- | --- | --- | ---
 ID | 46-14531 | 46-12946 | 46-0929 | 46-0726 | 46-14114
