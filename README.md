@@ -30,7 +30,7 @@ The user can also check their reserved flight as well as change any criteria the
 chose to changing the whole flight from beginning to end, also they can cancel their flight simply and get their money back.
 
 ## Motivation
-The reason behind this project is creating a full working flightbooking website with the every feature 
+The reason behind this project is creating a full working flightbooking website with every feature 
 needed to ensure a satisfying experience for all the users with minimal effort.
 
 ## Build Status
@@ -47,7 +47,7 @@ The code fully works and does not contain any bugs/errors.
  <img src="images/confirmation.png">
 
 ## Code Examples
- The idea of the project is to be able to connect your whole frontend and backend with an established 
+ The idea of the project is to be able to connect your frontend and backend with an established 
  database using mongoose atlas so in order to fully experience a working project the db connection need
  to be made before using the website and this can be achieved in the following steps:
  
