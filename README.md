@@ -7,7 +7,6 @@ simulate a thorough experience of reserving a flight.
 - [Description](#Description)
 - [Motivation](#motivation)
 - [Build Status](#Build-Status)
-- [Code Style](#Code-Style)
 - [Screenshots](#Screenshots)
 - [Install](#Install)
 - [Usage](#usage)
@@ -45,18 +44,6 @@ The code fully works and does not contain any bugs/errors.
  <img src="images/flight selection.png">
  <img src="images/seat selection.png">
  <img src="images/confirmation.png">
-
-## Code Examples
- The idea of the project is to be able to connect your frontend and backend with an established 
- database using mongoose atlas so in order to fully experience a working project the db connection need
- to be made before using the website and this can be achieved in the following steps:
- 
- 1-Create a mongoose atlas account and establish a connection
-
- 2-Enter the following line in app.js file to connect the database using the code in the link below:
- https://www.mongodb.com/blog/post/quick-start-nodejs-mongodb-how-to-get-connected-to-your-database
-
- 3-Change username, password and your-cluster-url to your info. where you will find them in your connection.
 
 ## Install
 Back-end installation:
@@ -178,6 +165,16 @@ cd client
 ```sh
 npm start
 ```
+
+Also a database connection need to be made before using the website and this can be achieved in the following steps:
+ 
+ 1-Create a mongoose atlas account and establish a connection
+
+ 2-Enter the following line in app.js file to connect the database using the code in the link below:
+ https://www.mongodb.com/blog/post/quick-start-nodejs-mongodb-how-to-get-connected-to-your-database
+
+ 3-Change username, password and your-cluster-url to your info. where you will find them in your connection.
+
 ## Tests
 Every aspect of the project could be tested like for example creating a flight and reserving it, cancelling
 a reservation and getting refunded, deleting/editing a flight, changing seats or flights to see the reflection 
